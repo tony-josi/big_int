@@ -14,11 +14,17 @@
 
 #define         BI_BASE_TYPE                uint32_t
 #define         BI_DOUBLE_BASE_TYPE         uint64_t
-#define         BI_BASE_MAX                 (100000000U)
+#define         BI_BASE_MAX                 (1000000000U)
 
 #define         DEFAULT_MEM_ALLOC_BYTES     (128)
 
+
 namespace bi {
+
+    enum class bi_base {
+        BI_HEX,
+        BI_DEC
+    };
 
     class big_int {
         private:
@@ -33,7 +39,8 @@ namespace bi {
         public:
 
         big_int();
-        int big_int_from_string(const std::string &str_num);
+        int             big_int_from_string(const std::string &str_num);
+        std::string     big_int_to_string(bi_base base);
         /*
         int big_int_add(const big_int b);
         int big_int_add(const big_int b, big_int *res);
