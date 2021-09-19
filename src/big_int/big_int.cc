@@ -11,14 +11,16 @@
 
 #include "../inc/big_int.hpp"
 
-#define         DEBUG_LOG       (0)
-#define         MAX_VERBOSE     (3)     /* Verbose level 3 - max,  1 - min */
+#define         DEBUG_LOG       (1)
 
 #if DEBUG_LOG
 
     #include <stdio.h>
+    
+    #define         _MAX_VERBOSE     (3)     /* Verbose level 3 - max,  1 - min */
+
     #define         _BI_LOG(_VERB, __str__, ...)    do {    \
-        if(_VERB <= MAX_VERBOSE) {                          \
+        if(_VERB <= _MAX_VERBOSE) {                          \
             printf("\t==> BI_LOG: ");                       \
             printf(__str__, ##__VA_ARGS__);                 \
             printf("\n");                                   \
