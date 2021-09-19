@@ -76,9 +76,24 @@ int bi::big_int::_big_int_expand(int req) {
 
 }
 
-int bi::big_int::big_int_string(const std::string &str_num) {
+int bi::big_int::big_int_from_string(const std::string &str_num) {
 
-    (void) str_num;
+    BI_BASE_TYPE each_data = 0, each_char_num;
+    _top = 0;
+    for(char c : str_num) {
+        if (c < '0' || c > '9') {
+            throw std::logic_error("Invalid char in the given string");
+        }
+        each_char_num = (BI_BASE_TYPE) (c - '0');
+        each_data = each_data * 10 + each_char_num;
+        if(each_data > BI_BASE_MAX) {
+            _data[_top++] = each_data % BI_BASE_MAX;
+            each_data = each_data / BI_BASE_MAX;
+        }
+        if(_top == _total_data) {
+            _big_int_expand(25);
+        }
+    }
     return 0;
 
 }
