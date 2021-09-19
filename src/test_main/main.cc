@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
     (void) argv;
 
     big_int test_num1;
+    test_num1._big_int_expand(25);
 
     return 0;
 
