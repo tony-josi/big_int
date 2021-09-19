@@ -11,8 +11,10 @@
 
 #include <stdint.h>
 
-#define         BI_BASE_TYPE            uint32_t
-#define         BI_DOUBLE_BASE_TYPE     uint64_t
+#define         BI_BASE_TYPE                uint32_t
+#define         BI_DOUBLE_BASE_TYPE         uint64_t
+
+#define         DEFAULT_MEM_ALLOC_BYTES     (128)
 
 namespace bi {
 
@@ -22,7 +24,7 @@ namespace bi {
         BI_BASE_TYPE        *_data;
         int                 _total_data;
         int                 _top;
-        int                 _neg;
+        bool                _neg;
 
         int _big_int_expand(int req);
 
