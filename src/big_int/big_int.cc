@@ -14,11 +14,15 @@
 #define         DEBUG_LOG       (1)
 
 #if DEBUG_LOG
+
     #include <stdio.h>
     #define         _BI_LOG(__str__, ...)    printf(__str__, ##__VA_ARGS__)
-#elif
-    #define         _BI_LOG(__str__) 
-#endif /* DEBUG_LOG */
+
+#elif   /* DEBUG_LOG */
+
+    #define         _BI_LOG(__str__, ...) 
+
+#endif  /* DEBUG_LOG */
 
 bi::big_int::big_int() {
 
@@ -36,6 +40,8 @@ bi::big_int::big_int() {
 bi::big_int::~big_int() {
 
     delete[]    _data;
+    
+    _BI_LOG("Freeing: %d, items", _total_data);
 
 }
 
