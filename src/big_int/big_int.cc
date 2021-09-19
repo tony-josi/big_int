@@ -11,7 +11,7 @@
 
 #include "../inc/big_int.hpp"
 
-#define         DEBUG_LOG       (1)
+#define         DEBUG_LOG       (0)
 #define         MAX_VERBOSE     (3)     /* Verbose level 3 - max,  1 - min */
 
 #if DEBUG_LOG
@@ -26,9 +26,11 @@
         else {}                                             \
     } while(0)
 
-#elif   /* DEBUG_LOG */
+#else   /* DEBUG_LOG */
 
-    #define         _BI_LOG(_VERB, __str__, ...)
+    #define         _BI_LOG(_VERB, __str__, ...)     do {   \
+        /*No debug log */ \
+        } while(0)
 
 #endif  /* DEBUG_LOG */
 
