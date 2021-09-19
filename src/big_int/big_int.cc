@@ -12,15 +12,23 @@
 #include "../inc/big_int.hpp"
 
 #define         DEBUG_LOG       (1)
+#define         MAX_VERBOSE     (3)     /* Verbose level 3 - max,  1 - min */
 
 #if DEBUG_LOG
 
     #include <stdio.h>
-    #define         _BI_LOG(__str__, ...)    printf(__str__, ##__VA_ARGS__)
+    #define         _BI_LOG(_VERB, __str__, ...)    do {    \
+        if(_VERB <= MAX_VERBOSE) {                          \
+            printf("\t==> BI_LOG: ");                       \
+            printf(__str__, ##__VA_ARGS__);                 \
+            printf("\n");                                   \
+        }                                                   \
+        else {}                                             \
+    } while(0)
 
 #elif   /* DEBUG_LOG */
 
-    #define         _BI_LOG(__str__, ...) 
+    #define         _BI_LOG(_VERB, __str__, ...)
 
 #endif  /* DEBUG_LOG */
 
@@ -32,16 +40,16 @@ bi::big_int::big_int() {
     _neg            = false;
 
     if(_data)
-        _BI_LOG("Big int init, with: %d items\n", _total_data);
+        _BI_LOG(1, "Big int init, with: %d items", _total_data);
     else
-        _BI_LOG("Init failed\n");
+        _BI_LOG(1, "Init failed");
 }
 
 bi::big_int::~big_int() {
 
     delete[]    _data;
     
-    _BI_LOG("Freeing: %d, items", _total_data);
+    _BI_LOG(1, "Freeing: %d, items", _total_data);
 
 }
 

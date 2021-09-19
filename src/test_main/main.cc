@@ -5,6 +5,9 @@ using namespace bi;
 
 int main(int argc, char *argv[]) {
 
+    (void) argc;
+    (void) argv;
+
     big_int test_num1;
 
     return 0;
