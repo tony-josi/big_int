@@ -13,7 +13,7 @@
 
 bi::big_int::big_int() {
 
-    _data           = new BI_BASE_TYPE[DEFAULT_MEM_ALLOC_BYTES / sizeof(BI_BASE_TYPE)];
+    _data           = new BI_BASE_TYPE(DEFAULT_MEM_ALLOC_BYTES);
     _total_data     = DEFAULT_MEM_ALLOC_BYTES / sizeof(BI_BASE_TYPE);
     _top            = 0;
     _neg            = false;

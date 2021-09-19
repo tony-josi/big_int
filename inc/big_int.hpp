@@ -26,11 +26,12 @@ namespace bi {
         int                 _top;
         bool                _neg;
 
-        int _big_int_expand(int req);
+        //int _big_int_expand(int req);
 
         public:
 
         big_int();
+        /*
         int big_int_add(const big_int b);
         int big_int_add(const big_int b, big_int *res);
         int big_int_sub(const big_int b);
@@ -39,6 +40,7 @@ namespace bi {
         int big_int_mul(const big_int b, big_int *res);
         int big_int_div(const big_int b);
         int big_int_div(const big_int b, big_int *res);
+        */
         ~big_int();
 
     };
