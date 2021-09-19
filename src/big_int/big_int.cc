@@ -11,6 +11,15 @@
 
 #include "../inc/big_int.hpp"
 
+#define         DEBUG_LOG       (1)
+
+#if DEBUG_LOG
+    #include <stdio.h>
+    #define         _BI_LOG(__str__, ...)    printf(__str__, ##__VA_ARGS__)
+#elif
+    #define         _BI_LOG(__str__) 
+#endif /* DEBUG_LOG */
+
 bi::big_int::big_int() {
 
     _data           = new BI_BASE_TYPE(DEFAULT_MEM_ALLOC_BYTES);
@@ -18,6 +27,10 @@ bi::big_int::big_int() {
     _top            = 0;
     _neg            = false;
 
+    if(_data)
+        _BI_LOG("Big int init, with: %d items\n", _total_data);
+    else
+        _BI_LOG("Init failed\n");
 }
 
 bi::big_int::~big_int() {
