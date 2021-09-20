@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include <string.h>
+#include <memory>
 
 #include "../inc/big_int.hpp"
 
@@ -103,20 +104,19 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
     size_t str_size = str_num.length();
     size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? 0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
     size_t base_t_aligned_size = str_size + extr_space_reqd;
-    char *temp_str = new char[base_t_aligned_size];
-    memset(temp_str, '0', extr_space_reqd);
-    memcpy(temp_str + extr_space_reqd, str_num.c_str(), str_size);
+    std::unique_ptr<char []> temp_str(new char[base_t_aligned_size]);
+    memset(temp_str.get(), '0', extr_space_reqd);
+    memcpy(temp_str.get() + extr_space_reqd, str_num.c_str(), str_size);
 
     int str_cur_indx = static_cast<int>(base_t_aligned_size - BI_HEX_STR_TO_DATA_SIZE);
 
     for(; str_cur_indx >= 0; str_cur_indx -= static_cast<int>(BI_HEX_STR_TO_DATA_SIZE)) {
-        sscanf(&temp_str[str_cur_indx], BI_SSCANF_FORMAT_HEX, &_data[_top++]);
+        sscanf(&(temp_str.get()[str_cur_indx]), BI_SSCANF_FORMAT_HEX, &_data[_top++]);
         if(_top == _total_data) {
             _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
         }
     }
 
-    delete[] temp_str;
     return 0;
 
 }
