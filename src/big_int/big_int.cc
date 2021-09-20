@@ -129,10 +129,10 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     for(int i = 0; i < _top; ++i) {
         if(base == bi::bi_base::BI_DEC) {
-            _BI_LOG(1, "%u", _data[i]);
+            _BI_LOG(1, "d%010u", _data[i]);
         }
         else if(base == bi::bi_base::BI_HEX){ 
-            _BI_LOG(1, "%08X", _data[i]);
+            _BI_LOG(1, "0x%08X", _data[i]);
         }
     }
 
