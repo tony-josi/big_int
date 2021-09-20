@@ -123,6 +123,48 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
 
 }
 
+int bi::big_int::big_int_add(const bi::big_int &b) {
+
+    int max_data_len, min_data_len;
+
+    if (_top > b._top) {
+        min_data_len = b._top;
+        max_data_len = _top;
+    } else {
+        min_data_len = _top;
+        max_data_len = b._top;
+    }
+
+    int i;
+
+    BI_DOUBLE_BASE_TYPE sum = 0;
+    BI_BASE_TYPE carry = 0;
+    for(i = 0; i < min_data_len; ++i) {
+        sum = b._data[i] + _data[i] + carry;
+        carry = (sum & ~0xFFFFFFFF) >> 32;
+        _data[i] = sum & 0xFFFFFFFF;
+    }
+    int top_cntr = 0;
+    for(; i < max_data_len; ++i) {
+        if(i >= _total_data) {
+            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        }
+        if(i >= _top) {
+            ++top_cntr;
+        }
+        if(i < _top) {
+            sum = _data[i] + carry;
+        } else {
+            sum = b._data[i] + carry;
+        }
+        carry = (sum & ~0xFFFFFFFF) >> 32;
+        _data[i] = sum & 0xFFFFFFFF;
+    }
+    _top += top_cntr;
+    return 0;
+
+}
+
 std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     // TODO: Need to return string instead of printing it
@@ -131,10 +173,10 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     for(int i = 0; i < _top; ++i) {
         if(base == bi::bi_base::BI_DEC) {
-            _BI_LOG(1, "d%010u", _data[i]);
+            _BI_LOG(1, "d %010u", _data[i]);
         }
         else if(base == bi::bi_base::BI_HEX){ 
-            _BI_LOG(1, "0x%08X", _data[i]);
+            _BI_LOG(1, "0x %08X", _data[i]);
         }
     }
 
