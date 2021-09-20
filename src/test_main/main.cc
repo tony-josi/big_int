@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
     (void) argc;
     (void) argv;
 
-    std::string test_num_str = "54646114646454540005";
+    std::string test_num_str = "5464611464645454000554646114646454540005546461146464545400055464611464645454000554646114646454540005";
 
     big_int test_num1;
     test_num1.big_int_from_string(test_num_str);

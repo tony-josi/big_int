@@ -11,6 +11,7 @@
 
 #include <stdexcept>
 #include <algorithm>
+#include <string.h>
 
 #include "../inc/big_int.hpp"
 
@@ -78,32 +79,44 @@ int bi::big_int::_big_int_expand(int req) {
 
 int bi::big_int::big_int_from_string(const std::string &str_num) {
 
-    BI_BASE_TYPE each_data = 0, each_char_num;
-    _top = 0;
-    int cntr = 0;
-    for(char c : str_num) {
-        if (c < '0' || c > '9') {
-            throw std::logic_error("Invalid char in the given string");
+    /*
+    int str_size = static_cast<int>(str_num.length());
+    int extr_space_reqd = ((str_size % 9 == 0) ? 0 : (9 - (str_size % 9)));
+    int base_t_aligned_size = str_size + extr_space_reqd;
+    char *temp_str = new char[static_cast<size_t>(base_t_aligned_size) + 1]; // +1 for NULL
+    memset(temp_str, '0', static_cast<size_t>(base_t_aligned_size) + 1);
+    memcpy(temp_str + extr_space_reqd, str_num.c_str(), static_cast<size_t>(str_size) + 1);
+
+    for (int i = (base_t_aligned_size / 9) - 1; i >= 0; --i) {
+        BI_BASE_TYPE t_val = static_cast<BI_BASE_TYPE>(strtoul(temp_str + static_cast<size_t>(i) * 9, NULL, 10));
+        memset(temp_str + static_cast<size_t>(i) * 9, '\0', 9);
+        _data[_top++] = t_val;
+        if (_top == _total_data) {
+            _big_int_expand(32);
         }
-        each_char_num = static_cast<BI_BASE_TYPE>(c - '0');
-        each_data = each_data * 10 + each_char_num;
-        _data[_top] = each_data;
-        if(++cntr >= 9) {
-            cntr = 0;
-            ++_top;
-            each_data = 0;
-        }
-        if(_top == _total_data) {
-            _big_int_expand(25);
-        }
-    }
-    if(each_data) {
-        for(int i = 0; i < (9 - cntr); ++i) {
-            _data[_top] *= 10;
-        }
-        ++_top;
     }
 
+    delete[] temp_str;
+    return 0;
+    */
+
+    size_t str_size = str_num.length();
+    size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? 0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
+    size_t base_t_aligned_size = str_size + extr_space_reqd;
+    char *temp_str = new char[base_t_aligned_size];
+    memset(temp_str, '0', extr_space_reqd);
+    memcpy(temp_str + extr_space_reqd, str_num.c_str(), str_size);
+
+    int str_cur_indx = static_cast<int>(base_t_aligned_size - BI_HEX_STR_TO_DATA_SIZE);
+
+    for(; str_cur_indx >= 0; str_cur_indx -= static_cast<int>(BI_HEX_STR_TO_DATA_SIZE)) {
+        sscanf(&temp_str[str_cur_indx], BI_SSCANF_FORMAT_HEX, &_data[_top++]);
+        if(_top == _total_data) {
+            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        }
+    }
+
+    delete[] temp_str;
     return 0;
 
 }
@@ -116,7 +129,7 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     for(int i = 0; i < _top; ++i) {
         if(base == bi::bi_base::BI_DEC) {
-            _BI_LOG(1, "%.9u", _data[i]);
+            _BI_LOG(1, "%u", _data[i]);
         }
         else if(base == bi::bi_base::BI_HEX){ 
             _BI_LOG(1, "%08X", _data[i]);

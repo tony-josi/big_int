@@ -14,6 +14,11 @@
 
 #define         BI_BASE_TYPE                uint32_t
 #define         BI_DOUBLE_BASE_TYPE         uint64_t
+#define         BI_SSCANF_FORMAT_HEX        "%8X"
+#define         BI_SPRINFF_FORMAT_HEX       "%.08X"
+#define         BI_HEX_STR_TO_DATA_SIZE     (2 * sizeof(BI_BASE_TYPE))
+#define         BI_DEFAULT_EXPAND_COUNT     (32)
+
 #define         BI_BASE_MAX                 (1000000000U)
 
 #define         DEFAULT_MEM_ALLOC_BYTES     (128)
