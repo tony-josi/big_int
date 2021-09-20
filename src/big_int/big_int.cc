@@ -165,6 +165,23 @@ int bi::big_int::big_int_add(const bi::big_int &b) {
 
 }
 
+int bi::big_int::big_int_add(const bi::big_int &b, bi::big_int *res) {
+
+    res->big_int_clear();
+    res->big_int_add(b);
+    res->big_int_add(*this);
+    return 0;
+
+}
+
+int bi::big_int::big_int_clear() {
+
+    memset(_data, 0, static_cast<size_t>(_total_data) * sizeof(BI_BASE_TYPE));
+    _top            = 0;
+    _neg            = false;
+    return 0;
+}
+
 std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     // TODO: Need to return string instead of printing it
