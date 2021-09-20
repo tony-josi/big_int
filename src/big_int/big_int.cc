@@ -102,7 +102,9 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
     */
 
     size_t str_size = str_num.length();
-    size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? 0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
+    size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? \
+    0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
+    
     size_t base_t_aligned_size = str_size + extr_space_reqd;
     std::unique_ptr<char []> temp_str(new char[base_t_aligned_size]);
     memset(temp_str.get(), '0', extr_space_reqd);
