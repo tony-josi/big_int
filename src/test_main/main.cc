@@ -29,6 +29,11 @@ int main(int argc, char *argv[]) {
     test_num_4.big_int_unsigned_sub(test_num_1, &test_num_5);
     test_num_5.big_int_to_string(bi_base::BI_HEX);
 
+    test_num_2.big_int_to_string(bi_base::BI_HEX);
+    test_num_3.big_int_to_string(bi_base::BI_HEX);
+    test_num_3.big_int_unsigned_sub(test_num_2, &test_num_1);
+    test_num_1.big_int_to_string(bi_base::BI_HEX);
+
     return 0;
 
 } 

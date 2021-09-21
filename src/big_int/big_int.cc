@@ -183,13 +183,8 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
 int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) {
 
     int max, min;
-    if(_top > b._top) {
-        max = _top;
-        min = b._top;
-    } else {
-        max = b._top;
-        min = _top;
-    }
+    max = _top;
+    min = b._top;
 
     int diff = max - min;
     if(diff < 0) {
