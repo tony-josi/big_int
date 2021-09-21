@@ -180,8 +180,25 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
 
 }
 
-int bi::big_int::big_int_sub(const bi::big_int &b) {
+int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) {
 
+    int max, min;
+    if(_top > b._top) {
+        max = _top;
+        min = b._top;
+    } else {
+        max = b._top;
+        min = _top;
+    }
+
+    int diff = max - min;
+    if(diff < 0) {
+        throw std::length_error("First param should be larger");
+    }
+
+    (void) max;
+    res->big_int_clear();
+    _sub_base_type(b._data, min, res);
     return 0;
 
 }
@@ -213,6 +230,24 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     return op_string;
 
+}
+
+int bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) {
+
+    BI_BASE_TYPE borrow = 0;
+    BI_DOUBLE_BASE_TYPE diff, temp1;
+    for(int i = 0; i < min; ++i) {
+        if(compare_bi_base_type(&_data[i], &data_ptr[i])) {
+            diff = _data[i] - data_ptr[i] - borrow;
+            borrow = 0;
+        } else {
+            temp1 = _data[i] + 0xFFFFFFFF - borrow;
+            diff = temp1 - data_ptr[i];
+            borrow = 1;
+        }
+        res_ptr->_data[(res_ptr->_top)++] = static_cast<BI_BASE_TYPE>(diff);
+    }
+    return 0;
 }
 
 bi::big_int::~big_int() {

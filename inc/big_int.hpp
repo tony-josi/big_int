@@ -40,6 +40,7 @@ namespace bi {
         bool                _neg;
 
         int _big_int_expand(int req);
+        int _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr);
 
         public:
 
@@ -48,14 +49,17 @@ namespace bi {
         std::string     big_int_to_string(bi_base base);
         int big_int_unsigned_add(const big_int &b);
         int big_int_unsigned_add(const big_int &b, big_int *res);
-        int big_int_sub(const big_int &b);
+        
+        /* First param should be larger. */
+        int big_int_unsigned_sub(const big_int &b, bi::big_int *res);
+        
         int big_int_clear();
         
         /*
         
         
         
-        int big_int_sub(const big_int b, big_int *res);
+        int big_int_unsigned_sub(const big_int b, big_int *res);
         int big_int_mul(const big_int b);
         int big_int_mul(const big_int b, big_int *res);
         int big_int_div(const big_int b);
