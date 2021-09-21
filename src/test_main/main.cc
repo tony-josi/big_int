@@ -18,10 +18,10 @@ int main(int argc, char *argv[]) {
     test_num_1.big_int_to_string(bi_base::BI_HEX);
     test_num_2.big_int_from_string(test_num_str_2);
     test_num_2.big_int_to_string(bi_base::BI_HEX);
-    test_num_2.big_int_add(test_num_1);
+    test_num_2.big_int_unsigned_add(test_num_1);
     test_num_2.big_int_to_string(bi_base::BI_HEX);
 
-    test_num_1.big_int_add(test_num_1, &test_num_3);
+    test_num_1.big_int_unsigned_add(test_num_1, &test_num_3);
     test_num_3.big_int_to_string(bi_base::BI_HEX);
 
     return 0;

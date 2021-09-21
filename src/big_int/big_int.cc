@@ -41,6 +41,12 @@
 
 #endif  /* DEBUG_LOG */
 
+namespace {
+
+    static int compare_bi_base_type(const BI_BASE_TYPE *a, const BI_BASE_TYPE *b);
+
+}
+
 bi::big_int::big_int() {
 
     _data           = new BI_BASE_TYPE[DEFAULT_MEM_ALLOC_BYTES / sizeof(BI_BASE_TYPE)];
@@ -123,7 +129,7 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
 
 }
 
-int bi::big_int::big_int_add(const bi::big_int &b) {
+int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
 
     int max_data_len, min_data_len;
 
@@ -165,11 +171,17 @@ int bi::big_int::big_int_add(const bi::big_int &b) {
 
 }
 
-int bi::big_int::big_int_add(const bi::big_int &b, bi::big_int *res) {
+int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
 
     res->big_int_clear();
-    res->big_int_add(b);
-    res->big_int_add(*this);
+    res->big_int_unsigned_add(b);
+    res->big_int_unsigned_add(*this);
+    return 0;
+
+}
+
+int bi::big_int::big_int_sub(const bi::big_int &b) {
+
     return 0;
 
 }
@@ -210,3 +222,15 @@ bi::big_int::~big_int() {
 
 }
 
+namespace {
+
+    static int compare_bi_base_type(const BI_BASE_TYPE *a, const BI_BASE_TYPE *b) {
+
+        if(a > b)
+            return 1;
+        else
+            return 0;
+
+    }
+
+}
