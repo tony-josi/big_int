@@ -45,6 +45,11 @@ namespace bi {
         public:
 
         big_int();
+        big_int(const big_int &src);
+        big_int & operator=(big_int src);
+        big_int(const big_int &&src);
+        ~big_int();
+
         int             big_int_from_string(const std::string &str_num);
         std::string     big_int_to_string(bi_base base);
         int big_int_unsigned_add(const big_int &b);
@@ -65,7 +70,7 @@ namespace bi {
         int big_int_div(const big_int b);
         int big_int_div(const big_int b, big_int *res);
         */
-        ~big_int();
+        
 
     };
 
