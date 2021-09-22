@@ -18,6 +18,13 @@ include(cmake/std_compiler_warnings.cmake)
 add_library(project_warnings INTERFACE)
 set_project_warnings(project_warnings)
 
+# pybind11
+option(PYTHON_TEST_BINDINGS_GEN "Enable python test case wrapper binding module generation" OFF)
+if(PYTHON_TEST_BINDINGS_GEN) 
+    set(PYBIND_PATH "${PROJECT_SOURCE_DIR}/ext")
+    add_subdirectory(${PYBIND_PATH}/pybind11)
+endif()
+
 add_subdirectory(src)
 
 
