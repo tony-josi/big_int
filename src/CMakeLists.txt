@@ -8,6 +8,7 @@ endif()
 
 add_subdirectory(big_int)
 add_subdirectory(test_main)
+add_subdirectory(big_int_test_cases)
 
 
 

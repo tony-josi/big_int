@@ -19,6 +19,7 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
 	module.doc() = "Library for testing the big int api using python";
 
     pybind11::class_<big_int_test_cases>(module, "big_int_tc")
+        .def(pybind11::init())
         .def("bi_test_big_int_from_string", &big_int_test_cases::bi_test_big_int_from_string)
         .def("bi_test_big_int_unsigned_add", &big_int_test_cases::bi_test_big_int_unsigned_add)
         .def("bi_test_big_int_unsigned_sub", &big_int_test_cases::bi_test_big_int_unsigned_sub)
