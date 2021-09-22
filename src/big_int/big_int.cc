@@ -136,27 +136,6 @@ int bi::big_int::_big_int_expand(int req) {
 
 int bi::big_int::big_int_from_string(const std::string &str_num) {
 
-    /*
-    int str_size = static_cast<int>(str_num.length());
-    int extr_space_reqd = ((str_size % 9 == 0) ? 0 : (9 - (str_size % 9)));
-    int base_t_aligned_size = str_size + extr_space_reqd;
-    char *temp_str = new char[static_cast<size_t>(base_t_aligned_size) + 1]; // +1 for NULL
-    memset(temp_str, '0', static_cast<size_t>(base_t_aligned_size) + 1);
-    memcpy(temp_str + extr_space_reqd, str_num.c_str(), static_cast<size_t>(str_size) + 1);
-
-    for (int i = (base_t_aligned_size / 9) - 1; i >= 0; --i) {
-        BI_BASE_TYPE t_val = static_cast<BI_BASE_TYPE>(strtoul(temp_str + static_cast<size_t>(i) * 9, NULL, 10));
-        memset(temp_str + static_cast<size_t>(i) * 9, '\0', 9);
-        _data[_top++] = t_val;
-        if (_top == _total_data) {
-            _big_int_expand(32);
-        }
-    }
-
-    delete[] temp_str;
-    return 0;
-    */
-
     size_t str_size = str_num.length();
     size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? \
     0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
@@ -197,8 +176,8 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
     BI_BASE_TYPE carry = 0;
     for(i = 0; i < min_data_len; ++i) {
         sum = b._data[i] + _data[i] + carry;
-        carry = (sum & ~0xFFFFFFFF) >> 32;
-        _data[i] = sum & 0xFFFFFFFF;
+        carry = (sum & ~BI_BASE_TYPE_MAX) >> 32;
+        _data[i] = sum & BI_BASE_TYPE_MAX;
     }
     int top_cntr = 0;
     for(; i < max_data_len; ++i) {
@@ -213,8 +192,8 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
         } else {
             sum = b._data[i] + carry;
         }
-        carry = (sum & ~0xFFFFFFFF) >> 32;
-        _data[i] = sum & 0xFFFFFFFF;
+        carry = (sum & ~BI_BASE_TYPE_MAX) >> 32;
+        _data[i] = sum & BI_BASE_TYPE_MAX;
     }
     _top += top_cntr;
     return 0;
@@ -264,10 +243,10 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     for(int i = 0; i < _top; ++i) {
         if(base == bi::bi_base::BI_DEC) {
-            _BI_LOG(1, "d %010u", _data[i]);
+            _BI_LOG(1, BI_SPRINF_FORMAT_DEC, _data[i]);
         }
         else if(base == bi::bi_base::BI_HEX){ 
-            _BI_LOG(1, "0x %08X", _data[i]);
+            _BI_LOG(1, BI_SPRINF_FORMAT_HEX, _data[i]);
         }
     }
 
@@ -286,7 +265,7 @@ int bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *re
             diff = _data[i] - data_ptr[i] - borrow;
             borrow = 0;
         } else {
-            temp1 = _data[i] + 0xFFFFFFFF - borrow;
+            temp1 = _data[i] + BI_BASE_TYPE_MAX - borrow;
             diff = temp1 - data_ptr[i];
             borrow = 1;
         }
