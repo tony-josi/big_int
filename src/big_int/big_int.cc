@@ -43,7 +43,7 @@
 
 namespace {
 
-    static int compare_bi_base_type(const BI_BASE_TYPE *a, const BI_BASE_TYPE *b);
+    static int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b);
 
 }
 
@@ -261,7 +261,7 @@ int bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *re
     BI_BASE_TYPE borrow = 0;
     BI_DOUBLE_BASE_TYPE diff, temp1;
     for(int i = 0; i < min; ++i) {
-        if(compare_bi_base_type(&_data[i], &data_ptr[i])) {
+        if(compare_bi_base_type(_data[i], data_ptr[i])) {
             diff = _data[i] - data_ptr[i] - borrow;
             borrow = 0;
         } else {
@@ -276,7 +276,7 @@ int bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *re
 
 namespace {
 
-    static int compare_bi_base_type(const BI_BASE_TYPE *a, const BI_BASE_TYPE *b) {
+    static int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b) {
 
         if(a > b)
             return 1;
