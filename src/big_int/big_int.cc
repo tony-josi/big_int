@@ -22,7 +22,7 @@
 
     #include <stdio.h>
     
-    #define         _MAX_VERBOSE     (3)     /* Verbose level 3 - max,  1 - min */
+    #define         _MAX_VERBOSE     (1)     /* Verbose level 3 - max,  1 - min */
 
     #define         _BI_LOG(_VERB, __str__, ...)    do {    \
         if(_VERB <= _MAX_VERBOSE) {                         \
@@ -237,21 +237,29 @@ int bi::big_int::big_int_clear() {
 
 std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
-    // TODO: Need to return string instead of printing it
+    size_t chars_per_data;
 
-    std::string op_string;
+    if(base == bi::bi_base::BI_DEC) {
+        chars_per_data = BI_SPRINF_FORMAT_DEC_CHARS;
+    } else if(base == bi::bi_base::BI_HEX){ 
+        chars_per_data = BI_SPRINF_FORMAT_HEX_CHARS;
+    }
 
-    for(int i = 0; i < _top; ++i) {
+    std::unique_ptr<char []> char_temp_buff(new char[static_cast<size_t>(_top) * chars_per_data + 1]);
+    memset(char_temp_buff.get(), '\0', static_cast<size_t>(_top) * chars_per_data + 1);
+
+    for(int i = _top - 1; i >= 0; --i) {
         if(base == bi::bi_base::BI_DEC) {
-            _BI_LOG(1, BI_SPRINF_FORMAT_DEC, _data[i]);
+            sprintf(char_temp_buff.get() + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_DEC, _data[i]);
+            _BI_LOG(3, BI_SPRINF_FORMAT_DEC_LOG, _data[i]);
         }
         else if(base == bi::bi_base::BI_HEX){ 
-            _BI_LOG(1, BI_SPRINF_FORMAT_HEX, _data[i]);
+            sprintf(char_temp_buff.get() + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
+            _BI_LOG(3, BI_SPRINF_FORMAT_HEX_LOG, _data[i]);
         }
     }
 
-    printf("\n");
-
+    std::string op_string(char_temp_buff.get());
     return op_string;
 
 }
@@ -278,7 +286,7 @@ namespace {
 
     static int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b) {
 
-        if(a > b)
+        if(a >= b)
             return 1;
         else
             return 0;

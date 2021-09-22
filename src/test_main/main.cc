@@ -1,3 +1,4 @@
+#include <iostream>
 
 #include "../../inc/big_int.hpp"
 
@@ -16,23 +17,23 @@ int main(int argc, char *argv[]) {
 
     big_int test_num_1, test_num_2, test_num_3, test_num_4, test_num_5;
     test_num_1.big_int_from_string(test_num_str_1);
-    test_num_1.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
     test_num_2.big_int_from_string(test_num_str_2);
-    test_num_2.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_2.big_int_to_string(bi_base::BI_HEX)<<"\n";
     //test_num_2.big_int_unsigned_add(test_num_1);
     //test_num_2.big_int_to_string(bi_base::BI_HEX);
 
     test_num_1.big_int_unsigned_add(test_num_1, &test_num_3);
-    test_num_3.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_3.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     test_num_4.big_int_from_string(test_num_str_3);
     test_num_4.big_int_unsigned_sub(test_num_1, &test_num_5);
-    test_num_5.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_5.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
-    test_num_2.big_int_to_string(bi_base::BI_HEX);
-    test_num_3.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_2.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    std::cout<<test_num_3.big_int_to_string(bi_base::BI_HEX)<<"\n";
     test_num_3.big_int_unsigned_sub(test_num_2, &test_num_1);
-    test_num_1.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
 

@@ -15,8 +15,12 @@
 #define         BI_BASE_TYPE                uint32_t
 #define         BI_DOUBLE_BASE_TYPE         uint64_t
 #define         BI_SSCANF_FORMAT_HEX        "%8X"
-#define         BI_SPRINF_FORMAT_HEX        "0x %08X"
-#define         BI_SPRINF_FORMAT_DEC        "d %010u"
+#define         BI_SPRINF_FORMAT_HEX        "%08x"
+#define         BI_SPRINF_FORMAT_DEC        "%010u"
+#define         BI_SPRINF_FORMAT_HEX_LOG    "0x %08X"
+#define         BI_SPRINF_FORMAT_DEC_LOG    "d %010u"
+#define         BI_SPRINF_FORMAT_HEX_CHARS  8
+#define         BI_SPRINF_FORMAT_DEC_CHARS  10
 #define         BI_HEX_STR_TO_DATA_SIZE     (2 * sizeof(BI_BASE_TYPE))
 #define         BI_DEFAULT_EXPAND_COUNT     (32)
 #define         BI_BASE_TYPE_MAX            (0xFFFFFFFF)
