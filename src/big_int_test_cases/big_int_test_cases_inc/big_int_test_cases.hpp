@@ -9,6 +9,8 @@
  *  @bug            No known bugs.
  */
 
+#include <string>
 
-#include "../../inc/big_int.hpp"
-
+std::string bi_test_big_int_from_string(const std::string &src_str);
+std::string bi_test_big_int_unsigned_add(const std::string &a, const std::string &b);
+std::string bi_test_big_int_unsigned_sub(const std::string &a, const std::string &b);
