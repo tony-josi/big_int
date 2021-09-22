@@ -9,8 +9,8 @@
  *  @bug            No known bugs.
  */
 
-#include "big_int_test_cases_inc/big_int_test_cases.hpp"
-#include "../../inc/big_int.hpp"
+#include "big_int_test_cases.hpp"
+#include "big_int.hpp"
 
 using namespace bi;
 
