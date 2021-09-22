@@ -60,6 +60,8 @@ bi::big_int::big_int()
         _BI_LOG(1, "Init failed");
         throw std::length_error("Couldnt find enough memory");
     }
+
+    _BI_LOG(3, "Default 'ctor");
 }
 
 bi::big_int::big_int(const bi::big_int &src) 
@@ -71,11 +73,44 @@ bi::big_int::big_int(const bi::big_int &src)
         _data[i] = src._data[i];
     }
 
+    _BI_LOG(3, "Copy 'ctor");
 }
 
+bi::big_int& bi::big_int::operator=(bi::big_int src) {
 
-        //big_int & operator=(big_int src);
-        //big_int(const big_int &&src);
+    _swap_big_int(src);
+    return *this;
+
+    _BI_LOG(3, "Copy/Move assign. 'ctor");
+
+}
+
+bi::big_int::big_int(bi::big_int &&src) {
+
+    _swap_big_int(src);
+
+    _BI_LOG(3, "Move 'ctor");
+
+}
+
+bi::big_int::~big_int() {
+
+    delete[]    _data;
+    _BI_LOG(1, "Freeing: %d, items", _total_data);
+
+}
+
+void bi::big_int::_swap_big_int(bi::big_int &src) {
+
+    using std::swap;
+
+    swap(_data,         src._data);
+    swap(_total_data,   src._total_data);
+    swap(_top,          src._top);
+    swap(_neg,          src._neg);
+
+}
+
 
 int bi::big_int::_big_int_expand(int req) {
 
@@ -258,13 +293,6 @@ int bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *re
         res_ptr->_data[(res_ptr->_top)++] = static_cast<BI_BASE_TYPE>(diff);
     }
     return 0;
-}
-
-bi::big_int::~big_int() {
-
-    delete[]    _data;
-    _BI_LOG(1, "Freeing: %d, items", _total_data);
-
 }
 
 namespace {

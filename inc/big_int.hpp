@@ -41,13 +41,14 @@ namespace bi {
 
         int _big_int_expand(int req);
         int _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr);
+        void _swap_big_int(big_int &src);
 
         public:
 
         big_int();
         big_int(const big_int &src);
-        big_int & operator=(big_int src);
-        big_int(const big_int &&src);
+        big_int& operator=(big_int src);
+        big_int(big_int &&src);
         ~big_int();
 
         int             big_int_from_string(const std::string &str_num);
