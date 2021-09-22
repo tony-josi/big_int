@@ -47,12 +47,12 @@ namespace {
 
 }
 
-bi::big_int::big_int() {
+bi::big_int::big_int() 
+:   _total_data {DEFAULT_MEM_ALLOC_BYTES / sizeof(BI_BASE_TYPE)},  
+    _top        {0},
+    _neg        {false} {
 
     _data           = new BI_BASE_TYPE[DEFAULT_MEM_ALLOC_BYTES / sizeof(BI_BASE_TYPE)];
-    _total_data     = DEFAULT_MEM_ALLOC_BYTES / sizeof(BI_BASE_TYPE);
-    _top            = 0;
-    _neg            = false;
 
     if(_data) {
         _BI_LOG(1, "Big int init, with: %d items", _total_data);
@@ -61,6 +61,21 @@ bi::big_int::big_int() {
         throw std::length_error("Couldnt find enough memory");
     }
 }
+
+bi::big_int::big_int(const bi::big_int &src) 
+:   _total_data {src._total_data},  
+    _top        {src._top},
+    _neg        {src._neg} {
+
+    for(int i = 0; i < _top; ++i) {
+        _data[i] = src._data[i];
+    }
+
+}
+
+
+        //big_int & operator=(big_int src);
+        //big_int(const big_int &&src);
 
 int bi::big_int::_big_int_expand(int req) {
 
