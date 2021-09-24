@@ -176,7 +176,7 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
     BI_BASE_TYPE carry = 0;
     for(i = 0; i < min_data_len; ++i) {
         sum = static_cast<BI_DOUBLE_BASE_TYPE>(b._data[i]) + _data[i] + carry;
-        carry = (sum) >> 32;
+        carry = static_cast<BI_BASE_TYPE>((sum) >> 32);
         _data[i] = sum & BI_BASE_TYPE_MAX;
     }
     int top_cntr = 0;
@@ -192,7 +192,7 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
         } else {
             sum = static_cast<BI_DOUBLE_BASE_TYPE>(b._data[i]) + carry;
         }
-        carry = (sum) >> 32;
+        carry = static_cast<BI_BASE_TYPE>((sum) >> 32);
         _data[i] = sum & BI_BASE_TYPE_MAX;
     }
     _top += top_cntr;
