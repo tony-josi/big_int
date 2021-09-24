@@ -44,7 +44,7 @@ namespace bi {
         bool                _neg;
 
         int _big_int_expand(int req);
-        int _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr);
+        BI_BASE_TYPE _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr);
         void _swap_big_int(big_int &src);
 
         public:

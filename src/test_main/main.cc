@@ -36,12 +36,13 @@ int main(int argc, char *argv[]) {
     std::cout<<test_num_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     std::string test_num_str_4 = "6feea77b";
-    std::string test_num_str_5 = "fc4d146a";
+    std::string test_num_str_5 = "121450c4d146a";
     big_int test_num_6, test_num_7, test_num_8;
     test_num_6.big_int_from_string(test_num_str_4);
     test_num_7.big_int_from_string(test_num_str_5);
-    test_num_6.big_int_unsigned_add(test_num_7);
-    std::cout<<test_num_6.big_int_to_string(bi_base::BI_HEX)<<"\n";    
+    //test_num_6.big_int_unsigned_add(test_num_7);
+    test_num_7.big_int_unsigned_sub(test_num_6, &test_num_8);
+    std::cout<<test_num_8.big_int_to_string(bi_base::BI_HEX)<<"\n";    
     
     return 0;
 
