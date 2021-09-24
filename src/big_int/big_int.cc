@@ -16,7 +16,7 @@
 
 #include "../inc/big_int.hpp"
 
-#define         DEBUG_LOG       (1)
+#define         DEBUG_LOG       (0)
 
 #if DEBUG_LOG
 
@@ -196,6 +196,14 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
         _data[i] = sum & BI_BASE_TYPE_MAX;
     }
     _top += top_cntr;
+    
+    if (carry) {
+        if(i >= _total_data) {
+            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        }
+        _data[_top++] = carry;
+    }
+
     return 0;
 
 }

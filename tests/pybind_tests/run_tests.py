@@ -50,7 +50,6 @@ def test_core_simple_loop(_test_func_, test_data):
         else:
             test_fail += 1
             _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = FAIL".format(i))
-        break
 
     _LOG_BI_TEST(1, _test_func_.__name__, "Total sub-test cases: {}, pass: {}".format(total_rand_nums, test_pass), optn = 1)
 
@@ -69,7 +68,7 @@ def test_core_2d_loop(_test_func_, test_data):
                 _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = FAIL".format(i))
                 _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {}".format(test_data[j], test_data[i]))
 
-    _LOG_BI_TEST(2, _test_func_.__name__, "Total sub-test cases: {}, pass: {}".format(total_rand_nums, test_pass), optn = 1)
+    _LOG_BI_TEST(1, _test_func_.__name__, "Total sub-test cases: {}, pass: {}".format(total_rand_nums, test_pass), optn = 1)
 
 def test_1_bi_test_big_int_from_string(test_data):
     test_core_simple_loop(_bi_test_big_int_from_string, test_data)
