@@ -20,7 +20,7 @@ public:
     std::string bi_test_big_int_unsigned_add(const std::string &a, const std::string &b);
     std::string bi_test_big_int_unsigned_sub(const std::string &a, const std::string &b);
     std::string bi_test_big_int_unsigned_add_on_obj(const std::string &a, const std::string &b);
-    //std::string bi_test_big_int_unsigned_sub_on_obj(const std::string &a, const std::string &b);
+    std::string bi_test_big_int_unsigned_sub_on_obj(const std::string &a, const std::string &b);
 
 };
 
