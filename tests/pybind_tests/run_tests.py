@@ -97,7 +97,7 @@ def test_1_bi_test_big_int_from_string(test_data):
 def test_2_bi_test_big_int_unsigned_add(test_data):
     test_core_2d_loop(_bi_test_big_int_unsigned_add, test_data)
 
-def test_3_bi_test_big_int_unsigned_add(test_data):
+def test_3_bi_test_big_int_unsigned_add_on_obj(test_data):
     test_core_2d_loop(_bi_test_big_int_unsigned_add_on_obj, test_data)
 
 
@@ -105,5 +105,5 @@ if __name__ == "__main__":
 
     test_1_bi_test_big_int_from_string(test_nums)
     test_2_bi_test_big_int_unsigned_add(test_nums)
-    test_3_bi_test_big_int_unsigned_add(test_nums)
+    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums)
 
