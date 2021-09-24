@@ -23,8 +23,9 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def(pybind11::init<>())
         .def("bi_test_big_int_from_string", &big_int_test_cases::bi_test_big_int_from_string, "bi_test_big_int_from_string test0", pybind11::arg("input"))
         .def("bi_test_big_int_unsigned_add", &big_int_test_cases::bi_test_big_int_unsigned_add)
+        .def("bi_test_big_int_unsigned_add_on_obj", &big_int_test_cases::bi_test_big_int_unsigned_add_on_obj)
         .def("bi_test_big_int_unsigned_sub", &big_int_test_cases::bi_test_big_int_unsigned_sub)
-        .def("bi_test_big_int_unsigned_add_on_obj", &big_int_test_cases::bi_test_big_int_unsigned_add_on_obj);
+        .def("bi_test_big_int_unsigned_sub_on_obj", &big_int_test_cases::bi_test_big_int_unsigned_sub_on_obj);
 
        
     //module.def("bi_test_big_int_from_string", &big_int_test_cases::bi_test_big_int_from_string, "bi_test_big_int_from_string test0");

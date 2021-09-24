@@ -248,6 +248,15 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) {
 
 }
 
+int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
+
+    bi::big_int temp;
+    this->big_int_unsigned_sub(b, &temp);
+    _swap_big_int(temp);
+    return 0;
+
+}
+
 int bi::big_int::big_int_clear() {
 
     memset(_data, 0, static_cast<size_t>(_total_data) * sizeof(BI_BASE_TYPE));

@@ -61,6 +61,7 @@ namespace bi {
         int big_int_unsigned_add(const big_int &b, big_int *res);
         
         /* First param should be larger. */
+        int big_int_unsigned_sub(const big_int &b);
         int big_int_unsigned_sub(const big_int &b, bi::big_int *res);
         
         int big_int_clear();
