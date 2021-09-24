@@ -35,6 +35,13 @@ int main(int argc, char *argv[]) {
     test_num_3.big_int_unsigned_sub(test_num_2, &test_num_1);
     std::cout<<test_num_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_4 = "1e1e9bf5d12868579d0dc1e63000";
+    big_int test_num_6, test_num_7, test_num_8;
+    test_num_6.big_int_from_string(test_num_str_4);
+    test_num_7.big_int_from_string(test_num_str_4);
+    test_num_6.big_int_unsigned_add(test_num_7);
+    std::cout<<test_num_6.big_int_to_string(bi_base::BI_HEX)<<"\n";    
+    
     return 0;
 
 } 
