@@ -251,7 +251,7 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) {
 int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
 
     bi::big_int temp;
-    this->big_int_unsigned_sub(b, &temp);
+    big_int_unsigned_sub(b, &temp);
     _swap_big_int(temp);
     return 0;
 
