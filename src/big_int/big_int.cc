@@ -220,7 +220,8 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
 
 int bi::big_int::big_int_signed_add(const bi::big_int &b) {
 
-
+    (void) b;
+    return 0;
 
 }
 
