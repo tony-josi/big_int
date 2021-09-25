@@ -73,10 +73,10 @@ def test_core_simple_loop(_test_func_, test_data):
     for i in range(total_rand_nums):
         if _test_func_(test_data[i]):
             test_pass += 1
-            _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = PASS".format(i))
+            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = PASS".format(test_data[i]))
         else:
             test_fail += 1
-            _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = FAIL".format(i))
+            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]))
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -95,11 +95,10 @@ def test_core_2d_loop(_test_func_, test_data):
         for i in range(len(test_data)):
             if _test_func_(test_data[j], test_data[i]):
                 test_pass += 1
-                _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = PASS".format(i))
+                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]))
             else:
                 test_fail += 1
-                _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = FAIL".format(i))
-                _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {}".format(test_data[j], test_data[i]))
+                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]))
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -120,11 +119,10 @@ def test_core_2d_loop_compare(_test_func_, test_data):
                 total_rand_nums += 1
                 if _test_func_(test_data[j], test_data[i]):
                     test_pass += 1
-                    _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = PASS".format(i))
+                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]))
                 else:
                     test_fail += 1
-                    _LOG_BI_TEST(2, _test_func_.__name__, "Sub-test: {} = FAIL".format(i))
-                _LOG_BI_TEST(4, _test_func_.__name__, "Input A: {} B: {}".format(hex(test_data[j]), hex(test_data[i])))
+                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]))
 
     test_status = ""
     if(total_rand_nums == test_pass):
