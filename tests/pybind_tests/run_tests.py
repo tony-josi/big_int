@@ -73,10 +73,10 @@ def test_core_simple_loop(_test_func_, test_data):
     for i in range(total_rand_nums):
         if _test_func_(test_data[i]):
             test_pass += 1
-            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = PASS".format(test_data[i]))
+            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = PASS".format(test_data[i]), optn = 1)
         else:
             test_fail += 1
-            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]))
+            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -95,10 +95,10 @@ def test_core_2d_loop(_test_func_, test_data):
         for i in range(len(test_data)):
             if _test_func_(test_data[j], test_data[i]):
                 test_pass += 1
-                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]))
+                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]), optn = 1)
             else:
                 test_fail += 1
-                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]))
+                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -119,10 +119,10 @@ def test_core_2d_loop_compare(_test_func_, test_data):
                 total_rand_nums += 1
                 if _test_func_(test_data[j], test_data[i]):
                     test_pass += 1
-                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]))
+                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]), optn = 1)
                 else:
                     test_fail += 1
-                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]))
+                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -149,6 +149,9 @@ def test_5_bi_test_big_int_unsigned_sub_on_obj(test_data):
 
 
 if __name__ == "__main__":
+
+    if len(sys.argv) > 1:
+        VERBOSE_LEVEL = int(sys.argv[1])
 
     test_1_bi_test_big_int_from_string(test_nums)
     test_2_bi_test_big_int_unsigned_add(test_nums)
