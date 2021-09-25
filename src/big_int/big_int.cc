@@ -43,7 +43,8 @@
 
 namespace {
 
-    static int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b);
+    static inline int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b);
+    static inline int compare_bi_base_type_n_top(const BI_BASE_TYPE a, const BI_BASE_TYPE b, const int a_top, const int b_top) ;
 
 }
 
@@ -217,6 +218,12 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
 
 }
 
+int bi::big_int::big_int_signed_add(const bi::big_int &b) {
+
+
+
+}
+
 int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) {
 
     int max, min;
@@ -312,14 +319,43 @@ BI_BASE_TYPE bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::bi
     return borrow;
 }
 
+int bi::big_int::compare_big_int(const bi::big_int &other) const {
+
+    if (_neg == other._neg) {
+        if (_neg == 1) {
+            return !compare_bi_base_type_n_top(_data[_top - 1], other._data[_top - 1], _top, other._top);
+        } else {
+            return compare_bi_base_type_n_top(_data[_top - 1], other._data[other._top - 1], _top, other._top);
+        }
+    } else {
+        if (_neg == 1) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+}
+
 namespace {
 
-    static int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b) {
+    static inline int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b) {
 
         if(a >= b)
             return 1;
         else
             return 0;
+
+    }
+
+    static inline int compare_bi_base_type_n_top(const BI_BASE_TYPE a, const BI_BASE_TYPE b, const int a_top, const int b_top) {
+
+        if (a_top == b_top) {
+            return compare_bi_base_type(a, b);
+        } else if (a_top > b_top) {
+            return 1;
+        } else {
+            return 0;
+        }
 
     }
 
