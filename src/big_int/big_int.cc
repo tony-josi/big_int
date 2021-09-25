@@ -320,7 +320,7 @@ BI_BASE_TYPE bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::bi
     return borrow;
 }
 
-int bi::big_int::compare_big_int(const bi::big_int &other) const {
+int bi::big_int::big_int_compare(const bi::big_int &other) const {
 
     if (_neg == other._neg) {
         if (_neg == 1) {

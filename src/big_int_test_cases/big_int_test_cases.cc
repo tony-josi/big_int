@@ -22,6 +22,15 @@ std::string big_int_test_cases::bi_test_big_int_from_string(const std::string &s
 
 }
 
+int big_int_test_cases::bi_test_big_int_compare(const std::string &a, const std::string &b) {
+
+    big_int test_bi_a, test_bi_b;
+    test_bi_a.big_int_from_string(a);
+    test_bi_b.big_int_from_string(b);
+    return test_bi_a.big_int_compare(test_bi_b);
+
+}
+
 std::string big_int_test_cases::bi_test_big_int_unsigned_add(const std::string &a, const std::string &b) {
 
     big_int test_bi_a, test_bi_b, test_bi_c;

@@ -58,7 +58,7 @@ namespace bi {
 
         int             big_int_from_string(const std::string &str_num);
         std::string     big_int_to_string(bi_base base);
-        int compare_big_int(const big_int &other) const;
+        int big_int_compare(const big_int &other) const;
         int big_int_unsigned_add(const big_int &b);
         int big_int_unsigned_add(const big_int &b, big_int *res);
         int big_int_signed_add(const big_int &b);
