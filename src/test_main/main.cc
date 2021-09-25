@@ -43,6 +43,13 @@ int main(int argc, char *argv[]) {
     //test_num_6.big_int_unsigned_add(test_num_7);
     test_num_7.big_int_unsigned_sub(test_num_6, &test_num_8);
     std::cout<<test_num_8.big_int_to_string(bi_base::BI_HEX)<<"\n";    
+
+    std::string test_num_str_6 = "140AF2D7E";
+    std::string test_num_str_7 = "1648AD85E";
+    big_int test_num_9, test_num_10;
+    test_num_9.big_int_from_string(test_num_str_6);
+    test_num_10.big_int_from_string(test_num_str_7);
+    std::cout<<test_num_9.big_int_compare(test_num_10)<<"\n";
     
     return 0;
 
