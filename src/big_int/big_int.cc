@@ -323,7 +323,7 @@ int bi::big_int::big_int_set_negetive(bool set_unset) {
 
     bi::big_int temp;
     temp.big_int_from_string("0x0");
-    if (this->big_int_compare(temp) == 0) {
+    if (big_int_compare(temp) == 0) {
         return -1;
     }
     _neg = set_unset;
