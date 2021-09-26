@@ -331,6 +331,12 @@ int bi::big_int::big_int_set_negetive(bool set_unset) {
 
 }
 
+int bi::big_int::big_int_is_negetive() {
+
+    return _neg;
+
+}
+
 
 BI_BASE_TYPE bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) {
 
