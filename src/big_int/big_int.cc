@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <string.h>
 #include <memory>
+#include <cstdio>
 
 #include "../inc/big_int.hpp"
 
@@ -137,23 +138,39 @@ int bi::big_int::_big_int_expand(int req) {
 
 int bi::big_int::big_int_from_string(const std::string &str_num) {
 
-    size_t str_size = str_num.length();
+    size_t str_size = str_num.length(), num_decor_cnt = 0;
+    size_t is_neg = 0;
+    if (str_size > 0 && str_num[0] == '-') {
+        is_neg = 1;
+        num_decor_cnt += 1;
+    }
+    if((str_size > (1 + is_neg)) && str_num[is_neg] == '0' && (str_num[is_neg + 1] == 'x' || str_num[is_neg + 1] == 'X')) {
+        num_decor_cnt += 2;
+    }
+
+    str_size -= num_decor_cnt;
+
     size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? \
     0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
     
     size_t base_t_aligned_size = str_size + extr_space_reqd;
     std::unique_ptr<char []> temp_str(new char[base_t_aligned_size]);
     memset(temp_str.get(), '0', extr_space_reqd);
-    memcpy(temp_str.get() + extr_space_reqd, str_num.c_str(), str_size);
+    memcpy(temp_str.get() + extr_space_reqd, str_num.c_str() + num_decor_cnt, str_size);
 
     int str_cur_indx = static_cast<int>(base_t_aligned_size - BI_HEX_STR_TO_DATA_SIZE);
 
     for(; str_cur_indx >= 0; str_cur_indx -= static_cast<int>(BI_HEX_STR_TO_DATA_SIZE)) {
-        sscanf(&(temp_str.get()[str_cur_indx]), BI_SSCANF_FORMAT_HEX, &_data[_top++]);
+        if(sscanf(&(temp_str.get()[str_cur_indx]), BI_SSCANF_FORMAT_HEX, &_data[_top++]) == EOF) {
+            big_int_clear();
+            return -1;
+        }
         if(_top == _total_data) {
             _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
         }
     }
+
+    _neg = static_cast<bool>(is_neg);
 
     return 0;
 

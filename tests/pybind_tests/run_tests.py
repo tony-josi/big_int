@@ -25,8 +25,8 @@ def compare_hex_string_numbers(str_1, str_2):
 def _bi_test_big_int_from_string(num):
     hex_str = hex(num)[2:]
     test_obj = pbitw.big_int_tc()
-    ret_str = test_obj.bi_test_big_int_from_string(hex_str)
-    _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
+    ret_str = test_obj.bi_test_big_int_from_string(hex(num))
+    _LOG_BI_TEST(1, "_bi_test_big_int_from_string", hex(num), ret_str)
     return compare_hex_string_numbers(ret_str, hex_str)
 
 def _bi_test_big_int_unsigned_add(num_1, num_2):
