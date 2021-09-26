@@ -324,13 +324,13 @@ int bi::big_int::big_int_compare(const bi::big_int &other) const {
 
     if (_neg == other._neg) {
         if (_neg == 1) {
-            return !_compare_bi_base_type_n_top(other);
+            return -1 * _compare_bi_base_type_n_top(other);
         } else {
             return _compare_bi_base_type_n_top(other);
         }
     } else {
         if (_neg == 1) {
-            return 0;
+            return -1;
         } else {
             return 1;
         }
@@ -340,20 +340,21 @@ int bi::big_int::big_int_compare(const bi::big_int &other) const {
 int bi::big_int::_compare_bi_base_type_n_top(const bi::big_int &other) const {
 
     if (_top == other._top) {
-        for(int i = _top - 1; i >= 0; i--) {
+        int i = _top - 1;
+        for(; i >= 0; i--) {
             if (_data[i] == other._data[i]) {
                 continue;
             } else if (_data[i] > other._data[i]) {
                 return 1;
             } else {
-                return 0;
+                return -1;
             }
         }
-        return 1;
+        return 0;
     } else if (_top > other._top) {
         return 1;
     } else {
-        return 0;
+        return -1;
     }
 
 }

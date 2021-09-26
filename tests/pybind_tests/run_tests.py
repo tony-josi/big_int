@@ -70,11 +70,11 @@ def _bi_test_big_int_compare(num_1, num_2):
     hex_str_2 = hex(num_2)[2:]
     test_obj = pbitw.big_int_tc()
     ret_val = test_obj.bi_test_big_int_compare(hex_str_1, hex_str_2)
-    act_comp_val = False
-    if num_1 >= num_2:
-        act_comp_val = True
-    else:
-        act_comp_val = False
+    act_comp_val = 0
+    if num_1 > num_2:
+        act_comp_val = 1
+    elif num_1 < num_2:
+        act_comp_val = -1
     _LOG_BI_TEST(4, "compare_big_int_numbers", num_1, num_2)
     return ret_val == act_comp_val
 
