@@ -23,10 +23,17 @@ def compare_hex_string_numbers(str_1, str_2):
         return False
 
 def _bi_test_big_int_from_string(num):
+    hex_str = hex(num)
+    test_obj = pbitw.big_int_tc()
+    ret_str = test_obj.bi_test_big_int_from_string(hex_str)
+    _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
+    return compare_hex_string_numbers(ret_str, hex_str)
+
+def _bi_test_big_int_from_string_no_0x(num):
     hex_str = hex(num)[2:]
     test_obj = pbitw.big_int_tc()
-    ret_str = test_obj.bi_test_big_int_from_string(hex(num))
-    _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex(num), ret_str)
+    ret_str = test_obj.bi_test_big_int_from_string(hex_str)
+    _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
     return compare_hex_string_numbers(ret_str, hex_str)
 
 def _bi_test_big_int_unsigned_add(num_1, num_2):
@@ -163,6 +170,8 @@ def test_5_bi_test_big_int_unsigned_sub_on_obj(test_data):
 def test_6_bi_test_big_int_compare(test_data):
     test_core_2d_loop(_bi_test_big_int_compare, test_data)
 
+def test_7_bi_test_big_int_from_string_no_0x(test_data):
+    test_core_simple_loop(_bi_test_big_int_from_string_no_0x, test_data)
 
 if __name__ == "__main__":
 
@@ -175,4 +184,5 @@ if __name__ == "__main__":
     test_4_bi_test_big_int_unsigned_sub(test_nums)
     test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums)
     test_6_bi_test_big_int_compare(test_nums)
+    test_7_bi_test_big_int_from_string_no_0x(test_nums)
 
