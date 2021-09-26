@@ -170,6 +170,9 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
         }
     }
 
+    if(big_int_is_zero() && is_neg) {
+        return -1;
+    }
     _neg = static_cast<bool>(is_neg);
 
     return 0;
