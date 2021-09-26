@@ -319,6 +319,19 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
 }
 
+int bi::big_int::big_int_set_negetive(bool set_unset) {
+
+    bi::big_int temp;
+    temp.big_int_from_string("0x0");
+    if (this->big_int_compare(temp) == 0) {
+        return -1;
+    }
+    _neg = set_unset;
+    return 0;
+
+}
+
+
 BI_BASE_TYPE bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) {
 
     BI_BASE_TYPE borrow = 0;
