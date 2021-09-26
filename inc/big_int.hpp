@@ -66,6 +66,7 @@ namespace bi {
         int big_int_signed_add(const big_int &b, big_int *res);
         int big_int_set_negetive(bool set_unset);
         bool big_int_is_negetive();
+        bool big_int_is_zero();
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);

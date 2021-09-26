@@ -329,15 +329,25 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
 int bi::big_int::big_int_set_negetive(bool set_unset) {
 
-    bi::big_int temp;
-    temp.big_int_from_string("0x0");
-    if (big_int_compare(temp) == 0) {
+    if (big_int_is_zero()) {
         return -1;
     }
     _neg = set_unset;
     return 0;
 
 }
+
+bool bi::big_int::big_int_is_zero() {
+
+    for(int i = 0; i < _top; ++i) {
+        if (_data[i] != 0) {
+            return -1;
+        }
+    }
+    return 0;
+
+}
+
 
 bool bi::big_int::big_int_is_negetive() {
 
