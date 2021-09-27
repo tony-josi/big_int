@@ -50,6 +50,11 @@ int main(int argc, char *argv[]) {
     test_num_9.big_int_from_string(test_num_str_6);
     test_num_10.big_int_from_string(test_num_str_7);
     std::cout<<test_num_9.big_int_compare(test_num_10)<<"\n";
+
+    std::string test_num_str_8 = "-17dbda480faccbc795d1cbfb80d095de3b79b9db52eece44baf92420a0";
+    big_int test_num_11;
+    test_num_11.big_int_from_string(test_num_str_8);
+    std::cout<<test_num_11.big_int_to_string(bi_base::BI_HEX);
     
     return 0;
 

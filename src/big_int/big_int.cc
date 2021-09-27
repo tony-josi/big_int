@@ -170,7 +170,7 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
         }
     }
 
-    if(big_int_is_zero() && is_neg) {
+    if(big_int_is_zero() == 0 && is_neg) {
         return -1;
     }
     _neg = static_cast<bool>(is_neg);
@@ -309,18 +309,18 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
     }
 
     std::unique_ptr<char []> char_temp_buff(new char[static_cast<size_t>(_top) * chars_per_data + 1 + is_neg]);
-    memset(char_temp_buff.get(), '\0', static_cast<size_t>(_top) * chars_per_data + 1);
+    memset(char_temp_buff.get(), '\0', static_cast<size_t>(_top) * chars_per_data + 1 + is_neg);
     if (is_neg) {
-        char_temp_buff[0] = '-';
+        char_temp_buff.get()[0] = '-';
     }
 
     for(int i = _top - 1; i >= 0; --i) {
         if(base == bi::bi_base::BI_DEC) {
-            sprintf(char_temp_buff.get() + ((static_cast<size_t>(_top) - 1) + is_neg - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_DEC, _data[i]);
+            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_DEC, _data[i]);
             _BI_LOG(3, BI_SPRINF_FORMAT_DEC_LOG, _data[i]);
         }
         else if(base == bi::bi_base::BI_HEX){ 
-            sprintf(char_temp_buff.get() + ((static_cast<size_t>(_top) - 1) + is_neg - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
+            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
             _BI_LOG(3, BI_SPRINF_FORMAT_HEX_LOG, _data[i]);
         }
     }

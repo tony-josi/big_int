@@ -1,7 +1,7 @@
 import sys
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 
-from random_numbers import test_nums
+from rand import test_nums
 import py_big_int_tc_wrap as pbitw
 
 VERBOSE_LEVEL = 1
@@ -34,7 +34,7 @@ def _bi_test_big_int_from_string(num):
     hex_str = get_hex_str_without_0x(num)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_from_string(hex_str)
-    _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
+    _LOG_BI_TEST(1, "_bi_test_big_int_from_string", hex_str, ret_str)
     return compare_hex_string_numbers(ret_str, hex_str)
 
 def _bi_test_big_int_from_string_no_0x(num):
@@ -104,7 +104,7 @@ def test_core_simple_loop(_test_func_, test_data):
             _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = PASS".format(test_data[i]), optn = 1)
         else:
             test_fail += 1
-            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
+            _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -187,10 +187,10 @@ if __name__ == "__main__":
         VERBOSE_LEVEL = int(sys.argv[1])
 
     test_1_bi_test_big_int_from_string(test_nums)
-    test_2_bi_test_big_int_unsigned_add(test_nums)
-    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums)
-    test_4_bi_test_big_int_unsigned_sub(test_nums)
-    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums)
-    test_6_bi_test_big_int_compare(test_nums)
-    test_7_bi_test_big_int_from_string_no_0x(test_nums)
+    # test_2_bi_test_big_int_unsigned_add(test_nums)
+    # test_3_bi_test_big_int_unsigned_add_on_obj(test_nums)
+    # test_4_bi_test_big_int_unsigned_sub(test_nums)
+    # test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums)
+    # test_6_bi_test_big_int_compare(test_nums)
+    # test_7_bi_test_big_int_from_string_no_0x(test_nums)
 
