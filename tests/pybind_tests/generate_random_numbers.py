@@ -28,7 +28,10 @@ if __name__ == "__main__":
             rand_arr.append(random.getrandbits(random.randint(DEFAULT_MIN_NUM_OF_BITS, max_num_bits)))
             rand_arr.append(random.getrandbits(random.randint(DEFAULT_MIN_NUM_OF_BITS, DEFAULT_MIN_NUM_OF_BITS * 4)))       # to have more smaller numbers
 
-    print("test_nums = [")
+    if signed_nums:
+        print("test_nums_int = [")
+    else:
+        print("test_nums_uint = [")
     for dat_ in rand_arr:
         print("    {},".format(dat_))
     print("]")

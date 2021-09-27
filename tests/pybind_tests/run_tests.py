@@ -1,7 +1,8 @@
 import sys
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 
-from rand import test_nums
+from rand import test_nums_int
+from random_numbers import test_nums_uint
 import py_big_int_tc_wrap as pbitw
 
 VERBOSE_LEVEL = 1
@@ -196,11 +197,18 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         VERBOSE_LEVEL = int(sys.argv[1])
 
-    test_1_bi_test_big_int_from_string(test_nums)
-    test_2_bi_test_big_int_unsigned_add(test_nums)
-    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums)
-    test_4_bi_test_big_int_unsigned_sub(test_nums)
-    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums)
-    test_6_bi_test_big_int_compare(test_nums)
-    test_7_bi_test_big_int_from_string_no_0x(test_nums)
+    test_1_bi_test_big_int_from_string(test_nums_uint)
+    test_2_bi_test_big_int_unsigned_add(test_nums_uint)
+    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
+    test_4_bi_test_big_int_unsigned_sub(test_nums_uint)
+    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
+    test_6_bi_test_big_int_compare(test_nums_uint)
+    test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
 
+    test_1_bi_test_big_int_from_string(test_nums_int)
+    test_2_bi_test_big_int_unsigned_add(test_nums_int)
+    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_int)
+    test_4_bi_test_big_int_unsigned_sub(test_nums_int)
+    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_int)
+    test_6_bi_test_big_int_compare(test_nums_int)
+    test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
