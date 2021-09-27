@@ -1,8 +1,8 @@
 import sys
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 
-from rand import test_nums_int
-from random_numbers import test_nums_uint
+from signed_data import test_nums_int
+from unsigned_data import test_nums_uint
 import py_big_int_tc_wrap as pbitw
 
 VERBOSE_LEVEL = 1
