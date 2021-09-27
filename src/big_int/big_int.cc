@@ -175,6 +175,15 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
     }
     _neg = static_cast<bool>(is_neg);
 
+    /* Remove extra zeroes in the MSB if the i/p string had them. */
+    for(int i = _top - 1; i >= 0; i--) {
+        if(_data[i] == 0) {
+            _top--;
+        } else {
+            break;
+        }
+    }
+
     return 0;
 
 }
