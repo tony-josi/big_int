@@ -1,8 +1,8 @@
 import sys
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 
-SIGNED_DATA_FPATH =     "signed_data.txt"
-UNSIGNED_DATA_FPATH =   "unsigned_data.txt"
+SIGNED_DATA_FPATH =     "/home/tony/Documents/Projects/big_int/tests/pybind_tests/signed_data.txt"
+UNSIGNED_DATA_FPATH =   "/home/tony/Documents/Projects/big_int/tests/pybind_tests/unsigned_data.txt"
 
 import py_big_int_tc_wrap as pbitw
 
