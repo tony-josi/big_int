@@ -201,6 +201,6 @@ if __name__ == "__main__":
     test_3_bi_test_big_int_unsigned_add_on_obj(test_nums)
     test_4_bi_test_big_int_unsigned_sub(test_nums)
     test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums)
-    # test_6_bi_test_big_int_compare(test_nums)
-    # test_7_bi_test_big_int_from_string_no_0x(test_nums)
+    test_6_bi_test_big_int_compare(test_nums)
+    test_7_bi_test_big_int_from_string_no_0x(test_nums)
 
