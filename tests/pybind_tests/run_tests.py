@@ -28,6 +28,7 @@ def compare_hex_string_numbers(str_1, str_2):
     if num_1 == num_2:
         return True
     else:
+        _LOG_BI_TEST(1, "compare_hex_string_numbers", num_1, num_2)
         return False
 
 def _bi_test_big_int_from_string(num):
@@ -71,7 +72,7 @@ def _bi_test_big_int_unsigned_sub(num_1, num_2):
     hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_unsigned_sub(hex_str_1, hex_str_2)
-    exp_res = get_hex_str_without_0x(num_1 - num_2)
+    exp_res = get_hex_str_without_0x(abs(num_1) - abs(num_2))
     _LOG_BI_TEST(3, "_bi_test_big_int_unsigned_add", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
@@ -80,7 +81,11 @@ def _bi_test_big_int_unsigned_sub_on_obj(num_1, num_2):
     hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_unsigned_sub_on_obj(hex_str_1, hex_str_2)
-    exp_res = get_hex_str_without_0x(num_1 - num_2)
+    exp_res = get_hex_str_without_0x(abs(num_1) - abs(num_2))
+
+    if(num_1 < 0):
+        # Catch thr case when the calling object is already -ve
+        exp_res = '-' + exp_res
     _LOG_BI_TEST(3, "_bi_test_big_int_unsigned_add", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
@@ -147,14 +152,15 @@ def test_core_2d_loop_compare(_test_func_, test_data):
 
     for j in range(len(test_data)):
         for i in range(len(test_data)):
-            if (test_data[j] >= test_data[i]):
+            if (abs(test_data[j]) >= abs(test_data[i])):
                 total_rand_nums += 1
-                if _test_func_(test_data[j], test_data[i]):
+                res = _test_func_(test_data[j], test_data[i])
+                if res:
                     test_pass += 1
                     _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]), optn = 1)
                 else:
                     test_fail += 1
-                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
+                    _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -193,8 +199,8 @@ if __name__ == "__main__":
     test_1_bi_test_big_int_from_string(test_nums)
     test_2_bi_test_big_int_unsigned_add(test_nums)
     test_3_bi_test_big_int_unsigned_add_on_obj(test_nums)
-    # test_4_bi_test_big_int_unsigned_sub(test_nums)
-    # test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums)
+    test_4_bi_test_big_int_unsigned_sub(test_nums)
+    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums)
     # test_6_bi_test_big_int_compare(test_nums)
     # test_7_bi_test_big_int_from_string_no_0x(test_nums)
 

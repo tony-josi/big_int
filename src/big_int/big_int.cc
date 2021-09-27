@@ -280,6 +280,7 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
 
     bi::big_int temp;
     big_int_unsigned_sub(b, &temp);
+    temp._neg = this->_neg;
     _swap_big_int(temp);
     return 0;
 
