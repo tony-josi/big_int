@@ -6,6 +6,14 @@ import py_big_int_tc_wrap as pbitw
 
 VERBOSE_LEVEL = 1
 
+def get_hex_str_without_0x(num):
+    num_str = hex(num)
+    if num < 0:
+        num_str = num_str[0] + num_str[3:]
+    else:
+        num_str = num_str[2:]
+    return num_str
+
 def _LOG_BI_TEST(verb_lvl, locn, str_data_1, str_data_2 = None, optn = 0):
     if verb_lvl <= VERBOSE_LEVEL:
         if(optn == 0):
@@ -23,58 +31,58 @@ def compare_hex_string_numbers(str_1, str_2):
         return False
 
 def _bi_test_big_int_from_string(num):
-    hex_str = hex(num)
+    hex_str = get_hex_str_without_0x(num)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_from_string(hex_str)
     _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
     return compare_hex_string_numbers(ret_str, hex_str)
 
 def _bi_test_big_int_from_string_no_0x(num):
-    hex_str = hex(num)[2:]
+    hex_str = get_hex_str_without_0x(num)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_from_string(hex_str)
     _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
     return compare_hex_string_numbers(ret_str, hex_str)
 
 def _bi_test_big_int_unsigned_add(num_1, num_2):
-    hex_str_1 = hex(num_1)[2:]
-    hex_str_2 = hex(num_2)[2:]
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_unsigned_add(hex_str_1, hex_str_2)
-    exp_res = hex(num_1 + num_2)[2:]
+    exp_res = get_hex_str_without_0x(num_1 + num_2)
     _LOG_BI_TEST(3, "_bi_test_big_int_unsigned_add", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def _bi_test_big_int_unsigned_add_on_obj(num_1, num_2):
-    hex_str_1 = hex(num_1)[2:]
-    hex_str_2 = hex(num_2)[2:]
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_unsigned_add_on_obj(hex_str_1, hex_str_2)
-    exp_res = hex(num_1 + num_2)[2:]
+    exp_res = get_hex_str_without_0x(num_1 + num_2)
     _LOG_BI_TEST(3, "bi_test_big_int_unsigned_add_on_obj", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def _bi_test_big_int_unsigned_sub(num_1, num_2):
-    hex_str_1 = hex(num_1)[2:]
-    hex_str_2 = hex(num_2)[2:]
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_unsigned_sub(hex_str_1, hex_str_2)
-    exp_res = hex(num_1 - num_2)[2:]
+    exp_res = get_hex_str_without_0x(num_1 - num_2)
     _LOG_BI_TEST(3, "_bi_test_big_int_unsigned_add", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def _bi_test_big_int_unsigned_sub_on_obj(num_1, num_2):
-    hex_str_1 = hex(num_1)[2:]
-    hex_str_2 = hex(num_2)[2:]
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_unsigned_sub_on_obj(hex_str_1, hex_str_2)
-    exp_res = hex(num_1 - num_2)[2:]
+    exp_res = get_hex_str_without_0x(num_1 - num_2)
     _LOG_BI_TEST(3, "_bi_test_big_int_unsigned_add", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def _bi_test_big_int_compare(num_1, num_2):
-    hex_str_1 = hex(num_1)[2:]
-    hex_str_2 = hex(num_2)[2:]
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_val = test_obj.bi_test_big_int_compare(hex_str_1, hex_str_2)
     act_comp_val = 0
