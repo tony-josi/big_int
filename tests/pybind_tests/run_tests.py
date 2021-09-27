@@ -1,11 +1,25 @@
 import sys
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 
-from signed_data import test_nums_int
-from unsigned_data import test_nums_uint
+SIGNED_DATA_FPATH =     "signed_data.py"
+UNSIGNED_DATA_FPATH =   "unsigned_data.py"
+
 import py_big_int_tc_wrap as pbitw
 
 VERBOSE_LEVEL = 1
+
+def _LOG_BI_TEST(verb_lvl, locn, str_data_1, str_data_2 = None, optn = 0):
+    if verb_lvl <= VERBOSE_LEVEL:
+        if(optn == 0):
+            print("==> _LOG_BI_TEST: Location: {} Expected: {}, Actual: {}".format(locn, str_data_1, str_data_2))
+        else:
+            print("==> _LOG_BI_TEST: Location: {} Log: {}".format(locn, str_data_1))
+
+def read_file_to_list(fpath):
+    with open(fpath) as file:
+        lines = file.readlines()
+        des_list = [int(line.rstrip(), 10) for line in lines] 
+        return des_list   
 
 def get_hex_str_without_0x(num):
     num_str = hex(num)
@@ -14,13 +28,6 @@ def get_hex_str_without_0x(num):
     else:
         num_str = num_str[2:]
     return num_str
-
-def _LOG_BI_TEST(verb_lvl, locn, str_data_1, str_data_2 = None, optn = 0):
-    if verb_lvl <= VERBOSE_LEVEL:
-        if(optn == 0):
-            print("==> _LOG_BI_TEST: Location: {} Expected: {}, Actual: {}".format(locn, str_data_1, str_data_2))
-        else:
-            print("==> _LOG_BI_TEST: Location: {} Log: {}".format(locn, str_data_1))
 
 def compare_hex_string_numbers(str_1, str_2):
     num_1 = int(str_1, 16)
@@ -196,6 +203,9 @@ if __name__ == "__main__":
 
     if len(sys.argv) > 1:
         VERBOSE_LEVEL = int(sys.argv[1])
+
+    test_nums_int = read_file_to_list(SIGNED_DATA_FPATH)
+    test_nums_uint = read_file_to_list(UNSIGNED_DATA_FPATH)
 
     test_1_bi_test_big_int_from_string(test_nums_uint)
     test_2_bi_test_big_int_unsigned_add(test_nums_uint)
