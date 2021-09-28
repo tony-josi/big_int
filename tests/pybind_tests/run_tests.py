@@ -115,7 +115,7 @@ def _bi_test_big_int_signed_add(num_1, num_2):
     hex_str_2 = get_hex_str_without_0x(num_2)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_signed_add(hex_str_1, hex_str_2)
-    exp_res = num_1 - num_2
+    exp_res = get_hex_str_without_0x(num_1 + num_2)
     _LOG_BI_TEST(3, "_bi_test_big_int_signed_add", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
@@ -152,7 +152,7 @@ def test_core_2d_loop(_test_func_, test_data):
                 _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]), optn = 1)
             else:
                 test_fail += 1
-                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
+                _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -177,7 +177,7 @@ def test_core_2d_loop_compare(_test_func_, test_data):
                     _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]), optn = 1)
                 else:
                     test_fail += 1
-                    _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
+                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):

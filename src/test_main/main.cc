@@ -55,6 +55,14 @@ int main(int argc, char *argv[]) {
     big_int test_num_11;
     test_num_11.big_int_from_string(test_num_str_8);
     std::cout<<test_num_11.big_int_to_string(bi_base::BI_HEX);
+
+    std::string test_num_str_9 = "140c0f55";
+    std::string test_num_str_10 = "6c6e40ef0aca";
+    big_int test_num_12, test_num_13, test_num_14;
+    test_num_12.big_int_from_string(test_num_str_9);
+    test_num_13.big_int_from_string(test_num_str_10);
+    test_num_12.big_int_signed_add(test_num_13, &test_num_14);
+    std::cout<<test_num_14.big_int_to_string(bi_base::BI_HEX);
     
     return 0;
 
