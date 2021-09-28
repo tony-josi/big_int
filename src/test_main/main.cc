@@ -56,8 +56,8 @@ int main(int argc, char *argv[]) {
     test_num_11.big_int_from_string(test_num_str_8);
     std::cout<<test_num_11.big_int_to_string(bi_base::BI_HEX);
 
-    std::string test_num_str_9 = "140c0f55";
-    std::string test_num_str_10 = "6c6e40ef0aca";
+    std::string test_num_str_9 = "849aad4047b566aac9aa";
+    std::string test_num_str_10 = "-3a30f05ae55f355f";
     big_int test_num_12, test_num_13, test_num_14;
     test_num_12.big_int_from_string(test_num_str_9);
     test_num_13.big_int_from_string(test_num_str_10);

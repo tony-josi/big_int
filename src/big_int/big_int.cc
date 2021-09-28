@@ -276,14 +276,14 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
                 res->_neg = b._neg;
             } else {
                 big_int_unsigned_sub(b, res);
-                res->_neg = _neg;
+                res->_neg = !_neg;
             }
         } else if (comp_stat == 0) {
             res->big_int_set_zero();
         } else {
             if (_neg) {
                 big_int_unsigned_sub(b, res);
-                res->_neg = _neg;
+                res->_neg = !_neg;
             } else {
                 b.big_int_unsigned_sub(*this, res);
                 res->_neg = b._neg;

@@ -235,3 +235,4 @@ if __name__ == "__main__":
     test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_int)
     test_6_bi_test_big_int_compare(test_nums_int)
     test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
+    test_8_bi_test_big_int_signed_add(test_nums_int)
