@@ -289,6 +289,8 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
                 res->_neg = b._neg;
             }
         }
+
+        /* Set back to previous type. */
         _neg = !_neg;
 
     }
