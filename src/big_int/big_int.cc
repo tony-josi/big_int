@@ -254,7 +254,55 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b) {
 
 }
 
-int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) {
+int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
+
+    res->big_int_clear();
+    /* If the operands are of same sign. */
+    if (_neg == b._neg) {
+
+        big_int_unsigned_add(b, res);
+        res->_neg = _neg;
+
+    }
+    /* If operands are of different sign. */
+    else {
+
+        /* Convert to same type. */
+        _neg = !_neg;
+        int comp_stat = big_int_compare(b);
+        if (comp_stat == 1) {
+            if (_neg) {
+                b.big_int_unsigned_sub(*this, res);
+                res->_neg = b._neg;
+            } else {
+                big_int_unsigned_sub(b, res);
+                res->_neg = _neg;
+            }
+        } else if (comp_stat == 0) {
+            res->big_int_set_zero();
+        } else {
+            if (_neg) {
+                big_int_unsigned_sub(b, res);
+                res->_neg = _neg;
+            } else {
+                b.big_int_unsigned_sub(*this, res);
+                res->_neg = b._neg;
+            }
+        }
+        _neg = !_neg;
+
+    }
+    return 0;
+
+}
+
+int bi::big_int::big_int_set_zero() {
+
+    return big_int_clear();
+
+}
+
+int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) const {
 
     int max, min;
     max = _top;
@@ -369,7 +417,7 @@ bool bi::big_int::big_int_is_negetive() {
 }
 
 
-BI_BASE_TYPE bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) {
+BI_BASE_TYPE bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) const {
 
     BI_BASE_TYPE borrow = 0;
     BI_DOUBLE_BASE_TYPE diff, temp1;

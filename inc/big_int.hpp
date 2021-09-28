@@ -44,7 +44,7 @@ namespace bi {
         bool                _neg;
 
         int _big_int_expand(int req);
-        BI_BASE_TYPE _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr);
+        BI_BASE_TYPE _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
         void _swap_big_int(big_int &src);
         int _compare_bi_base_type_n_top(const big_int &other) const;
         
@@ -67,10 +67,11 @@ namespace bi {
         int big_int_set_negetive(bool set_unset);
         bool big_int_is_negetive();
         bool big_int_is_zero();
+        int big_int_set_zero();
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);
-        int big_int_unsigned_sub(const big_int &b, bi::big_int *res);
+        int big_int_unsigned_sub(const big_int &b, bi::big_int *res) const;
         
         int big_int_clear();
         
