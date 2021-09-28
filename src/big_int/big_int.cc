@@ -249,7 +249,9 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
 
 int bi::big_int::big_int_signed_add(const bi::big_int &b) {
 
-    (void) b;
+    bi::big_int temp;
+    big_int_signed_add(b, &temp);
+    _swap_big_int(temp);
     return 0;
 
 }
