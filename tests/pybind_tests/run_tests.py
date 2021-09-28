@@ -107,8 +107,17 @@ def _bi_test_big_int_compare(num_1, num_2):
         act_comp_val = 1
     elif num_1 < num_2:
         act_comp_val = -1
-    _LOG_BI_TEST(4, "compare_big_int_numbers", num_1, num_2)
+    _LOG_BI_TEST(3, "compare_big_int_numbers", num_1, num_2)
     return ret_val == act_comp_val
+
+def _bi_test_big_int_signed_add(num_1, num_2):
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    hex_str_2 = get_hex_str_without_0x(num_2)
+    test_obj = pbitw.big_int_tc()
+    ret_str = test_obj.bi_test_big_int_signed_add(hex_str_1, hex_str_2)
+    exp_res = num_1 - num_2
+    _LOG_BI_TEST(3, "_bi_test_big_int_signed_add", exp_res, ret_str)
+    return compare_hex_string_numbers(exp_res, ret_str)
 
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
@@ -199,6 +208,9 @@ def test_6_bi_test_big_int_compare(test_data):
 def test_7_bi_test_big_int_from_string_no_0x(test_data):
     test_core_simple_loop(_bi_test_big_int_from_string_no_0x, test_data)
 
+def test_8_bi_test_big_int_signed_add(test_data):
+    test_core_2d_loop(_bi_test_big_int_signed_add, test_data)
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
@@ -214,6 +226,7 @@ if __name__ == "__main__":
     test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
     test_6_bi_test_big_int_compare(test_nums_uint)
     test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
+    test_8_bi_test_big_int_signed_add(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
