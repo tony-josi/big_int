@@ -54,22 +54,29 @@ int main(int argc, char *argv[]) {
     std::string test_num_str_8 = "0000000000000000000000000000000000000017dbda480faccbc795d1cbfb80d095de3b79b9db52eece44baf92420a0";
     big_int test_num_11;
     test_num_11.big_int_from_string(test_num_str_8);
-    std::cout<<test_num_11.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_11.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
-    std::string test_num_str_9 = "849aad4047b566aac9aa";
-    std::string test_num_str_10 = "-3a30f05ae55f355f";
+    std::string test_num_str_9 = "1a25eccdc842360de2082e6156b401821552c235babb2542aea688cd388d4a96fce2c4b2c68e108eb31f89edfc747b85";
+    std::string test_num_str_10 = "-1a25eccdc842360de2082e6156b401821552c235babb2542aea688cd388d4a96fce2c4b2c68e108eb31f89edfc747b85";
     big_int test_num_12, test_num_13, test_num_14;
     test_num_12.big_int_from_string(test_num_str_9);
     test_num_13.big_int_from_string(test_num_str_10);
     test_num_12.big_int_signed_add(test_num_13, &test_num_14);
-    std::cout<<test_num_14.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_14.big_int_to_string(bi_base::BI_HEX)<<"\n";
     
 
     std::string test_num_str_11 = "21931";
     big_int test_num_15;
     test_num_15.big_int_from_string(test_num_str_11);
     test_num_15.big_int_left_shift_word(2);
-    std::cout<<test_num_15.big_int_to_string(bi_base::BI_HEX);
+    std::cout<<test_num_15.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
+    std::string test_num_str_12 = "1a25eccdc842360de2082e6156b401821552c235babb2542aea688cd388d4a96fce2c4b2c68e108eb31f89edfc747b85";
+    big_int test_num_16, test_num_17, test_num_18;
+    test_num_16.big_int_from_string(test_num_str_12);
+    test_num_17.big_int_from_string(test_num_str_12);
+    test_num_17.big_int_signed_sub(test_num_16, &test_num_18);
+    std::cout<<"OP:"<<test_num_18.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
 

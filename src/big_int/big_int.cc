@@ -218,7 +218,7 @@ int bi::big_int::big_int_signed_sub(const bi::big_int &b, bi::big_int *res) {
 
     int comp_stat = big_int_compare(b);
     if (comp_stat == 0) {
-        res->big_int_set_zero();
+        res->big_int_clear();
     } else {
 
         // TODO: avoid expensive (might be) copy here
@@ -232,7 +232,9 @@ int bi::big_int::big_int_signed_sub(const bi::big_int &b, bi::big_int *res) {
 
 int bi::big_int::big_int_set_zero() {
 
-    return big_int_clear();
+    big_int_clear();
+    //_top = 1;
+    return 0;
 
 }
 
@@ -307,6 +309,7 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
     }
 
     for(int i = _top - 1; i >= 0; --i) {
+        
         if(base == bi::bi_base::BI_DEC) {
             sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_DEC, _data[i]);
             _BI_LOG(3, BI_SPRINF_FORMAT_DEC_LOG, _data[i]);
@@ -315,6 +318,7 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
             sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
             _BI_LOG(3, BI_SPRINF_FORMAT_HEX_LOG, _data[i]);
         }
+        
     }
 
     std::string op_string(char_temp_buff.get());
