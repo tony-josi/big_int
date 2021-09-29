@@ -193,7 +193,12 @@ int bi::big_int::big_int_left_shift_word(int shift_words) {
         _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
     }
 
-    memmove(_data + (static_cast<size_t>(shift_words) * sizeof(BI_BASE_TYPE)), _data, static_cast<size_t>(_top) * sizeof(BI_BASE_TYPE));
+    //memmove(_data + (static_cast<size_t>(shift_words) * sizeof(BI_BASE_TYPE)), _data, static_cast<size_t>(_top) * sizeof(BI_BASE_TYPE));
+    
+    for (int i = _top - 1; i >= 0; --i) {
+        _data[i + shift_words] = _data[i];
+    }
+
     for (int i = 0; i < shift_words; ++i) {
         _data[i] = 0;
     }
