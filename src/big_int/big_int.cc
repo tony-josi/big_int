@@ -17,15 +17,7 @@
 
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"
-
-
-namespace {
-
-    static inline int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b);
-    static inline int compare_bi_base_type_n_top(const BI_BASE_TYPE a, const BI_BASE_TYPE b, const int a_top, const int b_top) ;
-
-}
-
+#include "big_int_inline_defs.hpp"
 
 void bi::big_int::_swap_big_int(bi::big_int &src) {
 
@@ -399,31 +391,6 @@ int bi::big_int::_compare_bi_base_type_n_top(const bi::big_int &other) const {
         return 1;
     } else {
         return -1;
-    }
-
-}
-
-namespace {
-
-    static inline int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b) {
-
-        if(a >= b)
-            return 1;
-        else
-            return 0;
-
-    }
-
-    static inline int compare_bi_base_type_n_top(const BI_BASE_TYPE a, const BI_BASE_TYPE b, const int a_top, const int b_top) {
-
-        if (a_top == b_top) {
-            return compare_bi_base_type(a, b);
-        } else if (a_top > b_top) {
-            return 1;
-        } else {
-            return 0;
-        }
-
     }
 
 }
