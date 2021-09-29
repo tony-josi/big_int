@@ -198,6 +198,7 @@ int bi::big_int::big_int_left_shift_word(int shift_words) {
     for (int i = _top - 1; i >= 0; --i) {
         _data[i + shift_words] = _data[i];
     }
+    _top += shift_words;
 
     for (int i = 0; i < shift_words; ++i) {
         _data[i] = 0;

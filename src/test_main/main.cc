@@ -64,6 +64,13 @@ int main(int argc, char *argv[]) {
     test_num_12.big_int_signed_add(test_num_13, &test_num_14);
     std::cout<<test_num_14.big_int_to_string(bi_base::BI_HEX);
     
+
+    std::string test_num_str_11 = "21931";
+    big_int test_num_15;
+    test_num_15.big_int_from_string(test_num_str_11);
+    test_num_15.big_int_left_shift_word(2);
+    std::cout<<test_num_15.big_int_to_string(bi_base::BI_HEX);
+
     return 0;
 
 } 
