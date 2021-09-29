@@ -68,6 +68,7 @@ namespace bi {
         bool big_int_is_negetive();
         bool big_int_is_zero();
         int big_int_set_zero();
+        int big_int_left_shift_word(int shift_amt);
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);
