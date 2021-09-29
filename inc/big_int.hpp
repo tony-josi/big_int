@@ -12,6 +12,8 @@
 #include <stdint.h>
 #include <string>
 
+#pragma once
+
 #define         BI_BASE_TYPE                uint32_t
 #define         BI_DOUBLE_BASE_TYPE         uint64_t
 #define         BI_SSCANF_FORMAT_HEX        "%8X"
@@ -26,7 +28,6 @@
 #define         BI_BASE_TYPE_MAX            (0xFFFFFFFF)
 
 #define         DEFAULT_MEM_ALLOC_BYTES     (128)
-
 
 namespace bi {
 

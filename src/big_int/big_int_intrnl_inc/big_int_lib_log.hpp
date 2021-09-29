@@ -9,6 +9,8 @@
  *  @bug            No known bugs.
  */
 
+#pragma once
+
 #define         DEBUG_LOG       (0)
 
 #if DEBUG_LOG

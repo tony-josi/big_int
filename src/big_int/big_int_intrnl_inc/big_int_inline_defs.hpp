@@ -11,6 +11,8 @@
 
 #include "big_int.hpp"
 
+#pragma once
+
 static inline int compare_bi_base_type(const BI_BASE_TYPE a, const BI_BASE_TYPE b) {
 
     if(a >= b)
