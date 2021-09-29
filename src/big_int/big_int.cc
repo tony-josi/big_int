@@ -183,6 +183,24 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
 
 }
 
+int bi::big_int::big_int_left_shift_word(int shift_words) {
+
+    if (shift_words < 0) {
+        return -1;
+    }
+
+    if (_top + shift_words >= _total_data) {
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+    }
+
+    memmove(_data + (static_cast<size_t>(shift_words) * sizeof(BI_BASE_TYPE)), _data, static_cast<size_t>(_top) * sizeof(BI_BASE_TYPE));
+    for (int i = 0; i < shift_words; ++i) {
+        _data[i] = 0;
+    }
+    return 0;
+
+}
+
 int bi::big_int::big_int_set_zero() {
 
     return big_int_clear();
