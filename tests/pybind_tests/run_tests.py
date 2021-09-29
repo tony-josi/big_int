@@ -1,4 +1,4 @@
-import sys
+import sys, random
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 
 SIGNED_DATA_FPATH =     "/home/tony/Documents/Projects/big_int/tests/pybind_tests/signed_data.txt"
@@ -7,6 +7,9 @@ UNSIGNED_DATA_FPATH =   "/home/tony/Documents/Projects/big_int/tests/pybind_test
 import py_big_int_tc_wrap as pbitw
 
 VERBOSE_LEVEL = 1
+SHIFT_WORDS_RANDINT_MAX = 5
+PASS_STR_MESSAGE = "-- PASS --"
+FAIL_STR_MESSAGE = "!!!!!!!!!!       FAIL      !!!!!!!!!!"
 
 def _LOG_BI_TEST(verb_lvl, locn, str_data_1, str_data_2 = None, optn = 0):
     if verb_lvl <= VERBOSE_LEVEL:
@@ -129,13 +132,13 @@ def _bi_test_big_int_signed_add_on_obj(num_1, num_2):
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def _bi_test_big_int_left_shift_word(num_1):
-    shift_word_cnt = 2
+    shift_word_cnt = random.randint(0, SHIFT_WORDS_RANDINT_MAX)
     hex_str_1 = get_hex_str_without_0x(num_1)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_left_shift_word(hex_str_1, shift_word_cnt)
     exp_res_num = num_1 << (shift_word_cnt * 32)
     exp_res = get_hex_str_without_0x(exp_res_num)
-    _LOG_BI_TEST(1, "_bi_test_big_int_left_shift_word", exp_res, ret_str)
+    _LOG_BI_TEST(3, "_bi_test_big_int_left_shift_word", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def test_core_simple_loop(_test_func_, test_data):
@@ -153,9 +156,9 @@ def test_core_simple_loop(_test_func_, test_data):
 
     test_status = ""
     if(total_rand_nums == test_pass):
-        test_status = "PASS"
+        test_status = PASS_STR_MESSAGE
     else:
-        test_status = "FAIL"
+        test_status = FAIL_STR_MESSAGE
 
     _LOG_BI_TEST(1, _test_func_.__name__, "Total sub-test cases: {}, pass: {} ==>>> **** {} ***".format(total_rand_nums, test_pass, test_status), optn = 1)
 
@@ -175,9 +178,9 @@ def test_core_2d_loop(_test_func_, test_data):
 
     test_status = ""
     if(total_rand_nums == test_pass):
-        test_status = "PASS"
+        test_status = PASS_STR_MESSAGE
     else:
-        test_status = "FAIL"
+        test_status = FAIL_STR_MESSAGE
 
     _LOG_BI_TEST(1, _test_func_.__name__, "Total sub-test cases: {}, pass: {} ==>>> **** {} ***".format(total_rand_nums, test_pass, test_status), optn = 1)
 
@@ -200,9 +203,9 @@ def test_core_2d_loop_compare(_test_func_, test_data):
 
     test_status = ""
     if(total_rand_nums == test_pass):
-        test_status = "PASS"
+        test_status = PASS_STR_MESSAGE
     else:
-        test_status = "FAIL"
+        test_status = FAIL_STR_MESSAGE
 
     _LOG_BI_TEST(1, _test_func_.__name__, "Total sub-test cases: {}, pass: {} ==>>> **** {} ***".format(total_rand_nums, test_pass, test_status), optn = 1)
 
@@ -265,3 +268,4 @@ if __name__ == "__main__":
     test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
     test_8_bi_test_big_int_signed_add(test_nums_int)
     test_9_bi_test_big_int_signed_add_on_obj(test_nums_int)
+    test_10_bi_test_big_int_left_shift_word(test_nums_int)
