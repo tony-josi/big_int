@@ -70,10 +70,12 @@ namespace bi {
         bool big_int_is_zero();
         int big_int_set_zero();
         int big_int_left_shift_word(int shift_words);
+        int big_int_signed_sub(const big_int &b);
+        int big_int_signed_sub(const big_int &b, big_int *res);
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);
-        int big_int_unsigned_sub(const big_int &b, bi::big_int *res) const;
+        int big_int_unsigned_sub(const big_int &b, big_int *res) const;
         
         int big_int_clear();
         

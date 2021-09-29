@@ -207,6 +207,29 @@ int bi::big_int::big_int_left_shift_word(int shift_words) {
 
 }
 
+int bi::big_int::big_int_signed_sub(const bi::big_int &b) {
+
+    (void) b;
+    return 0;
+
+}
+
+int bi::big_int::big_int_signed_sub(const bi::big_int &b, bi::big_int *res) {
+
+    int comp_stat = big_int_compare(b);
+    if (comp_stat == 0) {
+        res->big_int_set_zero();
+    } else {
+
+        // TODO: avoid expensive (might be) copy here
+        bi::big_int temp_sub(b);
+        temp_sub._neg = !temp_sub._neg;
+        return big_int_signed_add(temp_sub, res);
+    }
+    return 0;
+
+}
+
 int bi::big_int::big_int_set_zero() {
 
     return big_int_clear();
