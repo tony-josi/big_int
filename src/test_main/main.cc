@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     std::string test_num_str_13 = "c7b9";
     big_int test_num_19, test_num_20;
     test_num_19.big_int_from_string(test_num_str_13);
-    test_num_19.big_int_multiply_base_type(258977, &test_num_20);
+    test_num_19.big_int_unsigned_multiply_base_type(258977, &test_num_20);
     std::cout<<"OP:"<<test_num_20.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
