@@ -218,7 +218,7 @@ int bi::big_int::big_int_signed_sub(const bi::big_int &b, bi::big_int *res) {
 
     int comp_stat = big_int_compare(b);
     if (comp_stat == 0) {
-        res->big_int_clear();
+        res->big_int_set_zero();
     } else {
 
         // TODO: avoid expensive (might be) copy here
@@ -233,7 +233,11 @@ int bi::big_int::big_int_signed_sub(const bi::big_int &b, bi::big_int *res) {
 int bi::big_int::big_int_set_zero() {
 
     big_int_clear();
-    //_top = 1;
+    if (_total_data > 0) {
+        _top = 1;
+    } else {
+        return 1;
+    }
     return 0;
 
 }

@@ -21,7 +21,7 @@ bi::big_int::big_int()
     _top        {0},
     _neg        {false} {
 
-    _data           = new BI_BASE_TYPE[DEFAULT_MEM_ALLOC_BYTES / sizeof(BI_BASE_TYPE)];
+    _data           = new BI_BASE_TYPE[_total_data];
 
     if(_data) {
         _BI_LOG(1, "Big int init, with: %d items", _total_data);
@@ -37,6 +37,15 @@ bi::big_int::big_int(const bi::big_int &src)
 :   _total_data {src._total_data},  
     _top        {src._top},
     _neg        {src._neg} {
+
+    _data           = new BI_BASE_TYPE[_total_data];
+
+    if(_data) {
+        _BI_LOG(1, "Big int init, with: %d items", _total_data);
+    } else {
+        _BI_LOG(1, "Init failed");
+        throw std::length_error("Couldnt find enough memory");
+    }
 
     for(int i = 0; i < _top; ++i) {
         _data[i] = src._data[i];
@@ -54,7 +63,11 @@ bi::big_int& bi::big_int::operator=(bi::big_int src) {
 
 }
 
-bi::big_int::big_int(bi::big_int &&src) {
+bi::big_int::big_int(bi::big_int &&src)
+:   _data       {nullptr},
+    _total_data {0},  
+    _top        {0},
+    _neg        {false} {
 
     _swap_big_int(src);
 
