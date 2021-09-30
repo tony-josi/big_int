@@ -101,7 +101,7 @@ int bi::big_int::_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) {
 
         interim_res = static_cast<BI_DOUBLE_BASE_TYPE>(_data[i]) * b + carry;
         res_ptr->_data[(res_ptr->_top)++] = interim_res & BI_BASE_TYPE_MAX;
-        carry = static_cast<BI_BASE_TYPE>(interim_res >> 32);
+        carry = static_cast<BI_BASE_TYPE>(interim_res >> BI_BASE_TYPE_TOTAL_BITS);
 
     }
 

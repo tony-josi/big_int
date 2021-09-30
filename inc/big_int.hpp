@@ -26,6 +26,7 @@
 #define         BI_HEX_STR_TO_DATA_SIZE     (2 * sizeof(BI_BASE_TYPE))
 #define         BI_DEFAULT_EXPAND_COUNT     (32)
 #define         BI_BASE_TYPE_MAX            (0xFFFFFFFF)
+#define         BI_BASE_TYPE_TOTAL_BITS     (32)
 
 #define         DEFAULT_MEM_ALLOC_BYTES     (128)
 
