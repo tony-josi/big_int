@@ -28,6 +28,7 @@ public:
     std::string bi_test_big_int_signed_sub(const std::string &a, const std::string &b);
     std::string bi_test_big_int_signed_sub_on_obj(const std::string &a, const std::string &b);
     std::string bi_test_big_int_unsigned_mulitply_258977(const std::string &a);
+    std::string bi_test_big_int_multiply(const std::string &a, const std::string &b);
 
 };
 
