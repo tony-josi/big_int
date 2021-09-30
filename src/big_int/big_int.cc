@@ -288,8 +288,16 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
 int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
 
     res->_neg = _neg ^ b._neg;
+    bi::big_int temp_bi;
+
+    res->big_int_set_zero();
     
-    (void) b;
+    for (int i = 0; i < b._top; ++i) {
+        temp_bi.big_int_clear();
+        _unsigned_multiply_bi_base_type(b._data[i], &temp_bi);
+        temp_bi.big_int_left_shift_word(i);
+        res->big_int_unsigned_add(temp_bi);
+    }
     return 0;
 
 }
