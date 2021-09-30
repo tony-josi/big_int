@@ -86,3 +86,32 @@ int bi::big_int::_compare_bi_base_type_n_top(const bi::big_int &other) const {
     }
 
 }
+
+int bi::big_int::_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) {
+
+    BI_DOUBLE_BASE_TYPE interim_res;
+    BI_BASE_TYPE        carry = 0;
+
+    res_ptr->big_int_clear();
+
+    for(int i = 0; i < _top; ++_top) {
+        if (i >= res_ptr->_total_data) {
+            res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        }
+
+        interim_res = static_cast<BI_DOUBLE_BASE_TYPE>(_data[i]) * b + carry;
+        res_ptr->_data[(res_ptr->_top)++] = interim_res & BI_BASE_TYPE_MAX;
+        carry = interim_res >> 32;
+
+    }
+
+    if (carry) {
+        if (res_ptr->_top >= res_ptr->_total_data) {
+            res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+            res_ptr->_data[(res_ptr->_top)++] = carry;
+        }
+    }
+
+    return 0;
+
+}

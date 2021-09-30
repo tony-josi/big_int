@@ -285,6 +285,15 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
 
 }
 
+int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
+
+    res->_neg = _neg ^ b._neg;
+    
+    (void) b;
+    return 0;
+
+}
+
 int bi::big_int::big_int_clear() {
 
     memset(_data, 0, static_cast<size_t>(_total_data) * sizeof(BI_BASE_TYPE));
