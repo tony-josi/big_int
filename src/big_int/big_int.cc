@@ -287,10 +287,10 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
 
 int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
 
-    res->_neg = _neg ^ b._neg;
     bi::big_int temp_bi;
 
     res->big_int_set_zero();
+    res->_neg = _neg ^ b._neg;
 
     if(!big_int_is_zero() || !b.big_int_is_zero()) {
         /* If any/both of the opreands is zero set result as zero and exit */

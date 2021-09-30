@@ -84,6 +84,14 @@ int main(int argc, char *argv[]) {
     test_num_19.big_int_unsigned_multiply_base_type(258977, &test_num_20);
     std::cout<<"OP:"<<test_num_20.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_14 = "-1f21d31c47f64d00d4bf7";
+    std::string test_num_str_15 = "282016a1aada8fd2aa";
+    big_int test_num_21, test_num_22, test_num_23;
+    test_num_21.big_int_from_string(test_num_str_14);
+    test_num_22.big_int_from_string(test_num_str_15);
+    test_num_21.big_int_multiply(test_num_22, &test_num_23);
+    std::cout<<test_num_23.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 

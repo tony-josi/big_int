@@ -187,7 +187,7 @@ def test_core_simple_loop(_test_func_, test_data):
             _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = PASS".format(test_data[i]), optn = 1)
         else:
             test_fail += 1
-            _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
+            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -322,3 +322,4 @@ if __name__ == "__main__":
     test_11_bi_test_big_int_signed_sub(test_nums_int)
     test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
     test_13_bi_test_big_int_mulitply_258977(test_nums_int)
+    test_14_bi_test_big_int_multiply(test_nums_int)
