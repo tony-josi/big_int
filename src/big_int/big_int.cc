@@ -292,7 +292,7 @@ int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
 
     res->big_int_set_zero();
 
-    if(big_int_is_zero() || b.big_int_is_zero()) {
+    if(!big_int_is_zero() || !b.big_int_is_zero()) {
         /* If any/both of the opreands is zero set result as zero and exit */
         return 0;
     }
