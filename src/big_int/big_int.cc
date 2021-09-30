@@ -27,7 +27,8 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
         is_neg = 1;
         num_decor_cnt += 1;
     }
-    if((str_size > (1 + is_neg)) && str_num[is_neg] == '0' && (str_num[is_neg + 1] == 'x' || str_num[is_neg + 1] == 'X')) {
+    if((str_size > (1 + is_neg)) && str_num[is_neg] == '0' && \
+    (str_num[is_neg + 1] == 'x' || str_num[is_neg + 1] == 'X')) {
         num_decor_cnt += 2;
     }
 
@@ -192,8 +193,6 @@ int bi::big_int::big_int_left_shift_word(int shift_words) {
     if (_top + shift_words >= _total_data) {
         _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
     }
-
-    //memmove(_data + (static_cast<size_t>(shift_words) * sizeof(BI_BASE_TYPE)), _data, static_cast<size_t>(_top) * sizeof(BI_BASE_TYPE));
     
     for (int i = _top - 1; i >= 0; --i) {
         _data[i + shift_words] = _data[i];
@@ -266,7 +265,8 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) co
             res->_data[(res->_top)++] = _data[i] - borrow;
             borrow = 0;
         } else {
-            res->_data[(res->_top)++] = static_cast<BI_BASE_TYPE>((static_cast<BI_DOUBLE_BASE_TYPE>(BI_BASE_TYPE_MAX) + 1 - borrow));
+            res->_data[(res->_top)++] = \
+            static_cast<BI_BASE_TYPE>((static_cast<BI_DOUBLE_BASE_TYPE>(BI_BASE_TYPE_MAX) + 1 - borrow));
             borrow = 1;
         }
     }
@@ -321,11 +321,13 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
     for(int i = _top - 1; i >= 0; --i) {
         
         if(base == bi::bi_base::BI_DEC) {
-            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_DEC, _data[i]);
+            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * \
+            chars_per_data, BI_SPRINF_FORMAT_DEC, _data[i]);
             _BI_LOG(3, BI_SPRINF_FORMAT_DEC_LOG, _data[i]);
         }
         else if(base == bi::bi_base::BI_HEX){ 
-            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
+            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * \
+            chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
             _BI_LOG(3, BI_SPRINF_FORMAT_HEX_LOG, _data[i]);
         }
         
