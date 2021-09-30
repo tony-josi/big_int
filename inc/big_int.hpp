@@ -75,6 +75,7 @@ namespace bi {
         int big_int_signed_sub(const big_int &b);
         int big_int_signed_sub(const big_int &b, big_int *res);
         int big_int_multiply(const big_int &b, big_int *res);
+        int big_int_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);
