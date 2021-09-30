@@ -291,6 +291,11 @@ int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
     bi::big_int temp_bi;
 
     res->big_int_set_zero();
+
+    if(big_int_is_zero() || b.big_int_is_zero()) {
+        /* If any/both of the opreands is zero set result as zero and exit */
+        return 0;
+    }
     
     for (int i = 0; i < b._top; ++i) {
         temp_bi.big_int_clear();
@@ -371,7 +376,7 @@ int bi::big_int::big_int_set_negetive(bool set_unset) {
 
 }
 
-bool bi::big_int::big_int_is_zero() {
+bool bi::big_int::big_int_is_zero() const {
 
     for(int i = 0; i < _top; ++i) {
         if (_data[i] != 0) {
