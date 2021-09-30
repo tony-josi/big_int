@@ -49,7 +49,7 @@ namespace bi {
         BI_BASE_TYPE _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
         void _swap_big_int(big_int &src);
         int _compare_bi_base_type_n_top(const big_int &other) const;
-        int _multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
+        int _unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
         
 
         public:
@@ -75,7 +75,7 @@ namespace bi {
         int big_int_signed_sub(const big_int &b);
         int big_int_signed_sub(const big_int &b, big_int *res);
         int big_int_multiply(const big_int &b, big_int *res);
-        int big_int_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
+        int big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);

@@ -162,8 +162,8 @@ def _bi_test_big_int_signed_sub_on_obj(num_1, num_2):
 def _bi_test_big_int_mulitply_258977(num_1):
     hex_str_1 = get_hex_str_without_0x(num_1)
     test_obj = pbitw.big_int_tc()
-    ret_str = test_obj.bi_test_big_int_mulitply_258977(hex_str_1)
-    exp_res = get_hex_str_without_0x(num_1 * 258977)
+    ret_str = test_obj.bi_test_big_int_unsigned_mulitply_258977(hex_str_1)
+    exp_res = get_hex_str_without_0x(abs(num_1) * 258977)
     _LOG_BI_TEST(3, "_bi_test_big_int_mulitply_258977", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
@@ -308,3 +308,4 @@ if __name__ == "__main__":
     test_10_bi_test_big_int_left_shift_word(test_nums_int)
     test_11_bi_test_big_int_signed_sub(test_nums_int)
     test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
+    test_13_bi_test_big_int_mulitply_258977(test_nums_int)

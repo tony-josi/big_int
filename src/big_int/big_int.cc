@@ -294,9 +294,9 @@ int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
 
 }
 
-int bi::big_int::big_int_multiply_base_type(const BI_BASE_TYPE &b, bi::big_int *res) {
+int bi::big_int::big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, bi::big_int *res) {
 
-    return _multiply_bi_base_type(b, res);
+    return _unsigned_multiply_bi_base_type(b, res);
 
 }
 
