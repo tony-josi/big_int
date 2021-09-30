@@ -297,6 +297,10 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     size_t chars_per_data;
 
+    if (_top <= 0) {
+        throw std::length_error("Invalid number: zero length");
+    }
+
     if(base == bi::bi_base::BI_DEC) {
         chars_per_data = BI_SPRINF_FORMAT_DEC_CHARS;
     } else if(base == bi::bi_base::BI_HEX){ 
