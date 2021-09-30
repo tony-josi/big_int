@@ -94,7 +94,7 @@ int bi::big_int::_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) {
 
     res_ptr->big_int_clear();
 
-    for(int i = 0; i < _top; ++_top) {
+    for(int i = 0; i < _top; ++i) {
         if (i >= res_ptr->_total_data) {
             res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
         }
@@ -108,8 +108,8 @@ int bi::big_int::_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) {
     if (carry) {
         if (res_ptr->_top >= res_ptr->_total_data) {
             res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
-            res_ptr->_data[(res_ptr->_top)++] = carry;
         }
+        res_ptr->_data[(res_ptr->_top)++] = carry;
     }
 
     return 0;
