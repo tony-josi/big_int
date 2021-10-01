@@ -37,6 +37,4 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def("bi_test_big_int_unsigned_compare", &big_int_test_cases::bi_test_big_int_unsigned_compare)
         .def("bi_test_big_int_left_shift", &big_int_test_cases::bi_test_big_int_left_shift);
 
-    
-    //module.def("bi_test_big_int_from_string", &big_int_test_cases::bi_test_big_int_from_string, "bi_test_big_int_from_string test0");
 }
