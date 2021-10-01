@@ -130,11 +130,11 @@ int bi::big_int::_big_int_left_shift_below_32bits(int bits) {
     }
 
     for (int i = 0; i < _top; ++i) {
-        interim_res = (_data[i] << bits) + carry;
+        interim_res = (static_cast<BI_DOUBLE_BASE_TYPE>(_data[i]) << bits) + carry;
         carry = static_cast<BI_BASE_TYPE>(interim_res >> BI_BASE_TYPE_TOTAL_BITS);
         _data[i] = static_cast<BI_BASE_TYPE>(interim_res & BI_BASE_TYPE_MAX);
     }
-    
+
     if (carry) {
         _data[_top++] = carry;
     }

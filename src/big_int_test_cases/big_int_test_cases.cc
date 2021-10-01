@@ -148,7 +148,7 @@ int         big_int_test_cases::bi_test_big_int_unsigned_compare(const std::stri
  
 }
 
-std::string bi_test_big_int_left_shift(const std::string &a, int bits) {
+std::string big_int_test_cases::bi_test_big_int_left_shift(const std::string &a, int bits) {
 
     big_int test_bi_a;
     test_bi_a.big_int_from_string(a);
