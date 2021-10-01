@@ -138,3 +138,12 @@ std::string big_int_test_cases::bi_test_big_int_multiply(const std::string &a, c
     return test_bi_c.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+int         big_int_test_cases::bi_test_big_int_unsigned_compare(const std::string &a, const std::string &b) {
+
+    big_int test_bi_a, test_bi_b;
+    test_bi_a.big_int_from_string(a);
+    test_bi_b.big_int_from_string(b);
+    return test_bi_a.big_int_unsigned_compare(test_bi_b);
+ 
+}
