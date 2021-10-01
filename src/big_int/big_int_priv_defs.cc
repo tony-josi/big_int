@@ -115,3 +115,30 @@ int bi::big_int::_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *re
     return 0;
 
 }
+
+int bi::big_int::_big_int_left_shift_below_32bits(int bits) {
+
+    if (bits > 32) {
+        return -1;
+    }
+
+    BI_DOUBLE_BASE_TYPE interim_res;
+    BI_BASE_TYPE        carry = 0;
+
+    if (_top >= _total_data) {
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+    }
+
+    for (int i = 0; i < _top; ++i) {
+        interim_res = (_data[i] << bits) + carry;
+        carry = static_cast<BI_BASE_TYPE>(interim_res >> BI_BASE_TYPE_TOTAL_BITS);
+        _data[i] = static_cast<BI_BASE_TYPE>(interim_res & BI_BASE_TYPE_MAX);
+    }
+    
+    if (carry) {
+        _data[_top++] = carry;
+    }
+
+    return 0;
+
+}

@@ -418,3 +418,8 @@ int bi::big_int::big_int_compare(const bi::big_int &other) const {
     }
 }
 
+int bi::big_int::big_int_left_shift(int bits) {
+
+    return _big_int_left_shift_below_32bits(bits);
+
+}
