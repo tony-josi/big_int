@@ -190,8 +190,12 @@ int bi::big_int::big_int_left_shift_word(int shift_words) {
         return -1;
     }
 
+    if (shift_words == 0) {
+        return 0;
+    }
+
     if (_top + shift_words >= _total_data) {
-        _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + shift_words);
     }
     
     for (int i = _top - 1; i >= 0; --i) {
@@ -420,6 +424,11 @@ int bi::big_int::big_int_compare(const bi::big_int &other) const {
 
 int bi::big_int::big_int_left_shift(int bits) {
 
-    return _big_int_left_shift_below_32bits(bits);
+    int ret_val = 0;
+    int word_shifts = bits / BI_BASE_TYPE_TOTAL_BITS;
+    int bit_shifts = bits % BI_BASE_TYPE_TOTAL_BITS;
+    ret_val = big_int_left_shift_word(word_shifts);
+    ret_val += _big_int_left_shift_below_32bits(bit_shifts);
+    return ret_val;
 
 }
