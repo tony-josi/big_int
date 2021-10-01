@@ -40,7 +40,7 @@ def compare_hex_string_numbers(str_1, str_2):
     if num_1 == num_2:
         return True
     else:
-        _LOG_BI_TEST(1, "compare_hex_string_numbers", num_1, num_2)
+        _LOG_BI_TEST(4, "compare_hex_string_numbers", num_1, num_2)
         return False
 
 def _bi_test_big_int_from_string(num):

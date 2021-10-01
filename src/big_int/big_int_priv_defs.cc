@@ -145,12 +145,18 @@ int bi::big_int::_big_int_left_shift_below_32bits(int bits) {
 
 int bi::big_int::_big_int_remove_preceding_zeroes() {
 
-    for(int i = _top - 1; i > 0; i--) {
+    int i = _top - 1;
+    for(; i > 0; i--) {
         if(_data[i] == 0) {
             _top--;
         } else {
-            break;
+            return 0;
         }
+    }
+
+    if(_data[0] == 0) {
+        /* The big int is zero, set the sign to positve just in case. */
+        _neg = false;
     }
 
     return 0;

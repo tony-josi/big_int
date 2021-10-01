@@ -60,13 +60,7 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
     _neg = static_cast<bool>(is_neg);
 
     /* Remove extra zeroes in the MSB if the i/p string had them, except the last zero (to denote zero big integer).*/
-    for(int i = _top - 1; i > 0; i--) {
-        if(_data[i] == 0) {
-            _top--;
-        } else {
-            break;
-        }
-    }
+    _big_int_remove_preceding_zeroes();
 
     return 0;
 
@@ -180,6 +174,10 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
         _neg = !_neg;
 
     }
+
+    /* Remove any preceding zeroes if any. */
+    res->_big_int_remove_preceding_zeroes();
+
     return 0;
 
 }
@@ -274,6 +272,8 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) co
             borrow = 1;
         }
     }
+
+    res->_big_int_remove_preceding_zeroes();
 
     return 0;
 
