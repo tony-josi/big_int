@@ -176,6 +176,21 @@ def _bi_test_big_int_multiply(num_1, num_2):
     _LOG_BI_TEST(3, "_bi_test_big_int_multiply", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
+def _bi_test_big_int_unsigned_compare(num_1_ac, num_2_ac):
+    num_1 = abs(num_1_ac)
+    num_2 = abs(num_2_ac)
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    hex_str_2 = get_hex_str_without_0x(num_2)
+    test_obj = pbitw.big_int_tc()
+    ret_val = test_obj.bi_test_big_int_unsigned_compare(hex_str_1, hex_str_2)
+    act_comp_val = 0
+    if num_1 > num_2:
+        act_comp_val = 1
+    elif num_1 < num_2:
+        act_comp_val = -1
+    _LOG_BI_TEST(3, "_bi_test_big_int_unsigned_compare", num_1, num_2)
+    return ret_val == act_comp_val
+
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
     test_pass = 0
@@ -286,6 +301,9 @@ def test_13_bi_test_big_int_mulitply_258977(test_data):
 def test_14_bi_test_big_int_multiply(test_data):
     test_core_2d_loop(_bi_test_big_int_multiply, test_data)
 
+def test_15_bi_test_big_int_unsigned_compare(test_data):
+    test_core_2d_loop(_bi_test_big_int_unsigned_compare, test_data)
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
@@ -315,6 +333,7 @@ if __name__ == "__main__":
     test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
     test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
     test_14_bi_test_big_int_multiply(test_nums_uint)
+    test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -330,3 +349,4 @@ if __name__ == "__main__":
     test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
     test_13_bi_test_big_int_mulitply_258977(test_nums_int)
     test_14_bi_test_big_int_multiply(test_nums_int)
+    test_15_bi_test_big_int_unsigned_compare(test_nums_int)
