@@ -34,7 +34,8 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def("bi_test_big_int_signed_sub_on_obj", &big_int_test_cases::bi_test_big_int_signed_sub_on_obj)
         .def("bi_test_big_int_unsigned_mulitply_258977", &big_int_test_cases::bi_test_big_int_unsigned_mulitply_258977)
         .def("bi_test_big_int_multiply", &big_int_test_cases::bi_test_big_int_multiply)
-        .def("bi_test_big_int_unsigned_compare", &big_int_test_cases::bi_test_big_int_unsigned_compare);
+        .def("bi_test_big_int_unsigned_compare", &big_int_test_cases::bi_test_big_int_unsigned_compare)
+        .def("bi_test_big_int_left_shift", &big_int_test_cases::bi_test_big_int_left_shift);
 
     
     //module.def("bi_test_big_int_from_string", &big_int_test_cases::bi_test_big_int_from_string, "bi_test_big_int_from_string test0");
