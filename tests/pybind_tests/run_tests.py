@@ -294,6 +294,13 @@ if __name__ == "__main__":
     test_nums_int = read_file_to_list(SIGNED_DATA_FPATH)
     test_nums_uint = read_file_to_list(UNSIGNED_DATA_FPATH)
 
+    test_nums_int.append(0)
+    test_nums_int.append(-1)
+    test_nums_int.append(1)
+
+    test_nums_uint.append(0)
+    test_nums_uint.append(1)
+
     test_1_bi_test_big_int_from_string(test_nums_uint)
     test_2_bi_test_big_int_unsigned_add(test_nums_uint)
     test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
