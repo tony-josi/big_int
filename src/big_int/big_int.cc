@@ -424,7 +424,7 @@ int bi::big_int::big_int_compare(const bi::big_int &other) const {
 
 int bi::big_int::big_int_left_shift(int bits) {
 
-    int ret_val = 0;
+    int ret_val;
     int word_shifts = bits / BI_BASE_TYPE_TOTAL_BITS;
     int bit_shifts = bits % BI_BASE_TYPE_TOTAL_BITS;
     ret_val = big_int_left_shift_word(word_shifts);
