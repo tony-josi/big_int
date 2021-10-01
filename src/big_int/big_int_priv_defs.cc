@@ -142,3 +142,17 @@ int bi::big_int::_big_int_left_shift_below_32bits(int bits) {
     return 0;
 
 }
+
+int bi::big_int::_big_int_remove_preceding_zeroes() {
+
+    for(int i = _top - 1; i > 0; i--) {
+        if(_data[i] == 0) {
+            _top--;
+        } else {
+            break;
+        }
+    }
+
+    return 0;
+
+}
