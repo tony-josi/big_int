@@ -290,12 +290,13 @@ int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
     bi::big_int temp_bi;
 
     res->big_int_set_zero();
-    res->_neg = _neg ^ b._neg;
 
     if(!big_int_is_zero() || !b.big_int_is_zero()) {
         /* If any/both of the opreands is zero set result as zero and exit */
         return 0;
     }
+
+    res->_neg = _neg ^ b._neg;
     
     for (int i = 0; i < b._top; ++i) {
         temp_bi.big_int_clear();
