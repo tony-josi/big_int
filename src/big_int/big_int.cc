@@ -395,6 +395,12 @@ bool bi::big_int::big_int_is_negetive() {
 
 }
 
+int bi::big_int::big_int_unsigned_compare(const bi::big_int &other) const {
+
+    return _compare_bi_base_type_n_top(other);
+
+}
+
 int bi::big_int::big_int_compare(const bi::big_int &other) const {
 
     if (_neg == other._neg) {
