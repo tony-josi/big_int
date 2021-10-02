@@ -453,6 +453,26 @@ int bi::big_int::big_int_left_shift_word(int shift_words, bi::big_int *res) {
 
 }
 
+int bi::big_int::big_int_right_shift_word(int shift_words) {
+
+    if (shift_words >= _top) {
+        return big_int_set_zero();
+    }
+
+    int i = 0;
+    for (; i < _top - shift_words; ++i) {
+        _data[i] = _data[i + shift_words];
+    }
+    for (int j = 0; j < shift_words; ++j) {
+        _data[i + j] = 0;
+    }
+
+    _top -= shift_words;
+
+    return 0;
+
+}
+
 int bi::big_int::big_int_right_shift(int bits) {
 
     return _big_int_right_shift_below_32bits(bits);

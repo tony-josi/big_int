@@ -77,14 +77,16 @@ namespace bi {
         bool big_int_is_negetive();
         bool big_int_is_zero() const;
         int big_int_set_zero();
-        int big_int_left_shift_word(int shift_words);
-        int big_int_left_shift_word(int shift_words, big_int *res);
         int big_int_signed_sub(const big_int &b);
         int big_int_signed_sub(const big_int &b, big_int *res);
         int big_int_multiply(const big_int &b, big_int *res);
         int big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
+        int big_int_left_shift_word(int shift_words);
+        int big_int_left_shift_word(int shift_words, big_int *res);
         int big_int_left_shift(int bits);
         int big_int_left_shift(int bits, big_int *res);
+        int big_int_right_shift_word(int shift_words);
+        int big_int_right_shift_word(int shift_words, big_int *res);
         int big_int_right_shift(int bits);
         int big_int_right_shift(int bits, big_int *res);
 

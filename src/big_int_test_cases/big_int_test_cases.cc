@@ -183,3 +183,12 @@ std::string big_int_test_cases::bi_test_big_int_right_shift_on_obj(const std::st
     return test_bi_a.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string big_int_test_cases::bi_test_big_int_right_shift_word_on_obj(const std::string &a, int shift_words) {
+
+    big_int test_bi_a;
+    test_bi_a.big_int_from_string(a);
+    test_bi_a.big_int_right_shift_word(shift_words);
+    return test_bi_a.big_int_to_string(bi_base::BI_HEX);
+
+}
