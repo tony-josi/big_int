@@ -452,3 +452,9 @@ int bi::big_int::big_int_left_shift_word(int shift_words, bi::big_int *res) {
     return ret_val;
 
 }
+
+int bi::big_int::big_int_right_shift(int bits) {
+
+
+
+}

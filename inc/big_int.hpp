@@ -14,21 +14,23 @@
 
 #pragma once
 
-#define         BI_BASE_TYPE                uint32_t
-#define         BI_DOUBLE_BASE_TYPE         uint64_t
-#define         BI_SSCANF_FORMAT_HEX        "%8X"
-#define         BI_SPRINF_FORMAT_HEX        "%08x"
-#define         BI_SPRINF_FORMAT_DEC        "%010u"
-#define         BI_SPRINF_FORMAT_HEX_LOG    "0x %08X"
-#define         BI_SPRINF_FORMAT_DEC_LOG    "d %010u"
-#define         BI_SPRINF_FORMAT_HEX_CHARS  8
-#define         BI_SPRINF_FORMAT_DEC_CHARS  10
-#define         BI_HEX_STR_TO_DATA_SIZE     (2 * sizeof(BI_BASE_TYPE))
-#define         BI_DEFAULT_EXPAND_COUNT     (32)
-#define         BI_BASE_TYPE_MAX            (0xFFFFFFFF)
-#define         BI_BASE_TYPE_TOTAL_BITS     (32)
+#define         BI_BASE_TYPE                                uint32_t
+#define         BI_DOUBLE_BASE_TYPE                         uint64_t
+#define         BI_SSCANF_FORMAT_HEX                        "%8X"
+#define         BI_SPRINF_FORMAT_HEX                        "%08x"
+#define         BI_SPRINF_FORMAT_DEC                        "%010u"
+#define         BI_SPRINF_FORMAT_HEX_LOG                    "0x %08X"
+#define         BI_SPRINF_FORMAT_DEC_LOG                    "d %010u"
+#define         BI_SPRINF_FORMAT_HEX_CHARS                  8
+#define         BI_SPRINF_FORMAT_DEC_CHARS                  10
+#define         BI_HEX_STR_TO_DATA_SIZE                     (2 * sizeof(BI_BASE_TYPE))
+#define         BI_DEFAULT_EXPAND_COUNT                     (32)
+#define         BI_BASE_TYPE_MAX                            (0xFFFFFFFF)
+#define         BI_BASE_TYPE_TOTAL_BITS                     (32)
+#define         BI_DOUBLE_BASE_TYPE_FIRST_HALF_MASK         (0xFFFFFFFF00000000)
+#define         BI_DOUBLE_BASE_TYPE_TOTAL_BITS              (64)
 
-#define         DEFAULT_MEM_ALLOC_BYTES     (128)
+#define         DEFAULT_MEM_ALLOC_BYTES                     (128)
 
 namespace bi {
 
@@ -51,6 +53,7 @@ namespace bi {
         int _compare_bi_base_type_n_top(const big_int &other) const;
         int _unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
         int _big_int_left_shift_below_32bits(int bits);
+        int _big_int_right_shift_below_32bits(int bits);
         int _big_int_remove_preceding_zeroes();
         
 
@@ -82,6 +85,8 @@ namespace bi {
         int big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
         int big_int_left_shift(int bits);
         int big_int_left_shift(int bits, big_int *res);
+        int big_int_right_shift(int bits);
+        int big_int_right_shift(int bits, big_int *res);
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);
@@ -90,12 +95,6 @@ namespace bi {
         int big_int_clear();
         
         /*
-        
-        
-        
-        int big_int_unsigned_sub(const big_int b, big_int *res);
-        int big_int_mul(const big_int b);
-        int big_int_mul(const big_int b, big_int *res);
         int big_int_div(const big_int b);
         int big_int_div(const big_int b, big_int *res);
         */

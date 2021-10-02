@@ -143,6 +143,28 @@ int bi::big_int::_big_int_left_shift_below_32bits(int bits) {
 
 }
 
+int bi::big_int::_big_int_right_shift_below_32bits(int bits) {
+
+    if (bits > 32) {
+        return -1;
+    }
+
+    BI_DOUBLE_BASE_TYPE interim_res_1, interim_res_2;
+    BI_BASE_TYPE        carry = 0;
+
+    for (int i = _top - 1; i >= 0; --i) {
+        interim_res_1 = static_cast<BI_DOUBLE_BASE_TYPE>(_data[i]) << BI_BASE_TYPE_TOTAL_BITS;
+        interim_res_2 = (interim_res_1 >> bits);
+        _data[i] = static_cast<BI_BASE_TYPE>((interim_res_2 & BI_DOUBLE_BASE_TYPE_FIRST_HALF_MASK) >> BI_BASE_TYPE_TOTAL_BITS) + carry;
+        carry = interim_res_2 & BI_BASE_TYPE_MAX;
+    }
+
+    /* No need to save carry as its a right shift and those bits are discarded. */
+
+    return _big_int_remove_preceding_zeroes();
+
+}
+
 int bi::big_int::_big_int_remove_preceding_zeroes() {
 
     int i = _top - 1;
