@@ -75,6 +75,7 @@ namespace bi {
         bool big_int_is_zero() const;
         int big_int_set_zero();
         int big_int_left_shift_word(int shift_words);
+        int big_int_left_shift_word(int shift_words, big_int *res);
         int big_int_signed_sub(const big_int &b);
         int big_int_signed_sub(const big_int &b, big_int *res);
         int big_int_multiply(const big_int &b, big_int *res);
