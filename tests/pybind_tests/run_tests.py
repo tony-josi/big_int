@@ -9,6 +9,7 @@ import py_big_int_tc_wrap as pbitw
 VERBOSE_LEVEL = 1
 SHIFT_WORDS_RANDINT_MAX = 5
 SHIFT_BITS_RANDINT_MAX = 4048
+RSHIFT_BITS_RANDINT_MAX = 32
 PASS_STR_MESSAGE = "-- PASS --"
 FAIL_STR_MESSAGE = "!!!!!!!!!!       FAIL      !!!!!!!!!!"
 
@@ -223,6 +224,16 @@ def _bi_test_big_int_left_shift(num_1):
     _LOG_BI_TEST(3, "bi_test_big_int_left_shift_on_obj {}".format(shift_word_cnt), exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
+def _bi_test_big_int_right_shift_on_obj(num_1):
+    shift_word_cnt = random.randint(0, RSHIFT_BITS_RANDINT_MAX)
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    test_obj = pbitw.big_int_tc()
+    ret_str = test_obj.bi_test_big_int_right_shift_on_obj(hex_str_1, shift_word_cnt)
+    exp_res_num = num_1 >> (shift_word_cnt)
+    exp_res = get_hex_str_without_0x(exp_res_num)
+    _LOG_BI_TEST(3, "bi_test_big_int_right_shift_on_obj {}".format(shift_word_cnt), exp_res, ret_str)
+    return compare_hex_string_numbers(exp_res, ret_str)
+
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
     test_pass = 0
@@ -345,6 +356,9 @@ def test_17_bi_test_big_int_left_shift_word(test_data):
 def test_18_bi_test_big_int_left_shift(test_data):
     test_core_simple_loop(_bi_test_big_int_left_shift, test_data)
 
+def test_19_bi_test_big_int_right_shift_on_obj(test_data):
+    test_core_simple_loop(_bi_test_big_int_right_shift_on_obj, test_data)
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
@@ -360,40 +374,41 @@ if __name__ == "__main__":
     test_nums_uint.append(0)
     test_nums_uint.append(1)
 
-    test_1_bi_test_big_int_from_string(test_nums_uint)
-    test_2_bi_test_big_int_unsigned_add(test_nums_uint)
-    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
-    test_4_bi_test_big_int_unsigned_sub(test_nums_uint)
-    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
-    test_6_bi_test_big_int_compare(test_nums_uint)
-    test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
-    test_8_bi_test_big_int_signed_add(test_nums_uint)
-    test_9_bi_test_big_int_signed_add_on_obj(test_nums_uint)
-    test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_uint)
-    test_11_bi_test_big_int_signed_sub(test_nums_uint)
-    test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
-    test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
-    test_14_bi_test_big_int_multiply(test_nums_uint)
-    test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
-    test_16_bi_test_big_int_left_shift_on_obj(test_nums_uint)
-    test_17_bi_test_big_int_left_shift_word(test_nums_uint)
-    test_18_bi_test_big_int_left_shift(test_nums_uint)
+    # test_1_bi_test_big_int_from_string(test_nums_uint)
+    # test_2_bi_test_big_int_unsigned_add(test_nums_uint)
+    # test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
+    # test_4_bi_test_big_int_unsigned_sub(test_nums_uint)
+    # test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
+    # test_6_bi_test_big_int_compare(test_nums_uint)
+    # test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
+    # test_8_bi_test_big_int_signed_add(test_nums_uint)
+    # test_9_bi_test_big_int_signed_add_on_obj(test_nums_uint)
+    # test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_uint)
+    # test_11_bi_test_big_int_signed_sub(test_nums_uint)
+    # test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
+    # test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
+    # test_14_bi_test_big_int_multiply(test_nums_uint)
+    # test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
+    # test_16_bi_test_big_int_left_shift_on_obj(test_nums_uint)
+    # test_17_bi_test_big_int_left_shift_word(test_nums_uint)
+    # test_18_bi_test_big_int_left_shift(test_nums_uint)
+    test_19_bi_test_big_int_right_shift_on_obj(test_nums_uint)
 
-    test_1_bi_test_big_int_from_string(test_nums_int)
-    test_2_bi_test_big_int_unsigned_add(test_nums_int)
-    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_int)
-    test_4_bi_test_big_int_unsigned_sub(test_nums_int)
-    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_int)
-    test_6_bi_test_big_int_compare(test_nums_int)
-    test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
-    test_8_bi_test_big_int_signed_add(test_nums_int)
-    test_9_bi_test_big_int_signed_add_on_obj(test_nums_int)
-    test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_int)
-    test_11_bi_test_big_int_signed_sub(test_nums_int)
-    test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
-    test_13_bi_test_big_int_mulitply_258977(test_nums_int)
-    test_14_bi_test_big_int_multiply(test_nums_int)
-    test_15_bi_test_big_int_unsigned_compare(test_nums_int)
-    test_16_bi_test_big_int_left_shift_on_obj(test_nums_int)
-    test_17_bi_test_big_int_left_shift_word(test_nums_int)
-    test_18_bi_test_big_int_left_shift(test_nums_int)
+    # test_1_bi_test_big_int_from_string(test_nums_int)
+    # test_2_bi_test_big_int_unsigned_add(test_nums_int)
+    # test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_int)
+    # test_4_bi_test_big_int_unsigned_sub(test_nums_int)
+    # test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_int)
+    # test_6_bi_test_big_int_compare(test_nums_int)
+    # test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
+    # test_8_bi_test_big_int_signed_add(test_nums_int)
+    # test_9_bi_test_big_int_signed_add_on_obj(test_nums_int)
+    # test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_int)
+    # test_11_bi_test_big_int_signed_sub(test_nums_int)
+    # test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
+    # test_13_bi_test_big_int_mulitply_258977(test_nums_int)
+    # test_14_bi_test_big_int_multiply(test_nums_int)
+    # test_15_bi_test_big_int_unsigned_compare(test_nums_int)
+    # test_16_bi_test_big_int_left_shift_on_obj(test_nums_int)
+    # test_17_bi_test_big_int_left_shift_word(test_nums_int)
+    # test_18_bi_test_big_int_left_shift(test_nums_int)
