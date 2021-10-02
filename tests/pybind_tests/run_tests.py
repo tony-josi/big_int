@@ -225,6 +225,11 @@ def _bi_test_big_int_left_shift(num_1):
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def _bi_test_big_int_right_shift_on_obj(num_1):
+
+    if num_1 < 0:
+        # To correct the arithmetic (python) vs logical (big_int lib) issue.
+        num_1 *= -1
+        
     shift_word_cnt = random.randint(0, RSHIFT_BITS_RANDINT_MAX)
     hex_str_1 = get_hex_str_without_0x(num_1)
     test_obj = pbitw.big_int_tc()
@@ -412,3 +417,4 @@ if __name__ == "__main__":
     # test_16_bi_test_big_int_left_shift_on_obj(test_nums_int)
     # test_17_bi_test_big_int_left_shift_word(test_nums_int)
     # test_18_bi_test_big_int_left_shift(test_nums_int)
+    test_19_bi_test_big_int_right_shift_on_obj(test_nums_int)
