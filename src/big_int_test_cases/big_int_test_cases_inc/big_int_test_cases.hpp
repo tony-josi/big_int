@@ -31,6 +31,8 @@ public:
     std::string bi_test_big_int_multiply(const std::string &a, const std::string &b);
     int         bi_test_big_int_unsigned_compare(const std::string &a, const std::string &b);
     std::string bi_test_big_int_left_shift_on_obj(const std::string &a, int bits);
+    std::string bi_test_big_int_left_shift_word(const std::string &a, int shift_words);
+    std::string bi_test_big_int_left_shift(const std::string &a, int bits);
 
 
 };

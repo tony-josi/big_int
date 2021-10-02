@@ -156,3 +156,21 @@ std::string big_int_test_cases::bi_test_big_int_left_shift_on_obj(const std::str
     return test_bi_a.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string big_int_test_cases::bi_test_big_int_left_shift_word(const std::string &a, int shift_words) {
+
+    big_int test_bi_a, test_bi_b;
+    test_bi_a.big_int_from_string(a);
+    test_bi_a.big_int_left_shift_word(shift_words, &test_bi_b);
+    return test_bi_b.big_int_to_string(bi_base::BI_HEX);
+
+}
+
+std::string big_int_test_cases::bi_test_big_int_left_shift(const std::string &a, int bits) {
+    
+    big_int test_bi_a, test_bi_b;
+    test_bi_a.big_int_from_string(a);
+    test_bi_a.big_int_left_shift(bits, &test_bi_b);
+    return test_bi_b.big_int_to_string(bi_base::BI_HEX);
+
+}
