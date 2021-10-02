@@ -142,6 +142,17 @@ def _bi_test_big_int_left_shift_word_on_obj(num_1):
     _LOG_BI_TEST(3, "_bi_test_big_int_left_shift_word_on_obj", exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
+def _bi_test_big_int_left_shift_word(num_1):
+    shift_word_cnt = random.randint(0, SHIFT_WORDS_RANDINT_MAX)
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    test_obj = pbitw.big_int_tc()
+    ret_str = test_obj.bi_test_big_int_left_shift_word(hex_str_1, shift_word_cnt)
+    exp_res_num = num_1 << (shift_word_cnt * 32)
+    exp_res = get_hex_str_without_0x(exp_res_num)
+    _LOG_BI_TEST(3, "_bi_test_big_int_left_shift_word_on_obj", exp_res, ret_str)
+    return compare_hex_string_numbers(exp_res, ret_str)
+
+
 def _bi_test_big_int_signed_sub(num_1, num_2):
     hex_str_1 = get_hex_str_without_0x(num_1)
     hex_str_2 = get_hex_str_without_0x(num_2)
@@ -197,6 +208,16 @@ def _bi_test_big_int_left_shift_on_obj(num_1):
     hex_str_1 = get_hex_str_without_0x(num_1)
     test_obj = pbitw.big_int_tc()
     ret_str = test_obj.bi_test_big_int_left_shift_on_obj(hex_str_1, shift_word_cnt)
+    exp_res_num = num_1 << (shift_word_cnt)
+    exp_res = get_hex_str_without_0x(exp_res_num)
+    _LOG_BI_TEST(3, "bi_test_big_int_left_shift_on_obj {}".format(shift_word_cnt), exp_res, ret_str)
+    return compare_hex_string_numbers(exp_res, ret_str)
+
+def _bi_test_big_int_left_shift(num_1):
+    shift_word_cnt = random.randint(0, SHIFT_BITS_RANDINT_MAX)
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    test_obj = pbitw.big_int_tc()
+    ret_str = test_obj.bi_test_big_int_left_shift(hex_str_1, shift_word_cnt)
     exp_res_num = num_1 << (shift_word_cnt)
     exp_res = get_hex_str_without_0x(exp_res_num)
     _LOG_BI_TEST(3, "bi_test_big_int_left_shift_on_obj {}".format(shift_word_cnt), exp_res, ret_str)
@@ -297,7 +318,7 @@ def test_8_bi_test_big_int_signed_add(test_data):
 def test_9_bi_test_big_int_signed_add_on_obj(test_data):
     test_core_2d_loop(_bi_test_big_int_signed_add_on_obj, test_data)
 
-def test_10_bi_test_big_int_left_shift_word(test_data):
+def test_10_bi_test_big_int_left_shift_word_on_obj(test_data):
     test_core_simple_loop(_bi_test_big_int_left_shift_word_on_obj, test_data)
 
 def test_11_bi_test_big_int_signed_sub(test_data):
@@ -315,8 +336,14 @@ def test_14_bi_test_big_int_multiply(test_data):
 def test_15_bi_test_big_int_unsigned_compare(test_data):
     test_core_2d_loop(_bi_test_big_int_unsigned_compare, test_data)
 
-def test_16_bi_test_big_int_left_shift(test_data):
+def test_16_bi_test_big_int_left_shift_on_obj(test_data):
     test_core_simple_loop(_bi_test_big_int_left_shift_on_obj, test_data)
+
+def test_17_bi_test_big_int_left_shift_word(test_data):
+    test_core_simple_loop(_bi_test_big_int_left_shift_word, test_data)
+
+def test_18_bi_test_big_int_left_shift(test_data):
+    test_core_simple_loop(_bi_test_big_int_left_shift, test_data)
 
 if __name__ == "__main__":
 
@@ -342,13 +369,15 @@ if __name__ == "__main__":
     test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
     test_8_bi_test_big_int_signed_add(test_nums_uint)
     test_9_bi_test_big_int_signed_add_on_obj(test_nums_uint)
-    test_10_bi_test_big_int_left_shift_word(test_nums_uint)
+    test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_uint)
     test_11_bi_test_big_int_signed_sub(test_nums_uint)
     test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
     test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
     test_14_bi_test_big_int_multiply(test_nums_uint)
     test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
-    test_16_bi_test_big_int_left_shift(test_nums_uint)
+    test_16_bi_test_big_int_left_shift_on_obj(test_nums_uint)
+    test_17_bi_test_big_int_left_shift_word(test_nums_uint)
+    test_18_bi_test_big_int_left_shift(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -359,10 +388,12 @@ if __name__ == "__main__":
     test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
     test_8_bi_test_big_int_signed_add(test_nums_int)
     test_9_bi_test_big_int_signed_add_on_obj(test_nums_int)
-    test_10_bi_test_big_int_left_shift_word(test_nums_int)
+    test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_int)
     test_11_bi_test_big_int_signed_sub(test_nums_int)
     test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
     test_13_bi_test_big_int_mulitply_258977(test_nums_int)
     test_14_bi_test_big_int_multiply(test_nums_int)
     test_15_bi_test_big_int_unsigned_compare(test_nums_int)
-    test_16_bi_test_big_int_left_shift(test_nums_int)
+    test_16_bi_test_big_int_left_shift_on_obj(test_nums_int)
+    test_17_bi_test_big_int_left_shift_word(test_nums_int)
+    test_18_bi_test_big_int_left_shift(test_nums_int)
