@@ -432,3 +432,13 @@ int bi::big_int::big_int_left_shift(int bits) {
     return ret_val;
 
 }
+
+int bi::big_int::big_int_left_shift(int bits, big_int *res) {
+
+    int ret_val;
+    big_int temp_val(*this);
+    ret_val = temp_val.big_int_left_shift(bits);
+    temp_val._swap_big_int(*res);
+    return ret_val;
+
+}

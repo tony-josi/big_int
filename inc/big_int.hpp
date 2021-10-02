@@ -80,6 +80,7 @@ namespace bi {
         int big_int_multiply(const big_int &b, big_int *res);
         int big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
         int big_int_left_shift(int bits);
+        int big_int_left_shift(int bits, big_int *res);
 
         /* First param should be larger. */
         int big_int_unsigned_sub(const big_int &b);
