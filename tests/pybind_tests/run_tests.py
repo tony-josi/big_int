@@ -1,3 +1,16 @@
+''' 
+ @file   run_tests.py
+ @brief  Main test src file
+
+ This file contains the script that calls the test wrappers for the
+ big_int library from the py_big_int_tc_wrap python module generated 
+ by the pybind11.
+
+ @author         Tony Josi   https://tonyjosi97.github.io/profile/
+ @copyright      Copyright (C) 2021 Tony Josi
+ @bug            No known bugs.
+'''
+
 import sys, random
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 

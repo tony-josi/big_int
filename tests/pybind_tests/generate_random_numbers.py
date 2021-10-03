@@ -1,3 +1,12 @@
+''' 
+ @file   generate_random_numbers.py
+ @brief  Random number genrator tool script
+ 
+ @author         Tony Josi   https://tonyjosi97.github.io/profile/
+ @copyright      Copyright (C) 2021 Tony Josi
+ @bug            No known bugs.
+'''
+
 import random, sys
 
 DEFAULT_MIN_NUM_OF_BITS =       16
