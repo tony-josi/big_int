@@ -54,11 +54,12 @@ namespace bi {
         BI_BASE_TYPE    _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
         void            _big_int_swap(big_int &src);
         int             _big_int_compare_bi_base_type_n_top(const big_int &other) const;
-        int             _big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
+        int             _big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr) const;
         int             _big_int_left_shift_below_32bits(int bits);
         int             _big_int_right_shift_below_32bits(int bits);
         int             _big_int_remove_preceding_zeroes();
-        int             _big_int_get_num_of_hex_chars();
+        int             _big_int_get_num_of_hex_chars() const;
+        int             _big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, BI_BASE_TYPE &op_remainder);
         
 
         public:
@@ -84,7 +85,7 @@ namespace bi {
         int             big_int_signed_sub(const big_int &b);
         int             big_int_signed_sub(const big_int &b, big_int *res);
         int             big_int_multiply(const big_int &b, big_int *res);
-        int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
+        int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res) const;
         int             big_int_get_num_of_hex_chars();
 
         /* Logical shifts*/

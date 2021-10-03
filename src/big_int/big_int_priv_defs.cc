@@ -87,7 +87,7 @@ int bi::big_int::_big_int_compare_bi_base_type_n_top(const bi::big_int &other) c
 
 }
 
-int bi::big_int::_big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) {
+int bi::big_int::_big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) const {
 
     BI_DOUBLE_BASE_TYPE interim_res;
     BI_BASE_TYPE        carry = 0;
@@ -185,7 +185,7 @@ int bi::big_int::_big_int_remove_preceding_zeroes() {
 
 }
 
-int bi::big_int::_big_int_get_num_of_hex_chars() {
+int bi::big_int::_big_int_get_num_of_hex_chars() const {
 
     int ret_val = 0;
     if (_top > 1) {
@@ -203,3 +203,48 @@ int bi::big_int::_big_int_get_num_of_hex_chars() {
     return ret_val;
 
 }
+
+int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, BI_BASE_TYPE &op_remainder) {
+
+    if (big_int_is_zero() || divisor.big_int_is_zero()) {
+        op_remainder = 0;
+        op_quotient = 0;
+        return 0;
+    }
+
+    int comp_res = big_int_unsigned_compare(divisor);
+    switch (comp_res) {
+    case -1:
+        return -1;
+    case 0:
+        op_quotient = 1;
+        op_remainder = 0;
+        return 0;
+    }
+
+    if ((_big_int_get_num_of_hex_chars() - divisor._big_int_get_num_of_hex_chars()) > 1) {
+        return -1;
+    } 
+
+    big_int temp_val;
+    BI_BASE_TYPE i = 1;
+    for (; i <= 0xF; ++i) {
+        temp_val.big_int_clear();
+        divisor.big_int_unsigned_multiply_base_type(i, &temp_val);
+        comp_res = big_int_unsigned_compare(temp_val);
+        switch (comp_res) {
+        case -1:
+            op_quotient = i - 1;
+            /* TODO: op_rem from BI_BASE_TYPE */
+            return 0;
+        case 0:
+            op_quotient = i;
+            op_remainder = 0;
+            return 0;
+        }
+    }
+
+    return -1;
+
+}
+
