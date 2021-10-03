@@ -39,6 +39,8 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def("bi_test_big_int_left_shift_word", &big_int_test_cases::bi_test_big_int_left_shift_word)
         .def("bi_test_big_int_left_shift", &big_int_test_cases::bi_test_big_int_left_shift)
         .def("bi_test_big_int_right_shift_on_obj", &big_int_test_cases::bi_test_big_int_right_shift_on_obj)
-        .def("bi_test_big_int_right_shift_word_on_obj", &big_int_test_cases::bi_test_big_int_right_shift_word_on_obj);
+        .def("bi_test_big_int_right_shift_word_on_obj", &big_int_test_cases::bi_test_big_int_right_shift_word_on_obj)
+        .def("bi_test_big_int_right_shift_word", &big_int_test_cases::bi_test_big_int_right_shift_word)
+        .def("bi_test_big_int_right_shift", &big_int_test_cases::bi_test_big_int_right_shift);
 
 }
