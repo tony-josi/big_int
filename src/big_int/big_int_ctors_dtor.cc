@@ -56,7 +56,7 @@ bi::big_int::big_int(const bi::big_int &src)
 
 bi::big_int& bi::big_int::operator=(bi::big_int src) {
 
-    _swap_big_int(src);
+    _big_int_swap(src);
     return *this;
 
     _BI_LOG(3, "Copy/Move assign. 'ctor");
@@ -69,7 +69,7 @@ bi::big_int::big_int(bi::big_int &&src)
     _top        {0},
     _neg        {false} {
 
-    _swap_big_int(src);
+    _big_int_swap(src);
 
     _BI_LOG(3, "Move 'ctor");
 

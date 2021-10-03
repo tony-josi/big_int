@@ -14,7 +14,7 @@
 #include "big_int_lib_log.hpp"
 #include "big_int_inline_defs.hpp"
 
-void bi::big_int::_swap_big_int(bi::big_int &src) {
+void bi::big_int::_big_int_swap(bi::big_int &src) {
 
     using std::swap;
 

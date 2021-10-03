@@ -129,7 +129,7 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b) {
 
     bi::big_int temp;
     big_int_signed_add(b, &temp);
-    _swap_big_int(temp);
+    _big_int_swap(temp);
     return 0;
 
 }
@@ -213,7 +213,7 @@ int bi::big_int::big_int_signed_sub(const bi::big_int &b) {
     int ret_val;
     bi::big_int temp_val;
     ret_val = big_int_signed_sub(b, &temp_val);
-    _swap_big_int(temp_val);
+    _big_int_swap(temp_val);
     return ret_val;
 
 }
@@ -284,7 +284,7 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
     bi::big_int temp;
     big_int_unsigned_sub(b, &temp);
     temp._neg = this->_neg;
-    _swap_big_int(temp);
+    _big_int_swap(temp);
     return 0;
 
 }
@@ -442,7 +442,7 @@ int bi::big_int::big_int_left_shift(int bits, bi::big_int *res) {
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_left_shift(bits);
-    temp_val._swap_big_int(*res);
+    temp_val._big_int_swap(*res);
     return ret_val;
 
 }
@@ -452,7 +452,7 @@ int bi::big_int::big_int_left_shift_word(int shift_words, bi::big_int *res) {
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_left_shift_word(shift_words);
-    temp_val._swap_big_int(*res);
+    temp_val._big_int_swap(*res);
     return ret_val;
 
 }
@@ -482,7 +482,7 @@ int bi::big_int::big_int_right_shift_word(int shift_words, bi::big_int *res) {
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_right_shift_word(shift_words);
-    temp_val._swap_big_int(*res);
+    temp_val._big_int_swap(*res);
     return ret_val;
 
 }
@@ -507,7 +507,7 @@ int bi::big_int::big_int_right_shift(int bits, bi::big_int *res) {
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_right_shift(bits);
-    temp_val._swap_big_int(*res);
+    temp_val._big_int_swap(*res);
     return ret_val;
 
 }
