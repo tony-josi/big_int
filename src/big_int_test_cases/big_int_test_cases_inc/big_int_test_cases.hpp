@@ -35,7 +35,8 @@ public:
     std::string bi_test_big_int_left_shift(const std::string &a, int bits);
     std::string bi_test_big_int_right_shift_on_obj(const std::string &a, int bits);
     std::string bi_test_big_int_right_shift_word_on_obj(const std::string &a, int shift_words);
-
+    std::string bi_test_big_int_right_shift_word(const std::string &a, int shift_words);
+    std::string bi_test_big_int_right_shift(const std::string &a, int bits);
 
 };
 
