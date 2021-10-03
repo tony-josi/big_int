@@ -65,7 +65,7 @@ BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min
     return borrow;
 }
 
-int bi::big_int::_compare_bi_base_type_n_top(const bi::big_int &other) const {
+int bi::big_int::_big_int_compare_bi_base_type_n_top(const bi::big_int &other) const {
 
     if (_top == other._top) {
         int i = _top - 1;

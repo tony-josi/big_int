@@ -401,7 +401,7 @@ bool bi::big_int::big_int_is_negetive() {
 
 int bi::big_int::big_int_unsigned_compare(const bi::big_int &other) const {
 
-    return _compare_bi_base_type_n_top(other);
+    return _big_int_compare_bi_base_type_n_top(other);
 
 }
 
@@ -409,9 +409,9 @@ int bi::big_int::big_int_compare(const bi::big_int &other) const {
 
     if (_neg == other._neg) {
         if (_neg == 1) {
-            return -1 * _compare_bi_base_type_n_top(other);
+            return -1 * _big_int_compare_bi_base_type_n_top(other);
         } else {
-            return _compare_bi_base_type_n_top(other);
+            return _big_int_compare_bi_base_type_n_top(other);
         }
     } else {
         if (_neg == 1) {
