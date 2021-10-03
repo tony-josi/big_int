@@ -424,11 +424,15 @@ int bi::big_int::big_int_compare(const bi::big_int &other) const {
 
 int bi::big_int::big_int_left_shift(int bits) {
 
-    int ret_val;
+    int ret_val = 0;
     int word_shifts = bits / BI_BASE_TYPE_TOTAL_BITS;
     int bit_shifts = bits % BI_BASE_TYPE_TOTAL_BITS;
-    ret_val = big_int_left_shift_word(word_shifts);
-    ret_val += _big_int_left_shift_below_32bits(bit_shifts);
+    if (word_shifts > 0) {
+        ret_val = big_int_left_shift_word(word_shifts);
+    }
+    if (bit_shifts > 0) {
+        ret_val += _big_int_left_shift_below_32bits(bit_shifts);
+    }
     return ret_val;
 
 }
@@ -485,11 +489,15 @@ int bi::big_int::big_int_right_shift_word(int shift_words, bi::big_int *res) {
 
 int bi::big_int::big_int_right_shift(int bits) {
 
-    int ret_val;
+    int ret_val = 0;
     int word_shifts = bits / BI_BASE_TYPE_TOTAL_BITS;
     int bit_shifts = bits % BI_BASE_TYPE_TOTAL_BITS;
-    ret_val = big_int_right_shift_word(word_shifts);
-    ret_val += _big_int_right_shift_below_32bits(bit_shifts);
+    if (word_shifts > 0) {
+        ret_val = big_int_right_shift_word(word_shifts);
+    }
+    if (bit_shifts > 0) {
+        ret_val += _big_int_right_shift_below_32bits(bit_shifts);
+    }
     return ret_val;
 
 }
