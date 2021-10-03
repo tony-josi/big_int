@@ -47,7 +47,7 @@ int bi::big_int::_big_int_expand(int req) {
 
 }
 
-BI_BASE_TYPE bi::big_int::_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) const {
+BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) const {
 
     BI_BASE_TYPE borrow = 0;
     BI_DOUBLE_BASE_TYPE diff, temp1;

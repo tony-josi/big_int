@@ -257,7 +257,7 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) co
     }
 
     res->big_int_clear();
-    BI_BASE_TYPE borrow = _sub_base_type(b._data, min, res);
+    BI_BASE_TYPE borrow = _big_int_sub_base_type(b._data, min, res);
 
     for(int i = min; i < max; i++) {
         if(i >= res->_total_data) {

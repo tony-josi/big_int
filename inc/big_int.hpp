@@ -48,7 +48,7 @@ namespace bi {
         bool                _neg;
 
         int _big_int_expand(int req);
-        BI_BASE_TYPE _sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
+        BI_BASE_TYPE _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
         void _swap_big_int(big_int &src);
         int _compare_bi_base_type_n_top(const big_int &other) const;
         int _unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
