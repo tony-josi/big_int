@@ -184,3 +184,22 @@ int bi::big_int::_big_int_remove_preceding_zeroes() {
     return 0;
 
 }
+
+int bi::big_int::_big_int_get_num_of_hex_chars() {
+
+    int ret_val = 0;
+    if (_top - 2 > 0) {
+        ret_val += (_top - 2) * 8 * 4;
+    }
+
+    if (_top - 1 >= 0) {
+        BI_BASE_TYPE temp_val = _data[_top - 1];
+        
+        do {
+            ret_val += 4;
+        } while (temp_val >>= 4);
+    }
+
+    return ret_val;
+
+}

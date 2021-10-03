@@ -58,6 +58,7 @@ namespace bi {
         int             _big_int_left_shift_below_32bits(int bits);
         int             _big_int_right_shift_below_32bits(int bits);
         int             _big_int_remove_preceding_zeroes();
+        int             _big_int_get_num_of_hex_chars();
         
 
         public:
@@ -84,6 +85,7 @@ namespace bi {
         int             big_int_signed_sub(const big_int &b, big_int *res);
         int             big_int_multiply(const big_int &b, big_int *res);
         int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
+        int             big_int_get_num_of_hex_chars();
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);
