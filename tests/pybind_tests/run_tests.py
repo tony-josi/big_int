@@ -254,6 +254,36 @@ def _bi_test_big_int_right_shift_word_on_obj(num_1):
     _LOG_BI_TEST(3, "bi_test_big_int_right_shift_word_on_obj {}".format(shift_word_cnt), exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
+def _bi_test_big_int_right_shift(num_1):
+
+    if num_1 < 0:
+        # To correct the arithmetic (python) vs logical (big_int lib) issue.
+        num_1 *= -1
+
+    shift_word_cnt = random.randint(0, RSHIFT_BITS_RANDINT_MAX)
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    test_obj = pbitw.big_int_tc()
+    ret_str = test_obj.bi_test_big_int_right_shift(hex_str_1, shift_word_cnt)
+    exp_res_num = num_1 >> (shift_word_cnt)
+    exp_res = get_hex_str_without_0x(exp_res_num)
+    _LOG_BI_TEST(3, "_bi_test_big_int_right_shift {}: {}".format(shift_word_cnt, hex_str_1), exp_res, ret_str)
+    return compare_hex_string_numbers(exp_res, ret_str)
+
+def _bi_test_big_int_right_shift_word(num_1):
+
+    if num_1 < 0:
+        # To correct the arithmetic (python) vs logical (big_int lib) issue.
+        num_1 *= -1
+
+    shift_word_cnt = random.randint(0, SHIFT_WORDS_RANDINT_MAX)
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    test_obj = pbitw.big_int_tc()
+    ret_str = test_obj.bi_test_big_int_right_shift_word(hex_str_1, shift_word_cnt)
+    exp_res_num = num_1 >> (shift_word_cnt * 32)
+    exp_res = get_hex_str_without_0x(exp_res_num)
+    _LOG_BI_TEST(3, "_bi_test_big_int_right_shift_word {}".format(shift_word_cnt), exp_res, ret_str)
+    return compare_hex_string_numbers(exp_res, ret_str)
+
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
     test_pass = 0
@@ -382,6 +412,12 @@ def test_19_bi_test_big_int_right_shift_on_obj(test_data):
 def test_20_bi_test_big_int_right_shift_word_on_obj(test_data):
     test_core_simple_loop(_bi_test_big_int_right_shift_word_on_obj, test_data)
 
+def test_21_bi_test_big_int_right_shift(test_data):
+    test_core_simple_loop(_bi_test_big_int_right_shift, test_data)
+
+def test_22_bi_test_big_int_right_shift_word(test_data):
+    test_core_simple_loop(_bi_test_big_int_right_shift_word, test_data)
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
@@ -417,6 +453,8 @@ if __name__ == "__main__":
     test_18_bi_test_big_int_left_shift(test_nums_uint)
     test_19_bi_test_big_int_right_shift_on_obj(test_nums_uint)
     test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_uint)
+    test_21_bi_test_big_int_right_shift(test_nums_uint)
+    test_22_bi_test_big_int_right_shift_word(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -438,3 +476,5 @@ if __name__ == "__main__":
     test_18_bi_test_big_int_left_shift(test_nums_int)
     test_19_bi_test_big_int_right_shift_on_obj(test_nums_int)
     test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_int)
+    test_21_bi_test_big_int_right_shift(test_nums_int)
+    test_22_bi_test_big_int_right_shift_word(test_nums_int)
