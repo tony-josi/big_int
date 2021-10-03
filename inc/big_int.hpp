@@ -47,14 +47,14 @@ namespace bi {
         int                 _top;
         bool                _neg;
 
-        int _big_int_expand(int req);
-        BI_BASE_TYPE _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
-        void _big_int_swap(big_int &src);
-        int _big_int_compare_bi_base_type_n_top(const big_int &other) const;
-        int _big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
-        int _big_int_left_shift_below_32bits(int bits);
-        int _big_int_right_shift_below_32bits(int bits);
-        int _big_int_remove_preceding_zeroes();
+        int             _big_int_expand(int req);
+        BI_BASE_TYPE    _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
+        void            _big_int_swap(big_int &src);
+        int             _big_int_compare_bi_base_type_n_top(const big_int &other) const;
+        int             _big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
+        int             _big_int_left_shift_below_32bits(int bits);
+        int             _big_int_right_shift_below_32bits(int bits);
+        int             _big_int_remove_preceding_zeroes();
         
 
         public:
@@ -67,36 +67,36 @@ namespace bi {
 
         int             big_int_from_string(const std::string &str_num);
         std::string     big_int_to_string(bi_base base);
-        int big_int_compare(const big_int &other) const;
-        int big_int_unsigned_compare(const big_int &other) const;
-        int big_int_unsigned_add(const big_int &b);
-        int big_int_unsigned_add(const big_int &b, big_int *res);
-        int big_int_signed_add(const big_int &b);
-        int big_int_signed_add(const big_int &b, big_int *res);
-        int big_int_set_negetive(bool set_unset);
-        bool big_int_is_negetive();
-        bool big_int_is_zero() const;
-        int big_int_set_zero();
-        int big_int_signed_sub(const big_int &b);
-        int big_int_signed_sub(const big_int &b, big_int *res);
-        int big_int_multiply(const big_int &b, big_int *res);
-        int big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
+        int             big_int_compare(const big_int &other) const;
+        int             big_int_unsigned_compare(const big_int &other) const;
+        int             big_int_unsigned_add(const big_int &b);
+        int             big_int_unsigned_add(const big_int &b, big_int *res);
+        int             big_int_signed_add(const big_int &b);
+        int             big_int_signed_add(const big_int &b, big_int *res);
+        int             big_int_set_negetive(bool set_unset);
+        bool            big_int_is_negetive();
+        bool            big_int_is_zero() const;
+        int             big_int_set_zero();
+        int             big_int_signed_sub(const big_int &b);
+        int             big_int_signed_sub(const big_int &b, big_int *res);
+        int             big_int_multiply(const big_int &b, big_int *res);
+        int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res);
 
         /* Logical shifts*/
-        int big_int_left_shift_word(int shift_words);
-        int big_int_left_shift_word(int shift_words, big_int *res);
-        int big_int_left_shift(int bits);
-        int big_int_left_shift(int bits, big_int *res);
-        int big_int_right_shift_word(int shift_words);
-        int big_int_right_shift_word(int shift_words, big_int *res);
-        int big_int_right_shift(int bits);
-        int big_int_right_shift(int bits, big_int *res);
+        int             big_int_left_shift_word(int shift_words);
+        int             big_int_left_shift_word(int shift_words, big_int *res);
+        int             big_int_left_shift(int bits);
+        int             big_int_left_shift(int bits, big_int *res);
+        int             big_int_right_shift_word(int shift_words);
+        int             big_int_right_shift_word(int shift_words, big_int *res);
+        int             big_int_right_shift(int bits);
+        int             big_int_right_shift(int bits, big_int *res);
 
         /* First param should be larger. */
-        int big_int_unsigned_sub(const big_int &b);
-        int big_int_unsigned_sub(const big_int &b, big_int *res) const;
+        int             big_int_unsigned_sub(const big_int &b);
+        int             big_int_unsigned_sub(const big_int &b, big_int *res) const;
         
-        int big_int_clear();
+        int             big_int_clear();
         
         /*
         int big_int_div(const big_int b);
