@@ -9,7 +9,7 @@ import py_big_int_tc_wrap as pbitw
 VERBOSE_LEVEL = 1
 SHIFT_WORDS_RANDINT_MAX = 5
 SHIFT_BITS_RANDINT_MAX = 4048
-RSHIFT_BITS_RANDINT_MAX = 32
+RSHIFT_BITS_RANDINT_MAX = 128
 PASS_STR_MESSAGE = "-- PASS --"
 FAIL_STR_MESSAGE = "!!!!!!!!!!       FAIL      !!!!!!!!!!"
 
@@ -236,7 +236,7 @@ def _bi_test_big_int_right_shift_on_obj(num_1):
     ret_str = test_obj.bi_test_big_int_right_shift_on_obj(hex_str_1, shift_word_cnt)
     exp_res_num = num_1 >> (shift_word_cnt)
     exp_res = get_hex_str_without_0x(exp_res_num)
-    _LOG_BI_TEST(3, "bi_test_big_int_right_shift_on_obj {}".format(shift_word_cnt), exp_res, ret_str)
+    _LOG_BI_TEST(3, "bi_test_big_int_right_shift_on_obj {}: {}".format(shift_word_cnt, hex_str_1), exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
 def _bi_test_big_int_right_shift_word_on_obj(num_1):

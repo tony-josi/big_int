@@ -475,6 +475,11 @@ int bi::big_int::big_int_right_shift_word(int shift_words) {
 
 int bi::big_int::big_int_right_shift(int bits) {
 
-    return _big_int_right_shift_below_32bits(bits);
+    int ret_val;
+    int word_shifts = bits / BI_BASE_TYPE_TOTAL_BITS;
+    int bit_shifts = bits % BI_BASE_TYPE_TOTAL_BITS;
+    ret_val = big_int_right_shift_word(word_shifts);
+    ret_val += _big_int_right_shift_below_32bits(bit_shifts);
+    return ret_val;
 
 }
