@@ -511,3 +511,9 @@ int bi::big_int::big_int_right_shift(int bits, bi::big_int *res) {
     return ret_val;
 
 }
+
+int bi::big_int::big_int_get_num_of_hex_chars() {
+
+    return _big_int_get_num_of_hex_chars();
+
+}
