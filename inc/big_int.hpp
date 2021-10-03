@@ -51,7 +51,7 @@ namespace bi {
         BI_BASE_TYPE _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
         void _big_int_swap(big_int &src);
         int _big_int_compare_bi_base_type_n_top(const big_int &other) const;
-        int _unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
+        int _big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, big_int *res_ptr);
         int _big_int_left_shift_below_32bits(int bits);
         int _big_int_right_shift_below_32bits(int bits);
         int _big_int_remove_preceding_zeroes();

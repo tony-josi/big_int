@@ -304,7 +304,7 @@ int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
     
     for (int i = 0; i < b._top; ++i) {
         temp_bi.big_int_clear();
-        _unsigned_multiply_bi_base_type(b._data[i], &temp_bi);
+        _big_int_unsigned_multiply_bi_base_type(b._data[i], &temp_bi);
         temp_bi.big_int_left_shift_word(i);
         res->big_int_unsigned_add(temp_bi);
     }
@@ -314,7 +314,7 @@ int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
 
 int bi::big_int::big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, bi::big_int *res) {
 
-    return _unsigned_multiply_bi_base_type(b, res);
+    return _big_int_unsigned_multiply_bi_base_type(b, res);
 
 }
 

@@ -87,7 +87,7 @@ int bi::big_int::_big_int_compare_bi_base_type_n_top(const bi::big_int &other) c
 
 }
 
-int bi::big_int::_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) {
+int bi::big_int::_big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) {
 
     BI_DOUBLE_BASE_TYPE interim_res;
     BI_BASE_TYPE        carry = 0;
