@@ -284,6 +284,21 @@ def _bi_test_big_int_right_shift_word(num_1):
     _LOG_BI_TEST(3, "_bi_test_big_int_right_shift_word {}".format(shift_word_cnt), exp_res, ret_str)
     return compare_hex_string_numbers(exp_res, ret_str)
 
+def _bi_test_big_int_get_num_of_hex_chars(num_1):
+
+    hex_str_1 = get_hex_str_without_0x(num_1)
+    test_obj = pbitw.big_int_tc()
+    ret_val = test_obj.bi_test_big_int_get_num_of_hex_chars(hex_str_1)
+    if num_1 < 0:
+        num_1 *= -1
+    exp_val = len(get_hex_str_without_0x(num_1))
+    _LOG_BI_TEST(3, "_bi_test_big_int_get_num_of_hex_chars", exp_val, ret_val)
+    if (ret_val == exp_val):
+        return True
+    else:
+        _LOG_BI_TEST(1, "_bi_test_big_int_get_num_of_hex_chars", exp_val, ret_val)
+        return False
+
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
     test_pass = 0
@@ -418,6 +433,9 @@ def test_21_bi_test_big_int_right_shift(test_data):
 def test_22_bi_test_big_int_right_shift_word(test_data):
     test_core_simple_loop(_bi_test_big_int_right_shift_word, test_data)
 
+def test_23_bi_test_big_int_get_num_of_hex_chars(test_data):
+    test_core_simple_loop(_bi_test_big_int_get_num_of_hex_chars, test_data)
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
@@ -455,6 +473,7 @@ if __name__ == "__main__":
     test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_uint)
     test_21_bi_test_big_int_right_shift(test_nums_uint)
     test_22_bi_test_big_int_right_shift_word(test_nums_uint)
+    test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -478,3 +497,4 @@ if __name__ == "__main__":
     test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_int)
     test_21_bi_test_big_int_right_shift(test_nums_int)
     test_22_bi_test_big_int_right_shift_word(test_nums_int)
+    test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
