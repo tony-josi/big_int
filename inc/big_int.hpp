@@ -35,17 +35,20 @@
 namespace bi {
 
     enum class bi_base {
+
         BI_HEX,
         BI_DEC
+    
     };
 
     class big_int {
+
         private:
 
-        BI_BASE_TYPE        *_data;
-        int                 _total_data;
-        int                 _top;
-        bool                _neg;
+        BI_BASE_TYPE    *_data;
+        int             _total_data;
+        int             _top;
+        bool            _neg;
 
         int             _big_int_expand(int req);
         BI_BASE_TYPE    _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int *res_ptr) const;
@@ -103,7 +106,6 @@ namespace bi {
         int big_int_div(const big_int b, big_int *res);
         */
         
-
     };
 
 }
