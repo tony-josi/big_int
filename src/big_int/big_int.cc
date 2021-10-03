@@ -473,6 +473,16 @@ int bi::big_int::big_int_right_shift_word(int shift_words) {
 
 }
 
+int bi::big_int::big_int_right_shift_word(int shift_words, bi::big_int *res) {
+
+    int ret_val;
+    big_int temp_val(*this);
+    ret_val = temp_val.big_int_right_shift_word(shift_words);
+    temp_val._swap_big_int(*res);
+    return ret_val;
+
+}
+
 int bi::big_int::big_int_right_shift(int bits) {
 
     int ret_val;
@@ -480,6 +490,16 @@ int bi::big_int::big_int_right_shift(int bits) {
     int bit_shifts = bits % BI_BASE_TYPE_TOTAL_BITS;
     ret_val = big_int_right_shift_word(word_shifts);
     ret_val += _big_int_right_shift_below_32bits(bit_shifts);
+    return ret_val;
+
+}
+
+int bi::big_int::big_int_right_shift(int bits, bi::big_int *res) {
+
+    int ret_val;
+    big_int temp_val(*this);
+    ret_val = temp_val.big_int_right_shift(bits);
+    temp_val._swap_big_int(*res);
     return ret_val;
 
 }
