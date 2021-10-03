@@ -215,21 +215,19 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
     int comp_res = big_int_unsigned_compare(divisor);
     switch (comp_res) {
     case -1:
-        return -1;
+        /* Divisor is greater than dividend, need more digits in dividend. */
+        return 1;
     case 0:
         op_quotient = 1;
         op_remainder = 0;
         return 0;
     }
 
-    if ((_big_int_get_num_of_hex_chars() - divisor._big_int_get_num_of_hex_chars()) > 1) {
-        return -1;
-    } 
-
     big_int temp_val;
-    BI_BASE_TYPE i = 1;
+
+    /* Start from 2 as the cases 0 & 1 are covered already in the above lines. */
+    BI_BASE_TYPE i = 2;
     for (; i <= 0xF; ++i) {
-        temp_val.big_int_clear();
         divisor.big_int_unsigned_multiply_base_type(i, &temp_val);
         comp_res = big_int_unsigned_compare(temp_val);
         switch (comp_res) {
