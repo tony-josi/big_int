@@ -37,6 +37,7 @@ public:
     std::string bi_test_big_int_right_shift_word_on_obj(const std::string &a, int shift_words);
     std::string bi_test_big_int_right_shift_word(const std::string &a, int shift_words);
     std::string bi_test_big_int_right_shift(const std::string &a, int bits);
+    int         bi_test_big_int_get_num_of_hex_chars(const std::string &a);
 
 };
 

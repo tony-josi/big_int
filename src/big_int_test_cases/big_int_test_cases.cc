@@ -210,3 +210,11 @@ std::string big_int_test_cases::bi_test_big_int_right_shift(const std::string &a
     return test_bi_b.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+int big_int_test_cases::bi_test_big_int_get_num_of_hex_chars(const std::string &a) {
+
+    big_int test_bi_a;
+    test_bi_a.big_int_from_string(a);
+    return test_bi_a.big_int_get_num_of_hex_chars();
+    
+}
