@@ -24,6 +24,7 @@ SHIFT_WORDS_RANDINT_MAX = 5
 SHIFT_BITS_RANDINT_MAX = 4048
 RSHIFT_BITS_RANDINT_MAX = 128
 UINT32_RANDINT_MAX = 0xFFFFFFFF
+MAX_HEX_CHAR = 0xF
 
 PASS_STR_MESSAGE = "-- PASS --"
 FAIL_STR_MESSAGE = "!!!!!!!!!!       FAIL      !!!!!!!!!!"
@@ -324,8 +325,22 @@ def _bi_test_big_int_from_base_type(num):
         is_neg = 1
     hex_str = get_hex_str_without_0x(rand_num)
     ret_str = test_obj.bi_test_big_int_from_base_type(urand_num, is_neg)
-    _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
+    _LOG_BI_TEST(3, "_bi_test_big_int_from_base_type", hex_str, ret_str)
     return compare_hex_string_numbers(ret_str, hex_str)
+
+def _bi_test_big_int_push_back_hex_chars(num):
+    rand_num = random.randint(0, MAX_HEX_CHAR)
+    test_obj = pbitw.big_int_tc()
+    hex_str = get_hex_str_without_0x(num)
+    num <<= 4
+    if num > 0:
+        num += rand_num
+    else:
+        num -= rand_num
+    exp_str = get_hex_str_without_0x(num)
+    ret_str = test_obj.bi_test_big_int_push_back_hex_chars(hex_str, rand_num)
+    _LOG_BI_TEST(3, "_bi_test_big_int_push_back_hex_chars", exp_str, ret_str)
+    return compare_hex_string_numbers(ret_str, exp_str)
 
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
@@ -467,6 +482,11 @@ def test_23_bi_test_big_int_get_num_of_hex_chars(test_data):
 def test_24_bi_test_big_int_from_base_type(test_data):
     test_core_simple_loop(_bi_test_big_int_from_base_type, test_data)
 
+def test_25_bi_test_big_int_push_back_hex_chars(test_data):
+    test_core_simple_loop(_bi_test_big_int_push_back_hex_chars, test_data)
+
+_bi_test_big_int_push_back_hex_chars
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
@@ -482,30 +502,31 @@ if __name__ == "__main__":
     test_nums_uint.append(0)
     test_nums_uint.append(1)
 
-    test_1_bi_test_big_int_from_string(test_nums_uint)
-    test_2_bi_test_big_int_unsigned_add(test_nums_uint)
-    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
-    test_4_bi_test_big_int_unsigned_sub(test_nums_uint)
-    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
-    test_6_bi_test_big_int_compare(test_nums_uint)
-    test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
-    test_8_bi_test_big_int_signed_add(test_nums_uint)
-    test_9_bi_test_big_int_signed_add_on_obj(test_nums_uint)
-    test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_uint)
-    test_11_bi_test_big_int_signed_sub(test_nums_uint)
-    test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
-    test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
-    test_14_bi_test_big_int_multiply(test_nums_uint)
-    test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
-    test_16_bi_test_big_int_left_shift_on_obj(test_nums_uint)
-    test_17_bi_test_big_int_left_shift_word(test_nums_uint)
-    test_18_bi_test_big_int_left_shift(test_nums_uint)
-    test_19_bi_test_big_int_right_shift_on_obj(test_nums_uint)
-    test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_uint)
-    test_21_bi_test_big_int_right_shift(test_nums_uint)
-    test_22_bi_test_big_int_right_shift_word(test_nums_uint)
-    test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
-    test_24_bi_test_big_int_from_base_type(test_nums_uint)
+    # test_1_bi_test_big_int_from_string(test_nums_uint)
+    # test_2_bi_test_big_int_unsigned_add(test_nums_uint)
+    # test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
+    # test_4_bi_test_big_int_unsigned_sub(test_nums_uint)
+    # test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
+    # test_6_bi_test_big_int_compare(test_nums_uint)
+    # test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
+    # test_8_bi_test_big_int_signed_add(test_nums_uint)
+    # test_9_bi_test_big_int_signed_add_on_obj(test_nums_uint)
+    # test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_uint)
+    # test_11_bi_test_big_int_signed_sub(test_nums_uint)
+    # test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
+    # test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
+    # test_14_bi_test_big_int_multiply(test_nums_uint)
+    # test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
+    # test_16_bi_test_big_int_left_shift_on_obj(test_nums_uint)
+    # test_17_bi_test_big_int_left_shift_word(test_nums_uint)
+    # test_18_bi_test_big_int_left_shift(test_nums_uint)
+    # test_19_bi_test_big_int_right_shift_on_obj(test_nums_uint)
+    # test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_uint)
+    # test_21_bi_test_big_int_right_shift(test_nums_uint)
+    # test_22_bi_test_big_int_right_shift_word(test_nums_uint)
+    # test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
+    # test_24_bi_test_big_int_from_base_type(test_nums_uint)
+    test_25_bi_test_big_int_push_back_hex_chars(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -531,3 +552,4 @@ if __name__ == "__main__":
     test_22_bi_test_big_int_right_shift_word(test_nums_int)
     test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
     test_24_bi_test_big_int_from_base_type(test_nums_int)
+    test_25_bi_test_big_int_push_back_hex_chars(test_nums_int)
