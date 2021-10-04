@@ -105,6 +105,9 @@ namespace bi {
         int             big_int_unsigned_sub(const big_int &b, big_int *res) const;
         
         int             big_int_clear();
+
+        /* Temporary public func.s for testing */
+        int             big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_chars);
         
         /*
         int big_int_div(const big_int b);
