@@ -24,6 +24,7 @@ bi::big_int::big_int()
     _data           = new BI_BASE_TYPE[_total_data];
 
     if(_data) {
+        _data[_top++] = 0; /* Init. with zero. */
         _BI_LOG(1, "Big int init, with: %d items", _total_data);
     } else {
         _BI_LOG(1, "Init failed");

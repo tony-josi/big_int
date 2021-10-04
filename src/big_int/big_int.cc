@@ -34,6 +34,9 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
 
     str_size -= num_decor_cnt;
 
+    /* Clear any previous data. */
+    big_int_clear();
+
     size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? \
     0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
     
