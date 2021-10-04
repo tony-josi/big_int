@@ -69,6 +69,14 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
 
 }
 
+int bi::big_int::big_int_from_base_type(const BI_BASE_TYPE &bt_val) {
+
+    big_int_clear();
+    _data[_top++] = bt_val;
+    return 0;
+
+}
+
 int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
 
     int max_data_len, min_data_len;
