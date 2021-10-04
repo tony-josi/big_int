@@ -69,10 +69,11 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
 
 }
 
-int bi::big_int::big_int_from_base_type(const BI_BASE_TYPE &bt_val) {
+int bi::big_int::big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg) {
 
     big_int_clear();
     _data[_top++] = bt_val;
+    _neg = is_neg;
     return 0;
 
 }

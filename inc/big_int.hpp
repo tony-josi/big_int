@@ -71,7 +71,7 @@ namespace bi {
         ~big_int();
 
         int             big_int_from_string(const std::string &str_num);
-        int             big_int_from_base_type(const BI_BASE_TYPE &bt_val);
+        int             big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg);
         std::string     big_int_to_string(bi_base base);
         int             big_int_compare(const big_int &other) const;
         int             big_int_unsigned_compare(const big_int &other) const;
