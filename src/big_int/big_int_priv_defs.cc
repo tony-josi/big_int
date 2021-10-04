@@ -246,3 +246,20 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
 
 }
 
+int bi::big_int::_big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_char) {
+
+    if (hex_char > 0xF) {
+        return -1;
+    }
+
+    if (hex_char == 0 && big_int_is_zero() == 0) {
+        /* MSB is zero, do nothing */
+        return 0;
+    }
+
+    int ret_val;
+    ret_val = big_int_left_shift(4);
+    _data[0] += hex_char;
+    return ret_val;
+
+}
