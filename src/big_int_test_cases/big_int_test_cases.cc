@@ -226,3 +226,12 @@ std::string big_int_test_cases::bi_test_big_int_from_base_type(const BI_BASE_TYP
     return test_bi.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string big_int_test_cases::bi_test_big_int_push_back_hex_chars(const std::string &src_str, BI_BASE_TYPE hex_char) {
+
+    big_int test_bi_a;
+    test_bi_a.big_int_from_string(src_str);
+    test_bi_a.big_int_push_back_hex_chars(hex_char);
+    return test_bi_a.big_int_to_string(bi_base::BI_HEX);
+
+}
