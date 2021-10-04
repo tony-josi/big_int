@@ -219,10 +219,10 @@ int big_int_test_cases::bi_test_big_int_get_num_of_hex_chars(const std::string &
     
 }
 
-std::string big_int_test_cases::bi_test_big_int_from_base_type(const BI_BASE_TYPE &bt_val) {
+std::string big_int_test_cases::bi_test_big_int_from_base_type(const std::string &bt_val) {
 
     big_int test_bi;
-    test_bi.big_int_from_base_type(bt_val);
+    test_bi.big_int_from_base_type(static_cast<BI_BASE_TYPE>(std::stoul(bt_val)));
     return test_bi.big_int_to_string(bi_base::BI_HEX);
 
 }

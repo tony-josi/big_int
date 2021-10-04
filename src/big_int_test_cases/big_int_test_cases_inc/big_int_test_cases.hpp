@@ -39,7 +39,7 @@ public:
     std::string bi_test_big_int_right_shift_word(const std::string &a, int shift_words);
     std::string bi_test_big_int_right_shift(const std::string &a, int bits);
     int         bi_test_big_int_get_num_of_hex_chars(const std::string &a);
-    std::string bi_test_big_int_from_base_type(const BI_BASE_TYPE &src_str);
+    std::string bi_test_big_int_from_base_type(const std::string &src_str);
 
 };
 
