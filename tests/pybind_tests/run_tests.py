@@ -315,10 +315,15 @@ def _bi_test_big_int_get_num_of_hex_chars(num_1):
         return False
 
 def _bi_test_big_int_from_base_type(num):
-    rand_num = random.randint(0, UINT32_RANDINT_MAX)
-    hex_str = get_hex_str_without_0x(rand_num)
+    rand_num = random.randint(-UINT32_RANDINT_MAX, UINT32_RANDINT_MAX)
     test_obj = pbitw.big_int_tc()
-    ret_str = test_obj.bi_test_big_int_from_string(hex_str)
+    urand_num = rand_num
+    is_neg = 0
+    if (rand_num < 0):
+        urand_num = -1 * rand_num    
+        is_neg = 1
+    hex_str = get_hex_str_without_0x(rand_num)
+    ret_str = test_obj.bi_test_big_int_from_base_type(urand_num, is_neg)
     _LOG_BI_TEST(3, "_bi_test_big_int_from_string", hex_str, ret_str)
     return compare_hex_string_numbers(ret_str, hex_str)
 
