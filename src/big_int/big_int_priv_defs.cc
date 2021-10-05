@@ -242,7 +242,7 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
 
     /* Start from 2 as the cases 0 & 1 are covered already in the above lines. */
     BI_BASE_TYPE i = 2;
-    for (; i <= 0xF; ++i) {
+    for (; i <= 0x10; ++i) {
         divisor.big_int_unsigned_multiply_base_type(i, &temp_val);
         comp_res = big_int_unsigned_compare(temp_val);
         switch (comp_res) {

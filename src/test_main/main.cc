@@ -92,6 +92,15 @@ int main(int argc, char *argv[]) {
     test_num_21.big_int_multiply(test_num_22, &test_num_23);
     std::cout<<test_num_23.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_16 = "f00000f33";
+    std::string test_num_str_17 = "ffffffff";
+    big_int test_num_24, test_num_25, test_num_26;
+    test_num_24.big_int_from_string(test_num_str_16);
+    test_num_25.big_int_from_string(test_num_str_17);
+    BI_BASE_TYPE quo = 0;
+    test_num_24.big_int_divide_once(test_num_25, quo, test_num_26);
+    std::cout<<quo<<"\t"<<test_num_26.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
