@@ -235,3 +235,28 @@ std::string big_int_test_cases::bi_test_big_int_push_back_hex_chars(const std::s
     return test_bi_a.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+int big_int_test_cases::bi_test_big_int_divide_once_quotient(const std::string &a, const std::string &b) {
+
+    big_int test_bi_a, test_bi_b, test_bi_rem;
+    test_bi_a.big_int_from_string(a);
+    test_bi_b.big_int_from_string(b);
+
+    BI_BASE_TYPE quo;
+    test_bi_a.big_int_divide_once(test_bi_b, quo, test_bi_rem);
+    return static_cast<int>(quo);
+
+}
+    
+    
+std::string bi_test_big_int_divide_once_remainder(const std::string &a, const std::string &b) {
+
+    big_int test_bi_a, test_bi_b, test_bi_rem;
+    test_bi_a.big_int_from_string(a);
+    test_bi_b.big_int_from_string(b);
+
+    BI_BASE_TYPE quo;
+    test_bi_a.big_int_divide_once(test_bi_b, quo, test_bi_rem);
+    return test_bi_rem.big_int_to_string(bi_base::BI_HEX);
+
+}
