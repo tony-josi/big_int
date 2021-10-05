@@ -59,7 +59,7 @@ namespace bi {
         int             _big_int_right_shift_below_32bits(int bits);
         int             _big_int_remove_preceding_zeroes();
         int             _big_int_get_num_of_hex_chars() const;
-        int             _big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, BI_BASE_TYPE &op_remainder);
+        int             _big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder);
         int             _big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_char);
         
 

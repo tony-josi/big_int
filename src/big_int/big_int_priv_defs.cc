@@ -204,10 +204,21 @@ int bi::big_int::_big_int_get_num_of_hex_chars() const {
 
 }
 
-int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, BI_BASE_TYPE &op_remainder) {
+int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder) {
 
-    if (big_int_is_zero() || divisor.big_int_is_zero()) {
-        op_remainder = 0;
+    if (divisor.big_int_is_zero()) {
+        // throw std::length_error("Division by zero undefined");
+        return -1;
+    }
+
+    if (big_int_get_num_of_hex_chars() - divisor._big_int_get_num_of_hex_chars() > 1) {
+        /* Return error as this api will only divide once. */
+        return -1;
+    }
+
+    if (big_int_is_zero()) {
+        /* Set remainder and quotient as zero if dividend is zero. */
+        op_remainder.big_int_set_zero();
         op_quotient = 0;
         return 0;
     }
@@ -215,15 +226,19 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
     int comp_res = big_int_unsigned_compare(divisor);
     switch (comp_res) {
     case -1:
-        /* Divisor is greater than dividend, need more digits in dividend. */
-        return 1;
+        /* Divisor is greater than dividend, set quotient as zero 
+        and remainder as dividend */
+        op_remainder = *this;
+        op_quotient = 0;
+        return 0;
     case 0:
+        /* Both dividend and divisor are same, so set quotient as 1 and remainder as zero. */
         op_quotient = 1;
-        op_remainder = 0;
+        op_remainder.big_int_set_zero();
         return 0;
     }
 
-    big_int temp_val;
+    big_int temp_val, temp_val_2;
 
     /* Start from 2 as the cases 0 & 1 are covered already in the above lines. */
     BI_BASE_TYPE i = 2;
@@ -233,15 +248,17 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
         switch (comp_res) {
         case -1:
             op_quotient = i - 1;
-            /* TODO: op_rem from BI_BASE_TYPE */
+            divisor.big_int_unsigned_multiply_base_type(i - 1, &temp_val_2);
+            big_int_unsigned_sub(temp_val_2, &op_remainder);
             return 0;
         case 0:
             op_quotient = i;
-            op_remainder = 0;
+            op_remainder.big_int_set_zero();
             return 0;
         }
     }
 
+    /* Function shouldn't reach here. ERROR. */
     return -1;
 
 }
