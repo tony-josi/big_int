@@ -252,7 +252,7 @@ int bi::big_int::_big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_char) {
         return -1;
     }
 
-    if (hex_char == 0 && big_int_is_zero() == 0) {
+    if (hex_char == 0 && big_int_is_zero() == true) {
         /* MSB is zero, do nothing */
         return 0;
     }

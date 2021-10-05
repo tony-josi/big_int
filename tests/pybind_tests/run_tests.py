@@ -57,7 +57,7 @@ def compare_hex_string_numbers(str_1, str_2):
     if num_1 == num_2:
         return True
     else:
-        _LOG_BI_TEST(4, "compare_hex_string_numbers", num_1, num_2)
+        _LOG_BI_TEST(1, "compare_hex_string_numbers", num_1, num_2)
         return False
 
 def _bi_test_big_int_from_string(num):
@@ -333,7 +333,7 @@ def _bi_test_big_int_push_back_hex_chars(num):
     test_obj = pbitw.big_int_tc()
     hex_str = get_hex_str_without_0x(num)
     num <<= 4
-    if num > 0:
+    if num >= 0:
         num += rand_num
     else:
         num -= rand_num
@@ -353,7 +353,7 @@ def test_core_simple_loop(_test_func_, test_data):
             _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = PASS".format(test_data[i]), optn = 1)
         else:
             test_fail += 1
-            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
+            _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -485,7 +485,6 @@ def test_24_bi_test_big_int_from_base_type(test_data):
 def test_25_bi_test_big_int_push_back_hex_chars(test_data):
     test_core_simple_loop(_bi_test_big_int_push_back_hex_chars, test_data)
 
-_bi_test_big_int_push_back_hex_chars
 
 if __name__ == "__main__":
 

@@ -57,7 +57,7 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
         }
     }
 
-    if(big_int_is_zero() == 0 && is_neg) {
+    if(big_int_is_zero() == true && is_neg) {
         return -1;
     }
     _neg = static_cast<bool>(is_neg);
@@ -307,7 +307,7 @@ int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
 
     res->big_int_set_zero();
 
-    if(!big_int_is_zero() || !b.big_int_is_zero()) {
+    if(big_int_is_zero() || b.big_int_is_zero()) {
         /* If any/both of the opreands is zero set result as zero and exit */
         return 0;
     }
@@ -350,6 +350,8 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
         chars_per_data = BI_SPRINF_FORMAT_DEC_CHARS;
     } else if(base == bi::bi_base::BI_HEX){ 
         chars_per_data = BI_SPRINF_FORMAT_HEX_CHARS;
+    } else {
+        chars_per_data = 0;
     }
 
     size_t is_neg = 0;
@@ -397,10 +399,10 @@ bool bi::big_int::big_int_is_zero() const {
 
     for(int i = 0; i < _top; ++i) {
         if (_data[i] != 0) {
-            return -1;
+            return false;
         }
     }
-    return 0;
+    return true;
 
 }
 
