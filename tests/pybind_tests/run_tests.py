@@ -342,6 +342,27 @@ def _bi_test_big_int_push_back_hex_chars(num):
     _LOG_BI_TEST(3, "_bi_test_big_int_push_back_hex_chars", exp_str, ret_str)
     return compare_hex_string_numbers(ret_str, exp_str)
 
+def _bi_test_big_int_divide_once(num_1, num_2):
+    num_1_abs = abs(num_1)
+    num_2_abs = abs(num_2)
+    hex_str_1 = get_hex_str_without_0x(num_1_abs)
+    hex_str_2 = get_hex_str_without_0x(num_2_abs)
+
+    if len(hex_str_1) != len(hex_str_2) or num_2 == 0:
+        return True
+    else:
+        test_obj = pbitw.big_int_tc()
+        quo = test_obj.bi_test_big_int_divide_once_quotient(hex_str_1, hex_str_2)
+        rem = test_obj.bi_test_big_int_divide_once_remainder(hex_str_1, hex_str_2)
+        exp_dividend = quo * num_2_abs + int(rem, 16)
+
+        _LOG_BI_TEST(3, "_bi_test_big_int_divide_once_remainder: dividend: {}, divisor: {}, quo: {}, rem: {}, exp_dividend: {}".format(num_1_abs, num_2_abs, quo, int(rem, 16), exp_dividend), str_data_1 = None, optn = 1)
+
+        if (exp_dividend == num_1_abs):
+            return True
+        else:
+            return False
+
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
     test_pass = 0
@@ -485,6 +506,9 @@ def test_24_bi_test_big_int_from_base_type(test_data):
 def test_25_bi_test_big_int_push_back_hex_chars(test_data):
     test_core_simple_loop(_bi_test_big_int_push_back_hex_chars, test_data)
 
+def test_26_bi_test_big_int_divide_once(test_data):
+    test_core_2d_loop(_bi_test_big_int_divide_once, test_data)
+
 
 if __name__ == "__main__":
 
@@ -526,6 +550,7 @@ if __name__ == "__main__":
     test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
     test_24_bi_test_big_int_from_base_type(test_nums_uint)
     test_25_bi_test_big_int_push_back_hex_chars(test_nums_uint)
+    test_26_bi_test_big_int_divide_once(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -552,3 +577,4 @@ if __name__ == "__main__":
     test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
     test_24_bi_test_big_int_from_base_type(test_nums_int)
     test_25_bi_test_big_int_push_back_hex_chars(test_nums_int)
+    test_26_bi_test_big_int_divide_once(test_nums_int)
