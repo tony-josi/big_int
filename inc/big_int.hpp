@@ -108,6 +108,7 @@ namespace bi {
 
         /* Temporary public func.s for testing */
         int             big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_chars);
+        int             big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder);
         
         /*
         int big_int_div(const big_int b);

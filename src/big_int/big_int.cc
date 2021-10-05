@@ -537,3 +537,9 @@ int bi::big_int::big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_chars) {
     return _big_int_push_back_hex_chars(hex_chars);
 
 }
+
+int bi::big_int::big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder) {
+
+    return _big_int_divide_once(divisor, op_quotient, op_remainder);
+
+}
