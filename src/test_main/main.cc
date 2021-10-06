@@ -101,6 +101,15 @@ int main(int argc, char *argv[]) {
     test_num_24.big_int_divide_once(test_num_25, quo, test_num_26);
     std::cout<<quo<<"\t"<<test_num_26.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+
+    std::string test_num_str_18 = "ffffffff";
+    std::string test_num_str_19 = "f";
+    big_int test_num_27, test_num_28, test_num_29, test_num_30;
+    test_num_27.big_int_from_string(test_num_str_18);
+    test_num_28.big_int_from_string(test_num_str_19);
+    int div_ret_val = test_num_27.big_int_div(test_num_28, test_num_29, test_num_30);
+    std::cout<<"RetCode: "<<div_ret_val<<" Quo: "<<test_num_29.big_int_to_string(bi_base::BI_HEX)<<" Rem: "<<test_num_30.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
