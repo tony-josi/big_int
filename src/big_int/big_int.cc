@@ -580,7 +580,7 @@ int bi::big_int::big_int_div(const bi::big_int divisor, bi::big_int &op_quotient
         op_quotient.big_int_clear();
         op_remainder.big_int_clear();
 
-        BI_BASE_TYPE temp_div_once_quotient = 0;
+        BI_BASE_TYPE temp_div_once_quotient = 0, temp_new_hex_rem_lsb;
         bi::big_int temp_div_once_dividend, temp_div_once_remainder; 
         int divisor_length = divisor._big_int_get_num_of_hex_chars();
         int dividend_length = _big_int_get_num_of_hex_chars();
@@ -590,9 +590,15 @@ int bi::big_int::big_int_div(const bi::big_int divisor, bi::big_int &op_quotient
             /* Divide once. */
             ++divide_cntr;
             ret_code += temp_div_once_dividend._big_int_divide_once(divisor, temp_div_once_quotient, temp_div_once_remainder);
-            op_quotient._big_int_push_back_hex_chars(temp_div_once_quotient);
+            ret_code += op_quotient._big_int_push_back_hex_chars(temp_div_once_quotient);
+            ret_code += _big_int_get_hex_char_from_lsb(dividend_length - divisor_length - divide_cntr, temp_new_hex_rem_lsb);
+            ret_code += temp_div_once_remainder.big_int_push_back_hex_chars(temp_new_hex_rem_lsb);
+            temp_div_once_dividend = temp_div_once_remainder;
 
-        } while (1);
+        } while ((dividend_length - divisor_length - divide_cntr) != 0 && ret_code == 0);
+        op_remainder = temp_div_once_remainder;
+        op_quotient.big_int_set_negetive(result_sign);
+        op_remainder.big_int_set_negetive(result_sign);
 
         return ret_code;
 

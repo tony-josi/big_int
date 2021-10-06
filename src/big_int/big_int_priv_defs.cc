@@ -281,7 +281,7 @@ int bi::big_int::_big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_char) {
 
 }
 
-int bi::big_int::_big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_TYPE &hex_char) {
+int bi::big_int::_big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_TYPE &hex_char) const {
 
     /* hex_indx_from_lsb starts from 0. */
     int data_indx = hex_indx_from_lsb / (BI_BASE_TYPE_TOTAL_BITS / 4);
