@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
     std::cout<<quo<<"\t"<<test_num_26.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
 
-    std::string test_num_str_18 = "ffffffff";
+    std::string test_num_str_18 = "ffffffffffffffffffffffffffffffff";
     std::string test_num_str_19 = "f1";
     big_int test_num_27, test_num_28, test_num_29, test_num_30;
     test_num_27.big_int_from_string(test_num_str_18);
