@@ -407,7 +407,7 @@ bool bi::big_int::big_int_is_zero() const {
 }
 
 
-bool bi::big_int::big_int_is_negetive() {
+bool bi::big_int::big_int_is_negetive() const {
 
     return _neg;
 
@@ -538,8 +538,67 @@ int bi::big_int::big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_chars) {
 
 }
 
-int bi::big_int::big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder) {
+int bi::big_int::big_int_divide_once(const bi::big_int &divisor, BI_BASE_TYPE &op_quotient, bi::big_int &op_remainder) {
 
     return _big_int_divide_once(divisor, op_quotient, op_remainder);
+
+}
+
+int bi::big_int::big_int_div(const bi::big_int divisor, bi::big_int &op_quotient, bi::big_int &op_remainder) {
+
+    if (divisor.big_int_is_zero()) {
+        // throw std::length_error("Division by zero undefined");
+        return -1;
+    }
+
+    bool result_sign = big_int_is_negetive() ^ divisor.big_int_is_negetive();
+
+    if (big_int_is_zero()) {
+        /* Set remainder and quotient as zero if dividend is zero. */
+        op_remainder.big_int_set_zero();
+        op_quotient.big_int_set_zero();
+        return 0;
+    }
+
+    int comp_res = big_int_unsigned_compare(divisor);
+    switch (comp_res) {
+    case -1:
+        /* Divisor is greater than dividend, set quotient as zero 
+        and remainder as dividend */
+        op_remainder = *this;
+        op_remainder.big_int_set_negetive(result_sign);
+        op_quotient.big_int_set_zero();
+        return 0;
+    case 0:
+        /* Both dividend and divisor are same, so set quotient as 1 and remainder as zero. */
+        op_quotient.big_int_from_base_type(static_cast<BI_BASE_TYPE>(1), result_sign);
+        op_remainder.big_int_set_zero();
+        return 0;
+    case 1:
+
+        /* Clear quotient and remainder big ints. */
+        op_quotient.big_int_clear();
+        op_remainder.big_int_clear();
+
+        BI_BASE_TYPE temp_div_once_quotient = 0;
+        bi::big_int temp_div_once_dividend, temp_div_once_remainder; 
+        int divisor_length = divisor._big_int_get_num_of_hex_chars();
+        int dividend_length = _big_int_get_num_of_hex_chars();
+        int ret_code = big_int_right_shift((dividend_length - divisor_length) * 4, &temp_div_once_dividend);
+        int divide_cntr = 0;
+        do {
+            /* Divide once. */
+            ++divide_cntr;
+            ret_code += temp_div_once_dividend._big_int_divide_once(divisor, temp_div_once_quotient, temp_div_once_remainder);
+            op_quotient._big_int_push_back_hex_chars(temp_div_once_quotient);
+
+        } while (1);
+
+        return ret_code;
+
+    }
+
+    /* Should't reach here. */
+    return -1;
 
 }

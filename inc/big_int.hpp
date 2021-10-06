@@ -81,7 +81,7 @@ namespace bi {
         int             big_int_signed_add(const big_int &b);
         int             big_int_signed_add(const big_int &b, big_int *res);
         int             big_int_set_negetive(bool set_unset);
-        bool            big_int_is_negetive();
+        bool            big_int_is_negetive() const;
         bool            big_int_is_zero() const;
         int             big_int_set_zero();
         int             big_int_signed_sub(const big_int &b);
@@ -89,6 +89,7 @@ namespace bi {
         int             big_int_multiply(const big_int &b, big_int *res);
         int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res) const;
         int             big_int_get_num_of_hex_chars();
+        int             big_int_div(const big_int divisor, big_int &quotient, big_int &remainder);
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);
@@ -112,7 +113,7 @@ namespace bi {
         
         /*
         int big_int_div(const big_int b);
-        int big_int_div(const big_int b, big_int *res);
+        
         */
         
     };
