@@ -211,7 +211,7 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
         return -1;
     }
 
-    if (big_int_get_num_of_hex_chars() - divisor._big_int_get_num_of_hex_chars() > 1) {
+    if (_big_int_get_num_of_hex_chars() - divisor._big_int_get_num_of_hex_chars() > 1) {
         /* Return error as this api will only divide once. */
         return -1;
     }
