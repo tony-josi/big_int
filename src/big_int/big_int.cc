@@ -544,7 +544,7 @@ int bi::big_int::big_int_divide_once(const bi::big_int &divisor, BI_BASE_TYPE &o
 
 }
 
-int bi::big_int::big_int_div(const bi::big_int divisor, bi::big_int &op_quotient, bi::big_int &op_remainder) {
+int bi::big_int::big_int_div(const bi::big_int &divisor, bi::big_int &op_quotient, bi::big_int &op_remainder) {
 
     if (divisor.big_int_is_zero()) {
         // throw std::length_error("Division by zero undefined");
@@ -577,8 +577,7 @@ int bi::big_int::big_int_div(const bi::big_int divisor, bi::big_int &op_quotient
     case 1:
 
         /* Clear quotient and remainder big ints. */
-        op_quotient.big_int_clear();
-        op_remainder.big_int_clear();
+        op_quotient.big_int_set_zero();
 
         BI_BASE_TYPE temp_div_once_quotient, temp_new_hex_rem_lsb;
         bi::big_int temp_div_once_dividend, temp_div_once_remainder; 
@@ -589,15 +588,15 @@ int bi::big_int::big_int_div(const bi::big_int divisor, bi::big_int &op_quotient
         
         do {
             /* Divide once. */
-            ++divide_cntr;
             temp_div_once_quotient = 0;
             temp_div_once_remainder.big_int_clear();
             ret_code += temp_div_once_dividend._big_int_divide_once(divisor, temp_div_once_quotient, temp_div_once_remainder);
             ret_code += op_quotient._big_int_push_back_hex_chars(temp_div_once_quotient);
             ret_code += _big_int_get_hex_char_from_lsb(dividend_length - divisor_length - divide_cntr, temp_new_hex_rem_lsb);
-            ret_code += temp_div_once_remainder.big_int_push_back_hex_chars(temp_new_hex_rem_lsb);
             temp_div_once_dividend = temp_div_once_remainder;
-        } while ((dividend_length - divisor_length - divide_cntr) != 0 && ret_code == 0);
+            ret_code += temp_div_once_dividend.big_int_push_back_hex_chars(temp_new_hex_rem_lsb);
+            ++divide_cntr;
+        } while ((dividend_length - divisor_length + 1 - divide_cntr) != 0 && ret_code == 0);
         
         op_remainder = temp_div_once_remainder;
         op_quotient.big_int_set_negetive(result_sign);
