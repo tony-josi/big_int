@@ -61,6 +61,7 @@ namespace bi {
         int             _big_int_get_num_of_hex_chars() const;
         int             _big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder);
         int             _big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_char);
+        int             _big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_TYPE &hex_char);
         
 
         public:
