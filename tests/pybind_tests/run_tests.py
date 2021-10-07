@@ -672,4 +672,4 @@ if __name__ == "__main__":
     test_26_bi_test_big_int_divide_once(test_nums_int)
     test_27_bi_test_big_int_divide_signed(test_nums_int)
 
-    # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdead))
+    print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
