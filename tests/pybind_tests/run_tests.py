@@ -51,7 +51,7 @@ def get_hex_str_without_0x(num):
     return num_str
 
 def compare_hex_string_numbers(str_1, str_2):
-    print(str_1, str_2)
+    # print(str_1, str_2)
     num_1 = int(str_1, 16)
     num_2 = int(str_2, 16)
     _LOG_BI_TEST(4, "compare_hex_string_numbers", num_1, num_2)
@@ -371,18 +371,26 @@ def _bi_test_big_int_divide(num_dividend, num_divisor):
 
     test_obj = pbitw.big_int_tc()
 
-    exp_quo = num_dividend // num_divisor
-    exp_rem = num_dividend % num_divisor
-    
-    hex_str_exp_quo = get_hex_str_without_0x(exp_quo)
-    hex_str_exp_rem = get_hex_str_without_0x(exp_rem)
+    hex_str_exp_quo = ""
+    hex_str_exp_rem = ""
 
     exp_ret_error = 0
     if num_divisor == 0:
         exp_ret_error = 1
-    quo_str = ""
-    rem_str = ""
-    ret_status = test_obj.bi_test_big_int_divide(hex_str_divid, hex_str_divisr, quo_str, rem_str)
+    else:
+        exp_quo = num_dividend // num_divisor
+        exp_rem = num_dividend % num_divisor
+        
+        hex_str_exp_quo = get_hex_str_without_0x(exp_quo)
+        hex_str_exp_rem = get_hex_str_without_0x(exp_rem)
+    
+    
+    ret_status = test_obj.bi_test_big_int_divide(hex_str_divid, hex_str_divisr)
+    quo_str = test_obj.bi_test_big_int_divide_quotient(hex_str_divid, hex_str_divisr)
+    rem_str = test_obj.bi_test_big_int_divide_remainder(hex_str_divid, hex_str_divisr)
+
+    _LOG_BI_TEST(1, "_bi_test_big_int_divide: dividend: {}, divisor: {}, quo: {}, rem: {}, exp_quo: {}, exp_rem: {}".\
+        format(num_dividend, num_divisor, quo_str, rem_str, hex_str_exp_quo, hex_str_exp_rem), str_data_1 = None, optn = 1)
 
     if exp_ret_error == ret_status:
         if compare_hex_string_numbers(hex_str_exp_quo, quo_str) and compare_hex_string_numbers(hex_str_exp_rem, rem_str):
@@ -539,6 +547,9 @@ def test_25_bi_test_big_int_push_back_hex_chars(test_data):
 def test_26_bi_test_big_int_divide_once(test_data):
     test_core_2d_loop(_bi_test_big_int_divide_once, test_data)
 
+def test_27_bi_test_big_int_divide(test_data):
+    test_core_2d_loop(_bi_test_big_int_divide, test_data)
+
 
 if __name__ == "__main__":
 
@@ -581,6 +592,7 @@ if __name__ == "__main__":
     # test_24_bi_test_big_int_from_base_type(test_nums_uint)
     # test_25_bi_test_big_int_push_back_hex_chars(test_nums_uint)
     # test_26_bi_test_big_int_divide_once(test_nums_uint)
+    test_27_bi_test_big_int_divide(test_nums_uint)
 
     # test_1_bi_test_big_int_from_string(test_nums_int)
     # test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -609,4 +621,4 @@ if __name__ == "__main__":
     # test_25_bi_test_big_int_push_back_hex_chars(test_nums_int)
     # test_26_bi_test_big_int_divide_once(test_nums_int)
 
-    _bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdead)
+    # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdead))
