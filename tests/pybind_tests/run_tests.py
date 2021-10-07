@@ -389,7 +389,54 @@ def _bi_test_big_int_divide(num_dividend, num_divisor):
     quo_str = test_obj.bi_test_big_int_divide_quotient(hex_str_divid, hex_str_divisr)
     rem_str = test_obj.bi_test_big_int_divide_remainder(hex_str_divid, hex_str_divisr)
 
-    _LOG_BI_TEST(1, "_bi_test_big_int_divide: dividend: {}, divisor: {}, quo: {}, rem: {}, exp_quo: {}, exp_rem: {}".\
+    _LOG_BI_TEST(3, "_bi_test_big_int_divide: dividend: {}, divisor: {}, quo: {}, rem: {}, exp_quo: {}, exp_rem: {}".\
+        format(num_dividend, num_divisor, quo_str, rem_str, hex_str_exp_quo, hex_str_exp_rem), str_data_1 = None, optn = 1)
+
+    if exp_ret_error == ret_status:
+        if compare_hex_string_numbers(hex_str_exp_quo, quo_str) and compare_hex_string_numbers(hex_str_exp_rem, rem_str):
+            return True
+        return False
+    elif exp_ret_error == 1:
+        return True
+    else:
+        return False
+
+def _bi_test_big_int_divide_signed(num_dividend, num_divisor):
+
+    hex_str_divid = get_hex_str_without_0x(num_dividend)
+    hex_str_divisr = get_hex_str_without_0x(num_divisor)
+
+    test_obj = pbitw.big_int_tc()
+
+    hex_str_exp_quo = ""
+    hex_str_exp_rem = ""
+
+    exp_ret_error = 0
+    if num_divisor == 0:
+        exp_ret_error = 1
+    else:
+        _quo = abs(num_dividend) // abs(num_divisor)
+        _rem = abs(num_dividend) % abs(num_divisor)
+
+        if num_dividend * num_divisor >= 0:
+            exp_quo = _quo
+        else:
+            exp_quo = -1 * _quo
+
+        exp_rem = _rem
+        if num_dividend < 0:
+            exp_rem = -1 * _rem
+        
+        
+        hex_str_exp_quo = get_hex_str_without_0x(exp_quo)
+        hex_str_exp_rem = get_hex_str_without_0x(exp_rem)
+    
+    
+    ret_status = test_obj.bi_test_big_int_divide(hex_str_divid, hex_str_divisr)
+    quo_str = test_obj.bi_test_big_int_divide_quotient(hex_str_divid, hex_str_divisr)
+    rem_str = test_obj.bi_test_big_int_divide_remainder(hex_str_divid, hex_str_divisr)
+
+    _LOG_BI_TEST(3, "_bi_test_big_int_divide: dividend: {}, divisor: {}, quo: {}, rem: {}, exp_quo: {}, exp_rem: {}".\
         format(num_dividend, num_divisor, quo_str, rem_str, hex_str_exp_quo, hex_str_exp_rem), str_data_1 = None, optn = 1)
 
     if exp_ret_error == ret_status:
@@ -550,6 +597,9 @@ def test_26_bi_test_big_int_divide_once(test_data):
 def test_27_bi_test_big_int_divide(test_data):
     test_core_2d_loop(_bi_test_big_int_divide, test_data)
 
+def test_27_bi_test_big_int_divide_signed(test_data):
+    test_core_2d_loop(_bi_test_big_int_divide_signed, test_data)
+
 
 if __name__ == "__main__":
 
@@ -566,59 +616,60 @@ if __name__ == "__main__":
     test_nums_uint.append(0)
     test_nums_uint.append(1)
 
-    # test_1_bi_test_big_int_from_string(test_nums_uint)
-    # test_2_bi_test_big_int_unsigned_add(test_nums_uint)
-    # test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
-    # test_4_bi_test_big_int_unsigned_sub(test_nums_uint)
-    # test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
-    # test_6_bi_test_big_int_compare(test_nums_uint)
-    # test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
-    # test_8_bi_test_big_int_signed_add(test_nums_uint)
-    # test_9_bi_test_big_int_signed_add_on_obj(test_nums_uint)
-    # test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_uint)
-    # test_11_bi_test_big_int_signed_sub(test_nums_uint)
-    # test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
-    # test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
-    # test_14_bi_test_big_int_multiply(test_nums_uint)
-    # test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
-    # test_16_bi_test_big_int_left_shift_on_obj(test_nums_uint)
-    # test_17_bi_test_big_int_left_shift_word(test_nums_uint)
-    # test_18_bi_test_big_int_left_shift(test_nums_uint)
-    # test_19_bi_test_big_int_right_shift_on_obj(test_nums_uint)
-    # test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_uint)
-    # test_21_bi_test_big_int_right_shift(test_nums_uint)
-    # test_22_bi_test_big_int_right_shift_word(test_nums_uint)
-    # test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
-    # test_24_bi_test_big_int_from_base_type(test_nums_uint)
-    # test_25_bi_test_big_int_push_back_hex_chars(test_nums_uint)
-    # test_26_bi_test_big_int_divide_once(test_nums_uint)
+    test_1_bi_test_big_int_from_string(test_nums_uint)
+    test_2_bi_test_big_int_unsigned_add(test_nums_uint)
+    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_uint)
+    test_4_bi_test_big_int_unsigned_sub(test_nums_uint)
+    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_uint)
+    test_6_bi_test_big_int_compare(test_nums_uint)
+    test_7_bi_test_big_int_from_string_no_0x(test_nums_uint)
+    test_8_bi_test_big_int_signed_add(test_nums_uint)
+    test_9_bi_test_big_int_signed_add_on_obj(test_nums_uint)
+    test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_uint)
+    test_11_bi_test_big_int_signed_sub(test_nums_uint)
+    test_12_bi_test_big_int_signed_sub_on_obj(test_nums_uint)
+    test_13_bi_test_big_int_mulitply_258977(test_nums_uint)
+    test_14_bi_test_big_int_multiply(test_nums_uint)
+    test_15_bi_test_big_int_unsigned_compare(test_nums_uint)
+    test_16_bi_test_big_int_left_shift_on_obj(test_nums_uint)
+    test_17_bi_test_big_int_left_shift_word(test_nums_uint)
+    test_18_bi_test_big_int_left_shift(test_nums_uint)
+    test_19_bi_test_big_int_right_shift_on_obj(test_nums_uint)
+    test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_uint)
+    test_21_bi_test_big_int_right_shift(test_nums_uint)
+    test_22_bi_test_big_int_right_shift_word(test_nums_uint)
+    test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
+    test_24_bi_test_big_int_from_base_type(test_nums_uint)
+    test_25_bi_test_big_int_push_back_hex_chars(test_nums_uint)
+    test_26_bi_test_big_int_divide_once(test_nums_uint)
     test_27_bi_test_big_int_divide(test_nums_uint)
 
-    # test_1_bi_test_big_int_from_string(test_nums_int)
-    # test_2_bi_test_big_int_unsigned_add(test_nums_int)
-    # test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_int)
-    # test_4_bi_test_big_int_unsigned_sub(test_nums_int)
-    # test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_int)
-    # test_6_bi_test_big_int_compare(test_nums_int)
-    # test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
-    # test_8_bi_test_big_int_signed_add(test_nums_int)
-    # test_9_bi_test_big_int_signed_add_on_obj(test_nums_int)
-    # test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_int)
-    # test_11_bi_test_big_int_signed_sub(test_nums_int)
-    # test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
-    # test_13_bi_test_big_int_mulitply_258977(test_nums_int)
-    # test_14_bi_test_big_int_multiply(test_nums_int)
-    # test_15_bi_test_big_int_unsigned_compare(test_nums_int)
-    # test_16_bi_test_big_int_left_shift_on_obj(test_nums_int)
-    # test_17_bi_test_big_int_left_shift_word(test_nums_int)
-    # test_18_bi_test_big_int_left_shift(test_nums_int)
-    # test_19_bi_test_big_int_right_shift_on_obj(test_nums_int)
-    # test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_int)
-    # test_21_bi_test_big_int_right_shift(test_nums_int)
-    # test_22_bi_test_big_int_right_shift_word(test_nums_int)
-    # test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
-    # test_24_bi_test_big_int_from_base_type(test_nums_int)
-    # test_25_bi_test_big_int_push_back_hex_chars(test_nums_int)
-    # test_26_bi_test_big_int_divide_once(test_nums_int)
+    test_1_bi_test_big_int_from_string(test_nums_int)
+    test_2_bi_test_big_int_unsigned_add(test_nums_int)
+    test_3_bi_test_big_int_unsigned_add_on_obj(test_nums_int)
+    test_4_bi_test_big_int_unsigned_sub(test_nums_int)
+    test_5_bi_test_big_int_unsigned_sub_on_obj(test_nums_int)
+    test_6_bi_test_big_int_compare(test_nums_int)
+    test_7_bi_test_big_int_from_string_no_0x(test_nums_int)
+    test_8_bi_test_big_int_signed_add(test_nums_int)
+    test_9_bi_test_big_int_signed_add_on_obj(test_nums_int)
+    test_10_bi_test_big_int_left_shift_word_on_obj(test_nums_int)
+    test_11_bi_test_big_int_signed_sub(test_nums_int)
+    test_12_bi_test_big_int_signed_sub_on_obj(test_nums_int)
+    test_13_bi_test_big_int_mulitply_258977(test_nums_int)
+    test_14_bi_test_big_int_multiply(test_nums_int)
+    test_15_bi_test_big_int_unsigned_compare(test_nums_int)
+    test_16_bi_test_big_int_left_shift_on_obj(test_nums_int)
+    test_17_bi_test_big_int_left_shift_word(test_nums_int)
+    test_18_bi_test_big_int_left_shift(test_nums_int)
+    test_19_bi_test_big_int_right_shift_on_obj(test_nums_int)
+    test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_int)
+    test_21_bi_test_big_int_right_shift(test_nums_int)
+    test_22_bi_test_big_int_right_shift_word(test_nums_int)
+    test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
+    test_24_bi_test_big_int_from_base_type(test_nums_int)
+    test_25_bi_test_big_int_push_back_hex_chars(test_nums_int)
+    test_26_bi_test_big_int_divide_once(test_nums_int)
+    test_27_bi_test_big_int_divide_signed(test_nums_int)
 
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdead))
