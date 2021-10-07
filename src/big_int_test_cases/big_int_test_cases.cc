@@ -267,6 +267,10 @@ int big_int_test_cases::bi_test_big_int_divide(const std::string &dividend, cons
     test_bi_a.big_int_from_string(dividend);
     test_bi_b.big_int_from_string(divisor);
 
-    return test_bi_a.big_int_div(test_bi_b, test_bi_quo, test_bi_rem);
+    int ret_val = test_bi_a.big_int_div(test_bi_b, test_bi_quo, test_bi_rem);
+    quotient = test_bi_quo.big_int_to_string(bi_base::BI_HEX);
+    remainder = test_bi_rem.big_int_to_string(bi_base::BI_HEX);
+
+    return ret_val;
 
 }
