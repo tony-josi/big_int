@@ -47,7 +47,9 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def("bi_test_big_int_push_back_hex_chars", &big_int_test_cases::bi_test_big_int_push_back_hex_chars)
         .def("bi_test_big_int_divide_once_quotient", &big_int_test_cases::bi_test_big_int_divide_once_quotient)
         .def("bi_test_big_int_divide_once_remainder", &big_int_test_cases::bi_test_big_int_divide_once_remainder)
-        .def("bi_test_big_int_divide", &big_int_test_cases::bi_test_big_int_divide);
+        .def("bi_test_big_int_divide", &big_int_test_cases::bi_test_big_int_divide)
+        .def("bi_test_big_int_divide_quotient", &big_int_test_cases::bi_test_big_int_divide_quotient)
+        .def("bi_test_big_int_divide_remainder", &big_int_test_cases::bi_test_big_int_divide_remainder);
 
 
 }
