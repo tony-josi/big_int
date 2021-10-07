@@ -261,16 +261,38 @@ std::string big_int_test_cases::bi_test_big_int_divide_once_remainder(const std:
 
 }
 
-int big_int_test_cases::bi_test_big_int_divide(const std::string &dividend, const std::string &divisor, std::string &quotient, std::string &remainder) {
+int big_int_test_cases::bi_test_big_int_divide(const std::string &dividend, const std::string &divisor) {
 
     big_int test_bi_a, test_bi_b, test_bi_rem, test_bi_quo;
     test_bi_a.big_int_from_string(dividend);
     test_bi_b.big_int_from_string(divisor);
 
     int ret_val = test_bi_a.big_int_div(test_bi_b, test_bi_quo, test_bi_rem);
-    quotient = test_bi_quo.big_int_to_string(bi_base::BI_HEX);
-    remainder = test_bi_rem.big_int_to_string(bi_base::BI_HEX);
 
     return ret_val;
+
+}
+
+std::string big_int_test_cases::bi_test_big_int_divide_quotient(const std::string &dividend, const std::string &divisor) {
+
+    big_int test_bi_a, test_bi_b, test_bi_rem, test_bi_quo;
+    test_bi_a.big_int_from_string(dividend);
+    test_bi_b.big_int_from_string(divisor);
+
+    int ret_val = test_bi_a.big_int_div(test_bi_b, test_bi_quo, test_bi_rem);
+
+    return test_bi_quo.big_int_to_string(bi_base::BI_HEX);
+
+}
+
+std::string big_int_test_cases::bi_test_big_int_divide_remainder(const std::string &dividend, const std::string &divisor) {
+
+    big_int test_bi_a, test_bi_b, test_bi_rem, test_bi_quo;
+    test_bi_a.big_int_from_string(dividend);
+    test_bi_b.big_int_from_string(divisor);
+
+    int ret_val = test_bi_a.big_int_div(test_bi_b, test_bi_quo, test_bi_rem);
+
+    return test_bi_rem.big_int_to_string(bi_base::BI_HEX);
 
 }

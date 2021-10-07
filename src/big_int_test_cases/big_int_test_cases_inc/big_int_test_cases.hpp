@@ -43,7 +43,10 @@ public:
     std::string bi_test_big_int_push_back_hex_chars(const std::string &src_str, BI_BASE_TYPE hex_char);
     int bi_test_big_int_divide_once_quotient(const std::string &a, const std::string &b);
     std::string bi_test_big_int_divide_once_remainder(const std::string &a, const std::string &b);
-    int bi_test_big_int_divide(const std::string &dividend, const std::string &divisor, std::string &quotient, std::string &remainder);
+    
+    int bi_test_big_int_divide(const std::string &dividend, const std::string &divisor);
+    std::string bi_test_big_int_divide_quotient(const std::string &dividend, const std::string &divisor);
+    std::string bi_test_big_int_divide_remainder(const std::string &dividend, const std::string &divisor);
 
 };
 
