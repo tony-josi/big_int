@@ -283,6 +283,7 @@ int bi::big_int::_big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_char) {
 
 int bi::big_int::_big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_TYPE &hex_char) const {
 
+    hex_char = 0;
     if (hex_indx_from_lsb < 0) {
         return -1;
     }
@@ -291,7 +292,6 @@ int bi::big_int::_big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_T
     int data_indx = hex_indx_from_lsb / (BI_BASE_TYPE_TOTAL_BITS / 4);
     int next_idx = hex_indx_from_lsb % (BI_BASE_TYPE_TOTAL_BITS / 4);
 
-    hex_char = 0;
     if (data_indx >= _top) {
         return -1;
     }

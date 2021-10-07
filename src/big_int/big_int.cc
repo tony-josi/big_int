@@ -592,11 +592,15 @@ int bi::big_int::big_int_div(const bi::big_int &divisor, bi::big_int &op_quotien
             temp_div_once_remainder.big_int_clear();
             ret_code += temp_div_once_dividend._big_int_divide_once(divisor, temp_div_once_quotient, temp_div_once_remainder);
             ret_code += op_quotient._big_int_push_back_hex_chars(temp_div_once_quotient);
-            ret_code += _big_int_get_hex_char_from_lsb(dividend_length - divisor_length - divide_cntr, temp_new_hex_rem_lsb);
+            if ((dividend_length - divisor_length - divide_cntr - 1) >= 0) {
+                ret_code += _big_int_get_hex_char_from_lsb(dividend_length - divisor_length - divide_cntr - 1, temp_new_hex_rem_lsb);
+            } else {
+                temp_new_hex_rem_lsb = 0;
+            }
             temp_div_once_dividend = temp_div_once_remainder;
             ret_code += temp_div_once_dividend.big_int_push_back_hex_chars(temp_new_hex_rem_lsb);
             ++divide_cntr;
-        } while ((dividend_length - divisor_length + 1 - divide_cntr) != 0 && ret_code == 0);
+        } while ((dividend_length - divisor_length + 1 - divide_cntr) > 0 && ret_code == 0);
         
         op_remainder = temp_div_once_remainder;
         op_quotient.big_int_set_negetive(result_sign);
