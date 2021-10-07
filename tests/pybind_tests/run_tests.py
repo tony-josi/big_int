@@ -313,7 +313,7 @@ def _bi_test_big_int_get_num_of_hex_chars(num_1):
     if (ret_val == exp_val):
         return True
     else:
-        _LOG_BI_TEST(1, "_bi_test_big_int_get_num_of_hex_chars", exp_val, ret_val)
+        _LOG_BI_TEST(3, "_bi_test_big_int_get_num_of_hex_chars", exp_val, ret_val)
         return False
 
 def _bi_test_big_int_from_base_type(num):
@@ -459,7 +459,7 @@ def test_core_simple_loop(_test_func_, test_data):
             _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = PASS".format(test_data[i]), optn = 1)
         else:
             test_fail += 1
-            _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
+            _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} = FAIL".format(test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -672,4 +672,5 @@ if __name__ == "__main__":
     test_26_bi_test_big_int_divide_once(test_nums_int)
     test_27_bi_test_big_int_divide_signed(test_nums_int)
 
-    print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
+    #print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
+    
