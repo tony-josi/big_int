@@ -260,3 +260,13 @@ std::string big_int_test_cases::bi_test_big_int_divide_once_remainder(const std:
     return test_bi_rem.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+int big_int_test_cases::bi_test_big_int_divide(const std::string &dividend, const std::string &divisor, std::string &quotient, std::string &remainder) {
+
+    big_int test_bi_a, test_bi_b, test_bi_rem, test_bi_quo;
+    test_bi_a.big_int_from_string(dividend);
+    test_bi_b.big_int_from_string(divisor);
+
+    return test_bi_a.big_int_div(test_bi_b, test_bi_quo, test_bi_rem);
+
+}
