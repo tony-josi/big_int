@@ -566,7 +566,8 @@ int bi::big_int::big_int_div(const bi::big_int &divisor, bi::big_int &op_quotien
         /* Divisor is greater than dividend, set quotient as zero 
         and remainder as dividend */
         op_remainder = *this;
-        op_remainder.big_int_set_negetive(result_sign);
+        /* Remainder takes the sign of dividend. */
+        op_remainder.big_int_set_negetive(_neg);
         op_quotient.big_int_set_zero();
         return 0;
     case 0:
@@ -606,7 +607,9 @@ int bi::big_int::big_int_div(const bi::big_int &divisor, bi::big_int &op_quotien
         
         op_remainder = temp_div_once_remainder;
         op_quotient.big_int_set_negetive(result_sign);
-        op_remainder.big_int_set_negetive(result_sign);
+
+        /* Remainder takes the sign of dividend. */
+        op_remainder.big_int_set_negetive(_neg);
 
         return ret_code;
 
