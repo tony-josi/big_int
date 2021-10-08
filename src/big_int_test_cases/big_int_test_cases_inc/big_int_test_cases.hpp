@@ -47,6 +47,8 @@ public:
     int bi_test_big_int_divide(const std::string &dividend, const std::string &divisor);
     std::string bi_test_big_int_divide_quotient(const std::string &dividend, const std::string &divisor);
     std::string bi_test_big_int_divide_remainder(const std::string &dividend, const std::string &divisor);
+    std::string bi_test_big_int_power_base_type(const std::string &base, const int &exponent);
+
 
 };
 

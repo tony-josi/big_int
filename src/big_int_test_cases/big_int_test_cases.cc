@@ -296,3 +296,13 @@ std::string big_int_test_cases::bi_test_big_int_divide_remainder(const std::stri
     return test_bi_rem.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string big_int_test_cases::bi_test_big_int_power_base_type(const std::string &base, const int &exponent) {
+
+
+    big_int test_bi_a, test_bi_res;
+    test_bi_a.big_int_from_string(base);
+    test_bi_a.big_int_power_base_type(exponent, test_bi_res);
+    return test_bi_res.big_int_to_string(bi_base::BI_HEX);
+
+}
