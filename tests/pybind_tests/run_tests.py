@@ -708,7 +708,7 @@ if __name__ == "__main__":
     test_20_bi_test_big_int_right_shift_word_on_obj(test_nums_int)
     test_21_bi_test_big_int_right_shift(test_nums_int)
     test_22_bi_test_big_int_right_shift_word(test_nums_int)
-    test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_uint)
+    test_23_bi_test_big_int_get_num_of_hex_chars(test_nums_int)
     test_24_bi_test_big_int_from_base_type(test_nums_int)
     test_25_bi_test_big_int_push_back_hex_chars(test_nums_int)
     test_26_bi_test_big_int_divide_once(test_nums_int)
