@@ -464,6 +464,23 @@ def _bi_test_big_int_power_base_type(num_1):
         _LOG_BI_TEST(1, "_bi_test_big_int_power_base_type: exp: {}".format(rand_exp), hex_str_exp, act_res)
         return False
 
+def _bi_test_big_int_modulus(num, mod):
+
+    hex_str_num = get_hex_str_without_0x(abs(num))
+    hex_str_mod = get_hex_str_without_0x(abs(mod))
+
+    test_obj = pbitw.big_int_tc()
+
+    hex_str_exp_quo = ""
+    hex_str_exp_rem = ""
+
+    if mod == 0:
+        return True
+
+    ret_str = test_obj.bi_test_big_int_modulus(hex_str_num, hex_str_mod)
+    return compare_hex_string_numbers(ret_str, get_hex_str_without_0x(abs(num) % abs(mod)))
+    
+
 
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
@@ -620,6 +637,9 @@ def test_27_bi_test_big_int_divide_signed(test_data):
 def test_28_bi_test_big_int_power_base_type(test_data):
     test_core_simple_loop(_bi_test_big_int_power_base_type, test_data)
 
+def test_29_bi_test_big_int_modulus(test_data):
+    test_core_2d_loop(_bi_test_big_int_modulus, test_data)
+
 
 if __name__ == "__main__":
 
@@ -664,6 +684,7 @@ if __name__ == "__main__":
     test_26_bi_test_big_int_divide_once(test_nums_uint)
     test_27_bi_test_big_int_divide(test_nums_uint)
     test_28_bi_test_big_int_power_base_type(test_nums_uint)
+    test_29_bi_test_big_int_modulus(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -693,6 +714,7 @@ if __name__ == "__main__":
     test_26_bi_test_big_int_divide_once(test_nums_int)
     test_27_bi_test_big_int_divide_signed(test_nums_int)
     test_28_bi_test_big_int_power_base_type(test_nums_int)
+    test_29_bi_test_big_int_modulus(test_nums_int)
 
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
