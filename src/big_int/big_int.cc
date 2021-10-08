@@ -619,3 +619,18 @@ int bi::big_int::big_int_div(const bi::big_int &divisor, bi::big_int &op_quotien
     return -1;
 
 }
+
+int bi::big_int::big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &result) {
+
+    int ret_val = 0;
+    ret_val += result.big_int_from_base_type(1, false);
+
+    big_int temp_val;
+    for (BI_BASE_TYPE i = 0; i < exponent; ++i) {
+        ret_val += big_int_multiply(result, &temp_val);
+        result = temp_val;
+    }
+
+    return ret_val;
+
+}

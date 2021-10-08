@@ -91,6 +91,7 @@ namespace bi {
         int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int *res) const;
         int             big_int_get_num_of_hex_chars();
         int             big_int_div(const big_int &divisor, big_int &quotient, big_int &remainder);
+        int             big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &result);
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);
