@@ -645,3 +645,10 @@ int bi::big_int::big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &
     return ret_val;
 
 }
+
+int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
+
+    big_int temp_quo;
+    return big_int_div(modulus, temp_quo, result);
+
+}
