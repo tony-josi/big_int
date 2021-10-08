@@ -625,7 +625,13 @@ int bi::big_int::big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &
     int ret_val = 0;
 
     if (big_int_is_zero()) {
-        return result.big_int_set_zero();
+        if (exponent == 0) {
+            /* pow(0, 0) = 1 */
+            return result.big_int_from_base_type(1, false);
+        } else {
+            /* pow(0, anything except 0) = 0 */
+            return result.big_int_set_zero();
+        }
     }
     
     ret_val += result.big_int_from_base_type(1, false);
