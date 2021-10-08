@@ -110,6 +110,12 @@ int main(int argc, char *argv[]) {
     int div_ret_val = test_num_27.big_int_div(test_num_28, test_num_29, test_num_30);
     std::cout<<"RetCode: "<<div_ret_val<<" Quo: "<<test_num_29.big_int_to_string(bi_base::BI_HEX)<<" Rem: "<<test_num_30.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_20 = "-fdbeef123beefdeaaaddee";
+    big_int test_num_31, test_num_32;
+    test_num_31.big_int_from_string(test_num_str_20);
+    test_num_31.big_int_power_base_type(4, test_num_32);
+    std::cout<<test_num_32.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
