@@ -306,3 +306,13 @@ std::string big_int_test_cases::bi_test_big_int_power_base_type(const std::strin
     return test_bi_res.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string big_int_test_cases::bi_test_big_int_modulus(const std::string &num, const std::string &mod) {
+
+    big_int test_bi_a, test_bi_b, test_bi_res;
+    test_bi_a.big_int_from_string(num);
+    test_bi_b.big_int_from_string(mod);
+    test_bi_a.big_int_modulus(test_bi_b, test_bi_res);
+    return test_bi_res.big_int_to_string(bi_base::BI_HEX);
+
+}
