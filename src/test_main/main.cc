@@ -116,6 +116,16 @@ int main(int argc, char *argv[]) {
     test_num_31.big_int_power_base_type(4, test_num_32);
     std::cout<<test_num_32.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_21 = "fdbeef123beefdeaaaddee";
+    std::string test_num_str_22 = "fdbe";
+    std::string test_num_str_23 = "fdbeef123beefdeaaa";
+    big_int test_num_33, test_num_34, test_num_35, test_num_36;
+    test_num_33.big_int_from_string(test_num_str_21);
+    test_num_34.big_int_from_string(test_num_str_22);
+    test_num_35.big_int_from_string(test_num_str_23);
+    test_num_33.big_int_modular_exponentiation(test_num_34, test_num_35, test_num_36);
+    std::cout<<test_num_36.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
