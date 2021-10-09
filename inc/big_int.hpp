@@ -92,7 +92,7 @@ namespace bi {
         int             big_int_get_num_of_hex_chars();
         int             big_int_div(const big_int &divisor, big_int &quotient, big_int &remainder);
         int             big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &result);
-        int             big_int_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);
+        int             big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);
         int             big_int_modulus(const big_int &modulus, big_int &result);
 
         /* Logical shifts*/

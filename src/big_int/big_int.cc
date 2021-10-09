@@ -695,7 +695,7 @@ int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
     +----------------------+----------------------+----------------------+----------------------+
 
 */
-int bi::big_int::big_int_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
+int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
 
     // TODO: Test if base could be negetive.
     if (exponent.big_int_is_negetive() || big_int_is_negetive()) {

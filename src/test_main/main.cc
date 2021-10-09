@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
     test_num_33.big_int_from_string(test_num_str_21);
     test_num_34.big_int_from_string(test_num_str_22);
     test_num_35.big_int_from_string(test_num_str_23);
-    test_num_33.big_int_modular_exponentiation(test_num_34, test_num_35, test_num_36);
+    test_num_33.big_int_fast_modular_exponentiation(test_num_34, test_num_35, test_num_36);
     std::cout<<test_num_36.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     big_int factorial_52, temp_copy;
