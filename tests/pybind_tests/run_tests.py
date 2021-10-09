@@ -496,8 +496,8 @@ def _bi_test_big_int_fast_modular_exponentiation(base, exp, mod):
     test_obj = pbitw.big_int_tc()
     act_res_str = test_obj.bi_test_big_int_fast_modular_exponentiation(abs_base_str, abs_exp_str, abs_mod_str)
     exp_res_str = get_hex_str_without_0x(pow(abs_base, abs_exp, abs_mod))
-    _LOG_BI_TEST(1, "_bi_test_big_int_fast_modular_exponentiation", exp_res_str, act_res_str)
-    return compare_hex_string_numbers(act_res_str, exp_res_str)
+    _LOG_BI_TEST(3, "_bi_test_big_int_fast_modular_exponentiation", exp_res_str, act_res_str)
+    return compare_hex_string_numbers(exp_res_str, act_res_str)
 
 
 
@@ -560,6 +560,31 @@ def test_core_2d_loop_compare(_test_func_, test_data):
                 else:
                     test_fail += 1
                     _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
+
+    test_status = ""
+    if(total_rand_nums == test_pass):
+        test_status = PASS_STR_MESSAGE
+    else:
+        test_status = FAIL_STR_MESSAGE
+
+    _LOG_BI_TEST(1, _test_func_.__name__, "Total sub-test cases: {}, pass: {} ==>>> **** {} ***".format(total_rand_nums, test_pass, test_status), optn = 1)
+
+def test_core_3d_loop(_test_func_, test_data_list, test_cases_div):
+    total_tc_from_list = len(test_data_list) // test_cases_div
+    total_rand_nums = total_tc_from_list ** 3
+    test_data = test_data_list[:total_tc_from_list]
+    test_pass = 0
+    test_fail = 0
+
+    for j in range(len(test_data)):
+        for i in range(len(test_data)):
+            for k in range(len(test_data)):
+                if _test_func_(test_data[j], test_data[i], test_data[k]):
+                    test_pass += 1
+                    _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} C: {}= PASS".format(test_data[j], test_data[i], test_data[k]), optn = 1)
+                else:
+                    test_fail += 1
+                    _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {} C: {}= FAIL".format(test_data[j], test_data[i], test_data[k]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -659,6 +684,9 @@ def test_28_bi_test_big_int_power_base_type(test_data):
 def test_29_bi_test_big_int_modulus(test_data):
     test_core_2d_loop(_bi_test_big_int_modulus, test_data)
 
+def test_30_bi_test_big_int_fast_modular_exponentiation(test_data):
+    test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 10)
+
 
 if __name__ == "__main__":
 
@@ -668,9 +696,10 @@ if __name__ == "__main__":
     test_nums_int = read_file_to_list(SIGNED_DATA_FPATH)
     test_nums_uint = read_file_to_list(UNSIGNED_DATA_FPATH)
 
-    test_nums_int.append(0)
-    test_nums_int.append(-1)
-    test_nums_int.append(1)
+    test_nums_int[3:] = test_nums_int
+    test_nums_int[0] = 0
+    test_nums_int[1] = -1
+    test_nums_int[2] = 1
 
     test_nums_uint.append(0)
     test_nums_uint.append(1)
@@ -738,3 +767,4 @@ if __name__ == "__main__":
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
     print(_bi_test_big_int_fast_modular_exponentiation(0xfdbeef123beefdeaaaddee, 0xfdbe, 0xfdbeef123beefdeaaa))
+    test_30_bi_test_big_int_fast_modular_exponentiation(test_nums_int)

@@ -702,6 +702,26 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
         throw std::range_error("Doesnt support negetive exponents/base for big_int_modular_exponentiation");
     }
 
+    big_int bi_1;
+    bi_1.big_int_from_base_type(1, false);
+    int comp_res = modulus.big_int_compare(bi_1);
+    if (comp_res < 0) {
+        // TODO: check if mod can be -ve.
+        throw std::range_error("Doesnt support negetive or zero modulus");
+    } else if (comp_res == 0) {
+        /* Set result as 0 if modulus is 1. */
+        return result.big_int_set_zero();
+    }
+
+    if (exponent.big_int_is_zero() == true) {
+        /* Set result as 1 if exponent is zero. */
+        return result.big_int_from_base_type(1, false);
+    }
+
+    if (big_int_is_zero() == true) {
+        return result.big_int_set_zero();
+    }
+
     result.big_int_from_base_type(1, false);
     big_int bi_2;
     bi_2.big_int_from_base_type(2, false);
