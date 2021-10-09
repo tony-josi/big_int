@@ -397,12 +397,17 @@ int bi::big_int::big_int_set_negetive(bool set_unset) {
 
 bool bi::big_int::big_int_is_zero() const {
 
-    for(int i = 0; i < _top; ++i) {
-        if (_data[i] != 0) {
+    if (_top > 1) {
+        return false;
+    } else if (_top == 1) {
+        if (_data[0] == 0) {
+            return true;
+        } else {
             return false;
         }
+    } else {
+        return false;
     }
-    return true;
 
 }
 
