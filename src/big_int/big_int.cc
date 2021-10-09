@@ -660,6 +660,7 @@ int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
     -------------------------------------
     
     [refer](https://stackoverflow.com/questions/40578553/fast-modular-exponentiation-help-me-find-the-mistake)
+    [refer](http://homepages.math.uic.edu/~leon/cs-mcs401-s08/handouts/fastexp.pdf)
 
     Algorithm - python:
     -------------------
@@ -695,6 +696,11 @@ int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
 
 */
 int bi::big_int::big_int_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
+
+    // TODO: Test if base could be negetive.
+    if (exponent.big_int_is_negetive() || big_int_is_negetive()) {
+        throw std::range_error("Doesnt support negetive exponents/base for big_int_modular_exponentiation");
+    }
 
     result.big_int_from_base_type(1, false);
     big_int bi_2;
