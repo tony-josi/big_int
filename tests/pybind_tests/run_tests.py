@@ -685,7 +685,7 @@ def test_29_bi_test_big_int_modulus(test_data):
     test_core_2d_loop(_bi_test_big_int_modulus, test_data)
 
 def test_30_bi_test_big_int_fast_modular_exponentiation(test_data):
-    test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 10)
+    test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 20)
 
 
 if __name__ == "__main__":
