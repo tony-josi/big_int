@@ -126,6 +126,14 @@ int main(int argc, char *argv[]) {
     test_num_33.big_int_modular_exponentiation(test_num_34, test_num_35, test_num_36);
     std::cout<<test_num_36.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    big_int factorial_52, temp_copy;
+    factorial_52.big_int_from_base_type(52, false);
+    for (int i = 51; i >= 2; --i) {
+        factorial_52.big_int_unsigned_multiply_base_type(i, &temp_copy);
+        factorial_52 = temp_copy;
+    }
+    std::cout<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 

@@ -653,6 +653,47 @@ int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
 
 }
 
+
+/*
+
+    Fast modular exponentiation algorithm
+    -------------------------------------
+    
+    [refer](https://stackoverflow.com/questions/40578553/fast-modular-exponentiation-help-me-find-the-mistake)
+
+    Algorithm - python:
+    -------------------
+
+        def pow_h(base, power, modulus):
+            a = 1
+            while power:
+                power, d = power // 2, power % 2
+                if d:
+                    a = a * base % modulus
+                base = base * base % modulus
+            return a
+
+    Example:    8 ^ 5 mod 7
+
+    Result is initialized to 1
+    prev_base = 7, initial base during first iteration
+    n_base => next base
+
+    +----------------------+----------------------+----------------------+----------------------+
+    | Itertion             | Exponent bit         | Calculation          | Result               |
+    +----------------------+----------------------+----------------------+----------------------+
+    | 1                    | 1                    | prev_base = 7        | 1 * 8 mod 7 = 1      | 
+    |                      |                      | n_base = 8 mod 7 = 1 |                      |
+    +----------------------+----------------------+----------------------+----------------------+
+    | 2                    | 0                    | n_base = 8 ^ 2 mod 7 | No result calc. if   |
+    |                      |                      | = 1 * 1 mod 7 = 1    | exponent bit is zero |
+    +----------------------+----------------------+----------------------+----------------------+
+    | 3                    | 1                    | n_base = 8 ^ 4 mod 7 | 1 * 1 mod 7 = 1      |
+    |                      |                      | = 8 ^ 2 * 8 ^ 2 mod 7|                      |
+    |                      |                      | = 1 * 1 mod 7 = 1    |                      |
+    +----------------------+----------------------+----------------------+----------------------+
+
+*/
 int bi::big_int::big_int_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
 
     result.big_int_from_base_type(1, false);
