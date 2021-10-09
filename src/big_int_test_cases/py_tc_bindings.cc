@@ -51,7 +51,8 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def("bi_test_big_int_divide_quotient", &big_int_test_cases::bi_test_big_int_divide_quotient)
         .def("bi_test_big_int_divide_remainder", &big_int_test_cases::bi_test_big_int_divide_remainder)
         .def("bi_test_big_int_power_base_type", &big_int_test_cases::bi_test_big_int_power_base_type)
-        .def("bi_test_big_int_modulus", &big_int_test_cases::bi_test_big_int_modulus);
+        .def("bi_test_big_int_modulus", &big_int_test_cases::bi_test_big_int_modulus)
+        .def("bi_test_big_int_fast_modular_exponentiation", &big_int_test_cases::bi_test_big_int_fast_modular_exponentiation);
 
 
 }
