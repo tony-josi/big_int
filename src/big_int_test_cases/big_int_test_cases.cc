@@ -316,3 +316,14 @@ std::string big_int_test_cases::bi_test_big_int_modulus(const std::string &num, 
     return test_bi_res.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string big_int_test_cases::bi_test_big_int_fast_modular_exponentiation(const std::string &base, const std::string &exponent, const std::string &modulus) {
+
+    big_int test_bi_base, test_bi_exp, test_bi_mod, test_bi_res;
+    test_bi_base.big_int_from_string(base);
+    test_bi_exp.big_int_from_string(exponent);
+    test_bi_mod.big_int_from_string(modulus);
+    test_bi_base.big_int_fast_modular_exponentiation(test_bi_exp, test_bi_mod, test_bi_res);
+    return test_bi_res.big_int_to_string(bi_base::BI_HEX);
+
+}

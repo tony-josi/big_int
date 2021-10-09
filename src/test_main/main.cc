@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
     big_int factorial_52, temp_copy;
     factorial_52.big_int_from_base_type(52, false);
     for (int i = 51; i >= 2; --i) {
-        factorial_52.big_int_unsigned_multiply_base_type(i, &temp_copy);
+        factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), &temp_copy);
         factorial_52 = temp_copy;
     }
     std::cout<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";

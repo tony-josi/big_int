@@ -50,7 +50,7 @@ public:
     std::string bi_test_big_int_power_base_type(const std::string &base, const int &exponent);
     std::string bi_test_big_int_modulus(const std::string &num, const std::string &mod);
 
-    std::string bi_test_big_int_modulus(const std::string &num, const std::string &mod);
+    std::string bi_test_big_int_fast_modular_exponentiation(const std::string &base, const std::string &exponent, const std::string &modulus);
 
 
 };
