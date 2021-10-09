@@ -719,15 +719,3 @@ if __name__ == "__main__":
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
     
-def pow_h(base, power, modulus):
-    base_h, power_h, modulus_h = base, power, modulus
-    a = 1
-    while power:
-        power, d = power // 2, power % 2
-        if d:
-            a = a * base % modulus
-        base = base * base % modulus
-    exp_pow = pow(base_h, power_h, modulus_h)
-    if a != exp_pow:
-        print(a, exp_pow, base_h, power_h, modulus_h)
-    return a
