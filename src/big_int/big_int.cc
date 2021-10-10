@@ -797,9 +797,9 @@ int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_g
     /* Compare and assign greater and lower big int temp variables. */
     int ret_code = 0, comp_stat = (*this).big_int_unsigned_compare(b);
     if (comp_stat == 0) {
-        /* If both numbers are equal then gcd is equal to the number. */
+        /* If both numbers are equal then gcd is equal to the +ve number. */
         op_gcd = (*this);
-        return 0;
+        return op_gcd.big_int_set_negetive(false);
     } else if (comp_stat == 1) {
         temp_greater = (*this);
         temp_lower = b;

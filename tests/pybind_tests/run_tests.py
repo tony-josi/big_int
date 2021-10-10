@@ -11,7 +11,7 @@
  @bug            No known bugs.
 '''
 
-import sys, random
+import sys, random, math
 sys.path.append("/home/tony/Documents/Projects/big_int/build/src/big_int_test_cases")
 
 SIGNED_DATA_FPATH =     "/home/tony/Documents/Projects/big_int/tests/pybind_tests/signed_data.txt"
@@ -499,7 +499,18 @@ def _bi_test_big_int_fast_modular_exponentiation(base, exp, mod):
     _LOG_BI_TEST(3, "_bi_test_big_int_fast_modular_exponentiation", exp_res_str, act_res_str)
     return compare_hex_string_numbers(exp_res_str, act_res_str)
 
+def _bi_test_big_int_gcd_euclidean_algorithm(num_1, num_2):
 
+    exp_res = math.gcd(num_1, num_2)
+    exp_res_str = get_hex_str_without_0x(exp_res)
+
+    num_1_str = get_hex_str_without_0x(num_1)
+    num_2_str = get_hex_str_without_0x(num_2)
+
+    test_obj = pbitw.big_int_tc()
+    act_res_str = test_obj.bi_test_big_int_gcd_euclidean_algorithm(num_1_str, num_2_str)
+    _LOG_BI_TEST(3, "_bi_test_big_int_gcd_euclidean_algorithm", exp_res_str, act_res_str)
+    return compare_hex_string_numbers(exp_res_str, act_res_str)
 
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
@@ -534,7 +545,7 @@ def test_core_2d_loop(_test_func_, test_data):
                 _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = PASS".format(test_data[j], test_data[i]), optn = 1)
             else:
                 test_fail += 1
-                _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
+                _LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {} = FAIL".format(test_data[j], test_data[i]), optn = 1)
 
     test_status = ""
     if(total_rand_nums == test_pass):
@@ -687,6 +698,9 @@ def test_29_bi_test_big_int_modulus(test_data):
 def test_30_bi_test_big_int_fast_modular_exponentiation(test_data):
     test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 20)
 
+def test_31_bi_test_big_int_gcd_euclidean_algorithm(test_data):
+    test_core_2d_loop(_bi_test_big_int_gcd_euclidean_algorithm, test_data)
+
 
 if __name__ == "__main__":
 
@@ -735,6 +749,7 @@ if __name__ == "__main__":
     test_28_bi_test_big_int_power_base_type(test_nums_uint)
     test_29_bi_test_big_int_modulus(test_nums_uint)
     test_30_bi_test_big_int_fast_modular_exponentiation(test_nums_uint)
+    test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -766,9 +781,11 @@ if __name__ == "__main__":
     test_28_bi_test_big_int_power_base_type(test_nums_int)
     test_29_bi_test_big_int_modulus(test_nums_int)
     test_30_bi_test_big_int_fast_modular_exponentiation(test_nums_int)
+    test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_int)
 
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
     # print(_bi_test_big_int_fast_modular_exponentiation(0xfdbeef123beefdeaaaddee, 0xfdbe, 0xfdbeef123beefdeaaa))
+    # print(_bi_test_big_int_gcd_euclidean_algorithm(64958, 16629248))
     
     
