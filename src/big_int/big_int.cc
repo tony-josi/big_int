@@ -774,41 +774,55 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
 
 */
 
-int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &a, const big_int &b, big_int &op_gcd) {
+int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd) {
 
-    if ((a.big_int_is_zero() & b.big_int_is_zero()) == true) {
+    if (((*this).big_int_is_zero() & b.big_int_is_zero()) == true) {
+        /* If both numbers are zero gcd is zero. */
         return op_gcd.big_int_set_zero();
-    } else if (a.big_int_is_zero()) {
+    } else if ((*this).big_int_is_zero()) {
+        /* If one of the number is zero and other is non zero then gcd is the non
+        zero number. */
         op_gcd = b;
         return  op_gcd.big_int_set_negetive(false);
     } else if (b.big_int_is_zero()) {
-        op_gcd = a;
+        /* If one of the number is zero and other is non zero then gcd is the non
+        zero number. */
+        op_gcd = (*this);
         return op_gcd.big_int_set_negetive(false);    
     }
 
-    int ret_code = 0, comp_stat = a.big_int_unsigned_compare(b);
+    /* Temp working variables. */
     big_int temp_greater, temp_lower, temp_quo, temp_rem, prev_rem;
 
+    /* Compare and assign greater and lower big int temp variables. */
+    int ret_code = 0, comp_stat = (*this).big_int_unsigned_compare(b);
     if (comp_stat == 0) {
-        op_gcd = a;
+        /* If both numbers are equal then gcd is equal to the number. */
+        op_gcd = (*this);
         return 0;
     } else if (comp_stat == 1) {
-        temp_greater = a;
+        temp_greater = (*this);
         temp_lower = b;
     } else {
         temp_greater = b;
-        temp_lower = a;
+        temp_lower = (*this);
     }
 
+    /* Set the numbers as positve as the gcd is +ve. */
     temp_greater.big_int_set_negetive(false); temp_lower.big_int_set_negetive(false);
 
+    /* Initialse the temp_rem and thus prev_rem with the lower number so that,
+    the gcd will be the lower number when both numbers are multiples. */
+    temp_rem = temp_lower;
     do {
+        /* GCD Euclidean algorithm (refer func. docs.) */
         prev_rem = temp_rem;
         ret_code += temp_greater.big_int_div(temp_lower, temp_quo, temp_rem);
         temp_greater = temp_lower;
         temp_lower = temp_rem;
     } while(temp_rem.big_int_is_zero() == false);
 
+    /* Assign previous remainder as the gcd. */
     op_gcd = prev_rem;
     return ret_code;
 

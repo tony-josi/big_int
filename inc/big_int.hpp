@@ -94,7 +94,7 @@ namespace bi {
         int             big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &result);
         int             big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);
         int             big_int_modulus(const big_int &modulus, big_int &result);
-        int             big_int_gcd_euclidean_algorithm(const big_int &a, const big_int &b, big_int &op_gcd);
+        int             big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd);
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);

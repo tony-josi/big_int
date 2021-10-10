@@ -134,6 +134,14 @@ int main(int argc, char *argv[]) {
     }
     std::cout<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_24 = "fdbe";
+    std::string test_num_str_25 = "fdbe00";
+    big_int test_num_37, test_num_38, test_gcd;
+    test_num_37.big_int_from_string(test_num_str_24);
+    test_num_38.big_int_from_string(test_num_str_25);
+    std::cout<<test_num_37.big_int_gcd_euclidean_algorithm(test_num_38, test_gcd)<<"\n";
+    std::cout<<test_gcd.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
