@@ -747,3 +747,69 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
     }
     return ret_val;
 }
+
+
+/*
+
+    GCD - Euclidean algorithm
+    -------------------------
+
+    [refer](https://en.wikipedia.org/wiki/Euclidean_algorithm)
+
+    For illustration, the Euclidean algorithm can be used to find the greatest common divisor of a = 1071 and b = 462. 
+    To begin, multiples of 462 are subtracted from 1071 until the remainder is less than 462. Two such multiples can be subtracted (q0 = 2), 
+    leaving a remainder of 147:
+
+        1071 = 2 × 462 + 147.
+    
+    Then multiples of 147 are subtracted from 462 until the remainder is less than 147. Three multiples can be subtracted (q1 = 3), leaving a remainder of 21:
+
+        462 = 3 × 147 + 21.
+    
+    Then multiples of 21 are subtracted from 147 until the remainder is less than 21. Seven multiples can be subtracted (q2 = 7), leaving no remainder:
+
+        147 = 7 × 21 + 0.
+    
+    Since the last remainder is zero, the algorithm ends with 21 as the greatest common divisor of 1071 and 462. 
+
+*/
+
+int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &a, const big_int &b, big_int &op_gcd) {
+
+    if ((a.big_int_is_zero() & b.big_int_is_zero()) == true) {
+        return op_gcd.big_int_set_zero();
+    } else if (a.big_int_is_zero()) {
+        op_gcd = b;
+        return  op_gcd.big_int_set_negetive(false);
+    } else if (b.big_int_is_zero()) {
+        op_gcd = a;
+        return op_gcd.big_int_set_negetive(false);    
+    }
+
+    int ret_code = 0, comp_stat = a.big_int_unsigned_compare(b);
+    big_int temp_greater, temp_lower, temp_quo, temp_rem, prev_rem;
+
+    if (comp_stat == 0) {
+        op_gcd = a;
+        return 0;
+    } else if (comp_stat == 1) {
+        temp_greater = a;
+        temp_lower = b;
+    } else {
+        temp_greater = b;
+        temp_lower = a;
+    }
+
+    temp_greater.big_int_set_negetive(false); temp_lower.big_int_set_negetive(false);
+
+    do {
+        prev_rem = temp_rem;
+        ret_code += temp_greater.big_int_div(temp_lower, temp_quo, temp_rem);
+        temp_greater = temp_lower;
+        temp_lower = temp_rem;
+    } while(temp_rem.big_int_is_zero() == false);
+
+    op_gcd = prev_rem;
+    return ret_code;
+
+}
