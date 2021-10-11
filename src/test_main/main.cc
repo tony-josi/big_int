@@ -150,6 +150,14 @@ int main(int argc, char *argv[]) {
     test_num_39.big_int_modulus(test_num_40, test_mod);
     std::cout<<test_mod.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_28 = "5198ac0b";
+    std::string test_num_str_29 = "ff55311b";
+    big_int test_num_41, test_num_42, test_inv;
+    test_num_41.big_int_from_string(test_num_str_28);
+    test_num_42.big_int_from_string(test_num_str_29);
+    test_num_41.big_int_modular_inverse_extended_euclidean_algorithm(test_num_42, test_inv);
+    std::cout<<test_inv.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
