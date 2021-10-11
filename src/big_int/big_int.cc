@@ -653,8 +653,25 @@ int bi::big_int::big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &
 
 int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
 
-    big_int temp_quo;
-    return big_int_div(modulus, temp_quo, result);
+    big_int temp_quo, temp_rem;
+    int ret_val = 0;
+
+    ret_val += big_int_div(modulus, temp_quo, temp_rem);
+    if (modulus.big_int_is_negetive() == false) {
+        if (temp_rem.big_int_is_negetive() == true) {
+            ret_val += (*this).big_int_unsigned_sub(temp_rem, &result);
+        } else {
+            result = temp_rem;
+        }
+    } else {
+        if (temp_rem.big_int_is_negetive() == false) {
+            ret_val += (*this).big_int_unsigned_sub(temp_rem, &result);   
+        } else {
+            result = temp_rem;
+        }
+        ret_val += result.big_int_set_negetive(true);
+    }
+    return ret_val;
 
 }
 
