@@ -466,8 +466,8 @@ def _bi_test_big_int_power_base_type(num_1):
 
 def _bi_test_big_int_modulus(num, mod):
 
-    hex_str_num = get_hex_str_without_0x(abs(num))
-    hex_str_mod = get_hex_str_without_0x(abs(mod))
+    hex_str_num = get_hex_str_without_0x(num)
+    hex_str_mod = get_hex_str_without_0x(mod)
 
     test_obj = pbitw.big_int_tc()
 
@@ -478,7 +478,7 @@ def _bi_test_big_int_modulus(num, mod):
         return True
 
     ret_str = test_obj.bi_test_big_int_modulus(hex_str_num, hex_str_mod)
-    return compare_hex_string_numbers(ret_str, get_hex_str_without_0x(abs(num) % abs(mod)))
+    return compare_hex_string_numbers(get_hex_str_without_0x(num % mod), ret_str)
     
 def _bi_test_big_int_fast_modular_exponentiation(base, exp, mod):
     

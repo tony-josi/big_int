@@ -142,6 +142,14 @@ int main(int argc, char *argv[]) {
     std::cout<<test_num_37.big_int_gcd_euclidean_algorithm(test_num_38, test_gcd)<<"\n";
     std::cout<<test_gcd.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    std::string test_num_str_26 = "49c0b8c154a67c39aa34b628f1cfc3551a8e6810e73bcda4c06ce6ee991c4060bdd87af34c77299fc89c";
+    std::string test_num_str_27 = "-b6a7a476fc0b78bf23f5e7954a04209966b4bef8c4590859031873";
+    big_int test_num_39, test_num_40, test_mod;
+    test_num_39.big_int_from_string(test_num_str_26);
+    test_num_40.big_int_from_string(test_num_str_27);
+    test_num_39.big_int_modulus(test_num_40, test_mod);
+    std::cout<<test_mod.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
