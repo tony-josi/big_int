@@ -844,3 +844,67 @@ int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_g
     return ret_code;
 
 }
+
+int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse) {
+
+    big_int bi_1, gcd;
+    bi_1.big_int_from_base_type(1, false);
+
+    int ret_code = 0;
+    ret_code += big_int_gcd_euclidean_algorithm(modulus, gcd);
+    int gcd_comp_stat = gcd.big_int_compare(bi_1);
+
+    if (gcd_comp_stat != 0 || ret_code != 0) {
+        throw std::range_error("The numbers should be co-prime to find inverse.");
+    }
+
+    /* Extended euclidean algorithm (EEA) working variables */
+    big_int pk_0, pk_1, pk_temp_1, pk_temp_2;
+    /* Init the variables to 0 and 1. */
+    pk_1.big_int_from_base_type(1, false);
+
+    int step_cntr = 0;
+    /* Temp working variables. */
+    big_int temp_greater, temp_lower, temp_quo, temp_rem, prev_rem, prev_quo[2];
+
+    /* Compare and assign greater and lower big int temp variables. */
+    int comp_stat = (*this).big_int_unsigned_compare(modulus);
+    if (comp_stat == 0) {
+        /* If both numbers are equal then invrese is equal to the +ve number. Only in the case of 1 */
+        /* TODO: verify above line. */
+        inverse = (*this);
+        return inverse.big_int_set_negetive(false);
+    } else if (comp_stat == 1) {
+        temp_greater = (*this);
+        temp_lower = modulus;
+    } else {
+        temp_greater = modulus;
+        temp_lower = (*this);
+    }
+
+    temp_rem = temp_lower;
+    do {
+        ++step_cntr;
+        prev_rem = temp_rem;
+        prev_quo[0] = prev_quo[1];
+        prev_quo[1] = temp_quo;
+        ret_code += temp_greater.big_int_div(temp_lower, temp_quo, temp_rem);
+        temp_greater = temp_lower;
+        temp_lower = temp_rem;
+        if (step_cntr > 2) {
+            ret_code += pk_1.big_int_multiply(prev_quo[0], &pk_temp_1);
+            ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
+            pk_0 = pk_1;
+            ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
+        }
+    } while(temp_rem.big_int_is_zero() == false);
+
+    ret_code += pk_1.big_int_multiply(prev_quo[1], &pk_temp_1);
+    ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
+    ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
+
+    inverse = pk_1;
+    return ret_code;
+
+}
+
