@@ -526,7 +526,7 @@ def _bi_test_big_int_modular_inverse_extended_euclidean_algorithm(num_1, num_2):
         if act_res_str == "NO_INV":
             _LOG_BI_TEST(3, "_bi_test_big_int_modular_inverse_extended_euclidean_algorithm: num_1 {}, num_2 {}".format(num_1, num_2), expected_inv_str, act_res_str)
             return True
-    _LOG_BI_TEST(1, "_bi_test_big_int_modular_inverse_extended_euclidean_algorithm: num_1 {}, num_2 {}".format(num_1, num_2), expected_inv_str, act_res_str)
+    _LOG_BI_TEST(3, "_bi_test_big_int_modular_inverse_extended_euclidean_algorithm: num_1 {}, num_2 {}".format(num_1, num_2), expected_inv_str, act_res_str)
     return compare_hex_string_numbers(expected_inv_str, act_res_str)
 
 def test_core_simple_loop(_test_func_, test_data):

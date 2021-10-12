@@ -850,10 +850,11 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     big_int bi_1;
     bi_1.big_int_from_base_type(1, false);
 
-    if (ip_modulus.big_int_unsigned_compare(bi_1) == 0) {
-        /* If modulus is 1 or -1 then inverse is zero. */
-        return inverse.big_int_set_zero();
-    }
+    /* Extended euclidean algorithm (EEA) working variables */
+    big_int pk_0, pk_1, pk_temp_1, pk_temp_2;
+    int step_cntr = 0;
+    /* Temp working variables. */
+    big_int temp_greater, temp_lower, temp_quo, temp_rem, prev_rem, prev_quo[2];
 
     /* Temporary working copies. */
     big_int ip_num(*this), modulus(ip_modulus);
@@ -863,6 +864,18 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     ip_num.big_int_set_negetive(false);
     modulus.big_int_set_negetive(false);
     int comp_stat = ip_num.big_int_compare(modulus);
+
+    if (modulus.big_int_is_zero() == true) {
+        /* No inverse if modulus is equal to zero. */
+        throw std::range_error("The number is not invertible for the given modulus");
+    } else if (ip_modulus.big_int_unsigned_compare(bi_1) == 0) {
+        /* If modulus is 1 or -1 then inverse is zero. */
+        return inverse.big_int_set_zero();
+    } else if ((*this).big_int_unsigned_compare(bi_1) == 0) {
+        pk_1.big_int_from_base_type(1, false);
+        goto change_inverse_based_on_arg_sign;
+    }
+
     if (comp_stat == 0 || ip_num.big_int_is_zero() == true) {
         /* No inverse if number is equal to zero. */
         throw std::range_error("The number is not invertible for the given modulus");
@@ -873,14 +886,8 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
         ip_num = temp_res;
     }
 
-    /* Extended euclidean algorithm (EEA) working variables */
-    big_int pk_0, pk_1, pk_temp_1, pk_temp_2;
     /* Init the variables to 0 and 1. */
     pk_1.big_int_from_base_type(1, false);
-
-    int step_cntr = 0;
-    /* Temp working variables. */
-    big_int temp_greater, temp_lower, temp_quo, temp_rem, prev_rem, prev_quo[2];
 
     temp_greater = modulus;
     temp_lower = ip_num;
@@ -910,6 +917,7 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
     ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
 
+change_inverse_based_on_arg_sign:
     if (ip_modulus.big_int_is_negetive() == false) {
         if ((*this).big_int_is_negetive() == true) {
             ret_code += modulus.big_int_unsigned_sub(pk_1, &inverse);
