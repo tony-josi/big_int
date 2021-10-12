@@ -524,9 +524,9 @@ def _bi_test_big_int_modular_inverse_extended_euclidean_algorithm(num_1, num_2):
         expected_inv_str = get_hex_str_without_0x(pow(num_1, -1, num_2))
     except Exception as _:
         if act_res_str == "NO_INV":
-            _LOG_BI_TEST(3, "_bi_test_big_int_modular_inverse_extended_euclidean_algorithm", expected_inv_str, act_res_str)
+            _LOG_BI_TEST(3, "_bi_test_big_int_modular_inverse_extended_euclidean_algorithm: num_1 {}, num_2 {}".format(num_1, num_2), expected_inv_str, act_res_str)
             return True
-    _LOG_BI_TEST(3, "_bi_test_big_int_modular_inverse_extended_euclidean_algorithm", expected_inv_str, act_res_str)
+    _LOG_BI_TEST(1, "_bi_test_big_int_modular_inverse_extended_euclidean_algorithm: num_1 {}, num_2 {}".format(num_1, num_2), expected_inv_str, act_res_str)
     return compare_hex_string_numbers(expected_inv_str, act_res_str)
 
 def test_core_simple_loop(_test_func_, test_data):
@@ -718,6 +718,9 @@ def test_30_bi_test_big_int_fast_modular_exponentiation(test_data):
 def test_31_bi_test_big_int_gcd_euclidean_algorithm(test_data):
     test_core_2d_loop(_bi_test_big_int_gcd_euclidean_algorithm, test_data)
 
+def test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_data):
+    test_core_2d_loop(_bi_test_big_int_modular_inverse_extended_euclidean_algorithm, test_data)
+
 
 if __name__ == "__main__":
 
@@ -800,10 +803,13 @@ if __name__ == "__main__":
     # test_30_bi_test_big_int_fast_modular_exponentiation(test_nums_int)
     # test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_int)
 
+    # test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_nums_uint)
+    test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_nums_int)
+
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
     # print(_bi_test_big_int_fast_modular_exponentiation(0xfdbeef123beefdeaaaddee, 0xfdbe, 0xfdbeef123beefdeaaa))
     # print(_bi_test_big_int_gcd_euclidean_algorithm(64958, 16629248))
-    print(_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(1368960011, 4283773211))
+    # print(_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(1368960011, 4283773211))
     
     

@@ -850,6 +850,11 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     big_int bi_1;
     bi_1.big_int_from_base_type(1, false);
 
+    if (ip_modulus.big_int_unsigned_compare(bi_1) == 0) {
+        /* If modulus is 1 or -1 then inverse is zero. */
+        return inverse.big_int_set_zero();
+    }
+
     /* Temporary working copies. */
     big_int ip_num(*this), modulus(ip_modulus);
     int ret_code = 0;
