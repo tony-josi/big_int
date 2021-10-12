@@ -337,3 +337,17 @@ std::string big_int_test_cases::bi_test_big_int_gcd_euclidean_algorithm(const st
     return test_bi_res.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string big_int_test_cases::bi_test_big_int_modular_inverse_extended_euclidean_algorithm(const std::string &a, const std::string &b) {
+
+    big_int test_bi_a, test_bi_b, test_bi_res;
+    test_bi_a.big_int_from_string(a);
+    test_bi_b.big_int_from_string(b);
+    try {
+        test_bi_a.big_int_modular_inverse_extended_euclidean_algorithm(test_bi_b, test_bi_res);
+        return test_bi_res.big_int_to_string(bi_base::BI_HEX);
+    } catch(...) {
+        return std::string("NO_INV");
+    }
+
+}

@@ -52,6 +52,7 @@ public:
 
     std::string bi_test_big_int_fast_modular_exponentiation(const std::string &base, const std::string &exponent, const std::string &modulus);
     std::string bi_test_big_int_gcd_euclidean_algorithm(const std::string &a, const std::string &b);
+    std::string bi_test_big_int_modular_inverse_extended_euclidean_algorithm(const std::string &a, const std::string &b);
 
 
 };
