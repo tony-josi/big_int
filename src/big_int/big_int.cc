@@ -845,6 +845,35 @@ int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_g
 
 }
 
+/*
+
+    The Extended Euclidean Algorithm
+    --------------------------------
+
+[refer](http://www-math.ucdenver.edu/~wcherowi/courses/m5410/exeucalg.html)
+
+We will number the steps of the Euclidean algorithm starting with step 0. 
+The quotient obtained at step i will be denoted by qi. As we carry out each 
+step of the Euclidean algorithm, we will also calculate an auxillary number, pi. 
+For the first two steps, the value of this number is given: p0 = 0 and p1 = 1. 
+For the remainder of the steps, we recursively calculate pi = [pi-2 - (pi-1 * qi-2)] (mod n). 
+Continue this calculation for one step beyond the last step of the Euclidean algorithm.
+
+The algorithm starts by "dividing" n by x. If the last non-zero remainder occurs at step k, 
+then if this remainder is 1, x has an inverse and it is pk+2. (If the remainder is not 1, then x does not have an inverse.) 
+Here is an example:
+
+Find the inverse of 15 mod 26.
+
+    Step 0:	26 = 1(15) + 11	        p0 = 0
+    Step 1:	15 = 1(11) + 4	        p1 = 1
+    Step 2:	11 = 2(4) + 3	        p2 = 0 - 1( 1) mod 26   = 25
+    Step 3:	4  = 1(3) + 1	        p3 = 1 - 25( 1) mod 26  = -24 mod 26 = 2
+    Step 4:	3  = 3(1) + 0	        p4 = 25 - 2( 2) mod 26  = 21
+                                    p5 = 2 - 21( 1) mod 26  = -19 mod 26 = 7
+
+*/
+
 int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_int &ip_modulus, big_int &inverse) {
 
     big_int bi_1;
@@ -872,6 +901,7 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
         /* If modulus is 1 or -1 then inverse is zero. */
         return inverse.big_int_set_zero();
     } else if ((*this).big_int_unsigned_compare(bi_1) == 0) {
+        /* If the number is 1 set the inverse 1, follow the sign based inverse change. */
         pk_1.big_int_from_base_type(1, false);
         goto change_inverse_based_on_arg_sign;
     }
@@ -893,6 +923,7 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     temp_lower = ip_num;
     temp_rem = temp_lower;
 
+    /* Extended euclidean algorithm */
     do {
         ++step_cntr;
         prev_rem = temp_rem;
@@ -902,6 +933,7 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
         temp_greater = temp_lower;
         temp_lower = temp_rem;
         if (step_cntr > 2) {
+            /* pi = [pi-2 - (pi-1 * qi-2)] (mod n) */
             ret_code += pk_1.big_int_multiply(prev_quo[0], &pk_temp_1);
             ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
             pk_0 = pk_1;
@@ -910,14 +942,19 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     } while(temp_rem.big_int_is_zero() == false);
 
     if (prev_rem.big_int_compare(bi_1) != 0) {
+        /* Throw if the GCD of the args is not 1, which means, the
+        numbers are not co - primes. */ 
         throw std::range_error("The number is not invertible for the given modulus");
     }
 
+    /* Final iteration. */
     ret_code += pk_1.big_int_multiply(prev_quo[1], &pk_temp_1);
     ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
     ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
 
 change_inverse_based_on_arg_sign:
+    /* Use the argument signs to change final pk_1. 
+    Sign convention is similar to big_int_modulus() */
     if (ip_modulus.big_int_is_negetive() == false) {
         if ((*this).big_int_is_negetive() == true) {
             ret_code += modulus.big_int_unsigned_sub(pk_1, &inverse);
