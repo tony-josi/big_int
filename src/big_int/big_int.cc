@@ -845,14 +845,21 @@ int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_g
 
 }
 
-int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse) {
+int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_int &ip_modulus, big_int &inverse) {
 
     big_int bi_1;
     bi_1.big_int_from_base_type(1, false);
 
-    if (big_int_compare(modulus) >= 0) {
+    /* Temporary working copies. */
+    big_int ip_num(*this), modulus(ip_modulus);
+
+    /* Do calculation as if they are +ve numbers. */
+    ip_num.big_int_set_negetive(false);
+    modulus.big_int_set_negetive(false);
+
+    if (ip_num.big_int_compare(modulus) >= 0) {
         /* No inverse if number greater than or equal to the modulus. */
-        throw std::range_error("The numbers should be co-prime to find inverse.");
+        throw std::range_error("The number is not invertible for the given modulus");
     }
 
     int ret_code = 0;
@@ -865,22 +872,10 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     /* Temp working variables. */
     big_int temp_greater, temp_lower, temp_quo, temp_rem, prev_rem, prev_quo[2];
 
-    /* Compare and assign greater and lower big int temp variables. */
-    int comp_stat = (*this).big_int_unsigned_compare(modulus);
-    if (comp_stat == 0) {
-        /* If both numbers are equal then invrese is equal to the +ve number. Only in the case of 1 */
-        /* TODO: verify above line. */
-        inverse = (*this);
-        return inverse.big_int_set_negetive(false);
-    } else if (comp_stat == 1) {
-        temp_greater = (*this);
-        temp_lower = modulus;
-    } else {
-        temp_greater = modulus;
-        temp_lower = (*this);
-    }
-
+    temp_greater = modulus;
+    temp_lower = ip_num;
     temp_rem = temp_lower;
+
     do {
         ++step_cntr;
         prev_rem = temp_rem;
@@ -898,7 +893,7 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     } while(temp_rem.big_int_is_zero() == false);
 
     if (prev_rem.big_int_compare(bi_1) != 0) {
-        throw std::range_error("The numbers should be co-prime to find inverse.");
+        throw std::range_error("The number is not invertible for the given modulus");
     }
 
     ret_code += pk_1.big_int_multiply(prev_quo[1], &pk_temp_1);
