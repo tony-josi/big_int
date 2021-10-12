@@ -850,6 +850,11 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     big_int bi_1;
     bi_1.big_int_from_base_type(1, false);
 
+    if (big_int_compare(modulus) >= 0) {
+        /* No inverse if number greater than or equal to the modulus. */
+        throw std::range_error("The numbers should be co-prime to find inverse.");
+    }
+
     int ret_code = 0;
     /* Extended euclidean algorithm (EEA) working variables */
     big_int pk_0, pk_1, pk_temp_1, pk_temp_2;
