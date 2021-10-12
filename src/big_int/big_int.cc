@@ -847,17 +847,10 @@ int bi::big_int::big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_g
 
 int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse) {
 
-    big_int bi_1, gcd;
+    big_int bi_1;
     bi_1.big_int_from_base_type(1, false);
 
     int ret_code = 0;
-    ret_code += big_int_gcd_euclidean_algorithm(modulus, gcd);
-    int gcd_comp_stat = gcd.big_int_compare(bi_1);
-
-    if (gcd_comp_stat != 0 || ret_code != 0) {
-        throw std::range_error("The numbers should be co-prime to find inverse.");
-    }
-
     /* Extended euclidean algorithm (EEA) working variables */
     big_int pk_0, pk_1, pk_temp_1, pk_temp_2;
     /* Init the variables to 0 and 1. */
@@ -898,6 +891,10 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
             ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
         }
     } while(temp_rem.big_int_is_zero() == false);
+
+    if (prev_rem.big_int_compare(bi_1) != 0) {
+        throw std::range_error("The numbers should be co-prime to find inverse.");
+    }
 
     ret_code += pk_1.big_int_multiply(prev_quo[1], &pk_temp_1);
     ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
