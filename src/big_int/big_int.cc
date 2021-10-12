@@ -900,7 +900,21 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
     ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
 
-    inverse = pk_1;
+    if (ip_modulus.big_int_is_negetive() == false) {
+        if ((*this).big_int_is_negetive() == true) {
+            ret_code += modulus.big_int_unsigned_sub(pk_1, &inverse);
+        } else {
+            inverse = pk_1;
+        }
+    } else {
+        if (((*this).big_int_is_negetive() == false) && ((*this).big_int_is_zero() == false)) {
+            ret_code += modulus.big_int_unsigned_sub(pk_1, &inverse);   
+        } else {
+            inverse = pk_1;
+        }
+        ret_code += inverse.big_int_set_negetive(true);
+    }
+
     return ret_code;
 
 }
