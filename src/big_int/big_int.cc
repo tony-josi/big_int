@@ -857,8 +857,8 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     ip_num.big_int_set_negetive(false);
     modulus.big_int_set_negetive(false);
 
-    if (ip_num.big_int_compare(modulus) >= 0) {
-        /* No inverse if number greater than or equal to the modulus. */
+    if (ip_num.big_int_compare(modulus) >= 0 || ip_num.big_int_is_zero() == true) {
+        /* No inverse if number greater than or equal to the modulus or zero. */
         throw std::range_error("The number is not invertible for the given modulus");
     }
 
