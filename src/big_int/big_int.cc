@@ -852,17 +852,22 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
 
     /* Temporary working copies. */
     big_int ip_num(*this), modulus(ip_modulus);
+    int ret_code = 0;
 
     /* Do calculation as if they are +ve numbers. */
     ip_num.big_int_set_negetive(false);
     modulus.big_int_set_negetive(false);
-
-    if (ip_num.big_int_compare(modulus) >= 0 || ip_num.big_int_is_zero() == true) {
-        /* No inverse if number greater than or equal to the modulus or zero. */
+    int comp_stat = ip_num.big_int_compare(modulus);
+    if (comp_stat == 0 || ip_num.big_int_is_zero() == true) {
+        /* No inverse if number is equal to zero. */
         throw std::range_error("The number is not invertible for the given modulus");
+    } else if (comp_stat > 0) {
+        /* If greater then reduce. */
+        big_int temp_res;
+        ret_code += ip_num.big_int_modulus(modulus, temp_res);
+        ip_num = temp_res;
     }
 
-    int ret_code = 0;
     /* Extended euclidean algorithm (EEA) working variables */
     big_int pk_0, pk_1, pk_temp_1, pk_temp_2;
     /* Init the variables to 0 and 1. */
