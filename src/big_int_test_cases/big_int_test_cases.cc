@@ -323,7 +323,15 @@ std::string big_int_test_cases::bi_test_big_int_fast_modular_exponentiation(cons
     test_bi_base.big_int_from_string(base);
     test_bi_exp.big_int_from_string(exponent);
     test_bi_mod.big_int_from_string(modulus);
-    test_bi_base.big_int_fast_modular_exponentiation(test_bi_exp, test_bi_mod, test_bi_res);
+    int ret_val = 0;
+    try {
+        ret_val = test_bi_base.big_int_fast_modular_exponentiation(test_bi_exp, test_bi_mod, test_bi_res);
+    } catch(...) {
+        return std::string("NO_INV");
+    }
+    if (ret_val != 0) {
+        return std::string("NO_INV");
+    }
     return test_bi_res.big_int_to_string(bi_base::BI_HEX);
 
 }
