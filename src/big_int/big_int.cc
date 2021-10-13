@@ -804,7 +804,7 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
         } catch (...) {
             throw;
         }
-        ret_val += temp_inverse.big_int_fast_modular_exponentiation(exponent, modulus, result);
+        ret_val += temp_inverse.big_int_fast_modular_exponentiation(exp, modulus, result);
         return ret_val;
     } else if ((exponent.big_int_is_zero() == true)) {
         if (modulus.big_int_is_negetive() == false) {
@@ -823,17 +823,23 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
     }
 
     if (modulus.big_int_is_negetive() == false) {
+        
         if ((*this).big_int_is_negetive() == true) {
             ret_val += modulus.big_int_unsigned_sub(temp_result, &result);
         } else {
             result = temp_result;
         }
+        
+        //result = temp_result;
     } else {
+        /*
         if (((*this).big_int_is_negetive() == false) && ((*this).big_int_is_zero() == false)) {
             ret_val += modulus.big_int_unsigned_sub(temp_result, &result);   
         } else {
             result = temp_result;
         }
+        */
+        ret_val += modulus.big_int_unsigned_sub(temp_result, &result);  
         ret_val += result.big_int_set_negetive(true);
     }
     return ret_val;

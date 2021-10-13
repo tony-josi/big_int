@@ -615,6 +615,7 @@ def test_core_3d_loop(_test_func_, test_data_list, test_cases_div):
     for j in range(len(test_data)):
         for i in range(len(test_data)):
             for k in range(len(test_data)):
+                #_LOG_BI_TEST(1, _test_func_.__name__, "Input A: {} B: {} C: {}= FAIL".format(test_data[j], test_data[i], test_data[k]), optn = 1)
                 if _test_func_(test_data[j], test_data[i], test_data[k]):
                     test_pass += 1
                     _LOG_BI_TEST(2, _test_func_.__name__, "Input A: {} B: {} C: {}= PASS".format(test_data[j], test_data[i], test_data[k]), optn = 1)
@@ -776,7 +777,7 @@ if __name__ == "__main__":
     # test_27_bi_test_big_int_divide(test_nums_uint)
     # test_28_bi_test_big_int_power_base_type(test_nums_uint)
     # test_29_bi_test_big_int_modulus(test_nums_uint)
-    test_30_bi_test_big_int_fast_modular_exponentiation(test_nums_uint)
+    # test_30_bi_test_big_int_fast_modular_exponentiation(test_nums_uint)
     # test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_uint)
     # test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_nums_uint)
 
