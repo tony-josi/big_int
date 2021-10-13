@@ -251,7 +251,7 @@ int bi::big_int::big_int_set_zero() {
     if (_total_data > 0) {
         _top = 1;
     } else {
-        return 1;
+        return -1;
     }
     return 0;
 
