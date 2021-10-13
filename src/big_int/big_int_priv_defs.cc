@@ -301,3 +301,27 @@ int bi::big_int::_big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_T
     return 0;
 
 }
+
+int bi::big_int::_big_int_unsigned_fast_modular_exponentiation(const bi::big_int &exponent, const bi::big_int &modulus, bi::big_int &result) {
+
+    int ret_val = 0;
+    ret_val += result.big_int_from_base_type(1, false);
+    big_int bi_2;
+    ret_val += bi_2.big_int_from_base_type(2, false);
+    
+    big_int temp_exponent(exponent), temp_exponent_2, temp_exponent_quo, temp_exponent_rem, temp_result, temp_result_2;
+    while (temp_exponent.big_int_is_zero() == false) {
+        ret_val += temp_exponent.big_int_div(bi_2, temp_exponent_quo, temp_exponent_rem);
+        temp_exponent = temp_exponent_quo;
+        if (temp_exponent_rem.big_int_is_zero() == false) {
+            ret_val += result.big_int_multiply(*this, &temp_result);
+            ret_val += temp_result.big_int_modulus(modulus, temp_result_2);
+            result = temp_result_2;
+        }
+        ret_val += big_int_multiply(*this, &temp_result);
+        ret_val += temp_result.big_int_modulus(modulus, temp_result_2);
+        *this = temp_result_2;
+    }
+    return ret_val;
+
+}

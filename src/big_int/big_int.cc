@@ -717,6 +717,7 @@ int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
     +----------------------+----------------------+----------------------+----------------------+
 
 */
+#if 0
 int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
 
     // TODO: Test if base could be negetive.
@@ -764,7 +765,74 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
     }
     return ret_val;
 }
+#endif
 
+int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
+
+    /* Temporary variables. */
+    /* +ve working copies of arguments. */
+    big_int base(*this), exp(exponent), mod(modulus), temp_result;
+    base.big_int_set_negetive(false);
+    mod.big_int_set_negetive(false);
+    exp.big_int_set_negetive(false);
+
+    /* Return status */
+    int ret_val = 0;
+
+    /* Compare modulus with one. */
+    big_int bi_1;
+    bi_1.big_int_from_base_type(1, false);
+    int comp_res = modulus.big_int_compare(bi_1);
+    
+    if (modulus.big_int_is_zero() == true) {
+        throw std::range_error("Modulus cannot be zero.");
+    } else if (comp_res == 0) {
+        /* Modulus is 1 */
+        return result.big_int_set_zero();
+    } else if ((*this).big_int_is_zero() == true) {
+        if (exponent.big_int_is_negetive() == false && exponent.big_int_is_zero() == false) {
+            return result.big_int_set_zero();
+        } else if (exponent.big_int_is_negetive() == true) {
+            throw std::range_error("Given base (0) doesn't have inverse. ");
+        }
+    }
+
+    if (exponent.big_int_is_negetive() == true) {
+        big_int temp_inverse;
+        try {
+            ret_val += (*this).big_int_modular_inverse_extended_euclidean_algorithm(modulus, temp_inverse);
+        } catch (...) {
+            throw;
+        }
+        ret_val += temp_inverse.big_int_fast_modular_exponentiation(exponent, modulus, result);
+        return ret_val;
+    } else if (exponent.big_int_is_zero() == true) {
+        ret_val += result.big_int_from_base_type(1, false);
+        return ret_val;
+    } else if (exponent.big_int_is_negetive() == false) {
+        ret_val += base._big_int_unsigned_fast_modular_exponentiation(exp, mod, temp_result);
+    } else {
+        /* Shouldnt reach here. */
+        return -1;
+    }
+
+    if (modulus.big_int_is_negetive() == false) {
+        if ((*this).big_int_is_negetive() == true) {
+            ret_val += modulus.big_int_unsigned_sub(temp_result, &result);
+        } else {
+            result = temp_result;
+        }
+    } else {
+        if (((*this).big_int_is_negetive() == false) && ((*this).big_int_is_zero() == false)) {
+            ret_val += modulus.big_int_unsigned_sub(temp_result, &result);   
+        } else {
+            result = temp_result;
+        }
+        ret_val += result.big_int_set_negetive(true);
+    }
+    return ret_val;
+
+}
 
 /*
 
