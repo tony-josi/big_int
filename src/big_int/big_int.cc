@@ -806,9 +806,15 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
         }
         ret_val += temp_inverse.big_int_fast_modular_exponentiation(exponent, modulus, result);
         return ret_val;
-    } else if (exponent.big_int_is_zero() == true) {
-        ret_val += result.big_int_from_base_type(1, false);
-        return ret_val;
+    } else if ((exponent.big_int_is_zero() == true)) {
+        if (modulus.big_int_is_negetive() == false) {
+            ret_val += result.big_int_from_base_type(1, false);
+            return ret_val;
+        } else {
+            ret_val += modulus.big_int_unsigned_sub(bi_1, &result);   
+            ret_val += result.big_int_set_negetive(true);
+            return ret_val;
+        }
     } else if (exponent.big_int_is_negetive() == false) {
         ret_val += base._big_int_unsigned_fast_modular_exponentiation(exp, mod, temp_result);
     } else {
