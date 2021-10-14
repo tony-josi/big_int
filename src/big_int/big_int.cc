@@ -669,9 +669,26 @@ int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
         } else {
             result = temp_rem;
         }
-        ret_val += result.big_int_set_negetive(true);
+        if (result.big_int_is_zero() == false) {
+            ret_val += result.big_int_set_negetive(true);
+        }
     }
     return ret_val;
+
+}
+
+bool bi::big_int::big_int_is_even() const {
+
+    if (_top > 0) {
+        if (_data[0] % 2 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        /* TODO: catch error. */
+        return true;
+    }
 
 }
 
@@ -772,17 +789,33 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
     /* Temporary variables. */
     /* +ve working copies of arguments. */
     big_int base(*this), exp(exponent), mod(modulus), temp_result;
-    base.big_int_set_negetive(false);
-    mod.big_int_set_negetive(false);
-    exp.big_int_set_negetive(false);
+
 
     /* Return status */
     int ret_val = 0;
+
+    if (base.big_int_unsigned_compare(modulus) >= 0) {
+        ret_val += (*this).big_int_modulus(modulus, base);
+        return base.big_int_fast_modular_exponentiation(exponent, modulus, result);
+    }
+
+    base.big_int_set_negetive(false);
+    mod.big_int_set_negetive(false);
+    exp.big_int_set_negetive(false);
 
     /* Compare modulus with one. */
     big_int bi_1;
     bi_1.big_int_from_base_type(1, false);
     int comp_res = modulus.big_int_compare(bi_1);
+    int exp_comp_res = exponent.big_int_unsigned_compare(bi_1);
+
+    if (exp_comp_res == 0) {
+        if (exponent.big_int_is_negetive() == false) {
+            return (*this).big_int_modulus(modulus, result);
+        } else {
+            return (*this).big_int_modular_inverse_extended_euclidean_algorithm(modulus, result);
+        }
+    }
     
     if (modulus.big_int_is_zero() == true) {
         throw std::range_error("Modulus cannot be zero.");
@@ -822,6 +855,7 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
         return -1;
     }
 
+#if 0
     if (modulus.big_int_is_negetive() == false) {
         
         if ((*this).big_int_is_negetive() == true) {
@@ -842,6 +876,30 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
         ret_val += modulus.big_int_unsigned_sub(temp_result, &result);  
         ret_val += result.big_int_set_negetive(true);
     }
+#endif
+
+    if ((*this).big_int_is_negetive() == true) {
+        if (exponent.big_int_is_even() == true) {
+            temp_result.big_int_set_negetive(false);
+        } else {
+            temp_result.big_int_set_negetive(true);
+        }
+    }
+
+    if (modulus.big_int_is_negetive() == true) {
+        ret_val += modulus.big_int_unsigned_sub(temp_result, &result);  
+        ret_val += result.big_int_set_negetive(true);
+    } else {
+        /*
+        if ((*this).big_int_is_negetive() == true) {
+            ret_val += modulus.big_int_unsigned_sub(temp_result, &result);
+        } else {
+            result = temp_result;
+        }
+        */
+        result = temp_result;
+    }
+
     return ret_val;
 
 }

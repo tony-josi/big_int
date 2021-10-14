@@ -97,6 +97,7 @@ namespace bi {
         int             big_int_modulus(const big_int &modulus, big_int &result);
         int             big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd);
         int             big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse);
+        bool            big_int_is_even() const;
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);

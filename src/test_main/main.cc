@@ -158,14 +158,14 @@ int main(int argc, char *argv[]) {
     test_num_41.big_int_modular_inverse_extended_euclidean_algorithm(test_num_42, test_inv);
     std::cout<<test_inv.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
-    std::string test_num_str_30 = "-14a4c9dcf1bcb9ce45c64ab763aa184a774e6e9498b56d08bbcd82056023a3dfa7dd38ff91afa45c289ec970e456fa118d1b57c18d4b519a78fe40830";
+    std::string test_num_str_30 = "0";
     std::string test_num_str_31 = "1";
-    std::string test_num_str_32 = "849aad4047b566aac9aa";
+    std::string test_num_str_32 = "-849aad4047b566aac9aa";
     big_int test_num_43, test_num_44, test_num_45, test_expp;
     test_num_43.big_int_from_string(test_num_str_30);
     test_num_44.big_int_from_string(test_num_str_31);
     test_num_45.big_int_from_string(test_num_str_32);
-    test_num_43.big_int_fast_modular_exponentiation(test_num_44, test_num_45, test_expp);
+    std::cout<<test_num_43.big_int_fast_modular_exponentiation(test_num_44, test_num_45, test_expp)<<"\n";
     std::cout<<test_expp.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
