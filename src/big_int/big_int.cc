@@ -784,6 +784,7 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
 }
 #endif
 
+#if 0
 int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
 
     /* Temporary variables. */
@@ -901,6 +902,88 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
     }
 
     return ret_val;
+
+}
+#endif
+
+int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result) {
+
+    int ret_val = 0;
+
+    /* Compare modulus with one. */
+    big_int bi_1;
+    bi_1.big_int_from_base_type(1, false);
+    int comp_res = modulus.big_int_compare(bi_1);
+    int exp_comp_res = exponent.big_int_unsigned_compare(bi_1);
+
+    if (exp_comp_res == 0) {
+        if (exponent.big_int_is_negetive() == false) {
+            return (*this).big_int_modulus(modulus, result);
+        } else {
+            return (*this).big_int_modular_inverse_extended_euclidean_algorithm(modulus, result);
+        }
+    }
+    
+    if (modulus.big_int_is_zero() == true) {
+        throw std::range_error("Modulus cannot be zero.");
+    } else if (comp_res == 0) {
+        /* Modulus is 1 */
+        return result.big_int_set_zero();
+    } else if ((*this).big_int_is_zero() == true) {
+        if (exponent.big_int_is_negetive() == false && exponent.big_int_is_zero() == false) {
+            return result.big_int_set_zero();
+        } else if (exponent.big_int_is_negetive() == true) {
+            throw std::range_error("Given base (0) doesn't have inverse. ");
+        } else if (exponent.big_int_is_zero() == true) {
+            if (modulus.big_int_is_negetive() == false) {
+                result = bi_1;
+            } else {
+                ret_val += modulus.big_int_unsigned_sub(bi_1, &result);  
+                ret_val += result.big_int_set_negetive(true);
+            }
+            return ret_val;
+        }
+    }
+
+    
+    if (exponent.big_int_is_negetive() == false) {
+        big_int us_base(*this), us_exp(exponent), us_mod(modulus), us_res;
+        us_base.big_int_set_negetive(false);
+        us_exp.big_int_set_negetive(false);
+        us_mod.big_int_set_negetive(false);
+        ret_val += us_base._big_int_unsigned_fast_modular_exponentiation(us_exp, us_mod, us_res);
+
+        if (modulus.big_int_is_negetive() == false) {
+            if ((*this).big_int_is_negetive() == true) {
+                ret_val += modulus.big_int_unsigned_sub(us_res, &result);
+            } else {
+                result = us_res;
+            }
+        } else {
+            if (((*this).big_int_is_negetive() == false) && (us_res.big_int_is_zero() == false)) {
+                ret_val += modulus.big_int_unsigned_sub(us_res, &result);   
+            } else {
+                result = us_res;
+            }
+            if (result.big_int_is_zero() == false) {
+                ret_val += result.big_int_set_negetive(true);
+            }
+        }
+
+        return ret_val;
+
+    } else {
+        big_int temp_inverse;
+        try {
+            ret_val += (*this).big_int_modular_inverse_extended_euclidean_algorithm(modulus, temp_inverse);
+        } catch (...) {
+            throw;
+        }
+        big_int us_exp(exponent);
+        us_exp.big_int_set_negetive(false);
+        ret_val += temp_inverse.big_int_fast_modular_exponentiation(us_exp, modulus, result);
+        return ret_val;
+    }
 
 }
 
