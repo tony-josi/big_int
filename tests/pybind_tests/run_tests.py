@@ -722,7 +722,7 @@ def test_29_bi_test_big_int_modulus(test_data):
     test_core_2d_loop(_bi_test_big_int_modulus, test_data)
 
 def test_30_bi_test_big_int_fast_modular_exponentiation(test_data):
-    test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 20)
+    test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 15)
 
 def test_31_bi_test_big_int_gcd_euclidean_algorithm(test_data):
     test_core_2d_loop(_bi_test_big_int_gcd_euclidean_algorithm, test_data)
