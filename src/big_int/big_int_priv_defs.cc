@@ -302,11 +302,11 @@ int bi::big_int::_big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_T
 
 }
 
-int bi::big_int::_big_int_unsigned_fast_modular_exponentiation(const bi::big_int &exponent, const bi::big_int &modulus, bi::big_int &result) {
+int bi::big_int::_big_int_fast_modular_exponentiation(const bi::big_int &exponent, const bi::big_int &modulus, bi::big_int &result) {
 
     int ret_val = 0;
 
-    if (exponent.big_int_is_zero() ==true && modulus.big_int_is_negetive() == true) {
+    if (exponent.big_int_is_zero() == true && modulus.big_int_is_negetive() == true) {
         big_int bi_1;
         bi_1.big_int_from_base_type(1, false);
         ret_val += modulus.big_int_unsigned_sub(bi_1, &result);

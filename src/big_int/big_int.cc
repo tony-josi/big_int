@@ -739,26 +739,36 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
 
     int ret_val = 0;
 
-    /* Compare modulus with one. */
     big_int bi_1;
     bi_1.big_int_from_base_type(1, false);
-    int comp_res = modulus.big_int_compare(bi_1);
+    /* Compare modulus with one. */
+    int comp_res = modulus.big_int_unsigned_compare(bi_1);
+    /* Compare exponent with one. */
     int exp_comp_res = exponent.big_int_unsigned_compare(bi_1);
 
     if (exp_comp_res == 0) {
         if (exponent.big_int_is_negetive() == false) {
+            /* Compare exponent with 1, return early with mod of base. */
             return (*this).big_int_modulus(modulus, result);
         } else {
-            return (*this).big_int_modular_inverse_extended_euclidean_algorithm(modulus, result);
+            /* Compare exponent with -1, return early with inverse of base. */
+            try {
+                ret_val += (*this).big_int_modular_inverse_extended_euclidean_algorithm(modulus, result);
+            } catch (...) {
+                throw;
+            }
+            return ret_val;
         }
     }
     
     if (modulus.big_int_is_zero() == true) {
+        /* If modulus is zero throw error. */
         throw std::range_error("Modulus cannot be zero.");
     } else if (comp_res == 0) {
-        /* Modulus is 1 */
+        /* Modulus is +/-1 */
         return result.big_int_set_zero();
     } else if ((*this).big_int_is_zero() == true) {
+        /* Handle base = 0 */
         if (exponent.big_int_is_negetive() == false && exponent.big_int_is_zero() == false) {
             return result.big_int_set_zero();
         } else if (exponent.big_int_is_negetive() == true) {
@@ -773,37 +783,12 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
             return ret_val;
         }
     }
-
     
     if (exponent.big_int_is_negetive() == false) {
-        big_int us_base(*this), us_exp(exponent), us_mod(modulus), us_res;
-        us_base.big_int_set_negetive(false);
-        us_exp.big_int_set_negetive(false);
-        us_mod.big_int_set_negetive(false);
-        ret_val += (*this)._big_int_unsigned_fast_modular_exponentiation(exponent, modulus, result);
-
-        /*
-        if (modulus.big_int_is_negetive() == false) {
-            if ((*this).big_int_is_negetive() == true) {
-                ret_val += modulus.big_int_unsigned_sub(us_res, &result);
-            } else {
-                result = us_res;
-            }
-        } else {
-            if (((*this).big_int_is_negetive() == false) && (us_res.big_int_is_zero() == false)) {
-                ret_val += modulus.big_int_unsigned_sub(us_res, &result);   
-            } else {
-                result = us_res;
-            }
-            if (result.big_int_is_zero() == false) {
-                ret_val += result.big_int_set_negetive(true);
-            }
-        }
-        */
-
-        return ret_val;
-
+        /* +ve exponent, follow usual algorithm. */
+        ret_val += (*this)._big_int_fast_modular_exponentiation(exponent, modulus, result);
     } else {
+        /* -ve exponent,  find inverse of base first. */
         big_int temp_inverse;
         try {
             ret_val += (*this).big_int_modular_inverse_extended_euclidean_algorithm(modulus, temp_inverse);
@@ -812,9 +797,10 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
         }
         big_int us_exp(exponent);
         us_exp.big_int_set_negetive(false);
+        /* Do modular exponentiation on inverse of the original base to get the final result. */
         ret_val += temp_inverse.big_int_fast_modular_exponentiation(us_exp, modulus, result);
-        return ret_val;
     }
+    return ret_val;
 
 }
 

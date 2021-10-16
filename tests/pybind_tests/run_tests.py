@@ -722,7 +722,7 @@ def test_29_bi_test_big_int_modulus(test_data):
     test_core_2d_loop(_bi_test_big_int_modulus, test_data)
 
 def test_30_bi_test_big_int_fast_modular_exponentiation(test_data):
-    test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 15)
+    test_core_3d_loop(_bi_test_big_int_fast_modular_exponentiation, test_data, 10)
 
 def test_31_bi_test_big_int_gcd_euclidean_algorithm(test_data):
     test_core_2d_loop(_bi_test_big_int_gcd_euclidean_algorithm, test_data)
@@ -811,8 +811,8 @@ if __name__ == "__main__":
     # test_28_bi_test_big_int_power_base_type(test_nums_int)
     # test_29_bi_test_big_int_modulus(test_nums_int)
     test_30_bi_test_big_int_fast_modular_exponentiation(test_nums_int)
-    # test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_int)
-    # test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_nums_int)
+    test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_int)
+    test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_nums_int)
 
 
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
