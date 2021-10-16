@@ -168,6 +168,40 @@ int main(int argc, char *argv[]) {
     std::cout<<test_num_43.big_int_fast_modular_exponentiation(test_num_44, test_num_45, test_expp)<<"\n";
     std::cout<<test_expp.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+
+    /* RSA algo test. */
+    std::string rsa_p_str = "2542825a218e7ecc6f507e84c2e182a27b5ec217f6bd4c0b00438c0408e3cbe9";
+    std::string rsa_q_str = "2b5e6d4ae5dae96e7b3fad571f85fa80dfcdcc38d8fc674e8d62f46eb5e7b20f";
+    big_int rsa_p, rsa_q, rsa_pq;
+    rsa_p.big_int_from_string(rsa_p_str);
+    rsa_q.big_int_from_string(rsa_q_str);
+    std::cout<<"P: "<<rsa_p.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    std::cout<<"P: "<<rsa_q.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    rsa_p.big_int_multiply(rsa_q, &rsa_pq);
+    std::cout<<"PQ: "<<rsa_pq.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    big_int rsa_p_1, rsa_q_1, rsa_p_1q_1, rsa_bi_1;
+    rsa_bi_1.big_int_from_base_type(1, false);
+    rsa_p.big_int_unsigned_sub(rsa_bi_1, &rsa_p_1);
+    rsa_q.big_int_unsigned_sub(rsa_bi_1, &rsa_q_1);
+    rsa_p_1.big_int_multiply(rsa_q_1, &rsa_p_1q_1);
+    std::cout<<"P-1Q-1: "<<rsa_p_1q_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
+    std::string rsa_pub_key_str = "10001";
+    big_int rsa_pub_key, rsa_priv_key;
+    rsa_pub_key.big_int_from_string(rsa_pub_key_str);
+    rsa_pub_key.big_int_modular_inverse_extended_euclidean_algorithm(rsa_p_1q_1, rsa_priv_key);
+    std::cout<<"PUB KEY: "<<rsa_pub_key.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    std::cout<<"PRIV KEY: "<<rsa_priv_key.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
+    std::string rsa_plain_str = "beefdead";
+    big_int rsa_plain_num, rsa_cipher_num, rsa_decipher_num;
+    rsa_plain_num.big_int_from_string(rsa_plain_str);
+    rsa_plain_num.big_int_fast_modular_exponentiation(rsa_pub_key, rsa_pq, rsa_cipher_num);
+    std::cout<<"PLAIN: "<<rsa_plain_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    std::cout<<"CIPHER: "<<rsa_cipher_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    rsa_cipher_num.big_int_fast_modular_exponentiation(rsa_priv_key, rsa_pq, rsa_decipher_num);
+    std::cout<<"DECIPHER: "<<rsa_decipher_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     return 0;
 
 } 
