@@ -973,7 +973,6 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
         */
 
         return ret_val;
-
     } else {
         big_int temp_inverse;
         try {
