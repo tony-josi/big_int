@@ -14,6 +14,7 @@
 #include <string.h>
 #include <memory>
 #include <cstdio>
+#include <random>
 
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"
@@ -1012,3 +1013,30 @@ change_inverse_based_on_arg_sign:
 
 }
 
+
+int bi::big_int::big_int_get_random_unsigned(int bits) {
+
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<BI_BASE_TYPE> rand_dist(0, 0xFFFFFFFF);
+
+    big_int_clear();
+
+    for (int i = 0; i < bits / BI_BASE_TYPE_TOTAL_BITS; ++i) {
+        if (_top >= _total_data) {
+            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        }
+        _data[_top++] = rand_dist(rng);
+    }
+    
+    int rem_bits = bits % BI_BASE_TYPE_TOTAL_BITS;
+    if (rem_bits > 0) {
+        if (_top >= _total_data) {
+            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        }
+        _data[_top++] = (rand_dist(rng) >> (BI_BASE_TYPE_TOTAL_BITS - rem_bits));
+    }
+
+    return 0;
+
+}

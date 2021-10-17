@@ -63,7 +63,6 @@ namespace bi {
         int             _big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_char);
         int             _big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_TYPE &hex_char) const;
         int             _big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);
-        int             _big_int_get_random_unsigned(big_int &rand_num, int bits);
         
 
         public:
@@ -99,6 +98,7 @@ namespace bi {
         int             big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd);
         int             big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse);
         bool            big_int_is_even() const;
+        int             big_int_get_random_unsigned(int bits);
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);
