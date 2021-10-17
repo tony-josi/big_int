@@ -202,7 +202,7 @@ int main(int argc, char *argv[]) {
     rsa_cipher_num.big_int_fast_modular_exponentiation(rsa_priv_key, rsa_pq, rsa_decipher_num);
     std::cout<<"DECIPHER: "<<rsa_decipher_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
-
+    /* big_int_get_random_unsigned */ 
     big_int rng_test;
     rng_test.big_int_get_random_unsigned(50);
     std::cout<<rng_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
