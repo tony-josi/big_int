@@ -318,6 +318,7 @@ int bi::big_int::_big_int_fast_modular_exponentiation(const bi::big_int &exponen
     ret_val += result.big_int_from_base_type(1, false);
     big_int bi_2;
     ret_val += bi_2.big_int_from_base_type(2, false);
+    big_int square_temp;
     
     big_int temp_base(*this), temp_exponent(exponent), temp_exponent_2, temp_exponent_quo, temp_exponent_rem, temp_result, temp_result_2;
     while (temp_exponent.big_int_is_zero() == false) {
@@ -328,7 +329,8 @@ int bi::big_int::_big_int_fast_modular_exponentiation(const bi::big_int &exponen
             ret_val += temp_result.big_int_modulus(modulus, temp_result_2);
             result = temp_result_2;
         }
-        ret_val += temp_base.big_int_multiply(temp_base, &temp_result);
+        square_temp = temp_base;
+        ret_val += square_temp.big_int_multiply(temp_base, &temp_result);
         ret_val += temp_result.big_int_modulus(modulus, temp_result_2);
         temp_base = temp_result_2;
     }

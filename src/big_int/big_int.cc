@@ -15,6 +15,7 @@
 #include <memory>
 #include <cstdio>
 #include <random>
+#include <iostream>
 
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"
@@ -608,6 +609,7 @@ int bi::big_int::big_int_div(const bi::big_int &divisor, bi::big_int &op_quotien
             temp_div_once_dividend = temp_div_once_remainder;
             ret_code += temp_div_once_dividend.big_int_push_back_hex_chars(temp_new_hex_rem_lsb);
             ++divide_cntr;
+            //std::cout << "Div cntr: " << divide_cntr << "\n";
         
         } while ((dividend_length - divisor_length + 1 - divide_cntr) > 0 && ret_code == 0);
         

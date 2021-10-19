@@ -169,8 +169,9 @@ int main(int argc, char *argv[]) {
     std::cout<<test_expp.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     /* RSA algo test. */
-    std::string rsa_p_str = "72834226206890107119061282971696988369895496523169973353480103452841307300533399678706858114292679358330256576339288823373461073798552487087851862458546825032845765968845958592621200070214849491273574818585645444673591741848839820421804358593830896562795962900399996480246466598878433629211150829884550008691";
-    std::string rsa_q_str = "74254532846677766054082104385137070866384043750421338103759307746701362515818497142487297613917213311051428645389411218787346225411700588469150029720110192374131544151962372743933966999350413389072998840191146433724370499793876163861424124524558914942587612190226096299610850644650029597450422850325613728491";
+    /*
+    std::string rsa_p_str = "f6d7a48c2b32b00e3080ad3e8874a9d515189700242725380be9630ef2c48948dda521d827fe09be921ccbe0eedbee69cc712439594e0b8c9fa175d95978884d";
+    std::string rsa_q_str = "a1ca4c416a1d58c7dd14ae3ea8d99f0797999e7d718edb43ca35a203e60c5d721da19cc3e1a9767f3852d9b4d9fdc981a4bd455e60eaf8d23d3c5a7c4e532d0f";
     big_int rsa_p, rsa_q, rsa_pq;
     rsa_p.big_int_from_string(rsa_p_str);
     rsa_q.big_int_from_string(rsa_q_str);
@@ -195,11 +196,29 @@ int main(int argc, char *argv[]) {
     std::string rsa_plain_str = "beefdead";
     big_int rsa_plain_num, rsa_cipher_num, rsa_decipher_num;
     rsa_plain_num.big_int_from_string(rsa_plain_str);
+
+    std::cout <<"PLAI:"<< rsa_plain_num.big_int_to_string(bi_base::BI_HEX) << "\n";
+    std::cout << "PLAI:" << rsa_pub_key.big_int_to_string(bi_base::BI_HEX) << "\n";
+    std::cout << "PLAI:" << rsa_pq.big_int_to_string(bi_base::BI_HEX) << "\n";
     rsa_plain_num.big_int_fast_modular_exponentiation(rsa_pub_key, rsa_pq, rsa_cipher_num);
+    
     std::cout<<"PLAIN: "<<rsa_plain_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
     std::cout<<"CIPHER: "<<rsa_cipher_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
     rsa_cipher_num.big_int_fast_modular_exponentiation(rsa_priv_key, rsa_pq, rsa_decipher_num);
     std::cout<<"DECIPHER: "<<rsa_decipher_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    */
+    std::string base_str = "beefdead";
+    std::string exp_str = "10001";
+    std::string mod_str = "9c00ae2b15b0f14c60f72fd936feb5a263f655b98aa6e312146d6dc195f0ee352a53886ed16cf202721b936ed6ae015437ce69502489c01f735996e83a820a4f12270dbe2cca58a9637fd95c479dd4cb9c67670026d3808a9f0e6f4933f192749f8b76c6088494863b3cd38a5ff0fce0e156de91a907ef2e2c40ef5e14fc8583";
+    big_int base, exp, mod, result;
+    base.big_int_from_string(base_str);
+    exp.big_int_from_string(exp_str);
+    mod.big_int_from_string(mod_str);
+    base.big_int_fast_modular_exponentiation(exp, mod, result);
+    std::cout << "PLAI:" << base.big_int_to_string(bi_base::BI_HEX) << "\n";
+    std::cout << "PLAI:" << exp.big_int_to_string(bi_base::BI_HEX) << "\n";
+    std::cout << "PLAI:" << mod.big_int_to_string(bi_base::BI_HEX) << "\n";
+    std::cout << "DECIPHER: " << result.big_int_to_string(bi_base::BI_HEX) << "\n";
 
     /* big_int_get_random_unsigned */ 
     big_int rng_test;
