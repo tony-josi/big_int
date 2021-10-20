@@ -56,10 +56,10 @@ def isMillerRabinPassed(mrc):
  
 if __name__ == '__main__':
     while True:
-        n = 2048
+        n = 4096
         prime_candidate = getLowLevelPrime(n)
         if not isMillerRabinPassed(prime_candidate):
             continue
         else:
-            print(n, "bit prime is: \n", prime_candidate)
+            print(n, "bit prime is: \n", hex(prime_candidate))
             break
