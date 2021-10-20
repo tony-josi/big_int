@@ -51,6 +51,9 @@ BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min
 
     BI_BASE_TYPE borrow = 0;
     BI_DOUBLE_BASE_TYPE diff, temp1;
+    if (res_ptr->_total_data <= min) {
+        res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT + min);
+    }
     for(int i = 0; i < min; ++i) {
         if(compare_bi_base_type(_data[i], data_ptr[i])) {
             diff = _data[i] - data_ptr[i] - borrow;
