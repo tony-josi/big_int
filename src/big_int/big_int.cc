@@ -265,7 +265,7 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) co
     max = _top;
     min = b._top;
 
-    int diff = max - min;
+    int diff = big_int_unsigned_compare(b);
     if(diff < 0) {
         throw std::length_error("First param should be larger");
     }
