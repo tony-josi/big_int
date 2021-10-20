@@ -9,6 +9,7 @@
 
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
 
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"
@@ -51,6 +52,9 @@ BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min
 
     BI_BASE_TYPE borrow = 0;
     BI_DOUBLE_BASE_TYPE diff, temp1;
+    if (res_ptr->_total_data <= min) {
+        res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT + min);
+    }
     for(int i = 0; i < min; ++i) {
         if(compare_bi_base_type(_data[i], data_ptr[i])) {
             diff = _data[i] - data_ptr[i] - borrow;
@@ -247,17 +251,19 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
         comp_res = big_int_unsigned_compare(temp_val);
         switch (comp_res) {
         case -1:
+            //std::cout << "HIT UNEQ: "<< i - 1<<"\n";
             op_quotient = i - 1;
-            divisor.big_int_unsigned_multiply_base_type(i - 1, &temp_val_2);
-            big_int_unsigned_sub(temp_val_2, &op_remainder);
+            divisor.big_int_unsigned_multiply_base_type(i - 1, &temp_val);
+            big_int_unsigned_sub(temp_val, &op_remainder);
             return 0;
         case 0:
+            //std::cout << "HIT EQ: "<<i<<"\n";
             op_quotient = i;
             op_remainder.big_int_set_zero();
             return 0;
         }
     }
-
+    std::cout<<"HIT ERROR\n";
     /* Function shouldn't reach here. ERROR. */
     return -1;
 
