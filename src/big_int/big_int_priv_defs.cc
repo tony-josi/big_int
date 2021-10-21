@@ -97,15 +97,14 @@ int bi::big_int::_big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big
 
     res_ptr->big_int_clear();
 
-    for(int i = 0; i < _top; ++i) {
-        if (i >= res_ptr->_total_data) {
-            res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
-        }
+    if (_top >= res_ptr->_total_data) {
+        res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+    }
 
+    for(int i = 0; i < _top; ++i) {
         interim_res = static_cast<BI_DOUBLE_BASE_TYPE>(_data[i]) * b + carry;
         res_ptr->_data[(res_ptr->_top)++] = interim_res & BI_BASE_TYPE_MAX;
         carry = static_cast<BI_BASE_TYPE>(interim_res >> BI_BASE_TYPE_TOTAL_BITS);
-
     }
 
     if (carry) {
