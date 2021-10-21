@@ -98,7 +98,7 @@ int bi::big_int::_big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big
     res_ptr->big_int_clear();
 
     if (_top >= res_ptr->_total_data) {
-        res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT + _top);
     }
 
     for(int i = 0; i < _top; ++i) {
