@@ -128,7 +128,7 @@ int bi::big_int::_big_int_left_shift_below_32bits(int bits) {
     BI_BASE_TYPE        carry = 0;
 
     if (_top >= _total_data) {
-        _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + _top);
     }
 
     for (int i = 0; i < _top; ++i) {
