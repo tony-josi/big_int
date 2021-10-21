@@ -1026,10 +1026,11 @@ int bi::big_int::big_int_get_random_unsigned(int bits) {
 
     big_int_clear();
 
+    if ((bits / BI_BASE_TYPE_TOTAL_BITS) >= _total_data) {
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + (bits / BI_BASE_TYPE_TOTAL_BITS));
+    }
+
     for (int i = 0; i < bits / BI_BASE_TYPE_TOTAL_BITS; ++i) {
-        if (_top >= _total_data) {
-            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
-        }
         _data[_top++] = rand_dist(rng);
     }
     
