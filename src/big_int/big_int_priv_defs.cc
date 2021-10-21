@@ -322,11 +322,11 @@ int bi::big_int::_big_int_fast_modular_exponentiation(const bi::big_int &exponen
     big_int bi_2;
     ret_val += bi_2.big_int_from_base_type(2, false);
     
-    big_int temp_base(*this), temp_exponent(exponent), temp_exponent_2, temp_exponent_quo, temp_exponent_rem, temp_result, temp_result_2;
+    big_int temp_base(*this), temp_exponent(exponent), temp_exponent_2, temp_result, temp_result_2;
+    BI_BASE_TYPE temp_exponent_rem;
     while (temp_exponent.big_int_is_zero() == false) {
-        ret_val += temp_exponent.big_int_div(bi_2, temp_exponent_quo, temp_exponent_rem);
-        temp_exponent = temp_exponent_quo;
-        if (temp_exponent_rem.big_int_is_zero() == false) {
+        ret_val += temp_exponent._big_int_fast_divide_by_two(temp_exponent_rem);
+        if (temp_exponent_rem != 0) {
             ret_val += result.big_int_multiply(temp_base, &temp_result);
             ret_val += temp_result.big_int_modulus(modulus, temp_result_2);
             result = temp_result_2;
@@ -336,5 +336,21 @@ int bi::big_int::_big_int_fast_modular_exponentiation(const bi::big_int &exponen
         temp_base = temp_result_2;
     }
     return ret_val;
+
+}
+
+int bi::big_int::_big_int_fast_divide_by_two(BI_BASE_TYPE &remainder) {
+
+    BI_DOUBLE_BASE_TYPE interim_res_1, interim_res_2;
+    BI_BASE_TYPE        carry = 0;
+
+    for (int i = _top - 1; i >= 0; --i) {
+        interim_res_1 = static_cast<BI_DOUBLE_BASE_TYPE>(_data[i]) << BI_BASE_TYPE_TOTAL_BITS;
+        interim_res_2 = (interim_res_1 >> 1);
+        _data[i] = static_cast<BI_BASE_TYPE>((interim_res_2 & BI_DOUBLE_BASE_TYPE_FIRST_HALF_MASK) >> BI_BASE_TYPE_TOTAL_BITS) + carry;
+        carry = interim_res_2 & BI_BASE_TYPE_MAX;
+    }
+    remainder = carry;
+    return _big_int_remove_preceding_zeroes();
 
 }

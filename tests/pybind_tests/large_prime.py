@@ -60,7 +60,7 @@ def isMillerRabinPassed(mrc):
  
 if __name__ == '__main__':
     while True:
-        n = 4096
+        n = 1024
         prime_candidate = getLowLevelPrime(n)
         if not isMillerRabinPassed(prime_candidate):
             continue
