@@ -48,13 +48,14 @@ int bi::big_int::big_int_from_string(const std::string &str_num) {
 
     int str_cur_indx = static_cast<int>(base_t_aligned_size - BI_HEX_STR_TO_DATA_SIZE);
 
+    if(static_cast<int>((base_t_aligned_size / BI_HEX_STR_TO_DATA_SIZE) + 1) >= _total_data) {
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + static_cast<int>((base_t_aligned_size / BI_HEX_STR_TO_DATA_SIZE) + 1));
+    }
+    
     for(; str_cur_indx >= 0; str_cur_indx -= static_cast<int>(BI_HEX_STR_TO_DATA_SIZE)) {
         if(sscanf(&(temp_str.get()[str_cur_indx]), BI_SSCANF_FORMAT_HEX, &_data[_top++]) == EOF) {
             big_int_clear();
             return -1;
-        }
-        if(_top == _total_data) {
-            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
         }
     }
 
@@ -100,11 +101,13 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
         carry = static_cast<BI_BASE_TYPE>((sum) >> BI_BASE_TYPE_TOTAL_BITS);
         _data[i] = sum & BI_BASE_TYPE_MAX;
     }
+
+    if(max_data_len >= _total_data) {
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + max_data_len);
+    }
+    
     int top_cntr = 0;
     for(; i < max_data_len; ++i) {
-        if(i >= _total_data) {
-            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
-        }
         if(i >= _top) {
             ++top_cntr;
         }
