@@ -1070,6 +1070,7 @@ int bi::big_int::big_int_fast_divide_by_power_of_two(int power, big_int &remaind
     temp_dbase <<= (BI_BASE_TYPE_TOTAL_BITS - bit_cont);
     temp_dbase &= BI_BASE_TYPE_MAX;
     remainder._data[(remainder._top)++] = static_cast<BI_BASE_TYPE>(temp_dbase >> (BI_BASE_TYPE_TOTAL_BITS - bit_cont)); 
+    remainder.big_int_set_negetive((*this)._neg);
 
     quotient = (*this);
     return quotient.big_int_right_shift(power); 
