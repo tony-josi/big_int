@@ -1095,6 +1095,11 @@ int bi::big_int::big_int_get_random_unsigned_between(const big_int &low, const b
     /* random number in the range [low, high) */
 
     int ret_val = 0;
+
+    if (high.big_int_unsigned_compare(low) < 0) {
+        return -1;
+    }
+
     int low_bits = low.big_int_get_num_of_bits();
     int high_bits = high.big_int_get_num_of_bits();
 

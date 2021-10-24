@@ -565,7 +565,19 @@ def _bi_test_big_int_fast_multiply_by_power_of_two(num_1):
     act_res_pro_str = test_obj.bi_test_big_int_fast_multiply_by_power_of_two(num_1_str, divid_pow)
     _LOG_BI_TEST(3, "_bi_test_big_int_fast_multiply_by_power_of_two: num_1 {}, pow {}".format(hex(num_1), divid_pow), exp_pro_str, act_res_pro_str)
     return compare_hex_string_numbers(exp_pro_str, act_res_pro_str)
+
+def _bi_test_big_int_get_random_unsigned_between(num_1, num_2):
+
+    if (num_1 < 0):
+        num_1 *= -1
+    if (num_2 < 0):
+        num_2 *= -1
     
+    num_1_str = get_hex_str_without_0x(num_1)
+    num_2_str = get_hex_str_without_0x(num_2)
+    test_obj = pbitw.big_int_tc()
+
+    act_res_str = test_obj.test_big_int_get_random_unsigned_between(num_1_str, num_2_str)
 
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
