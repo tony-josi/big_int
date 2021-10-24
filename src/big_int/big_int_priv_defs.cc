@@ -14,6 +14,19 @@
 #include "big_int_lib_log.hpp"
 #include "big_int_inline_defs.hpp"
 
+namespace {
+    const BI_BASE_TYPE first_primes_list[] = {   2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
+                                                31, 37, 41, 43, 47, 53, 59, 61, 67,
+                                                71, 73, 79, 83, 89, 97, 101, 103,
+                                                107, 109, 113, 127, 131, 137, 139,
+                                                149, 151, 157, 163, 167, 173, 179,
+                                                181, 191, 193, 197, 199, 211, 223,
+                                                227, 229, 233, 239, 241, 251, 257,
+                                                263, 269, 271, 277, 281, 283, 293,
+                                                307, 311, 313, 317, 331, 337, 347, 349
+                                            };
+}
+
 void bi::big_int::_big_int_swap(bi::big_int &src) {
 
     using std::swap;
@@ -351,5 +364,36 @@ int bi::big_int::_big_int_fast_divide_by_two(BI_BASE_TYPE &remainder) {
     }
     remainder = carry;
     return _big_int_remove_preceding_zeroes();
+
+}
+
+int bi::big_int::_big_int_generate_random_probable_prime(int bits, int max_lower_prime_check) {
+
+    int ret_val = 0;
+    constexpr int max_prime_list_total_length = sizeof(first_primes_list) / sizeof(int);
+
+    int max_prime_list_length = max_lower_prime_check;
+    if (max_prime_list_length > max_prime_list_total_length) {
+        max_prime_list_length = max_prime_list_total_length;
+    }
+
+    while (ret_val == 0) {
+        int prim_cntr = 0;
+        big_int rand_test_val, lower_prime, temp_quo, temp_rem;
+        ret_val += rand_test_val.big_int_get_random_unsigned(bits);
+        for (int i = 0; i < max_prime_list_length; ++i) {
+            ret_val += lower_prime.big_int_from_base_type(first_primes_list[i], false);
+            ret_val += rand_test_val.big_int_div(lower_prime, temp_quo, temp_rem);
+            if (temp_rem.big_int_is_zero() == true) {
+                ++prim_cntr;
+            }
+        }
+        if (prim_cntr == 0) {
+            (*this) = rand_test_val;
+            break;
+        }
+    }
+    
+    return ret_val;
 
 }

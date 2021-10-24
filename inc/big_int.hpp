@@ -64,6 +64,7 @@ namespace bi {
         int             _big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_TYPE &hex_char) const;
         int             _big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);
         int             _big_int_fast_divide_by_two(BI_BASE_TYPE &remainder);
+        int             _big_int_generate_random_probable_prime(int bits, int max_lower_prime_check);
         
 
         public:
