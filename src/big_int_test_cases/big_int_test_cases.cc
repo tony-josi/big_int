@@ -386,3 +386,13 @@ std::string big_int_test_cases::bi_test_big_int_fast_multiply_by_power_of_two(co
     return test_bi_res.big_int_to_string(bi_base::BI_HEX);
 
 }
+
+std::string bi_test_big_int_get_random_unsigned_between(const std::string &low, const std::string &high) {
+
+    big_int test_bi_a, test_bi_b, test_bi_res;
+    test_bi_a.big_int_from_string(low);
+    test_bi_b.big_int_from_string(high);
+    test_bi_res.big_int_get_random_unsigned_between(test_bi_a, test_bi_b);
+    return test_bi_res.big_int_to_string(bi_base::BI_HEX);
+
+}
