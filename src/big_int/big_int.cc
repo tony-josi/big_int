@@ -506,7 +506,7 @@ int bi::big_int::big_int_right_shift_word(int shift_words, bi::big_int &res) {
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_right_shift_word(shift_words);
-    temp_val._big_int_swap(&res);
+    temp_val._big_int_swap(res);
     return ret_val;
 
 }
@@ -531,7 +531,7 @@ int bi::big_int::big_int_right_shift(int bits, bi::big_int &res) {
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_right_shift(bits);
-    temp_val._big_int_swap(&res);
+    temp_val._big_int_swap(res);
     return ret_val;
 
 }
@@ -594,7 +594,7 @@ int bi::big_int::big_int_div(const bi::big_int &divisor, bi::big_int &op_quotien
         bi::big_int temp_div_once_dividend, temp_div_once_remainder; 
         int divisor_length = divisor._big_int_get_num_of_hex_chars();
         int dividend_length = _big_int_get_num_of_hex_chars();
-        int ret_code = big_int_right_shift((dividend_length - divisor_length) * 4, &temp_div_once_dividend);
+        int ret_code = big_int_right_shift((dividend_length - divisor_length) * 4, temp_div_once_dividend);
         int divide_cntr = 0;
         
         do {
