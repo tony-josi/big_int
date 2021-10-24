@@ -126,14 +126,6 @@ int main(int argc, char *argv[]) {
     test_num_33.big_int_fast_modular_exponentiation(test_num_34, test_num_35, test_num_36);
     std::cout<<test_num_36.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
-    big_int factorial_52, temp_copy;
-    factorial_52.big_int_from_base_type(52, false);
-    for (int i = 51; i >= 2; --i) {
-        factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), temp_copy);
-        factorial_52 = temp_copy;
-    }
-    std::cout<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
-
     std::string test_num_str_24 = "fdbe";
     std::string test_num_str_25 = "fdbe00";
     big_int test_num_37, test_num_38, test_gcd;
@@ -168,6 +160,14 @@ int main(int argc, char *argv[]) {
     std::cout<<test_num_43.big_int_fast_modular_exponentiation(test_num_44, test_num_45, test_expp)<<"\n";
     std::cout<<test_expp.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    big_int factorial_52, temp_copy;
+    factorial_52.big_int_from_base_type(52, false);
+    for (int i = 51; i >= 2; --i) {
+        factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), temp_copy);
+        factorial_52 = temp_copy;
+    }
+    std::cout<<"FACTORIAL: "<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
     /* RSA algo test. */
     /*
     RSA - 4096 bit primes - RSA-8192 bits Example
@@ -184,8 +184,11 @@ int main(int argc, char *argv[]) {
     DECIPHER: beefdead                                                                                                                                                                                                               0003991cdf748bb0
 
     */
-    std::string rsa_p_str = "b0d8cf6d1bd3d6abfbafa0f0566539f9a2e606196d50d9567ffacb229724d35291953690efcd48f8ed9f793cf54095d639daf29e6279f6527e57454ccfd6c8fbfae1563473654cd1281dfc55a41d680b631fd19f3294bad8f1590816318424f0ecd3b23ecea78778e02b9853ee7afd6f92790db35a0f5a02e06f1946c734577a21a7212eedd365d1c6da8e7c600b847493bfdc3b6d87d1482fde6c54f768b4a7dfc585916f574fd063a361beab24d27a310fad9d482835b0b3f238b967c69edba070d7c920c8185ef0fdd415c1b09d96f47cb36b71524933cf999f3a73ea9e5da81aa968b8e450468467049105577c0591d700c449bb7f338aa8129bb77b60fa59e884f8025de6d0db0d09d0c8903be307b9c9859f09123c7486954dad39110b1705b66d292e72f6dbc69c81d6745c33a42af42605c423dc459c4eaec7976d38da94593695802ceb571136258ffe115fec3e0e40a77ef7ee4e3175fc62b7577986837deed1bac34c9bfdb20a6b9aa0c2a2654816205c2802ca6a855f3929d469ef82418db376bf72c10341c8a61c5a390dffbe888c4c88e213de96648ee525821d87a8568415aebf392a58ba20b55f671fece0e670ceb183e9763636357e726124bfce8e30b556fb94b4ebbdaea2230431e56baaa3ae27559a5cec2cb399abeee9b3cfa3d675cb53cc30778b35675a1469476e84341f2a358053aaa4d3d19683";
-    std::string rsa_q_str = "a5329c6a789ab9dfb869d4271f1710024e946bdbc3446215404fbc3c140a58e37d373f90070cb48332b06adac1f115bb1a560895f8e316049d87e639e52b91791ee9dd9cbce46e9db42944752df6d97ec92c365314836f0798fcbf7b5045483511a870a5aa5b6a75115536a92965e39c0ea2bd01bc2359ece1c996a0735e93fa3105a19013a827df43ebfe76298e626033a6ea5a2b5b6f3b5d0a5b1bd4f0b7dfff00717ef3b0a90d1a9ed482058c9bec3ee31616ade312f8a83a12fd6c7aeef51ed3ea714b849d39a5186ee6b2fa745d0b6ca6ee53032b65d6d0f09076fa2a42434e43eabb6a0354c679c73ecb95adc27fa0658648cc42b281e7f90b0a490de081384e89fa34852e340a39b5d4fac51ccfc15350ed1c304f5376f2dad41bf4382098f16f869ec37e23e6bb992cd29f4dd5562dcc3014936692eccb6bec10a0996ec310d830b5d38b047ab806a61655fc8cfff32302c62961e202d0732d7fdc455c973717fa55a3c89b041fb83f77e13927ffd3ebe678e525afd2004a9f56d812fcea46fd77a08d574a5d24ef094e0ed372867b22bca4dacf85ff3f43711abde91eeb707b7335d0e05ca4606ed542bacc6dbc738095f026a1aca40e7a95f12fa492be398f4e915f3d7d4a252b1cf8da37181cee1ad0fa1dcaad1ae7ade4ffa3d0af37b57ab42917e0de97269c598a8613ec3024c88271536865451c34508777fb";
+
+
+    /* RSA-2048 */   
+    std::string rsa_p_str = "836087009e0619a138f89e5242a82ad9e5c9ffc9614bbcf5b4b0350a7b6384aaef846e2e5dcba73ea661e27ce1ba44d7fe7ac785194c4153ec72a55df6c8261227fe58b51aacfda898fe24d04291505b4a63f2233ee09b8e82535c56bd9edeaa79cee8a45104531db9d17492282c75746bb0ed376af0381e65361a23d7a6cf4f";
+    std::string rsa_q_str = "c3ba9d642913754f8da650ee0a8f02e1f55f2633c53d248e8349978ad1262f57530a6504b85f50292a73630e25db6d048d6eab5ac71d29960e41245100db2f51af358fdb32ba64b8db0e4e68a1df348d57531db8f5411d9295da7cfd02e2ea71251a227ef28a19dc05e3b345c3fe8646205b88ac81ccc2aac5f69925eb8fee2d";
     big_int rsa_p, rsa_q, rsa_pq;
     rsa_p.big_int_from_string(rsa_p_str);
     rsa_q.big_int_from_string(rsa_q_str);
