@@ -54,7 +54,9 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def("bi_test_big_int_modulus", &big_int_test_cases::bi_test_big_int_modulus)
         .def("bi_test_big_int_fast_modular_exponentiation", &big_int_test_cases::bi_test_big_int_fast_modular_exponentiation)
         .def("bi_test_big_int_gcd_euclidean_algorithm", &big_int_test_cases::bi_test_big_int_gcd_euclidean_algorithm)
-        .def("bi_test_big_int_modular_inverse_extended_euclidean_algorithm", &big_int_test_cases::bi_test_big_int_modular_inverse_extended_euclidean_algorithm);
+        .def("bi_test_big_int_modular_inverse_extended_euclidean_algorithm", &big_int_test_cases::bi_test_big_int_modular_inverse_extended_euclidean_algorithm)
+        .def("bi_test_big_int_fast_divide_by_power_of_two_quotient", &big_int_test_cases::bi_test_big_int_fast_divide_by_power_of_two_quotient)
+        .def("bi_test_big_int_fast_divide_by_power_of_two_remainder", &big_int_test_cases::bi_test_big_int_fast_divide_by_power_of_two_remainder);
 
 
 }
