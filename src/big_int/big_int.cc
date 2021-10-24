@@ -1046,7 +1046,7 @@ int bi::big_int::big_int_get_random_unsigned(int bits) {
 
 }
 
-int bi::big_int::big_int_fast_divide_by_power_of_two(int power, big_int &remainder, big_int &quotient) {
+int bi::big_int::big_int_fast_divide_by_power_of_two(int power, big_int &remainder, big_int &quotient) const {
 
     /* Take the remainder. */
     int ret_val = 0;
@@ -1074,5 +1074,12 @@ int bi::big_int::big_int_fast_divide_by_power_of_two(int power, big_int &remaind
 
     quotient = (*this);
     return quotient.big_int_right_shift(power); 
+
+}
+
+int bi::big_int::big_int_fast_multiply_by_power_of_two(int power, big_int &result) const {
+
+    result = (*this);
+    return result.big_int_left_shift(power);
 
 }

@@ -55,6 +55,7 @@ public:
     std::string bi_test_big_int_modular_inverse_extended_euclidean_algorithm(const std::string &a, const std::string &b);
     std::string bi_test_big_int_fast_divide_by_power_of_two_quotient(const std::string &a, const int pow);
     std::string bi_test_big_int_fast_divide_by_power_of_two_remainder(const std::string &a, const int pow);
+    std::string bi_test_big_int_fast_multiply_by_power_of_two(const std::string &a, const int pow);
 
 
 };
