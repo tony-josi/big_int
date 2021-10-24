@@ -1048,12 +1048,12 @@ int bi::big_int::big_int_get_random_unsigned(int bits) {
 
 int bi::big_int::big_int_fast_divide_by_power_of_two(int power, big_int &remainder, big_int &quotient) {
 
-    /* Take the remainer. */
+    /* Take the remainder. */
     int ret_val = 0;
     int word_cnt = power / BI_BASE_TYPE_TOTAL_BITS;
     int bit_cont = power % BI_BASE_TYPE_TOTAL_BITS;
 
-    if (word_cnt > _top) {
+    if (word_cnt >= _top) {
         ret_val += quotient.big_int_set_zero();
         remainder = *this;
         return ret_val;
@@ -1061,8 +1061,17 @@ int bi::big_int::big_int_fast_divide_by_power_of_two(int power, big_int &remaind
 
     remainder.big_int_clear();
 
-    for (int i = 0; i < word_cnt; ++i) {
+    int i = 0; 
+    for (; i < word_cnt; ++i) {
         remainder._data[(remainder._top)++] = (*this)._data[i];
     }
+
+    BI_DOUBLE_BASE_TYPE temp_dbase = (*this)._data[i];
+    temp_dbase <<= (BI_BASE_TYPE_TOTAL_BITS - bit_cont);
+    temp_dbase &= BI_BASE_TYPE_MAX;
+    remainder._data[(remainder._top)++] = static_cast<BI_BASE_TYPE>(temp_dbase >> (BI_BASE_TYPE_TOTAL_BITS - bit_cont)); 
+
+    quotient = (*this);
+    return quotient.big_int_right_shift(power); 
 
 }
