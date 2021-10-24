@@ -1089,3 +1089,32 @@ int bi::big_int::big_int_get_num_of_bits() const {
     return 4 * big_int_get_num_of_hex_chars();
 
 }
+
+int bi::big_int::big_int_get_random_unsigned_between(const big_int &low, const big_int &high) {
+
+    /* random number in the range [low, high) */
+
+    int ret_val = 0;
+    int low_bits = low.big_int_get_num_of_bits();
+    int high_bits = high.big_int_get_num_of_bits();
+
+    std::random_device rd;                              // only used once to initialise (seed) engine
+    std::mt19937 rng(rd());                             // random-number engine used (Mersenne-Twister in this case)
+    std::uniform_int_distribution<int> get_rand_bits(low_bits, high_bits);    
+
+    int rand_bits = get_rand_bits(rng);
+
+    while (ret_val == 0) {
+        big_int temp_rand;
+        ret_val += temp_rand.big_int_get_random_unsigned(rand_bits);
+        int low_comp_res = temp_rand.big_int_unsigned_compare(low);   
+        int high_comp_res = temp_rand.big_int_unsigned_compare(high); 
+        if (low_comp_res >= 0 && high_comp_res < 0) {
+            (*this) = temp_rand;
+            break;
+        }
+    }
+
+    return ret_val;
+
+}
