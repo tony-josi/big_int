@@ -539,6 +539,9 @@ def _bi_test_big_int_modular_inverse_extended_euclidean_algorithm(num_1, num_2):
 
 def _bi_test_big_int_fast_divide_by_power_of_two(num_1):
 
+    if (num_1 < 0):
+        num_1 *= -1
+
     num_1_str = get_hex_str_without_0x(num_1)
     divid_pow = random.randint(0, RSHIFT_BITS_RANDINT_MAX)
     test_obj = pbitw.big_int_tc()
