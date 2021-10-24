@@ -554,6 +554,18 @@ def _bi_test_big_int_fast_divide_by_power_of_two(num_1):
     _LOG_BI_TEST(3, "_bi_test_big_int_fast_divide_by_power_of_two: num_1 {}, pow {}".format(hex(num_1), divid_pow), exp_quo_str, act_res_quo_str)
     return compare_hex_string_numbers(exp_quo_str, act_res_quo_str) and compare_hex_string_numbers(exp_rem_str, act_res_rem_str)
 
+def _bi_test_big_int_fast_multiply_by_power_of_two(num_1):
+
+    num_1_str = get_hex_str_without_0x(num_1)
+    divid_pow = random.randint(0, RSHIFT_BITS_RANDINT_MAX)
+    test_obj = pbitw.big_int_tc()
+
+    exp_pro_str = get_hex_str_without_0x(num_1 * pow(2, divid_pow))
+    
+    act_res_pro_str = test_obj.bi_test_big_int_fast_multiply_by_power_of_two(num_1_str, divid_pow)
+    _LOG_BI_TEST(3, "_bi_test_big_int_fast_multiply_by_power_of_two: num_1 {}, pow {}".format(hex(num_1), divid_pow), exp_pro_str, act_res_pro_str)
+    return compare_hex_string_numbers(exp_pro_str, act_res_pro_str)
+    
 
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
@@ -751,6 +763,8 @@ def test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_da
 def test_33_bi_test_big_int_fast_divide_by_power_of_two(test_data):
     test_core_simple_loop(_bi_test_big_int_fast_divide_by_power_of_two, test_data)
 
+def test_34_bi_test_big_int_fast_divide_by_power_of_two(test_data):
+    test_core_simple_loop(_bi_test_big_int_fast_multiply_by_power_of_two, test_data)
 
 if __name__ == "__main__":
 
@@ -802,6 +816,7 @@ if __name__ == "__main__":
     test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_uint)
     test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_nums_uint)
     test_33_bi_test_big_int_fast_divide_by_power_of_two(test_nums_uint)
+    test_34_bi_test_big_int_fast_divide_by_power_of_two(test_nums_uint)
 
     test_1_bi_test_big_int_from_string(test_nums_int)
     test_2_bi_test_big_int_unsigned_add(test_nums_int)
@@ -836,6 +851,8 @@ if __name__ == "__main__":
     test_31_bi_test_big_int_gcd_euclidean_algorithm(test_nums_int)
     test_32_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(test_nums_int)
     test_33_bi_test_big_int_fast_divide_by_power_of_two(test_nums_int)
+    test_34_bi_test_big_int_fast_divide_by_power_of_two(test_nums_int)
+    
 
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
