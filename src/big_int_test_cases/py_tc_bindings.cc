@@ -59,5 +59,4 @@ PYBIND11_MODULE(py_big_int_tc_wrap, module) {
         .def("bi_test_big_int_fast_divide_by_power_of_two_remainder", &big_int_test_cases::bi_test_big_int_fast_divide_by_power_of_two_remainder)
         .def("bi_test_big_int_fast_multiply_by_power_of_two", &big_int_test_cases::bi_test_big_int_fast_multiply_by_power_of_two);
 
-
 }
