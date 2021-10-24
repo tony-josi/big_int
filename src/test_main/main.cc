@@ -224,13 +224,13 @@ int main(int argc, char *argv[]) {
 
     /* big_int_get_random_unsigned */ 
     big_int rng_test;
-    rng_test.big_int_get_random_unsigned(50);
+    rng_test.big_int_get_random_unsigned(2048);
     std::cout<<rng_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
 
     /* big_int_get_random_unsigned */ 
     big_int rnd_prob_prime_test;
-    rnd_prob_prime_test._big_int_generate_random_probable_prime(50, 70);
+    rnd_prob_prime_test._big_int_generate_random_probable_prime(2048, 70);
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;

@@ -386,6 +386,7 @@ int bi::big_int::_big_int_generate_random_probable_prime(int bits, int max_lower
             ret_val += rand_test_val.big_int_div(lower_prime, temp_quo, temp_rem);
             if (temp_rem.big_int_is_zero() == true) {
                 ++prim_cntr;
+                break;
             }
         }
         if (prim_cntr == 0) {
