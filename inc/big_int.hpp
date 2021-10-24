@@ -93,7 +93,8 @@ namespace bi {
         int             big_int_signed_sub(const big_int &b, big_int &res);
         int             big_int_multiply(const big_int &b, big_int &res);
         int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int &res) const;
-        int             big_int_get_num_of_hex_chars();
+        int             big_int_get_num_of_hex_chars() const;
+        int             big_int_get_num_of_bits() const;
         int             big_int_div(const big_int &divisor, big_int &quotient, big_int &remainder);
         int             big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &result);
         int             big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);

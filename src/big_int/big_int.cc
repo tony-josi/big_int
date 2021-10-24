@@ -536,7 +536,7 @@ int bi::big_int::big_int_right_shift(int bits, bi::big_int &res) {
 
 }
 
-int bi::big_int::big_int_get_num_of_hex_chars() {
+int bi::big_int::big_int_get_num_of_hex_chars() const {
 
     return _big_int_get_num_of_hex_chars();
 
@@ -1081,5 +1081,11 @@ int bi::big_int::big_int_fast_multiply_by_power_of_two(int power, big_int &resul
 
     result = (*this);
     return result.big_int_left_shift(power);
+
+}
+
+int bi::big_int::big_int_get_num_of_bits() const {
+
+    return 4 * big_int_get_num_of_hex_chars();
 
 }
