@@ -370,7 +370,7 @@ int bi::big_int::_big_int_fast_divide_by_two(BI_BASE_TYPE &remainder) {
 int bi::big_int::_big_int_generate_random_probable_prime(int bits, int max_lower_prime_check) {
 
     int ret_val = 0;
-    constexpr int max_prime_list_total_length = sizeof(first_primes_list) / sizeof(int);
+    constexpr int max_prime_list_total_length = sizeof(first_primes_list) / sizeof(BI_BASE_TYPE);
 
     int max_prime_list_length = max_lower_prime_check;
     if (max_prime_list_length > max_prime_list_total_length) {

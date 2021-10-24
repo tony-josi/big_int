@@ -185,8 +185,10 @@ int main(int argc, char *argv[]) {
 
     */
 
+    #define RSA_TEST 0
 
-    /* RSA-2048 */   
+    /* RSA-2048 */  
+#if RSA_TEST 
     std::string rsa_p_str = "836087009e0619a138f89e5242a82ad9e5c9ffc9614bbcf5b4b0350a7b6384aaef846e2e5dcba73ea661e27ce1ba44d7fe7ac785194c4153ec72a55df6c8261227fe58b51aacfda898fe24d04291505b4a63f2233ee09b8e82535c56bd9edeaa79cee8a45104531db9d17492282c75746bb0ed376af0381e65361a23d7a6cf4f";
     std::string rsa_q_str = "c3ba9d642913754f8da650ee0a8f02e1f55f2633c53d248e8349978ad1262f57530a6504b85f50292a73630e25db6d048d6eab5ac71d29960e41245100db2f51af358fdb32ba64b8db0e4e68a1df348d57531db8f5411d9295da7cfd02e2ea71251a227ef28a19dc05e3b345c3fe8646205b88ac81ccc2aac5f69925eb8fee2d";
     big_int rsa_p, rsa_q, rsa_pq;
@@ -218,11 +220,18 @@ int main(int argc, char *argv[]) {
     std::cout<<"CIPHER: "<<rsa_cipher_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
     rsa_cipher_num.big_int_fast_modular_exponentiation(rsa_priv_key, rsa_pq, rsa_decipher_num);
     std::cout<<"DECIPHER: "<<rsa_decipher_num.big_int_to_string(bi_base::BI_HEX)<<"\n";
+#endif /* RSA_TEST */
 
     /* big_int_get_random_unsigned */ 
     big_int rng_test;
     rng_test.big_int_get_random_unsigned(50);
     std::cout<<rng_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
+
+    /* big_int_get_random_unsigned */ 
+    big_int rnd_prob_prime_test;
+    rnd_prob_prime_test._big_int_generate_random_probable_prime(50, 70);
+    std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
 

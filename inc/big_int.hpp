@@ -64,7 +64,7 @@ namespace bi {
         int             _big_int_get_hex_char_from_lsb(int hex_indx_from_lsb, BI_BASE_TYPE &hex_char) const;
         int             _big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);
         int             _big_int_fast_divide_by_two(BI_BASE_TYPE &remainder);
-        int             _big_int_generate_random_probable_prime(int bits, int max_lower_prime_check);
+        
         
 
         public:
@@ -122,6 +122,10 @@ namespace bi {
         /* Temporary public func.s for testing */
         int             big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_chars);
         int             big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder);
+
+
+        /* TODO: make private */
+        int             _big_int_generate_random_probable_prime(int bits, int max_lower_prime_check);
         
     };
 
