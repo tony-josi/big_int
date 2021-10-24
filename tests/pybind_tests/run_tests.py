@@ -834,6 +834,7 @@ if __name__ == "__main__":
 
     
     test_33_bi_test_big_int_fast_divide_by_power_of_two(test_nums_uint)
+    test_33_bi_test_big_int_fast_divide_by_power_of_two(test_nums_int)
 
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
