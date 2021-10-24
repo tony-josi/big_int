@@ -47,12 +47,12 @@ int bi::big_int::_big_int_expand(int req) {
 
 }
 
-BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int *res_ptr) const {
+BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int &res_ptr) const {
 
     BI_BASE_TYPE borrow = 0;
     BI_DOUBLE_BASE_TYPE diff, temp1;
-    if (res_ptr->_total_data <= min) {
-        res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT + min);
+    if (res_ptr._total_data <= min) {
+        res_ptr._big_int_expand(BI_DEFAULT_EXPAND_COUNT + min);
     }
     for(int i = 0; i < min; ++i) {
         if(compare_bi_base_type(_data[i], data_ptr[i])) {
@@ -63,7 +63,7 @@ BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min
             diff = temp1 - data_ptr[i];
             borrow = 1;
         }
-        res_ptr->_data[(res_ptr->_top)++] = static_cast<BI_BASE_TYPE>(diff);
+        res_ptr._data[(res_ptr._top)++] = static_cast<BI_BASE_TYPE>(diff);
     }
     return borrow;
 }
@@ -90,28 +90,28 @@ int bi::big_int::_big_int_compare_bi_base_type_n_top(const bi::big_int &other) c
 
 }
 
-int bi::big_int::_big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int *res_ptr) const {
+int bi::big_int::_big_int_unsigned_multiply_bi_base_type(BI_BASE_TYPE b, bi::big_int &res_ptr) const {
 
     BI_DOUBLE_BASE_TYPE interim_res;
     BI_BASE_TYPE        carry = 0;
 
-    res_ptr->big_int_clear();
+    res_ptr.big_int_clear();
 
-    if (_top >= res_ptr->_total_data) {
-        res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT + _top);
+    if (_top >= res_ptr._total_data) {
+        res_ptr._big_int_expand(BI_DEFAULT_EXPAND_COUNT + _top);
     }
 
     for(int i = 0; i < _top; ++i) {
         interim_res = static_cast<BI_DOUBLE_BASE_TYPE>(_data[i]) * b + carry;
-        res_ptr->_data[(res_ptr->_top)++] = interim_res & BI_BASE_TYPE_MAX;
+        res_ptr._data[(res_ptr._top)++] = interim_res & BI_BASE_TYPE_MAX;
         carry = static_cast<BI_BASE_TYPE>(interim_res >> BI_BASE_TYPE_TOTAL_BITS);
     }
 
     if (carry) {
-        if (res_ptr->_top >= res_ptr->_total_data) {
-            res_ptr->_big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        if (res_ptr._top >= res_ptr._total_data) {
+            res_ptr._big_int_expand(BI_DEFAULT_EXPAND_COUNT);
         }
-        res_ptr->_data[(res_ptr->_top)++] = carry;
+        res_ptr._data[(res_ptr._top)++] = carry;
     }
 
     return 0;
@@ -245,13 +245,13 @@ int bi::big_int::_big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_q
     /* Start from 2 as the cases 0 & 1 are covered already in the above lines. */
     BI_BASE_TYPE i = 2;
     for (; i <= 0x10; ++i) {
-        divisor.big_int_unsigned_multiply_base_type(i, &temp_val);
+        divisor.big_int_unsigned_multiply_base_type(i, temp_val);
         comp_res = big_int_unsigned_compare(temp_val);
         switch (comp_res) {
         case -1:
             op_quotient = i - 1;
-            divisor.big_int_unsigned_multiply_base_type(i - 1, &temp_val_2);
-            big_int_unsigned_sub(temp_val_2, &op_remainder);
+            divisor.big_int_unsigned_multiply_base_type(i - 1, temp_val_2);
+            big_int_unsigned_sub(temp_val_2, op_remainder);
             return 0;
         case 0:
             op_quotient = i;
@@ -311,7 +311,7 @@ int bi::big_int::_big_int_fast_modular_exponentiation(const bi::big_int &exponen
     if (exponent.big_int_is_zero() == true && modulus.big_int_is_negetive() == true) {
         big_int bi_1;
         bi_1.big_int_from_base_type(1, false);
-        ret_val += modulus.big_int_unsigned_sub(bi_1, &result);
+        ret_val += modulus.big_int_unsigned_sub(bi_1, result);
         ret_val += result.big_int_set_negetive(true);
         return ret_val;
     }
@@ -326,11 +326,11 @@ int bi::big_int::_big_int_fast_modular_exponentiation(const bi::big_int &exponen
     while (temp_exponent.big_int_is_zero() == false) {
         ret_val += temp_exponent._big_int_fast_divide_by_two(temp_exponent_rem);
         if (temp_exponent_rem != 0) {
-            ret_val += result.big_int_multiply(temp_base, &temp_result);
+            ret_val += result.big_int_multiply(temp_base, temp_result);
             ret_val += temp_result.big_int_modulus(modulus, temp_result_2);
             result = temp_result_2;
         }
-        ret_val += temp_base.big_int_multiply(temp_base, &temp_result);
+        ret_val += temp_base.big_int_multiply(temp_base, temp_result);
         ret_val += temp_result.big_int_modulus(modulus, temp_result_2);
         temp_base = temp_result_2;
     }

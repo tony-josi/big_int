@@ -36,7 +36,7 @@ std::string big_int_test_cases::bi_test_big_int_unsigned_add(const std::string &
     big_int test_bi_a, test_bi_b, test_bi_c;
     test_bi_a.big_int_from_string(a);
     test_bi_b.big_int_from_string(b);
-    test_bi_a.big_int_unsigned_add(test_bi_b, &test_bi_c);
+    test_bi_a.big_int_unsigned_add(test_bi_b, test_bi_c);
     return test_bi_c.big_int_to_string(bi_base::BI_HEX);
 
 }
@@ -45,7 +45,7 @@ std::string big_int_test_cases::bi_test_big_int_unsigned_sub(const std::string &
     big_int test_bi_a, test_bi_b, test_bi_c;
     test_bi_a.big_int_from_string(a);
     test_bi_b.big_int_from_string(b);
-    test_bi_a.big_int_unsigned_sub(test_bi_b, &test_bi_c);
+    test_bi_a.big_int_unsigned_sub(test_bi_b, test_bi_c);
     return test_bi_c.big_int_to_string(bi_base::BI_HEX);
 
 }
@@ -76,7 +76,7 @@ std::string big_int_test_cases::bi_test_big_int_signed_add(const std::string &a,
     big_int test_bi_a, test_bi_b, test_bi_c;
     test_bi_a.big_int_from_string(a);
     test_bi_b.big_int_from_string(b);
-    test_bi_a.big_int_signed_add(test_bi_b, &test_bi_c);
+    test_bi_a.big_int_signed_add(test_bi_b, test_bi_c);
     return test_bi_c.big_int_to_string(bi_base::BI_HEX);
 
 }
@@ -105,7 +105,7 @@ std::string big_int_test_cases::bi_test_big_int_signed_sub(const std::string &a,
     big_int test_bi_a, test_bi_b, test_bi_c;
     test_bi_a.big_int_from_string(a);
     test_bi_b.big_int_from_string(b);
-    test_bi_a.big_int_signed_sub(test_bi_b, &test_bi_c);
+    test_bi_a.big_int_signed_sub(test_bi_b, test_bi_c);
     return test_bi_c.big_int_to_string(bi_base::BI_HEX);
 
 }
@@ -124,7 +124,7 @@ std::string big_int_test_cases::bi_test_big_int_unsigned_mulitply_258977(const s
 
     big_int test_bi_a, test_bi_b;
     test_bi_a.big_int_from_string(a);
-    test_bi_a.big_int_unsigned_multiply_base_type(258977, &test_bi_b);
+    test_bi_a.big_int_unsigned_multiply_base_type(258977, test_bi_b);
     return test_bi_b.big_int_to_string(bi_base::BI_HEX);
 
 }
@@ -134,7 +134,7 @@ std::string big_int_test_cases::bi_test_big_int_multiply(const std::string &a, c
     big_int test_bi_a, test_bi_b, test_bi_c;
     test_bi_a.big_int_from_string(a);
     test_bi_b.big_int_from_string(b);
-    test_bi_a.big_int_multiply(test_bi_b, &test_bi_c);
+    test_bi_a.big_int_multiply(test_bi_b, test_bi_c);
     return test_bi_c.big_int_to_string(bi_base::BI_HEX);
 
 }

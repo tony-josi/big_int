@@ -132,11 +132,11 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b) {
 
 }
 
-int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
+int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int &res) {
 
-    res->big_int_clear();
-    res->big_int_unsigned_add(b);
-    res->big_int_unsigned_add(*this);
+    res.big_int_clear();
+    res.big_int_unsigned_add(b);
+    res.big_int_unsigned_add(*this);
     return 0;
 
 }
@@ -144,20 +144,20 @@ int bi::big_int::big_int_unsigned_add(const bi::big_int &b, bi::big_int *res) {
 int bi::big_int::big_int_signed_add(const bi::big_int &b) {
 
     bi::big_int temp;
-    big_int_signed_add(b, &temp);
+    big_int_signed_add(b, temp);
     _big_int_swap(temp);
     return 0;
 
 }
 
-int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
+int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int &res) {
 
-    res->big_int_clear();
+    res.big_int_clear();
     /* If the operands are of same sign. */
     if (_neg == b._neg) {
 
         big_int_unsigned_add(b, res);
-        res->_neg = _neg;
+        res._neg = _neg;
 
     }
     /* If operands are of different sign. */
@@ -169,20 +169,20 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
         if (comp_stat == 1) {
             if (_neg) {
                 b.big_int_unsigned_sub(*this, res);
-                res->_neg = b._neg;
+                res._neg = b._neg;
             } else {
                 big_int_unsigned_sub(b, res);
-                res->_neg = !_neg;
+                res._neg = !_neg;
             }
         } else if (comp_stat == 0) {
-            res->big_int_set_zero();
+            res.big_int_set_zero();
         } else {
             if (_neg) {
                 big_int_unsigned_sub(b, res);
-                res->_neg = !_neg;
+                res._neg = !_neg;
             } else {
                 b.big_int_unsigned_sub(*this, res);
-                res->_neg = b._neg;
+                res._neg = b._neg;
             }
         }
 
@@ -192,7 +192,7 @@ int bi::big_int::big_int_signed_add(const bi::big_int &b, bi::big_int *res) {
     }
 
     /* Remove any preceding zeroes if any. */
-    res->_big_int_remove_preceding_zeroes();
+    res._big_int_remove_preceding_zeroes();
 
     return 0;
 
@@ -228,17 +228,17 @@ int bi::big_int::big_int_signed_sub(const bi::big_int &b) {
 
     int ret_val;
     bi::big_int temp_val;
-    ret_val = big_int_signed_sub(b, &temp_val);
+    ret_val = big_int_signed_sub(b, temp_val);
     _big_int_swap(temp_val);
     return ret_val;
 
 }
 
-int bi::big_int::big_int_signed_sub(const bi::big_int &b, bi::big_int *res) {
+int bi::big_int::big_int_signed_sub(const bi::big_int &b, bi::big_int &res) {
 
     int comp_stat = big_int_compare(b);
     if (comp_stat == 0) {
-        return res->big_int_set_zero();
+        return res.big_int_set_zero();
     } else {
 
         // TODO: avoid expensive (might be) copy here
@@ -261,7 +261,7 @@ int bi::big_int::big_int_set_zero() {
 
 }
 
-int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) const {
+int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int &res) const {
 
     int max, min;
     max = _top;
@@ -272,25 +272,25 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) co
         throw std::length_error("First param should be larger");
     }
 
-    res->big_int_clear();
+    res.big_int_clear();
     BI_BASE_TYPE borrow = _big_int_sub_base_type(b._data, min, res);
 
-    if((max - min) >= res->_total_data) {
-        res->_big_int_expand(BI_DEFAULT_EXPAND_COUNT + (max - min));
+    if((max - min) >= res._total_data) {
+        res._big_int_expand(BI_DEFAULT_EXPAND_COUNT + (max - min));
     }
 
     for(int i = min; i < max; i++) {
         if(compare_bi_base_type(_data[i], borrow)) {
-            res->_data[(res->_top)++] = _data[i] - borrow;
+            res._data[(res._top)++] = _data[i] - borrow;
             borrow = 0;
         } else {
-            res->_data[(res->_top)++] = \
+            res._data[(res._top)++] = \
             static_cast<BI_BASE_TYPE>((static_cast<BI_DOUBLE_BASE_TYPE>(BI_BASE_TYPE_MAX) + 1 - borrow));
             borrow = 1;
         }
     }
 
-    res->_big_int_remove_preceding_zeroes();
+    res._big_int_remove_preceding_zeroes();
 
     return 0;
 
@@ -299,37 +299,37 @@ int bi::big_int::big_int_unsigned_sub(const bi::big_int &b, bi::big_int *res) co
 int bi::big_int::big_int_unsigned_sub(const bi::big_int &b) {
 
     bi::big_int temp;
-    big_int_unsigned_sub(b, &temp);
+    big_int_unsigned_sub(b, temp);
     temp._neg = this->_neg;
     _big_int_swap(temp);
     return 0;
 
 }
 
-int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int *res) {
+int bi::big_int::big_int_multiply(const bi::big_int &b, bi::big_int &res) {
 
     bi::big_int temp_bi;
 
-    res->big_int_set_zero();
+    res.big_int_set_zero();
 
     if(big_int_is_zero() || b.big_int_is_zero()) {
         /* If any/both of the opreands is zero set result as zero and exit */
         return 0;
     }
 
-    res->_neg = _neg ^ b._neg;
+    res._neg = _neg ^ b._neg;
     
     for (int i = 0; i < b._top; ++i) {
         temp_bi.big_int_clear();
-        _big_int_unsigned_multiply_bi_base_type(b._data[i], &temp_bi);
+        _big_int_unsigned_multiply_bi_base_type(b._data[i], temp_bi);
         temp_bi.big_int_left_shift_word(i);
-        res->big_int_unsigned_add(temp_bi);
+        res.big_int_unsigned_add(temp_bi);
     }
     return 0;
 
 }
 
-int bi::big_int::big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, bi::big_int *res) const {
+int bi::big_int::big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, bi::big_int &res) const {
 
     return _big_int_unsigned_multiply_bi_base_type(b, res);
 
@@ -461,22 +461,22 @@ int bi::big_int::big_int_left_shift(int bits) {
 
 }
 
-int bi::big_int::big_int_left_shift(int bits, bi::big_int *res) {
+int bi::big_int::big_int_left_shift(int bits, bi::big_int &res) {
 
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_left_shift(bits);
-    temp_val._big_int_swap(*res);
+    temp_val._big_int_swap(res);
     return ret_val;
 
 }
 
-int bi::big_int::big_int_left_shift_word(int shift_words, bi::big_int *res) {
+int bi::big_int::big_int_left_shift_word(int shift_words, bi::big_int &res) {
 
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_left_shift_word(shift_words);
-    temp_val._big_int_swap(*res);
+    temp_val._big_int_swap(res);
     return ret_val;
 
 }
@@ -501,12 +501,12 @@ int bi::big_int::big_int_right_shift_word(int shift_words) {
 
 }
 
-int bi::big_int::big_int_right_shift_word(int shift_words, bi::big_int *res) {
+int bi::big_int::big_int_right_shift_word(int shift_words, bi::big_int &res) {
 
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_right_shift_word(shift_words);
-    temp_val._big_int_swap(*res);
+    temp_val._big_int_swap(&res);
     return ret_val;
 
 }
@@ -526,12 +526,12 @@ int bi::big_int::big_int_right_shift(int bits) {
 
 }
 
-int bi::big_int::big_int_right_shift(int bits, bi::big_int *res) {
+int bi::big_int::big_int_right_shift(int bits, bi::big_int &res) {
 
     int ret_val;
     big_int temp_val(*this);
     ret_val = temp_val.big_int_right_shift(bits);
-    temp_val._big_int_swap(*res);
+    temp_val._big_int_swap(&res);
     return ret_val;
 
 }
@@ -648,7 +648,7 @@ int bi::big_int::big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &
 
     big_int temp_val;
     for (BI_BASE_TYPE i = 0; i < exponent; ++i) {
-        ret_val += big_int_multiply(result, &temp_val);
+        ret_val += big_int_multiply(result, temp_val);
         result = temp_val;
     }
 
@@ -664,13 +664,13 @@ int bi::big_int::big_int_modulus(const big_int &modulus, big_int &result) {
     ret_val += big_int_div(modulus, temp_quo, temp_rem);
     if (modulus.big_int_is_negetive() == false) {
         if (temp_rem.big_int_is_negetive() == true) {
-            ret_val += modulus.big_int_unsigned_sub(temp_rem, &result);
+            ret_val += modulus.big_int_unsigned_sub(temp_rem, result);
         } else {
             result = temp_rem;
         }
     } else {
         if ((temp_rem.big_int_is_negetive() == false) && (temp_rem.big_int_is_zero() == false)) {
-            ret_val += modulus.big_int_unsigned_sub(temp_rem, &result);   
+            ret_val += modulus.big_int_unsigned_sub(temp_rem, result);   
         } else {
             result = temp_rem;
         }
@@ -782,7 +782,7 @@ int bi::big_int::big_int_fast_modular_exponentiation(const big_int &exponent, co
             if (modulus.big_int_is_negetive() == false) {
                 result = bi_1;
             } else {
-                ret_val += modulus.big_int_unsigned_sub(bi_1, &result);  
+                ret_val += modulus.big_int_unsigned_sub(bi_1, result);  
                 ret_val += result.big_int_set_negetive(true);
             }
             return ret_val;
@@ -977,8 +977,8 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
         temp_lower = temp_rem;
         if (step_cntr > 2) {
             /* pi = [pi-2 - (pi-1 * qi-2)] (mod n) */
-            ret_code += pk_1.big_int_multiply(prev_quo[0], &pk_temp_1);
-            ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
+            ret_code += pk_1.big_int_multiply(prev_quo[0], pk_temp_1);
+            ret_code += pk_0.big_int_signed_sub(pk_temp_1, pk_temp_2);
             pk_0 = pk_1;
             ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
         }
@@ -991,8 +991,8 @@ int bi::big_int::big_int_modular_inverse_extended_euclidean_algorithm(const big_
     }
 
     /* Final iteration. */
-    ret_code += pk_1.big_int_multiply(prev_quo[1], &pk_temp_1);
-    ret_code += pk_0.big_int_signed_sub(pk_temp_1, &pk_temp_2);
+    ret_code += pk_1.big_int_multiply(prev_quo[1], pk_temp_1);
+    ret_code += pk_0.big_int_signed_sub(pk_temp_1, pk_temp_2);
     ret_code += pk_temp_2.big_int_modulus(modulus, pk_1);
 
 change_inverse_based_on_arg_sign:
@@ -1000,13 +1000,13 @@ change_inverse_based_on_arg_sign:
     Sign convention is similar to big_int_modulus() */
     if (ip_modulus.big_int_is_negetive() == false) {
         if ((*this).big_int_is_negetive() == true) {
-            ret_code += modulus.big_int_unsigned_sub(pk_1, &inverse);
+            ret_code += modulus.big_int_unsigned_sub(pk_1, inverse);
         } else {
             inverse = pk_1;
         }
     } else {
         if (((*this).big_int_is_negetive() == false) && ((*this).big_int_is_zero() == false)) {
-            ret_code += modulus.big_int_unsigned_sub(pk_1, &inverse);   
+            ret_code += modulus.big_int_unsigned_sub(pk_1, inverse);   
         } else {
             inverse = pk_1;
         }

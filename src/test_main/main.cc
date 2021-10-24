@@ -23,16 +23,16 @@ int main(int argc, char *argv[]) {
     //test_num_2.big_int_unsigned_add(test_num_1);
     //test_num_2.big_int_to_string(bi_base::BI_HEX);
 
-    test_num_1.big_int_unsigned_add(test_num_1, &test_num_3);
+    test_num_1.big_int_unsigned_add(test_num_1, test_num_3);
     std::cout<<test_num_3.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     test_num_4.big_int_from_string(test_num_str_3);
-    test_num_4.big_int_unsigned_sub(test_num_1, &test_num_5);
+    test_num_4.big_int_unsigned_sub(test_num_1, test_num_5);
     std::cout<<test_num_5.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     std::cout<<test_num_2.big_int_to_string(bi_base::BI_HEX)<<"\n";
     std::cout<<test_num_3.big_int_to_string(bi_base::BI_HEX)<<"\n";
-    test_num_3.big_int_unsigned_sub(test_num_2, &test_num_1);
+    test_num_3.big_int_unsigned_sub(test_num_2, test_num_1);
     std::cout<<test_num_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     std::string test_num_str_4 = "6feea77b";
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     test_num_6.big_int_from_string(test_num_str_4);
     test_num_7.big_int_from_string(test_num_str_5);
     //test_num_6.big_int_unsigned_add(test_num_7);
-    test_num_7.big_int_unsigned_sub(test_num_6, &test_num_8);
+    test_num_7.big_int_unsigned_sub(test_num_6, test_num_8);
     std::cout<<test_num_8.big_int_to_string(bi_base::BI_HEX)<<"\n";    
 
     std::string test_num_str_6 = "140AF2D7E";
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     big_int test_num_12, test_num_13, test_num_14;
     test_num_12.big_int_from_string(test_num_str_9);
     test_num_13.big_int_from_string(test_num_str_10);
-    test_num_12.big_int_signed_add(test_num_13, &test_num_14);
+    test_num_12.big_int_signed_add(test_num_13, test_num_14);
     std::cout<<test_num_14.big_int_to_string(bi_base::BI_HEX)<<"\n";
     
 
@@ -75,13 +75,13 @@ int main(int argc, char *argv[]) {
     big_int test_num_16, test_num_17, test_num_18;
     test_num_16.big_int_from_string(test_num_str_12);
     test_num_17.big_int_from_string(test_num_str_12);
-    test_num_17.big_int_signed_sub(test_num_16, &test_num_18);
+    test_num_17.big_int_signed_sub(test_num_16, test_num_18);
     std::cout<<"OP:"<<test_num_18.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     std::string test_num_str_13 = "c7b9";
     big_int test_num_19, test_num_20;
     test_num_19.big_int_from_string(test_num_str_13);
-    test_num_19.big_int_unsigned_multiply_base_type(258977, &test_num_20);
+    test_num_19.big_int_unsigned_multiply_base_type(258977, test_num_20);
     std::cout<<"OP:"<<test_num_20.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     std::string test_num_str_14 = "-1f21d31c47f64d00d4bf7";
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
     big_int test_num_21, test_num_22, test_num_23;
     test_num_21.big_int_from_string(test_num_str_14);
     test_num_22.big_int_from_string(test_num_str_15);
-    test_num_21.big_int_multiply(test_num_22, &test_num_23);
+    test_num_21.big_int_multiply(test_num_22, test_num_23);
     std::cout<<test_num_23.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     std::string test_num_str_16 = "f00000f33";
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
     big_int factorial_52, temp_copy;
     factorial_52.big_int_from_base_type(52, false);
     for (int i = 51; i >= 2; --i) {
-        factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), &temp_copy);
+        factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), temp_copy);
         factorial_52 = temp_copy;
     }
     std::cout<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
@@ -191,13 +191,13 @@ int main(int argc, char *argv[]) {
     rsa_q.big_int_from_string(rsa_q_str);
     std::cout<<"P: "<<rsa_p.big_int_to_string(bi_base::BI_HEX)<<"\n";
     std::cout<<"Q: "<<rsa_q.big_int_to_string(bi_base::BI_HEX)<<"\n";
-    rsa_p.big_int_multiply(rsa_q, &rsa_pq);
+    rsa_p.big_int_multiply(rsa_q, rsa_pq);
     std::cout<<"PQ: "<<rsa_pq.big_int_to_string(bi_base::BI_HEX)<<"\n";
     big_int rsa_p_1, rsa_q_1, rsa_p_1q_1, rsa_bi_1;
     rsa_bi_1.big_int_from_base_type(1, false);
-    rsa_p.big_int_unsigned_sub(rsa_bi_1, &rsa_p_1);
-    rsa_q.big_int_unsigned_sub(rsa_bi_1, &rsa_q_1);
-    rsa_p_1.big_int_multiply(rsa_q_1, &rsa_p_1q_1);
+    rsa_p.big_int_unsigned_sub(rsa_bi_1, rsa_p_1);
+    rsa_q.big_int_unsigned_sub(rsa_bi_1, rsa_q_1);
+    rsa_p_1.big_int_multiply(rsa_q_1, rsa_p_1q_1);
     std::cout<<"P-1Q-1: "<<rsa_p_1q_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     std::string rsa_pub_key_str = "10001";
