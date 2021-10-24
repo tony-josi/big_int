@@ -387,7 +387,7 @@ std::string big_int_test_cases::bi_test_big_int_fast_multiply_by_power_of_two(co
 
 }
 
-std::string bi_test_big_int_get_random_unsigned_between(const std::string &low, const std::string &high) {
+std::string big_int_test_cases::bi_test_big_int_get_random_unsigned_between(const std::string &low, const std::string &high) {
 
     big_int test_bi_a, test_bi_b, test_bi_res;
     test_bi_a.big_int_from_string(low);
