@@ -87,6 +87,7 @@ namespace bi {
         bool            big_int_is_negetive() const;
         bool            big_int_is_zero() const;
         int             big_int_set_zero();
+        int             big_int_clear();
         int             big_int_signed_sub(const big_int &b);
         int             big_int_signed_sub(const big_int &b, big_int &res);
         int             big_int_multiply(const big_int &b, big_int &res);
@@ -116,17 +117,10 @@ namespace bi {
         /* First param should be larger. */
         int             big_int_unsigned_sub(const big_int &b);
         int             big_int_unsigned_sub(const big_int &b, big_int &res) const;
-        
-        int             big_int_clear();
 
         /* Temporary public func.s for testing */
         int             big_int_push_back_hex_chars(const BI_BASE_TYPE &hex_chars);
         int             big_int_divide_once(const big_int &divisor, BI_BASE_TYPE &op_quotient, big_int &op_remainder);
-        
-        /*
-        int big_int_div(const big_int b);
-        
-        */
         
     };
 
