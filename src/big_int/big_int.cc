@@ -15,6 +15,7 @@
 #include <memory>
 #include <cstdio>
 #include <random>
+#include <iostream>
 
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"
@@ -1039,7 +1040,10 @@ int bi::big_int::big_int_get_random_unsigned(int bits) {
         if (_top >= _total_data) {
             _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
         }
-        _data[_top++] = (rand_dist(rng) >> (BI_BASE_TYPE_TOTAL_BITS - rem_bits));
+        BI_BASE_TYPE temp_val = (rand_dist(rng) >> (BI_BASE_TYPE_TOTAL_BITS - rem_bits));
+        if (temp_val > 0) {
+            _data[_top++] = temp_val;
+        }
     }
 
     return 0;
@@ -1106,15 +1110,14 @@ int bi::big_int::big_int_get_random_unsigned_between(const big_int &low, const b
     std::random_device rd;                              // only used once to initialise (seed) engine
     std::mt19937 rng(rd());                             // random-number engine used (Mersenne-Twister in this case)
     std::uniform_int_distribution<int> get_rand_bits(low_bits, high_bits);    
-
     int rand_bits = get_rand_bits(rng);
 
     while (ret_val == 0) {
         big_int temp_rand;
-        ret_val += temp_rand.big_int_get_random_unsigned(rand_bits);
-        int low_comp_res = temp_rand.big_int_unsigned_compare(low);   
-        int high_comp_res = temp_rand.big_int_unsigned_compare(high); 
-        if (low_comp_res >= 0 && high_comp_res < 0) {
+        temp_rand.big_int_get_random_unsigned(rand_bits);
+        int low_comp_res = low.big_int_unsigned_compare(temp_rand);   
+        int high_comp_res = high.big_int_unsigned_compare(temp_rand); 
+        if ((low_comp_res <= 0) && (high_comp_res > 0)) {
             (*this) = temp_rand;
             break;
         }
