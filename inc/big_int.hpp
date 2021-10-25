@@ -107,9 +107,9 @@ namespace bi {
         int             big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd);
         int             big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse);
         bool            big_int_is_even() const;
-        int             big_int_get_random_unsigned(int bits);
         int             big_int_fast_divide_by_power_of_two(int power, big_int &remainder, big_int &coefficient) const;
         int             big_int_fast_multiply_by_power_of_two(int power, big_int &result) const;
+        int             big_int_get_random_unsigned(int bits);
         int             big_int_get_random_unsigned_between(const big_int &low, const big_int &high);
 
         /* Logical shifts*/
