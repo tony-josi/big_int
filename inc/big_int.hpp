@@ -66,6 +66,9 @@ namespace bi {
         int             _big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result);
         int             _big_int_fast_divide_by_two(BI_BASE_TYPE &remainder);
         int             _big_int_generate_random_unsigned(int bits, std::mt19937 &mt_arg, std::uniform_int_distribution<BI_BASE_TYPE> &uni_dist);
+        int             _big_int_get_random_unsigned_between(std::mt19937 &mt_arg, std::uniform_int_distribution<BI_BASE_TYPE> &uni_dist, \
+            std::uniform_int_distribution<int> &uni_dist_rand_bits, const big_int &low, const big_int &high);
+
         
         
 

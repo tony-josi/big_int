@@ -425,3 +425,32 @@ int bi::big_int::_big_int_generate_random_unsigned(int bits, std::mt19937 &mt_ar
     return 0;
 
 }
+
+int bi::big_int::_big_int_get_random_unsigned_between(
+    std::mt19937 &mt_arg, 
+    std::uniform_int_distribution<BI_BASE_TYPE> &uni_dist, 
+    std::uniform_int_distribution<int> &uni_dist_rand_bits, 
+    const big_int &low, 
+    const big_int &high) {
+
+    int ret_val = 0;
+
+    if (high.big_int_unsigned_compare(low) < 0) {
+        return -1;
+    }
+
+    int rand_bits = uni_dist_rand_bits(mt_arg);
+    while (ret_val == 0) {
+        big_int temp_rand;
+        temp_rand._big_int_generate_random_unsigned(rand_bits, mt_arg, uni_dist);
+        int low_comp_res = low.big_int_unsigned_compare(temp_rand);   
+        int high_comp_res = high.big_int_unsigned_compare(temp_rand); 
+        if ((low_comp_res <= 0) && (high_comp_res > 0)) {
+            (*this) = temp_rand;
+            break;
+        }
+    }
+
+    return ret_val;
+
+}
