@@ -183,14 +183,18 @@ int main(int argc, char *argv[]) {
     CIPHER: 14dbd1022cebf2c397dee6c28529958818115087b530f632977bf325d2f00abcd79b9801540b00b744f7dce26a72100d90cfe3e4dc4de7f7f2c1ce4aeb418e7cc6e83ee8a7f220264c9ef916b74097c0f22997913350104ec621a41c8c4ad239127b29bc6c616e567b52690cb30ba3ac3da0df58e52f6eef32dd33f8e3e685ce9b2665f76a6d39e0be989a7d9d1ed384f5928c8c97e4f1174cf036468f6b67ae0df31f6487b671e862ae15cb714d156d640e28f81843b827627a4f654c089a4d3311eef38c2b0fd64e7d802dac7c9b5aaa4db0c65ddd1d1b2db196cc5e2796e003970123009e93f59dbee8e299e2593569c296a06c148c8071e90667b0fb5c606a66233e2d0f0ae2d70f2434b6dcbeaa7d62c3cb3ea4cf8324746d17b6662ff52378c610e60ca028127c71263f2a24d7d6d1e7235a7d858f836487338e1bf52816b0d06830230c15f66ceddb5de0d3ecd1737bac97a07b264a2a50cc473392ff301572cb24d29cc07d7e1490f3b3238b2bd3112ee1ba1dd5f887bb6fa7c895999827b6d7a89653543ac5eebdbf3fa5cfb394fadc76be339c6e94b115b16b25a078aa2f9935848f93d1ed52f70098f5c4f2d98dd5e4a51cceb88bec1ed70cf333bd5c4d662a8b349f1da5642e4e3c7fab3798c42bce0721f62e17cc72d5dda796fe59a686c2445a11a5254f9cac2a9c986018a656bb297dbbeecdaf1d65ed0d98378bc542703b2cfe7590ef8f575d8a58b0b50e648372b9e7d55a915d6226c9bcce110b513e1222ed13f689a2a1e97ca582682c1419a5c9315972d6ed110a7b4b8ad2ca597c4e55c9c22f03b1ec811637bea5f2bca72dc8ee23967dece05547adfbb25dc88cbbb2d1af18a56f11aa5bd431391d4b8cc9351c26828d74aa107eea1d8d2c67b6b25c71f4a3ae49a8569a8e09231c0c44d78be8aad541705ba251016a61bce198f0e5375522a31760225b22f7159cde26088dfc1dab45d1b9d19f85ccd20fed067efb181b9910acaa4641c9b723cd651c7768483d47b5bb40fcdcc27e87c9811ac478aa22ee2c83e7fea30935a307f34d9842b83a760959b70eab3eab94f96d9b99284d82ff6bc0e796fe017c032f3148773963f81a1f520c14ba9dc2a8ec460482e2efb7f08de0a96a844879ac1593e3599b1b099f9872cb9d682cd525d1341e4bcf5dbbb39750d454255aa9c9fd57c18ca3e5379ff959426d3e08a966f4f4c5845aa048855e38b8124c4b15d97c97cd6f81f251f5472db1719ae2acc7160075e6b817da2d061590d45ca6a6e9418a6b5aaff390359d41c2dac5b9d4830d36e8cd18320cc32144753947d5242fb1a5c90a3232b7b65a4bd326edbbe281cb3cc155da00844bf22fab9b47c5dcc55c096fdc39c1960e64a422ff9dedf3983c255d74e013322f97f1701326d6c64585de4acee17b7c47aa89fa89786d                                                                                                                                                                                                  
     DECIPHER: beefdead                                                                                                                                                                                                               0003991cdf748bb0
 
+    // RSA-2048
+    std::string rsa_p_str = "836087009e0619a138f89e5242a82ad9e5c9ffc9614bbcf5b4b0350a7b6384aaef846e2e5dcba73ea661e27ce1ba44d7fe7ac785194c4153ec72a55df6c8261227fe58b51aacfda898fe24d04291505b4a63f2233ee09b8e82535c56bd9edeaa79cee8a45104531db9d17492282c75746bb0ed376af0381e65361a23d7a6cf4f";
+    std::string rsa_q_str = "c3ba9d642913754f8da650ee0a8f02e1f55f2633c53d248e8349978ad1262f57530a6504b85f50292a73630e25db6d048d6eab5ac71d29960e41245100db2f51af358fdb32ba64b8db0e4e68a1df348d57531db8f5411d9295da7cfd02e2ea71251a227ef28a19dc05e3b345c3fe8646205b88ac81ccc2aac5f69925eb8fee2d";
+ 
     */
 
-    #define RSA_TEST 0
+    #define RSA_TEST 1
 
     /* RSA-2048 */  
 #if RSA_TEST 
-    std::string rsa_p_str = "836087009e0619a138f89e5242a82ad9e5c9ffc9614bbcf5b4b0350a7b6384aaef846e2e5dcba73ea661e27ce1ba44d7fe7ac785194c4153ec72a55df6c8261227fe58b51aacfda898fe24d04291505b4a63f2233ee09b8e82535c56bd9edeaa79cee8a45104531db9d17492282c75746bb0ed376af0381e65361a23d7a6cf4f";
-    std::string rsa_q_str = "c3ba9d642913754f8da650ee0a8f02e1f55f2633c53d248e8349978ad1262f57530a6504b85f50292a73630e25db6d048d6eab5ac71d29960e41245100db2f51af358fdb32ba64b8db0e4e68a1df348d57531db8f5411d9295da7cfd02e2ea71251a227ef28a19dc05e3b345c3fe8646205b88ac81ccc2aac5f69925eb8fee2d";
+    std::string rsa_p_str = "d3e5664fdacb9090daf5cbc65a890dc13ea78647cf5ae1326654d7741bfbf041";
+    std::string rsa_q_str = "ddf3700a11f08ba2258395395154dfc3f8a82d48841017dffac6372f0b7f148d";
     big_int rsa_p, rsa_q, rsa_pq;
     rsa_p.big_int_from_string(rsa_p_str);
     rsa_q.big_int_from_string(rsa_q_str);
@@ -235,6 +239,10 @@ int main(int argc, char *argv[]) {
     big_int rnd_prob_prime_test;
     rnd_prob_prime_test._big_int_generate_random_probable_prime(2048, rng, rand_dist, 70);
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
+    big_int miller_rabin_prime_test;
+    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller(256, 10);
+    std::cout<<"Miller Rabin Prime: "<<miller_rabin_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
 
