@@ -193,8 +193,8 @@ int main(int argc, char *argv[]) {
 
     /* RSA-2048 */  
 #if RSA_TEST 
-    std::string rsa_p_str = "d3e5664fdacb9090daf5cbc65a890dc13ea78647cf5ae1326654d7741bfbf041";
-    std::string rsa_q_str = "ddf3700a11f08ba2258395395154dfc3f8a82d48841017dffac6372f0b7f148d";
+    std::string rsa_p_str = "290dcce89c3f7340992e91d4c065e3bba63e3e4b7189484b09b49ef967f6845bccf32be275f48e3e5f13ce79fc90a82d476070f9a3e3f581cc9de60495ce584cdbe61e0feb91d5a3b94c1b1ce8511626b01b66f035a6c39d1907d0467a1ed08cbd241fad76a9ee259274e919a265997fa6095062be4f15e9342802f9e489d3cf";
+    std::string rsa_q_str = "2d67b8dd3f7ba95f9d738f89ed0b9831decee90d5c4cc9fd802c5c03fa2896d8659dcd149ff3ede9113a78b503cd7888a82c8b8d08e4e91813f0826081104bd0ea7247c7259ee977b512885ae00fbc29d143b29c14e026b3e9f0a87068aca81cf963924b0ba8da6feae9580add717c2d1ebcb853266fd5882cf466a099cad2cb";
     big_int rsa_p, rsa_q, rsa_pq;
     rsa_p.big_int_from_string(rsa_p_str);
     rsa_q.big_int_from_string(rsa_q_str);
@@ -241,7 +241,7 @@ int main(int argc, char *argv[]) {
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     big_int miller_rabin_prime_test;
-    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller(256, 10);
+    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller(1024, 10);
     std::cout<<"Miller Rabin Prime: "<<miller_rabin_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
