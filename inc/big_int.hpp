@@ -129,7 +129,7 @@ namespace bi {
 
 
         /* TODO: make private */
-        int             _big_int_generate_random_probable_prime(int bits, int max_lower_prime_check);
+        int             _big_int_generate_random_probable_prime(int bits, std::mt19937 &mt_arg, std::uniform_int_distribution<BI_BASE_TYPE> &uni_dist, int max_lower_prime_check);
         
     };
 

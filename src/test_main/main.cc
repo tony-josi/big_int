@@ -229,8 +229,11 @@ int main(int argc, char *argv[]) {
 
 
     /* big_int_get_random_unsigned */ 
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<BI_BASE_TYPE> rand_dist(0, 0xFFFFFFFF);
     big_int rnd_prob_prime_test;
-    rnd_prob_prime_test._big_int_generate_random_probable_prime(2048, 70);
+    rnd_prob_prime_test._big_int_generate_random_probable_prime(2048, rng, rand_dist, 70);
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;

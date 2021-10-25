@@ -367,7 +367,7 @@ int bi::big_int::_big_int_fast_divide_by_two(BI_BASE_TYPE &remainder) {
 
 }
 
-int bi::big_int::_big_int_generate_random_probable_prime(int bits, int max_lower_prime_check) {
+int bi::big_int::_big_int_generate_random_probable_prime(int bits, std::mt19937 &mt_arg, std::uniform_int_distribution<BI_BASE_TYPE> &uni_dist, int max_lower_prime_check) {
 
     int ret_val = 0;
     constexpr int max_prime_list_total_length = sizeof(first_primes_list) / sizeof(BI_BASE_TYPE);
@@ -380,7 +380,7 @@ int bi::big_int::_big_int_generate_random_probable_prime(int bits, int max_lower
     while (ret_val == 0) {
         int prim_cntr = 0;
         big_int rand_test_val, lower_prime, temp_quo, temp_rem;
-        ret_val += rand_test_val.big_int_get_random_unsigned(bits);
+        ret_val += rand_test_val._big_int_generate_random_unsigned(bits, mt_arg, uni_dist);
         for (int i = 0; i < max_prime_list_length; ++i) {
             ret_val += lower_prime.big_int_from_base_type(first_primes_list[i], false);
             ret_val += rand_test_val.big_int_div(lower_prime, temp_quo, temp_rem);
@@ -416,7 +416,7 @@ int bi::big_int::_big_int_generate_random_unsigned(int bits, std::mt19937 &mt_ar
         if (_top >= _total_data) {
             _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
         }
-        BI_BASE_TYPE temp_val = (uni_dist(mt_arg) % (1 << rem_bits));
+        BI_BASE_TYPE temp_val = (uni_dist(mt_arg) % static_cast<BI_BASE_TYPE>((1 << rem_bits)));
         if (temp_val > 0) {
             _data[_top++] = temp_val;
         }
