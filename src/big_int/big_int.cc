@@ -1084,3 +1084,36 @@ int bi::big_int::big_int_get_random_unsigned_between(const big_int &low, const b
     return _big_int_get_random_unsigned_between(rng, uni_dist, get_rand_bits, low, high);
 
 }
+
+int bi::big_int::big_int_get_random_unsigned_prime_rabin_miller(int bits, int reqd_rabin_miller_iterations) {
+
+    int ret_val = 0;
+
+    std::random_device rd;
+    std::mt19937 rng(rd()); 
+    std::uniform_int_distribution<BI_BASE_TYPE> uni_dist(0, 0xFFFFFFFF);
+    
+    while (ret_val == 0) {
+
+        big_int candidate_num, bi_1, candidate_num_sub_1;
+        ret_val += candidate_num._big_int_generate_random_probable_prime(bits, rng, uni_dist, -1); /* -1 -> Use all prime numbers in the array. */ 
+        ret_val += bi_1.big_int_from_base_type(1, false);
+
+        uint64_t max_div_by_two = 0;
+        BI_BASE_TYPE div_2_rem;
+        ret_val += candidate_num.big_int_unsigned_sub(bi_1, candidate_num_sub_1);
+
+        ret_val += candidate_num_sub_1._big_int_fast_divide_by_two(div_2_rem);
+        while (div_2_rem == 0) {
+            ++max_div_by_two;
+            ret_val += candidate_num_sub_1._big_int_fast_divide_by_two(div_2_rem);
+        }
+
+        std::cout<<"d: "<<max_div_by_two<<"num: "<<candidate_num_sub_1.big_int_to_string(bi_base::BI_HEX);
+        break;
+
+    }
+
+    return ret_val;
+    
+}

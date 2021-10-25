@@ -372,6 +372,11 @@ int bi::big_int::_big_int_generate_random_probable_prime(int bits, std::mt19937 
     int ret_val = 0;
     constexpr int max_prime_list_total_length = sizeof(first_primes_list) / sizeof(BI_BASE_TYPE);
 
+    /* If max_lower_prime_check is negetive use all prime numbers in the array. */
+    if (max_lower_prime_check < 0) {
+        max_lower_prime_check = max_prime_list_total_length;
+    }
+    
     int max_prime_list_length = max_lower_prime_check;
     if (max_prime_list_length > max_prime_list_total_length) {
         max_prime_list_length = max_prime_list_total_length;

@@ -111,6 +111,7 @@ namespace bi {
         int             big_int_fast_multiply_by_power_of_two(int power, big_int &result) const;
         int             big_int_get_random_unsigned(int bits);
         int             big_int_get_random_unsigned_between(const big_int &low, const big_int &high);
+        int             big_int_get_random_unsigned_prime_rabin_miller(int bits, int reqd_rabin_miller_iterations);
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);
