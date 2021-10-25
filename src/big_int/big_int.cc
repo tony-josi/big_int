@@ -1025,28 +1025,7 @@ int bi::big_int::big_int_get_random_unsigned(int bits) {
     std::mt19937 rng(dev());
     std::uniform_int_distribution<BI_BASE_TYPE> rand_dist(0, 0xFFFFFFFF);
 
-    big_int_clear();
-
-    if ((bits / BI_BASE_TYPE_TOTAL_BITS) >= _total_data) {
-        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + (bits / BI_BASE_TYPE_TOTAL_BITS));
-    }
-
-    for (int i = 0; i < bits / BI_BASE_TYPE_TOTAL_BITS; ++i) {
-        _data[_top++] = rand_dist(rng);
-    }
-    
-    int rem_bits = bits % BI_BASE_TYPE_TOTAL_BITS;
-    if (rem_bits > 0) {
-        if (_top >= _total_data) {
-            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
-        }
-        BI_BASE_TYPE temp_val = (rand_dist(rng) >> (BI_BASE_TYPE_TOTAL_BITS - rem_bits));
-        if (temp_val > 0) {
-            _data[_top++] = temp_val;
-        }
-    }
-
-    return 0;
+    return _big_int_generate_random_unsigned(bits, rng, rand_dist);
 
 }
 

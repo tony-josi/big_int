@@ -398,3 +398,30 @@ int bi::big_int::_big_int_generate_random_probable_prime(int bits, int max_lower
     return ret_val;
 
 }
+
+int bi::big_int::_big_int_generate_random_unsigned(int bits, std::mt19937 &mt_arg, std::uniform_int_distribution<BI_BASE_TYPE> &uni_dist) {
+
+    big_int_clear();
+
+    if ((bits / BI_BASE_TYPE_TOTAL_BITS) >= _total_data) {
+        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + (bits / BI_BASE_TYPE_TOTAL_BITS));
+    }
+
+    for (int i = 0; i < bits / BI_BASE_TYPE_TOTAL_BITS; ++i) {
+        _data[_top++] = uni_dist(mt_arg);
+    }
+    
+    int rem_bits = bits % BI_BASE_TYPE_TOTAL_BITS;
+    if (rem_bits > 0) {
+        if (_top >= _total_data) {
+            _big_int_expand(BI_DEFAULT_EXPAND_COUNT);
+        }
+        BI_BASE_TYPE temp_val = (uni_dist(mt_arg) % (1 << rem_bits));
+        if (temp_val > 0) {
+            _data[_top++] = temp_val;
+        }
+    }
+
+    return 0;
+
+}
