@@ -193,8 +193,8 @@ int main(int argc, char *argv[]) {
 
     /* RSA-2048 */  
 #if RSA_TEST 
-    std::string rsa_p_str = "290dcce89c3f7340992e91d4c065e3bba63e3e4b7189484b09b49ef967f6845bccf32be275f48e3e5f13ce79fc90a82d476070f9a3e3f581cc9de60495ce584cdbe61e0feb91d5a3b94c1b1ce8511626b01b66f035a6c39d1907d0467a1ed08cbd241fad76a9ee259274e919a265997fa6095062be4f15e9342802f9e489d3cf";
-    std::string rsa_q_str = "2d67b8dd3f7ba95f9d738f89ed0b9831decee90d5c4cc9fd802c5c03fa2896d8659dcd149ff3ede9113a78b503cd7888a82c8b8d08e4e91813f0826081104bd0ea7247c7259ee977b512885ae00fbc29d143b29c14e026b3e9f0a87068aca81cf963924b0ba8da6feae9580add717c2d1ebcb853266fd5882cf466a099cad2cb";
+    std::string rsa_p_str = "5f1d9461ea5c225e3cb8e3a283a9ce6debd6507295286a47781d257ff24a993f1eb209cb591e9e47db1743d425ac5a27ffe8434bdd6a5a8fda9c1912043bcaa2700b1830531d7d5a650772982f4916920731b2a2124cc3a96c47a9e7a0667b36e884205f6b4ba84cf3d3c62fe1f6b46e74a91d00055bb04789242e21630a3b5e04c94e1e37c4f147f352bdf6292c00e1ade21c0fbb8fc7be6ec0f698b8d4449bb265e01478d3fb84a57a292d6859688f6616ee83f38737d1b6d0aa8e8cf9b0c60b944a01651309898db23a5c6a623a8ed40b25395bcda37952f9b125ff0a4289f0152ffdd85a5fe7d5a2589a02147c423a51d4567a49c06de831b0358b81de69";
+    std::string rsa_q_str = "f2a23baf0ac6ddac8c1cc95d7d032e6ec4dbd0bc0337a34b44af449eb3a33deb0f8b2b6a5f816c9f62ae3acc4409efa618479ff8cfa15d13506222f8fd0b981df390f3d257c14a6322976fc53983ff330342486fcc269355e6a3e4b4986d8e92745ebb869fe9f655d6b477e7ad5e0179c003eb44ed5875f4503ffade0c347f2e9579a023ec23b139b23038085ebdd99d4a4b807608442f5d8b06b8d2e30865491aac44d8072a8ee601a5b0f39b046c4518803e51748c9ed018a7144bdacedfbb76243c4fec6c4e15e0b2f5668295207c96e03a3fa1959c228d7ef89af6913f8b36a8de0d55b2d9b1db8dd0ed11c279013bed102fc9c9fdefec8e02df3fcce2df";
     big_int rsa_p, rsa_q, rsa_pq;
     rsa_p.big_int_from_string(rsa_p_str);
     rsa_q.big_int_from_string(rsa_q_str);
@@ -241,7 +241,7 @@ int main(int argc, char *argv[]) {
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     big_int miller_rabin_prime_test;
-    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller(1024, 10);
+    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller(2048, 10);
     std::cout<<"Miller Rabin Prime: "<<miller_rabin_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
