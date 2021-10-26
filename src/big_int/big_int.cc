@@ -1160,6 +1160,12 @@ int bi::big_int::big_int_get_random_unsigned_prime_rabin_miller(int bits, int re
     
 }
 
+/*
+reqd_rabin_miller_iterations -> use 20?
+no_of_threads -> number of threads used to run the function, -ve or 0 thread count causes maximum (std::thread::hardware_concurrency();)
+                 threads to be used, more than std::thread::hardware_concurrency(); will cause max threads to be std::thread::hardware_concurrency();
+
+*/
 int bi::big_int::big_int_get_random_unsigned_prime_rabin_miller_threaded(int bits, int reqd_rabin_miller_iterations, int no_of_threads) {
 
     std::mutex          final_op_mutex;
