@@ -625,7 +625,7 @@ def _bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(bits):
     test_obj = pbitw.big_int_tc()
     exp_prime_str = test_obj.bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(512, 20, -1)
 
-    if isMillerRabinPassed(int(exp_prime_str, 16) + 1):
+    if isMillerRabinPassed(int(exp_prime_str, 16)):
         _LOG_BI_TEST(2, "_bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded: num_1 {} PASS".format(int(exp_prime_str, 16)), 0, 0)
         return True
     else:
