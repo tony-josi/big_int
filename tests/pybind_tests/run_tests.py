@@ -595,6 +595,43 @@ def _bi_test_big_int_get_random_unsigned_between(num_1, num_2):
             _LOG_BI_TEST(1, "_bi_test_big_int_get_random_unsigned_between: num_1 {}, num_2 {}".format(num_1, num_2), int(act_res_str, 16), int(act_res_str, 16))
             return False
 
+def _bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(bits):
+
+    def isMillerRabinPassed(mrc):
+        '''Run 20 iterations of Rabin Miller Primality test'''
+        maxDivisionsByTwo = 0
+        ec = mrc-1
+        while ec % 2 == 0:
+            ec >>= 1
+            maxDivisionsByTwo += 1
+        assert(2**maxDivisionsByTwo * ec == mrc-1)
+    
+        def trialComposite(round_tester):
+            if pow(round_tester, ec, mrc) == 1:
+                return False
+            for i in range(maxDivisionsByTwo):
+                if pow(round_tester, 2**i * ec, mrc) == mrc-1:
+                    return False
+            return True
+    
+        # Set number of trials here
+        numberOfRabinTrials = 20
+        for i in range(numberOfRabinTrials):
+            round_tester = random.randrange(2, mrc)
+            if trialComposite(round_tester):
+                return False
+        return True
+
+    test_obj = pbitw.big_int_tc()
+    exp_prime_str = test_obj.bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(512, 20, -1)
+
+    if isMillerRabinPassed(int(exp_prime_str, 16) + 1):
+        _LOG_BI_TEST(2, "_bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded: num_1 {} PASS".format(int(exp_prime_str, 16)), 0, 0)
+        return True
+    else:
+        _LOG_BI_TEST(2, "_bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded: num_1 {} FAIL".format(int(exp_prime_str, 16)), 0, 0)
+        return False
+
 def test_core_simple_loop(_test_func_, test_data):
     total_rand_nums = len(test_data)
     test_pass = 0
@@ -797,6 +834,18 @@ def test_34_bi_test_big_int_fast_divide_by_power_of_two(test_data):
 def test_35_bi_test_big_int_get_random_unsigned_between(test_data):
     test_core_2d_loop(_bi_test_big_int_get_random_unsigned_between, test_data)
 
+def test_36_bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(test_iterations):
+    pass_cntr = 0
+    for _ in range(test_iterations):
+        if _bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(512):
+            pass_cntr += 1
+    if(pass_cntr == test_iterations):
+        test_status = PASS_STR_MESSAGE
+    else:
+        test_status = FAIL_STR_MESSAGE
+
+    _LOG_BI_TEST(1, _bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded.__name__, "Total sub-test cases: {}, pass: {} ==>>> **** {} ***".format(test_iterations, pass_cntr, test_status), optn = 1)
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
@@ -886,11 +935,11 @@ if __name__ == "__main__":
     test_34_bi_test_big_int_fast_divide_by_power_of_two(test_nums_int)
     test_35_bi_test_big_int_get_random_unsigned_between(test_nums_int)  
      
+    test_36_bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(10)
       
     # print(_bi_test_big_int_divide(0xfdbeef123beefdeaaaddee, 0xdeed))
     # print(_bi_test_big_int_power_base_type(0xfdbeef123beefdeaaaddee))
     # print(_bi_test_big_int_fast_modular_exponentiation(0xfdbeef123beefdeaaaddee, 0xfdbe, 0xfdbeef123beefdeaaa))
     # print(_bi_test_big_int_gcd_euclidean_algorithm(64958, 16629248))
     # print(_bi_test_big_int_modular_inverse_extended_euclidean_algorithm(1368960011, 4283773211))
-    
     
