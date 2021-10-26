@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include "../../inc/big_int.hpp"
 
@@ -241,9 +242,21 @@ int main(int argc, char *argv[]) {
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 #endif
 
+    auto t1 = std::chrono::high_resolution_clock::now();
+    big_int miller_rabin_prime_test_threaded;
+    miller_rabin_prime_test_threaded.big_int_get_random_unsigned_prime_rabin_miller_threaded(512, 10, -1);
+    std::cout<<"Miller Rabin Prime threaded: "<<miller_rabin_prime_test_threaded.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>\
+    ( std::chrono::high_resolution_clock::now() - t1 ).count();
+    std::cout<<"\nDuration: "<<duration<<"\n";
+
+    t1 = std::chrono::high_resolution_clock::now();
     big_int miller_rabin_prime_test;
-    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller_threaded(512, 10, -1);
+    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller(512, 10);
     std::cout<<"Miller Rabin Prime: "<<miller_rabin_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
+    duration = std::chrono::duration_cast<std::chrono::milliseconds> \
+    ( std::chrono::high_resolution_clock::now() - t1 ).count();
+    std::cout<<"\nDuration: "<<duration<<"\n";
 
     return 0;
 
