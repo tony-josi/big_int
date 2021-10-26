@@ -399,3 +399,11 @@ std::string big_int_test_cases::bi_test_big_int_get_random_unsigned_between(cons
         return "RND_ERROR";
     }
 }
+
+std::string big_int_test_cases::bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(const int &bits, const int &rounds, const int &threads_cnt) {
+
+    big_int test_rand_prime;
+    test_rand_prime.big_int_get_random_unsigned_prime_rabin_miller_threaded(bits, rounds, threads_cnt);
+    return test_rand_prime.big_int_to_string(bi_base::BI_HEX);
+
+}

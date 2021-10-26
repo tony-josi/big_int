@@ -57,6 +57,7 @@ public:
     std::string bi_test_big_int_fast_divide_by_power_of_two_remainder(const std::string &a, const int pow);
     std::string bi_test_big_int_fast_multiply_by_power_of_two(const std::string &a, const int pow);
     std::string bi_test_big_int_get_random_unsigned_between(const std::string &low, const std::string &high);
+    std::string bi_test_big_int_get_random_unsigned_prime_rabin_miller_threaded(const int &bits, const int &rounds, const int &threads_cnt);
 
 
 };
