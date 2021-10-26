@@ -112,6 +112,7 @@ namespace bi {
         int             big_int_get_random_unsigned(int bits);
         int             big_int_get_random_unsigned_between(const big_int &low, const big_int &high);
         int             big_int_get_random_unsigned_prime_rabin_miller(int bits, int reqd_rabin_miller_iterations);
+        int             big_int_get_random_unsigned_prime_rabin_miller_threaded(int bits, int reqd_rabin_miller_iterations, int no_of_threads);
 
         /* Logical shifts*/
         int             big_int_left_shift_word(int shift_words);

@@ -16,6 +16,10 @@
 #include <cstdio>
 #include <random>
 #include <iostream>
+#include <mutex>
+#include <atomic>
+#include <vector>
+#include <thread>
 
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"
@@ -1154,4 +1158,108 @@ int bi::big_int::big_int_get_random_unsigned_prime_rabin_miller(int bits, int re
 
     return ret_val;
     
+}
+
+int bi::big_int::big_int_get_random_unsigned_prime_rabin_miller_threaded(int bits, int reqd_rabin_miller_iterations, int no_of_threads) {
+
+    std::mutex          final_op_mutex;
+    big_int             final_op;
+    std::atomic<bool>   stop_thread{false};
+
+    auto rabin_miller_lambda = [&] {
+
+        int ret_val = 0;
+
+        std::random_device rd;
+        std::mt19937 rng(rd()); 
+        std::uniform_int_distribution<BI_BASE_TYPE> uni_dist(0, 0xFFFFFFFF);
+        
+        while (ret_val == 0 && !stop_thread) {
+
+            big_int candidate_num, bi_1, bi_2, candidate_num_sub_1, candidate_num_sub_1_copy, prev_candidate_num_sub_1;
+            ret_val += candidate_num._big_int_generate_random_probable_prime(bits, rng, uni_dist, -1); /* -1 -> Use all prime numbers in the array. */ 
+            ret_val += bi_1.big_int_from_base_type(1, false);
+            ret_val += bi_2.big_int_from_base_type(2, false);
+            std::uniform_int_distribution<int> uni_dist_rand_bits(bi_2.big_int_get_num_of_bits(), candidate_num.big_int_get_num_of_bits());
+
+            int max_div_by_two = 0;
+            BI_BASE_TYPE div_2_rem;
+            ret_val += candidate_num.big_int_unsigned_sub(bi_1, candidate_num_sub_1);
+            candidate_num_sub_1_copy = candidate_num_sub_1;
+
+            prev_candidate_num_sub_1 = candidate_num_sub_1;
+            ret_val += candidate_num_sub_1._big_int_fast_divide_by_two(div_2_rem);
+            while (div_2_rem == 0 && !stop_thread) {
+                ++max_div_by_two;
+                prev_candidate_num_sub_1 = candidate_num_sub_1;
+                ret_val += candidate_num_sub_1._big_int_fast_divide_by_two(div_2_rem);
+            }
+
+            //std::cout<<"d: "<<max_div_by_two<<" num: "<<prev_candidate_num_sub_1.big_int_to_string(bi_base::BI_HEX)<<"\n";
+            //break;
+            int i = 0;
+            for (; i < reqd_rabin_miller_iterations && !stop_thread; ++i) {
+                big_int this_round_random_bi;
+                ret_val += this_round_random_bi._big_int_get_random_unsigned_between(rng, uni_dist, uni_dist_rand_bits, bi_2, candidate_num);
+
+                big_int mod_exp_res;
+                bool composite_test = true;
+                ret_val += this_round_random_bi.big_int_fast_modular_exponentiation(prev_candidate_num_sub_1, candidate_num, mod_exp_res);
+                if (mod_exp_res.big_int_unsigned_compare(bi_1) == 0) {
+                    composite_test = false;
+                }
+                else {
+                    for (int j = 0; j < max_div_by_two && !stop_thread; ++j) {
+                        big_int temp_exp, fast_mul_bi_1(bi_1);
+                        ret_val += fast_mul_bi_1.big_int_left_shift(j);
+                        ret_val += prev_candidate_num_sub_1.big_int_multiply(fast_mul_bi_1, temp_exp);
+                        ret_val += this_round_random_bi.big_int_fast_modular_exponentiation(temp_exp, candidate_num, mod_exp_res);
+                        if (mod_exp_res.big_int_unsigned_compare(candidate_num_sub_1_copy) == 0) {
+                            composite_test = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (composite_test == true) {
+                    break;
+                }
+            }
+
+            if (i == reqd_rabin_miller_iterations) {
+                std::unique_lock<std::mutex> op_value_lock(final_op_mutex);
+                final_op = candidate_num;
+                op_value_lock.unlock();
+                stop_thread = true;
+                break;
+            }
+
+        }
+
+        return ret_val;
+
+    };
+
+    size_t total_thread_count;
+    if (no_of_threads <= 0) {
+        total_thread_count = std::thread::hardware_concurrency();
+    } else if (static_cast<size_t>(no_of_threads) > std::thread::hardware_concurrency()) {
+        total_thread_count = std::thread::hardware_concurrency();
+    } else {
+        total_thread_count = static_cast<size_t>(no_of_threads);
+    }
+
+    std::vector<std::thread> rabin_miller_threads;
+    rabin_miller_threads.reserve(total_thread_count);
+    for(auto i = 0u; i < total_thread_count; ++i) {
+        rabin_miller_threads.emplace_back(rabin_miller_lambda);
+    }
+
+    for(auto &t : rabin_miller_threads) {
+        t.join();
+    }
+
+    (*this) = final_op;
+    return 0;
+
 }
