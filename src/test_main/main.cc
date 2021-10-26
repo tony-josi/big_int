@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     (void) argv;
 
     //std::string test_num_str = "5464611464645454000554646114646454540005546461146464545400055464611464645454000554646114646454540005";
-    
+#if 0    
     std::string test_num_str_1 = "1FFFFFFF1FFFFFFF";
     std::string test_num_str_2 = "1FFFFFFF";
     std::string test_num_str_3 = "4FFFFFFF1FFFFFFF";
@@ -239,9 +239,10 @@ int main(int argc, char *argv[]) {
     big_int rnd_prob_prime_test;
     rnd_prob_prime_test._big_int_generate_random_probable_prime(2048, rng, rand_dist, 70);
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
+#endif
 
     big_int miller_rabin_prime_test;
-    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller(2048, 10);
+    miller_rabin_prime_test.big_int_get_random_unsigned_prime_rabin_miller_threaded(512, 10, -1);
     std::cout<<"Miller Rabin Prime: "<<miller_rabin_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
