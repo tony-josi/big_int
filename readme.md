@@ -140,7 +140,7 @@ a5897f10b825a97aabb3bee80d33195f9ec47bd748266056dbbf1fb8dacc2789af9e4234459c8ac8
 7088a68b9575          
 
 PLAIN: beefdead
-                                                                                                                                                                                                                  
+
 CIPHER: 14dbd1022cebf2c397dee6c28529958818115087b530f632977bf325d2f00abcd79b9801540b00b744f70
 dce26a72100d90cfe3e4dc4de7f7f2c1ce4aeb418e7cc6e83ee8a7f220264c9ef916b74097c0f22997913350104ec
 621a41c8c4ad239127b29bc6c616e567b52690cb30ba3ac3da0df58e52f6eef32dd33f8e3e685ce9b2665f76a6d39
@@ -163,7 +163,8 @@ c71f4a3ae49a8569a8e09231c0c44d78be8aad541705ba251016a61bce198f0e5375522a31760225
 4b15d97c97cd6f81f251f5472db1719ae2acc7160075e6b817da2d061590d45ca6a6e9418a6b5aaff390359d41c2d
 ac5b9d4830d36e8cd18320cc32144753947d5242fb1a5c90a3232b7b65a4bd326edbbe281cb3cc155da00844bf22f
 ab9b47c5dcc55c096fdc39c1960e64a422ff9dedf3983c255d74e013322f97f1701326d6c64585de4acee17b7c47a
-a89fa89786d                                                                                                                                                                                                  
+a89fa89786d                                                                                                                       
+                                                                           
 DECIPHER: beefdead 
 ```
 
