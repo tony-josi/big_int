@@ -1,3 +1,17 @@
+# Big Integer Library
+
+```
+
+██████╗ ██╗ ██████╗     ██╗███╗   ██╗████████╗
+██╔══██╗██║██╔════╝     ██║████╗  ██║╚══██╔══╝
+██████╔╝██║██║  ███╗    ██║██╔██╗ ██║   ██║   
+██╔══██╗██║██║   ██║    ██║██║╚██╗██║   ██║   
+██████╔╝██║╚██████╔╝    ██║██║ ╚████║   ██║   
+╚═════╝ ╚═╝ ╚═════╝     ╚═╝╚═╝  ╚═══╝   ╚═╝   
+                                        
+```
+
+Big int is an arbitrary precision (infinite-precision arithmetic) integer library which can be used to do arithmetic calculations on numbers whose digits of precision are limited only by the available memory of the host system.
 
 ### Build & Test Project
 
