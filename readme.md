@@ -114,7 +114,7 @@ c4e1472cf910d740e75fbd943e52f36848afe7cb39f94aadcf384abcd122bd322e9767c79cf8afb7
 d83374064463168f4   
                                                                                                                                                                                                
 PUB KEY: 00010001          
-                                                                                                                                                                                                      
+
 PRIV KEY: 20d265d790ef98365f353bb53f18954151946514851d33366e60e91219865da7a9f14af1daf482c0a5e
 e46a9655a9f33809c6086655cb0bfd4c05b60a9bef959ba548ebbdb8ef8a82cc9a9c99fa00faee855ceb738870fd6
 792efbec7bca1542c135cfed4cdc6af8d4ddd2ef6f7bbc00e5f1a5848f03885c5cfc65d99422cfcfbda054cd1672a
@@ -137,8 +137,10 @@ a5cecb486c1f8ead6dddfe6023e20f1e4e0300e4614a25b3481c9543e94e72d9a1c23f23a24ba2d7
 ee272b1dd1e4e45f542255a0e19f62d960012a7dcd0c03323eeadae3a2c89c5268e5547dc856ffb7a0c5d6fb34e7d
 a11bc3cb4bc2d0fa335dccafcc8d4870b32af24dceeaa77b53f23234ba9002f79a0b6abebd5e3777f8eacca66826c
 a5897f10b825a97aabb3bee80d33195f9ec47bd748266056dbbf1fb8dacc2789af9e4234459c8ac889d629bf6d693
-7088a68b9575                                                                                                                                                                                                
-PLAIN: beefdead                                                                                                                                                                                                                  
+7088a68b9575          
+
+PLAIN: beefdead
+                                                                                                                                                                                                                  
 CIPHER: 14dbd1022cebf2c397dee6c28529958818115087b530f632977bf325d2f00abcd79b9801540b00b744f70
 dce26a72100d90cfe3e4dc4de7f7f2c1ce4aeb418e7cc6e83ee8a7f220264c9ef916b74097c0f22997913350104ec
 621a41c8c4ad239127b29bc6c616e567b52690cb30ba3ac3da0df58e52f6eef32dd33f8e3e685ce9b2665f76a6d39
