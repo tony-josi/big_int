@@ -27,5 +27,5 @@ git submodule update --init --recursive #if python module generation is required
 mkdir build && cd build
 cmake .. -DPYTHON_TEST_BINDINGS_GEN=ON -DENABLE_IPO=ON -DCMAKE_BUILD_TYPE=Release #turn -DPYTHON_TEST_BINDINGS_GEN=OFF if  python module generation is not required
 make
-python3 ../tests/pybind_tests/run_tests.py 1
+python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN=ON
 ```
