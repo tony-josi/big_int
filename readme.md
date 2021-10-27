@@ -31,6 +31,9 @@ make
 python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN=ON
 ```
 
+## Available operations
+
+
 ### Examples using `big_int`:
 
 #### RSA-8192
