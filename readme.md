@@ -20,12 +20,12 @@ The `big_int` library is implemented purely in C++ language without any 3rd part
 
 ### Get started: Build & Test Project
 
-```
+``` sh
 git clone <url>
 cd big_int
-git submodule update --init --recursive // if python module generation is required
+git submodule update --init --recursive #if python module generation is required
 mkdir build && cd build
-cmake .. -DPYTHON_TEST_BINDINGS_GEN=ON -DENABLE_IPO=ON -DCMAKE_BUILD_TYPE=Release // turn -DPYTHON_TEST_BINDINGS_GEN=OFF if  python module generation is not required
+cmake .. -DPYTHON_TEST_BINDINGS_GEN=ON -DENABLE_IPO=ON -DCMAKE_BUILD_TYPE=Release #turn -DPYTHON_TEST_BINDINGS_GEN=OFF if  python module generation is not required
 make
 python3 ../tests/pybind_tests/run_tests.py 1
 ```
