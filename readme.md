@@ -19,7 +19,9 @@
 
 The `big_int` library is implemented purely in C++ language without any 3rd party libraries or dependencies. The project uses CMake build file generator and uses [`pybind11`](https://github.com/pybind/pybind11) for exposing C++ API's as python modules for testing.
 
-### Get started: Build & Test Project
+### Get started
+
+#### Build & Test Project:
 
 ``` sh
 git clone <url>
@@ -30,6 +32,12 @@ cmake .. -DPYTHON_TEST_BINDINGS_GEN=ON -DENABLE_IPO=ON -DCMAKE_BUILD_TYPE=Releas
 make
 python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN=ON
 ```
+
+## Algorithms used:
+
+1. [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)
+2. [Extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm)
+3. [Miller–Rabin primality test](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)
 
 ## Available operations
 
@@ -89,4 +97,4 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 
 #### RSA-8192
 
-* [RSA-8192.txt](https://github.com/TonyJosi97/big_int/blob/master/examples/RSA-8192.txt)
+* [`RSA-8192.txt`](https://github.com/TonyJosi97/big_int/blob/master/examples/RSA-8192.txt)
