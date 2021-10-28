@@ -161,13 +161,7 @@ int main(int argc, char *argv[]) {
     std::cout<<test_num_43.big_int_fast_modular_exponentiation(test_num_44, test_num_45, test_expp)<<"\n";
     std::cout<<test_expp.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
-    big_int factorial_52, temp_copy;
-    factorial_52.big_int_from_base_type(52, false);
-    for (int i = 51; i >= 2; --i) {
-        factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), temp_copy);
-        factorial_52 = temp_copy;
-    }
-    std::cout<<"FACTORIAL: "<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
+
 
     /* RSA algo test. */
     /*
@@ -240,7 +234,7 @@ int main(int argc, char *argv[]) {
     big_int rnd_prob_prime_test;
     rnd_prob_prime_test._big_int_generate_random_probable_prime(2048, rng, rand_dist, 70);
     std::cout<<rnd_prob_prime_test.big_int_to_string(bi_base::BI_HEX)<<"\n";
-#endif
+
 
     auto t1 = std::chrono::high_resolution_clock::now();
     big_int miller_rabin_prime_test_threaded;
@@ -257,6 +251,15 @@ int main(int argc, char *argv[]) {
     duration = std::chrono::duration_cast<std::chrono::milliseconds> \
     ( std::chrono::high_resolution_clock::now() - t1 ).count();
     std::cout<<"\nDuration: "<<duration<<"\n";
+#endif
+
+    big_int factorial_52, temp_copy;
+    factorial_52.big_int_from_base_type(100000, false);
+    for (int i = 99999; i >= 2; --i) {
+        factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), temp_copy);
+        factorial_52 = temp_copy;
+    }
+    std::cout<<"FACTORIAL: "<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
     return 0;
 
