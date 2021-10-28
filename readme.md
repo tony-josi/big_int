@@ -62,9 +62,9 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 |   `bool            big_int_is_even() const`     | Check if number is even     |
 |   `int             big_int_fast_divide_by_power_of_two(int power, big_int &remainder, big_int &coefficient) const`     |   Fast division of big_int by powers of 2   |
 |  `int             big_int_fast_multiply_by_power_of_two(int power, big_int &result) const`      |   Fast multiplication of big_int by powers of 2   |
-|        |      |
-|        |      |
-|        |      |
+|   `int             big_int_get_random_unsigned(int bits)`     | Generate a random unsigned big_int with given number of bits     |
+|    `int             big_int_get_random_unsigned_between(const big_int &low, const big_int &high)`    |   Generate a random unsigned `big_int` between given `low` and `high` `big_int`s  |
+|    `int             big_int_get_random_unsigned_prime_rabin_miller(int bits, int reqd_rabin_miller_iterations)`    |   Generate a random unsigned prime `big_int` of given bits, at verifies the primility using **Rabin Miller algorithm** for the given `reqd_rabin_miller_iterations` iterations   |
 |        |      |
 |        |      |
 |        |      |
