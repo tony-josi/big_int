@@ -34,7 +34,7 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 ## Available operations
 
 | Operations/Functions | Brief description |
-| :---      | :---          |
+| :---:      | :---          |
 | `int big_int_from_string(const std::string &str_num)`     | Convert a hexadicimal string of any length to `big_int`.    |
 | `int big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg)`      | Convert a number of type `BI_BASE_TYPE` (default, `uint32_t`) to `big_int`.      |
 |  `std::string     big_int_to_string(bi_base base)`      |   Convert a `big_int` to string (Note: Currently only support hexadecimal string output)    |
