@@ -82,3 +82,11 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 
 ### Examples using `big_int`:
 
+#### 100000 Factorial
+
+* [`factorial_100000.txt`](https://github.com/TonyJosi97/big_int/blob/master/examples/factorial_100000.txt)
+
+
+#### RSA-8192
+
+* [RSA-8192.txt](https://github.com/TonyJosi97/big_int/blob/master/examples/RSA-8192.txt)
