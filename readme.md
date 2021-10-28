@@ -65,8 +65,7 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 |   `int             big_int_get_random_unsigned(int bits)`     | Generate a random unsigned big_int with given number of bits     |
 |    `int             big_int_get_random_unsigned_between(const big_int &low, const big_int &high)`    |   Generate a random unsigned `big_int` between given `low` and `high` `big_int`s  |
 |    `int             big_int_get_random_unsigned_prime_rabin_miller(int bits, int reqd_rabin_miller_iterations)`    |   Generate a random unsigned prime `big_int` of given bits, at verifies the primility using **Rabin Miller algorithm** for the given `reqd_rabin_miller_iterations` iterations   |
-|   `int             big_int_get_random_unsigned_prime_rabin_miller_threaded(int bits, int reqd_rabin_miller_iterations, int no_of_threads)`     |  Generate a random unsigned prime `big_int` of given bits, at verifies the primility using **Rabin Miller algorithm** for the given `reqd_rabin_miller_iterations` iterations, using `no_of_threads` threads. -ve or 0 thread count causes maximum (`std::thread::hardware_concurrency();`)
-                 threads to be used, more than `std::thread::hardware_concurrency();` will cause max threads to be `std::thread::hardware_concurrency();`    |
+|   `int             big_int_get_random_unsigned_prime_rabin_miller_threaded(int bits, int reqd_rabin_miller_iterations, int no_of_threads)`     |  Generate a random unsigned prime `big_int` of given bits, at verifies the primility using **Rabin Miller algorithm** for the given `reqd_rabin_miller_iterations` iterations, using `no_of_threads` threads. -ve or 0 thread count causes maximum (`std::thread::hardware_concurrency();`) threads to be used, more than `std::thread::hardware_concurrency();` will cause max threads to be `std::thread::hardware_concurrency();`    |
 |        |      |
 |        |      |
 |        |      |
