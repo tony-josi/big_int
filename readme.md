@@ -52,6 +52,7 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 |   `int             big_int_multiply(const big_int &b, big_int &res)`     |   Does signed multiplication of two `big_int`s and stores the result in res   |
 
 | Operations/Functions | Brief description |
+| :---      |   :---          |
 |   `int             big_int_unsigned_multiply_base_type(const BI_BASE_TYPE &b, big_int &res) const`     |   Does unsigned multiplication of calling `big_int` and a `BI_BASE_TYPE` (default, `uint32_t`) value and stores the result in res   |
 |    `int             big_int_get_num_of_hex_chars() const`    |   Get the number of hex characters in the hexadecimal representation of the `big_int`   |
 |   `int             big_int_get_num_of_bits() const`     |   Get the bit size of the calling `bit_int`   |
