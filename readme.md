@@ -39,10 +39,16 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 | `int big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg)`      | Convert a number of type `BI_BASE_TYPE` (default, `uint32_t`) to `big_int`.      |
 |  `std::string     big_int_to_string(bi_base base)`      |   Convert a `big_int` to string (Note: Currently only support hexadecimal string output)    |
 |   `int             big_int_compare(const big_int &other) const`     |  Compare two `big_int`s, returns 1 if calling `big_int` is greater than `other`, 0 if equal and -1 if less than.    |
-|        |      |
-|        |      |
-|        |      |
-|        |      |
+|    `int             big_int_unsigned_compare(const big_int &other) const`    | Unsigned comparisson, returns 1 if calling `big_int` is greater than `other`, 0 if equal and -1 if less than.       |
+|   `int             big_int_unsigned_add(const big_int &b, big_int &res)`     |   Does unsigned addition of two `big_int`s and stores the result in res.   |
+|  `int             big_int_signed_add(const big_int &b, big_int &res)`      |   Does signed addition of two `big_int`s and stores the result in res.    |
+|    `int             big_int_set_negetive(bool set_unset)`    |    Set `big_int` as negetive/positive based on `set_unset`  |
+|   `int             big_int_set_zero()`     |   Set `big_int` as zero   |
+|   `bool            big_int_is_negetive() const`     |    Check if the `big_int` is negetive  |
+|    `bool            big_int_is_zero() const`    |  Check if the `big_int` is zero    |
+|     `int             big_int_clear()`   |  Clear the contents    |
+|    `int             big_int_signed_sub(const big_int &b, big_int &res)`    |   Does signed subtraction of two `big_int`s and stores the result in res    |
+|   `int             big_int_unsigned_sub(const big_int &b, big_int &res) const`     |    Does unsigned subtraction of two `big_int`s and stores the result in res. (Note: This functions `throws` if the absolute value of argument `other` is less than the calling object. )  |
 |        |      |
 |        |      |
 |        |      |
