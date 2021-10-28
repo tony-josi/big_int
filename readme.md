@@ -58,7 +58,7 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 |   `int             big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result)`     |   Calculates the fast modular exponentiation using the **fast modular exponentiation algorithm** and stores the result in `result`.   |
 |   `int             big_int_modulus(const big_int &modulus, big_int &result)`     |   Calculates the modulus of the calling `big_int` and stores the result in `result`.    |
 |   `int             big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd)`     |    Calculates the greatest common divisor of the calling `big_int` and another `big_int` `b` using the **euclidean algorithm** and stores the result in `op_gcd`  |
-|        |      |
+| `int             big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse)`       |  Calculates the modular inverse of the calling `big_int` in the field `modulus`, using **extended euclidean algorithm** and stores the result in `inverse`    |
 |        |      |
 |        |      |
 |        |      |
