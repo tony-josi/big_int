@@ -56,11 +56,15 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 |  `int             big_int_div(const big_int &divisor, big_int &quotient, big_int &remainder)`      |  Signed division of calling `big_int` with the `divisor` `big_int` and stores the quotient in `quotient` and remainder in `remainder`    |
 |    `int             big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &result)`    |  Calculates the power of calling big_int when its raised to    a `BI_BASE_TYPE` (default, `uint32_t`) value, `exponent` and stores the result in `result`  |
 |   `int             big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result)`     |   Calculates the fast modular exponentiation using the **fast modular exponentiation algorithm** and stores the result in `result`.   |
+|   `int             big_int_modulus(const big_int &modulus, big_int &result)`     |   Calculates the modulus of the calling `big_int` and stores the result in `result`.    |
+|   `int             big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd)`     |    Calculates the greatest common divisor of the calling `big_int` and another `big_int` `b` using the **euclidean algorithm** and stores the result in `op_gcd`  |
 |        |      |
 |        |      |
 |        |      |
 |        |      |
 |        |      |
+|        |      |
+
 
 ### Examples using `big_int`:
 
