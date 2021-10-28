@@ -60,6 +60,9 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 |    `int             big_int_power_base_type(const BI_BASE_TYPE &exponent, big_int &result)`    |  Calculates the power of calling big_int when its raised to    a `BI_BASE_TYPE` (default, `uint32_t`) value, `exponent` and stores the result in `result`  |
 |   `int             big_int_fast_modular_exponentiation(const big_int &exponent, const big_int &modulus, big_int &result)`     |   Calculates the fast modular exponentiation using the **fast modular exponentiation algorithm** and stores the result in `result`.   |
 |   `int             big_int_modulus(const big_int &modulus, big_int &result)`     |   Calculates the modulus of the calling `big_int` and stores the result in `result`.    |
+
+| Operations/Functions | Brief description |
+| :---      |   :---          |
 |   `int             big_int_gcd_euclidean_algorithm(const big_int &b, big_int &op_gcd)`     |    Calculates the greatest common divisor of the calling `big_int` and another `big_int` `b` using the **euclidean algorithm** and stores the result in `op_gcd`  |
 | `int             big_int_modular_inverse_extended_euclidean_algorithm(const big_int &modulus, big_int &inverse)`       |  Calculates the modular inverse of the calling `big_int` in the field `modulus`, using **extended euclidean algorithm** and stores the result in `inverse`    |
 |   `bool            big_int_is_even() const`     | Check if number is even     |
@@ -68,6 +71,9 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 |   `int             big_int_get_random_unsigned(int bits)`     | Generate a random unsigned big_int with given number of bits     |
 |    `int             big_int_get_random_unsigned_between(const big_int &low, const big_int &high)`    |   Generate a random unsigned `big_int` between given `low` and `high` `big_int`s  |
 |    `int             big_int_get_random_unsigned_prime_rabin_miller(int bits, int reqd_rabin_miller_iterations)`    |   Generate a random unsigned prime `big_int` of given bits, at verifies the primility using **Rabin Miller algorithm** for the given `reqd_rabin_miller_iterations` iterations   |
+
+| Operations/Functions | Brief description |
+| :---      |   :---          |
 |   `int  big_int_get_random_unsigned_prime_rabin_miller_threaded(int bits, int reqd_rabin_miller_iterations, int no_of_threads)`     |  Generate a random unsigned prime `big_int` of given bits, at verifies the primility using **Rabin Miller algorithm** for the given `reqd_rabin_miller_iterations` iterations, using `no_of_threads` threads. Negetive or 0 thread count causes maximum (`std::thread::hardware_concurrency();`) threads to be used, more than `std::thread::hardware_concurrency();` will cause max threads to be `std::thread::hardware_concurrency();`    |
 |   `int             big_int_left_shift_word(int shift_words, big_int &res)`     |   Left shift the `big_int` with `shift_words` mulitples of 32 bits.   |
 |     `int             big_int_left_shift(int bits, big_int &res)`   |   Left shift the `big_int` with given `bits`.     |
