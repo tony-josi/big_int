@@ -254,8 +254,8 @@ int main(int argc, char *argv[]) {
 #endif
 
     big_int factorial_52, temp_copy;
-    factorial_52.big_int_from_base_type(100000, false);
-    for (int i = 99999; i >= 2; --i) {
+    factorial_52.big_int_from_base_type(1000000, false);
+    for (int i = 999999; i >= 2; --i) {
         factorial_52.big_int_unsigned_multiply_base_type(static_cast<BI_BASE_TYPE>(i), temp_copy);
         factorial_52 = temp_copy;
     }
