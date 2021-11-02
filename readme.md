@@ -12,7 +12,7 @@
 ```
 ## About `big_int`
 
-`big_int` is an [arbitrary precision (infinite-precision arithmetic)](https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic) integer library which can be used to do arithmetic calculations on numbers whose digits of precision are limited only by the available memory of the host system. Infinite-precision arithmetic has a lot of applications in the field of computing especially if the programming language doesn't natively support infinite-precision arithmetics such as C & C++. Some of the main applications include [**public-key cryptography**](https://en.wikipedia.org/wiki/Public-key_cryptography) and calculation involving very long numbers such as factorial of large numbers, for example `100000!`.
+`big_int` is an [arbitrary precision (infinite-precision arithmetic)](https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic) integer library, which can be used to do arithmetic calculations on numbers, whose digits of precision are limited only by the available memory of the host system. Infinite-precision arithmetic has a lot of applications in the field of computing, especially, if the programming language doesn't natively support infinite-precision arithmetics such as C & C++. Some of the main applications include [**public-key cryptography**](https://en.wikipedia.org/wiki/Public-key_cryptography) and calculation involving very long numbers such as factorial of large numbers, for example `1000000!`.
 
 
 ## Project
