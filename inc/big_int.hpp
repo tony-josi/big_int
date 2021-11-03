@@ -37,8 +37,9 @@ namespace bi {
 
     enum class bi_base {
 
-        BI_HEX,
-        BI_DEC
+        BI_BIN,
+        BI_DEC,
+        BI_HEX
     
     };
 
@@ -52,6 +53,7 @@ namespace bi {
         bool            _neg;
 
         int             _big_int_expand(int req);
+        int             _big_int_from_string(const std::string &str_data);
         BI_BASE_TYPE    _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int &res_ptr) const;
         void            _big_int_swap(big_int &src);
         int             _big_int_compare_bi_base_type_n_top(const big_int &other) const;
@@ -80,7 +82,7 @@ namespace bi {
         big_int(big_int &&src);
         ~big_int();
 
-        int             big_int_from_string(const std::string &str_num);
+        int             big_int_from_string(const std::string &str_num, bi_base target_base = bi_base::BI_HEX);
         int             big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg);
         std::string     big_int_to_string(bi_base base);
         int             big_int_compare(const big_int &other) const;

@@ -24,59 +24,34 @@
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"
 #include "big_int_inline_defs.hpp"
+#include "big_int_base_converter.hpp"
 
 const char *bin_num_set = "01";
 const char *dec_num_set = "0123456789";
 const char *hex_num_set = "0123456789ABCDEF";
 
-int bi::big_int::big_int_from_string(const std::string &str_num) {
+int bi::big_int::big_int_from_string(const std::string &str_num, bi_base target_base) {
 
-    size_t str_size = str_num.length(), num_decor_cnt = 0;
-    size_t is_neg = 0;
-    if (str_size > 0 && str_num[0] == '-') {
-        is_neg = 1;
-        num_decor_cnt += 1;
-    }
-    if((str_size > (1 + is_neg)) && str_num[is_neg] == '0' && \
-    (str_num[is_neg + 1] == 'x' || str_num[is_neg + 1] == 'X')) {
-        num_decor_cnt += 2;
-    }
-
-    str_size -= num_decor_cnt;
-
-    /* Clear any previous data. */
-    big_int_clear();
-
-    size_t extr_space_reqd = ((str_size % BI_HEX_STR_TO_DATA_SIZE == 0) ? \
-    0 : (BI_HEX_STR_TO_DATA_SIZE - (str_size % BI_HEX_STR_TO_DATA_SIZE)));
-    
-    size_t base_t_aligned_size = str_size + extr_space_reqd;
-    std::unique_ptr<char []> temp_str(new char[base_t_aligned_size]);
-    memset(temp_str.get(), '0', extr_space_reqd);
-    memcpy(temp_str.get() + extr_space_reqd, str_num.c_str() + num_decor_cnt, str_size);
-
-    int str_cur_indx = static_cast<int>(base_t_aligned_size - BI_HEX_STR_TO_DATA_SIZE);
-
-    if(static_cast<int>((base_t_aligned_size / BI_HEX_STR_TO_DATA_SIZE) + 1) >= _total_data) {
-        _big_int_expand(BI_DEFAULT_EXPAND_COUNT + static_cast<int>((base_t_aligned_size / BI_HEX_STR_TO_DATA_SIZE) + 1));
-    }
-    
-    for(; str_cur_indx >= 0; str_cur_indx -= static_cast<int>(BI_HEX_STR_TO_DATA_SIZE)) {
-        if(sscanf(&(temp_str.get()[str_cur_indx]), BI_SSCANF_FORMAT_HEX, &_data[_top++]) == EOF) {
-            big_int_clear();
-            return -1;
+    std::string hex_str;
+    switch (target_base) {
+        case bi_base::BI_BIN: {
+            BaseConverter bin_to_hex(bin_num_set, hex_num_set);
+            hex_str = bin_to_hex.Convert(str_num);
+            break;
         }
+        case bi_base::BI_DEC: {
+            BaseConverter dec_to_hex(dec_num_set, hex_num_set);
+            hex_str = dec_to_hex.Convert(str_num);
+            break;
+        }
+        case bi_base::BI_HEX:
+            hex_str = str_num;
+            break;
+        default:
+            throw std::invalid_argument("Invalid base");
     }
 
-    if(big_int_is_zero() == true && is_neg) {
-        return -1;
-    }
-    _neg = static_cast<bool>(is_neg);
-
-    /* Remove extra zeroes in the MSB if the i/p string had them, except the last zero (to denote zero big integer).*/
-    _big_int_remove_preceding_zeroes();
-
-    return 0;
+    _big_int_from_string(hex_str);
 
 }
 
