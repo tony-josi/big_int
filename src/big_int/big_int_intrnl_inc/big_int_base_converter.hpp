@@ -3,6 +3,8 @@
  *  @brief  Header file for the big int base converter class
  *
  *  This file contains the Header code for the big int base converter class
+ *  This code is taken from: https://stackoverflow.com/questions/4735622/convert-large-hex-string-to-decimal-string
+ *  [Convert large hex string to decimal string]
  *
  *  @bug            No known bugs.
  */

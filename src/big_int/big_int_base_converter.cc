@@ -2,7 +2,9 @@
  *  @file   big_int_base_converter.cc
  *  @brief  Source file for the big int base converter class
  *
- *  This file contains the source code for the big int base converter class
+ *  This file contains the source code for the big int base converter class.
+ *  This code is taken from: https://stackoverflow.com/questions/4735622/convert-large-hex-string-to-decimal-string
+ *  [Convert large hex string to decimal string]
  *
  *  @bug            No known bugs.
  */
@@ -90,7 +92,7 @@ unsigned int BaseConverter::base2dec(const std::string& baseDigits, const std::s
     unsigned int numberBase = (unsigned int)baseDigits.length();
     unsigned int result = 0;
     for (size_t i = 0; i < value.length(); ++i) {
-        
+
         result *= numberBase;
         int c = baseDigits.find(value[i]);
         if (c == std::string::npos)
