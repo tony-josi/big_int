@@ -18,7 +18,7 @@
 #define         BI_BASE_TYPE                                uint32_t
 #define         BI_DOUBLE_BASE_TYPE                         uint64_t
 #define         BI_SSCANF_FORMAT_HEX                        "%8X"
-#define         BI_SPRINF_FORMAT_HEX                        "%08x"
+#define         BI_SPRINF_FORMAT_HEX                        "%08X"
 #define         BI_SPRINF_FORMAT_DEC                        "%010u"
 #define         BI_SPRINF_FORMAT_HEX_LOG                    "0x %08X"
 #define         BI_SPRINF_FORMAT_DEC_LOG                    "d %010u"
@@ -85,7 +85,7 @@ namespace bi {
 
         int             big_int_from_string(const std::string &str_num, bi_base target_base = bi_base::BI_HEX);
         int             big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg);
-        std::string     big_int_to_string(bi_base base);
+        std::string     big_int_to_string(bi_base target_base = bi_base::BI_HEX);
         int             big_int_compare(const big_int &other) const;
         int             big_int_unsigned_compare(const big_int &other) const;
         int             big_int_unsigned_add(const big_int &b);

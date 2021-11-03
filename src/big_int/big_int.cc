@@ -30,7 +30,23 @@ const char *bin_num_set = "01";
 const char *dec_num_set = "0123456789";
 const char *hex_num_set = "0123456789ABCDEF";
 
-int bi::big_int::big_int_from_string(const std::string &str_num, bi_base target_base) {
+int bi::big_int::big_int_from_string(const std::string &str_num_arg, bi_base target_base) {
+
+    std::string str_num(str_num_arg);
+
+    bool is_neg = false;
+    if (str_num[0] == '-') {
+        is_neg = true;
+        str_num = str_num.substr(1);
+    }
+
+    size_t n = str_num.find_first_not_of('0');
+    if (n != std::string::npos) {
+        str_num = str_num.substr(n);
+    }
+    else {
+        str_num = "0";
+    }
 
     std::string hex_str;
     switch (target_base) {
@@ -51,8 +67,11 @@ int bi::big_int::big_int_from_string(const std::string &str_num, bi_base target_
             throw std::invalid_argument("Invalid base");
     }
 
-    return _big_int_from_string(hex_str);
+    if (is_neg) {
+        hex_str.insert(0, "-");
+    }
 
+    return _big_int_from_string(hex_str);;
 }
 
 int bi::big_int::big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg) {
@@ -331,6 +350,20 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
     std::string tmp_op_str, hex_str = _big_int_to_string();
 
+    bool is_neg = false;
+    if (hex_str[0] == '-') {
+        is_neg = true;
+        hex_str = hex_str.substr(1);
+    }
+
+    size_t n = hex_str.find_first_not_of('0');
+    if (n != std::string::npos) {
+        hex_str = hex_str.substr(n);
+    }
+    else {
+        hex_str = "0";
+    }
+
     switch (base) {
         case bi_base::BI_BIN: {
             BaseConverter hex_to_bin(hex_num_set, bin_num_set);
@@ -348,6 +381,10 @@ std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
         default:
             throw std::invalid_argument("Invalid base");
     }   
+
+    if (is_neg) {
+        tmp_op_str.insert(0, "-");
+    }
 
     return tmp_op_str;
 
