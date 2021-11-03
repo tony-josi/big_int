@@ -15,6 +15,7 @@ class BaseConverter {
 
 public:
 
+    BaseConverter::BaseConverter(const char *sourceBaseSet, const char *targetBaseSet);
     std::string GetSourceBaseSet() const { return sourceBaseSet_; }
     std::string GetTargetBaseSet() const { return targetBaseSet_; }
     unsigned int GetSourceBase() const { return (unsigned int)sourceBaseSet_.length(); }
