@@ -51,7 +51,7 @@ int bi::big_int::big_int_from_string(const std::string &str_num, bi_base target_
             throw std::invalid_argument("Invalid base");
     }
 
-    _big_int_from_string(hex_str);
+    return _big_int_from_string(hex_str);
 
 }
 
