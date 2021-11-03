@@ -1,7 +1,7 @@
 find_package (Threads)
 
 set(BIG_INT_PRIV_INC_DIR "${PROJECT_SOURCE_DIR}/src/big_int/big_int_intrnl_inc")
-set(SOURCES big_int.cc big_int_ctors_dtor.cc big_int_priv_defs.cc)
+set(SOURCES big_int.cc big_int_ctors_dtor.cc big_int_priv_defs.cc big_int_base_converter.cc)
 
 add_library(big_int_lib STATIC ${SOURCES})
 
