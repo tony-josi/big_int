@@ -261,6 +261,10 @@ int main(int argc, char *argv[]) {
     }
     std::cout<<"FACTORIAL: "<<factorial_52.big_int_to_string(bi_base::BI_HEX)<<"\n";
 
+    big_int bi_dec_test;
+    bi_dec_test.big_int_from_string("123432242321234324324", bi_base::BI_DEC);
+    std::cout<<"123432242321234324324: "<<bi_dec_test.big_int_to_string(bi_base::BI_HEX);
+
     return 0;
 
 } 
