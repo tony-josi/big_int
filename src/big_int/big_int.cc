@@ -25,6 +25,10 @@
 #include "big_int_lib_log.hpp"
 #include "big_int_inline_defs.hpp"
 
+const char *bin_num_set = "01";
+const char *dec_num_set = "0123456789";
+const char *hex_num_set = "0123456789ABCDEF";
+
 int bi::big_int::big_int_from_string(const std::string &str_num) {
 
     size_t str_size = str_num.length(), num_decor_cnt = 0;
