@@ -118,6 +118,38 @@ int bi::big_int::_big_int_from_string(const std::string &str_num) {
 
 }
 
+std::string bi::big_int::_big_int_to_string() {
+
+    size_t chars_per_data = BI_SPRINF_FORMAT_HEX_CHARS;
+
+    if (_top <= 0) {
+        throw std::length_error("Invalid number: zero length");
+    }
+
+    size_t is_neg = 0;
+    if (big_int_is_negetive()) {
+        is_neg = 1;
+    }
+
+    std::unique_ptr<char []> char_temp_buff(new char[static_cast<size_t>(_top) * chars_per_data + 1 + is_neg]);
+    memset(char_temp_buff.get(), '\0', static_cast<size_t>(_top) * chars_per_data + 1 + is_neg);
+    if (is_neg) {
+        char_temp_buff.get()[0] = '-';
+    }
+
+    for(int i = _top - 1; i >= 0; --i) {
+
+        sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * \
+        chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
+        _BI_LOG(3, BI_SPRINF_FORMAT_HEX_LOG, _data[i]);
+    
+    }
+
+    std::string op_string(char_temp_buff.get());
+    return op_string;
+
+}
+
 BI_BASE_TYPE bi::big_int::_big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, bi::big_int &res_ptr) const {
 
     BI_BASE_TYPE borrow = 0;

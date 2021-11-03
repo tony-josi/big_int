@@ -329,48 +329,27 @@ int bi::big_int::big_int_clear() {
 
 std::string     bi::big_int::big_int_to_string(bi::bi_base base) {
 
-    size_t chars_per_data;
+    std::string tmp_op_str, hex_str = _big_int_to_string();
 
-    if (_top <= 0) {
-        throw std::length_error("Invalid number: zero length");
-    }
-
-    if(base == bi::bi_base::BI_DEC) {
-        chars_per_data = BI_SPRINF_FORMAT_DEC_CHARS;
-    } else if(base == bi::bi_base::BI_HEX){ 
-        chars_per_data = BI_SPRINF_FORMAT_HEX_CHARS;
-    } else {
-        chars_per_data = 0;
-    }
-
-    size_t is_neg = 0;
-    if (big_int_is_negetive()) {
-        is_neg = 1;
-    }
-
-    std::unique_ptr<char []> char_temp_buff(new char[static_cast<size_t>(_top) * chars_per_data + 1 + is_neg]);
-    memset(char_temp_buff.get(), '\0', static_cast<size_t>(_top) * chars_per_data + 1 + is_neg);
-    if (is_neg) {
-        char_temp_buff.get()[0] = '-';
-    }
-
-    for(int i = _top - 1; i >= 0; --i) {
-        
-        if(base == bi::bi_base::BI_DEC) {
-            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * \
-            chars_per_data, BI_SPRINF_FORMAT_DEC, _data[i]);
-            _BI_LOG(3, BI_SPRINF_FORMAT_DEC_LOG, _data[i]);
+    switch (base) {
+        case bi_base::BI_BIN: {
+            BaseConverter hex_to_bin(hex_num_set, bin_num_set);
+            tmp_op_str = hex_to_bin.Convert(hex_str);
+            break;
         }
-        else if(base == bi::bi_base::BI_HEX){ 
-            sprintf(char_temp_buff.get() + is_neg + ((static_cast<size_t>(_top) - 1) - static_cast<size_t>(i)) * \
-            chars_per_data, BI_SPRINF_FORMAT_HEX, _data[i]);
-            _BI_LOG(3, BI_SPRINF_FORMAT_HEX_LOG, _data[i]);
+        case bi_base::BI_DEC: {
+            BaseConverter hex_to_dec(hex_num_set, dec_num_set);
+            tmp_op_str = hex_to_dec.Convert(hex_str);
+            break;
         }
-        
-    }
+        case bi_base::BI_HEX:
+            tmp_op_str = hex_str;
+            break;
+        default:
+            throw std::invalid_argument("Invalid base");
+    }   
 
-    std::string op_string(char_temp_buff.get());
-    return op_string;
+    return tmp_op_str;
 
 }
 

@@ -54,6 +54,7 @@ namespace bi {
 
         int             _big_int_expand(int req);
         int             _big_int_from_string(const std::string &str_data);
+        std::string     _big_int_to_string();
         BI_BASE_TYPE    _big_int_sub_base_type(BI_BASE_TYPE *data_ptr, int min, big_int &res_ptr) const;
         void            _big_int_swap(big_int &src);
         int             _big_int_compare_bi_base_type_n_top(const big_int &other) const;
