@@ -43,9 +43,9 @@ python3 ../tests/pybind_tests/run_tests.py 1 #only if -DPYTHON_TEST_BINDINGS_GEN
 
 | Operations/Functions | Brief description |
 | :---      |   :---          |
-| `big_int_from_string(const std::string &str_num, bi_base target_base = bi_base::BI_HEX);`     | Convert a string (bin/hex/dec) of any length to `big_int`. `target_base` can be updated with the (bin/hex/dec) [`bi_base::BI_BIN` / `bi_base::BI_HEX` / `bi_base::BI_DEC`] based on the string format. Default format is `bi_base::BI_HEX` |
+| `big_int_from_string(const std::string &str_num, bi_base target_base = bi_base::BI_HEX);`     | Convert a string (bin/hex/dec) of any length to `big_int`. `target_base` can be updated with the (bin/hex/dec) [`bi_base::BI_BIN` / `bi_base::BI_HEX` / `bi_base::BI_DEC`] based on the string format. Default format is `bi_base::BI_HEX`. |
 | `int big_int_from_base_type(const BI_BASE_TYPE &bt_val, const bool is_neg)`      | Convert a number of type `BI_BASE_TYPE` (default, `uint32_t`) to `big_int`.      |
-|  `std::string     big_int_to_string(bi_base base)`      |   Convert a `big_int` to string (Note: Currently only support hexadecimal string output)    |
+|  `std::string     big_int_to_string(bi_base base)`      |   Convert a `big_int` to string. `target_base` can be updated with the (bin/hex/dec) [`bi_base::BI_BIN` / `bi_base::BI_HEX` / `bi_base::BI_DEC`] based on the string format required. Default format is `bi_base::BI_HEX`.    |
 |   `int             big_int_compare(const big_int &other) const`     |  Compare two `big_int`s, returns 1 if calling `big_int` is greater than `other`, 0 if equal and -1 if less than.    |
 |    `int             big_int_unsigned_compare(const big_int &other) const`    | Unsigned comparisson, returns 1 if calling `big_int` is greater than `other`, 0 if equal and -1 if less than.       |
 |   `int             big_int_unsigned_add(const big_int &b, big_int &res)`     |   Does unsigned addition of two `big_int`s and stores the result in res.   |
