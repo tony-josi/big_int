@@ -74,7 +74,7 @@ unsigned int BaseConverter::divide(const std::string& baseDigits, std::string& x
 
 std::string BaseConverter::dec2base(const std::string& baseDigits, unsigned int value) {
 
-    unsigned int numberBase = (unsigned int)baseDigits.length();
+    unsigned int numberBase = static_cast<unsigned int>(baseDigits.length());
     std::string result;
     do {
 
@@ -89,16 +89,16 @@ std::string BaseConverter::dec2base(const std::string& baseDigits, unsigned int 
 
 unsigned int BaseConverter::base2dec(const std::string& baseDigits, const std::string& value) {
 
-    unsigned int numberBase = (unsigned int)baseDigits.length();
+    unsigned int numberBase = static_cast<unsigned int>(baseDigits.length());
     unsigned int result = 0;
     for (size_t i = 0; i < value.length(); ++i) {
 
         result *= numberBase;
-        int c = baseDigits.find(value[i]);
-        if (c == std::string::npos)
+        unsigned int c = static_cast<unsigned int>(baseDigits.find(value[i]));
+        if (c == static_cast<unsigned int>(std::string::npos))
             throw std::runtime_error("Invalid character");
 
-        result += (unsigned int)c;
+        result += c;
     }
 
     return result;

@@ -20,8 +20,8 @@ public:
     BaseConverter(const char *sourceBaseSet, const char *targetBaseSet);
     std::string GetSourceBaseSet() const { return sourceBaseSet_; }
     std::string GetTargetBaseSet() const { return targetBaseSet_; }
-    unsigned int GetSourceBase() const { return (unsigned int)sourceBaseSet_.length(); }
-    unsigned int GetTargetBase() const { return (unsigned int)targetBaseSet_.length(); }
+    unsigned int GetSourceBase() const { return static_cast<unsigned int>(sourceBaseSet_.length()); }
+    unsigned int GetTargetBase() const { return static_cast<unsigned int>(targetBaseSet_.length()); }
 
     std::string  Convert(std::string value) const;
 
