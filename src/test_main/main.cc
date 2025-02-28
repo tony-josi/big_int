@@ -267,6 +267,14 @@ int main(int argc, char *argv[]) {
     std::cout << "123432242321234324324: b" << bi_dec_test.big_int_to_string(bi_base::BI_BIN) << "\n";
     std::cout << "123432242321234324324: d" << bi_dec_test.big_int_to_string(bi_base::BI_DEC) << "\n";
 
+    big_int bi_dec_2_power_255, bi_dec_2_power_255_result;
+    BI_BASE_TYPE bi_dec_255 = 255;
+    bi_dec_2_power_255.big_int_from_string("2", bi_base::BI_DEC);
+    bi_dec_2_power_255.big_int_power_base_type(bi_dec_255, bi_dec_2_power_255_result);
+
+    std::cout<<"2^255: "<<bi_dec_2_power_255_result.big_int_to_string(bi_base::BI_DEC) << "\n";
+    // 57896044618658097711785492504343953926634992332820282019728792003956564819968
+
     return 0;
 
 } 

@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <memory>
+#include <cstring>
 
 #include "big_int.hpp"
 #include "big_int_lib_log.hpp"

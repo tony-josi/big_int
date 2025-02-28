@@ -2,4 +2,5 @@
 a.out
 build/*
 __pycache__/
+tests/pybind_tests/py_big_int_tc_wrap.so
 
